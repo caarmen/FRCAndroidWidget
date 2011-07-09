@@ -54,12 +54,16 @@ public class FrenchCalendarUtil {
 	}
 
 	public FrenchCalendarDate getDate(GregorianCalendar gregorianDate) {
+		TimeZone parisTimeZone = TimeZone.getTimeZone(TIMEZONE_PARIS);
+		Calendar gregorianDateParis = Calendar.getInstance(parisTimeZone);
+		gregorianDateParis.setTimeInMillis(gregorianDate.getTimeInMillis());
+
 		if (mode == MODE_EQUINOX
-				|| (gregorianDate.getTime().after(frenchEraBegin) && gregorianDate
+				|| (gregorianDateParis.getTime().after(frenchEraBegin) && gregorianDateParis
 						.getTime().before(frenchEraEnd))) {
-			return getDateEquinox(gregorianDate);
+			return getDateEquinox(gregorianDateParis);
 		} else if (mode == MODE_ROMME) {
-			return getDateRomme(gregorianDate);
+			return getDateRomme(gregorianDateParis);
 		} else {
 			throw new IllegalArgumentException("Can't convert date "
 					+ gregorianDate + " in mode " + mode);
@@ -67,53 +71,55 @@ public class FrenchCalendarUtil {
 
 	}
 
-	private FrenchCalendarDate getDateEquinox(GregorianCalendar gregorianDate) {
-		TimeZone parisTimeZone = TimeZone.getTimeZone(TIMEZONE_PARIS);
-		Calendar gregorianDateParis = Calendar.getInstance(parisTimeZone);
-		gregorianDateParis.setTimeInMillis(gregorianDate.getTimeInMillis());
+	private FrenchCalendarDate getDateEquinox(Calendar gregorianDateParis) {
 
 		int gyear = gregorianDateParis.get(Calendar.YEAR);
 
 		Long gAutumnEquinoxTimestamp = autumnEquinoxes.get(gyear);
 		if (gAutumnEquinoxTimestamp == null)
 			throw new IllegalArgumentException("Date not supported: "
-					+ gregorianDate);
-		Date gAutumnEquinox = new Date(gAutumnEquinoxTimestamp);
+					+ gregorianDateParis);
+		TimeZone parisTimeZone = TimeZone.getTimeZone(TIMEZONE_PARIS);
+		Calendar gAutumnEquinox = Calendar.getInstance(parisTimeZone);
+		
+		gAutumnEquinox.setTimeInMillis(gAutumnEquinoxTimestamp);
 
-		Date g1stVendemiaire = gAutumnEquinox;
+		Calendar g1stVendemiaire = gAutumnEquinox;
 		// Case 1, date from January to September
-		if (gregorianDateParis.getTime().compareTo(gAutumnEquinox) < 0) {
+		if (gregorianDateParis.compareTo(gAutumnEquinox) < 0) {
 			Long g1stVendemiaireTimestamp = autumnEquinoxes.get(gyear - 1);
 			if (g1stVendemiaireTimestamp == null)
 				throw new IllegalArgumentException("Date not supported: "
-						+ gregorianDate);
+						+ gregorianDateParis);
 
-			g1stVendemiaire = new Date(g1stVendemiaireTimestamp);
+			g1stVendemiaire.setTimeInMillis(g1stVendemiaireTimestamp);
 		}
 		// Case 2, date from September to December
 		else {
 
 		}
-		int frenchYear = g1stVendemiaire.getYear() - frenchEraBegin.getYear()
+		int frenchYear = g1stVendemiaire.get(Calendar.YEAR) - (frenchEraBegin.getYear() + 1900)
 				+ 1;
 		int numberDaysInFrenchYear = (int) ((gregorianDateParis
-				.getTimeInMillis() - g1stVendemiaire.getTime()) / NUM_MILLISECONDS_IN_DAY);
+				.getTimeInMillis() - g1stVendemiaire.getTimeInMillis()) / NUM_MILLISECONDS_IN_DAY);
 		FrenchCalendarDate result = getFrenchDate(frenchYear, numberDaysInFrenchYear);
 		return result;
 	}
 
-	private FrenchCalendarDate getDateRomme(GregorianCalendar gregorianDate) {
-		long numMillisSinceEndOfFrenchEra = (gregorianDate.getTimeInMillis() - frenchEraEnd
+	private FrenchCalendarDate getDateRomme(Calendar gregorianDateParis) {
+		long numMillisSinceEndOfFrenchEra = (gregorianDateParis.getTimeInMillis() + gregorianDateParis.get(Calendar.DST_OFFSET) - frenchEraEnd
 				.getTime());
-		long fakeEndFrenchEraTimestamp = new GregorianCalendar(20, 0, 1)
+		long fakeEndFrenchEraTimestamp = new GregorianCalendar(10020, 0, 1)
 				.getTimeInMillis();
 		long fakeFrenchTimestamp = fakeEndFrenchEraTimestamp
 				+ numMillisSinceEndOfFrenchEra;
-		GregorianCalendar fakeFrenchDate = new GregorianCalendar();
+		TimeZone parisTimeZone = TimeZone.getTimeZone(TIMEZONE_PARIS);
+		
+		Calendar fakeFrenchDate = Calendar.getInstance(parisTimeZone);
 		fakeFrenchDate.setTimeInMillis(fakeFrenchTimestamp);
 		int frenchYear = fakeFrenchDate.get(Calendar.YEAR);
 		int frenchDayInYear = fakeFrenchDate.get(Calendar.DAY_OF_YEAR);
-		FrenchCalendarDate result = getFrenchDate(frenchYear, frenchDayInYear-1);
+		FrenchCalendarDate result = getFrenchDate(frenchYear-10000, frenchDayInYear-1);
 		return result;
 	}
 
