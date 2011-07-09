@@ -44,7 +44,7 @@ public class EquinoxDatesReader {
 				Date date = sdf.parse(timestampStr);
 				Calendar dateParis = Calendar.getInstance(parisTimeZone);
 				dateParis.setTimeInMillis(date.getTime());
-				dateParis.set(Calendar.HOUR, 0);
+				dateParis.set(Calendar.HOUR_OF_DAY, 0);
 				dateParis.set(Calendar.MINUTE, 0);
 				dateParis.set(Calendar.SECOND, 0);
 				dateParis.set(Calendar.MILLISECOND, 0);
