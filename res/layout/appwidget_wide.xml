@@ -24,12 +24,12 @@
 		<TextView android:id="@+id/text_month" android:layout_height="wrap_content"
 			android:layout_width="wrap_content" android:paddingRight="3dip"
 			android:textColor="#100903" android:text="Vendémiaire" />
+		<TextView android:id="@+id/text_year" android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
+			android:textColor="#100903" android:text="209" />
 	</LinearLayout>
 
 
-	<TextView android:id="@+id/text_year" android:layout_height="wrap_content"
-		android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
-		android:textColor="#100903" android:text="209" />
 	<TextView android:id="@+id/text_time" android:layout_height="fill_parent"
 		android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
 		android:textColor="#100903" android:text="00:00:00" />

@@ -14,5 +14,5 @@
         android:title="@string/setting_frequency"
         android:entries="@array/setting_frequency_labels"
         android:entryValues="@array/setting_frequency_values"
-        android:dialogTitle="@string/setting_frequency" android:defaultValue="864"/>
+        android:dialogTitle="@string/setting_frequency" android:defaultValue="86400"/>
 </PreferenceScreen>
