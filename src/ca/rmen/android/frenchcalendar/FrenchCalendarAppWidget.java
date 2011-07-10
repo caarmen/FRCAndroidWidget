@@ -189,7 +189,7 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 			timestamp = String.format("%02d:%02d", frenchDate.hour,
 					frenchDate.minute);
 		} else {
-			views.setViewVisibility(R.id.text_time, View.INVISIBLE);
+			views.setViewVisibility(R.id.text_time, View.GONE);
 			timestamp = "";
 		}
 		views.setTextViewText(R.id.text_time, timestamp);
