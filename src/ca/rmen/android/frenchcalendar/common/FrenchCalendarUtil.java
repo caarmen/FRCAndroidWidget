@@ -234,7 +234,7 @@ public class FrenchCalendarUtil {
 	 *         0 to 99.
 	 */
 	private int[] getFrenchTime(Calendar gtime) {
-		int ghour = gtime.get(Calendar.HOUR);
+		int ghour = gtime.get(Calendar.HOUR_OF_DAY);
 		int gmin = gtime.get(Calendar.MINUTE);
 		int gsec = gtime.get(Calendar.SECOND);
 

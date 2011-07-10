@@ -63,19 +63,18 @@ public class FrenchCalendarAppWidget extends AppWidgetProvider {
 			String frenchDateStr = frenchDate.toString();
 			debug(context, frenchDateStr);
 			views.setTextViewText(R.id.text_year, "" + frenchDate.year);
-			debug(context, "set year");
 			views.setTextViewText(R.id.text_dayofmonth, "" + frenchDate.day);
-			debug(context, "set day");
+			debug(context, "weekday " + frenchDate.getDayInWeek());
 			CharSequence weekdayLabel = getLabel(context, R.array.weekdays,
 					frenchDate.getDayInWeek() - 1);
 			CharSequence monthLabel = getLabel(context, R.array.months,
 					frenchDate.month - 1);
 			views.setTextViewText(R.id.text_month, monthLabel);
-			debug(context, "set month");
 			views.setTextViewText(R.id.text_weekday, weekdayLabel);
-			debug(context, "set weekday");
+			debug(context, now.getTime());
+			String timestamp = String.format("%02d:%02d", frenchDate.hour, frenchDate.minute);
+			views.setTextViewText(R.id.text_time, timestamp);
 			appWidgetManager.updateAppWidget(appWidgetId, views);
-			debug(context, "done");
 		}
 
 	}

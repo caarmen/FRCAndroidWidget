@@ -30,7 +30,7 @@ public class FrenchCalendarDate {
 	 * @return a number from 1 to 10.
 	 */
 	public int getDayInWeek() {
-		return this.day - (10 * (this.day / 10));
+		return this.day - (10 * (this.day / 10)) + 1;
 	}
 
 	/**
