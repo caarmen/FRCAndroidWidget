@@ -14,24 +14,26 @@ import ca.rmen.android.frenchcalendar.io.EquinoxDatesReader;
 
 public class FrenchCalendarUtil {
 
-	public static final String TIMEZONE_PARIS = "Europe/Paris";
+	public static final TimeZone TIMEZONE_PARIS = TimeZone.getTimeZone("Europe/Paris");
 	public static final int MODE_EQUINOX = 0;
 	public static final int MODE_ROMME = 1;
 	public static final int MODE_CONTINUOUS = 2;
 	public static final int MODE_128 = 3;
-	private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss z";
-	private static final String FRENCH_ERA_BEGIN = "1792-09-22 00:00:00 CET";
-	private static final String FRENCH_ERA_END = "1811-09-23 00:00:00 CET";
+	private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+	private static final String FRENCH_ERA_BEGIN = "1792-09-22 00:00:00";
+	private static final String FRENCH_ERA_END = "1811-09-23 00:00:00";
 	private static final long NUM_MILLISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
-
+	
 	private Date frenchEraBegin;
 	private Date frenchEraEnd;
 	private Map<Integer, Long> autumnEquinoxes;
 	private int mode;
 
+
 	public FrenchCalendarUtil(InputStream is, int mode) {
 		setMode(mode);
 		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+		sdf.setTimeZone(TIMEZONE_PARIS);
 		try {
 			frenchEraBegin = sdf.parse(FRENCH_ERA_BEGIN);
 			frenchEraEnd = sdf.parse(FRENCH_ERA_END);
@@ -54,8 +56,7 @@ public class FrenchCalendarUtil {
 	}
 
 	public FrenchCalendarDate getDate(GregorianCalendar gregorianDate) {
-		TimeZone parisTimeZone = TimeZone.getTimeZone(TIMEZONE_PARIS);
-		Calendar gregorianDateParis = Calendar.getInstance(parisTimeZone);
+		Calendar gregorianDateParis = Calendar.getInstance(TIMEZONE_PARIS);
 		gregorianDateParis.setTimeInMillis(gregorianDate.getTimeInMillis());
 
 		if (mode == MODE_EQUINOX
@@ -79,8 +80,7 @@ public class FrenchCalendarUtil {
 		if (gAutumnEquinoxTimestamp == null)
 			throw new IllegalArgumentException("Date not supported: "
 					+ gregorianDateParis);
-		TimeZone parisTimeZone = TimeZone.getTimeZone(TIMEZONE_PARIS);
-		Calendar gAutumnEquinox = Calendar.getInstance(parisTimeZone);
+		Calendar gAutumnEquinox = Calendar.getInstance(TIMEZONE_PARIS);
 		
 		gAutumnEquinox.setTimeInMillis(gAutumnEquinoxTimestamp);
 
@@ -113,9 +113,8 @@ public class FrenchCalendarUtil {
 				.getTimeInMillis();
 		long fakeFrenchTimestamp = fakeEndFrenchEraTimestamp
 				+ numMillisSinceEndOfFrenchEra;
-		TimeZone parisTimeZone = TimeZone.getTimeZone(TIMEZONE_PARIS);
 		
-		Calendar fakeFrenchDate = Calendar.getInstance(parisTimeZone);
+		Calendar fakeFrenchDate = Calendar.getInstance(TIMEZONE_PARIS);
 		fakeFrenchDate.setTimeInMillis(fakeFrenchTimestamp);
 		int frenchYear = fakeFrenchDate.get(Calendar.YEAR);
 		int frenchDayInYear = fakeFrenchDate.get(Calendar.DAY_OF_YEAR);

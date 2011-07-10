@@ -31,7 +31,6 @@ public class EquinoxDatesReader {
 		sdf = new SimpleDateFormat(DATE_FORMAT);
 		reader = new CSVReader(is);
 		int line = 0;
-		TimeZone parisTimeZone = TimeZone.getTimeZone(FrenchCalendarUtil.TIMEZONE_PARIS);
 		while (reader.next()) {
 			line++;
 			String yearStr = reader.getValue(COL_YEAR);
@@ -42,7 +41,7 @@ public class EquinoxDatesReader {
 			try {
 
 				Date date = sdf.parse(timestampStr);
-				Calendar dateParis = Calendar.getInstance(parisTimeZone);
+				Calendar dateParis = Calendar.getInstance(FrenchCalendarUtil.TIMEZONE_PARIS);
 				dateParis.setTimeInMillis(date.getTime());
 				dateParis.set(Calendar.HOUR_OF_DAY, 0);
 				dateParis.set(Calendar.MINUTE, 0);
