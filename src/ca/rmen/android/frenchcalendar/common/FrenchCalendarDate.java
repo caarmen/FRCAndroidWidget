@@ -1,5 +1,13 @@
 package ca.rmen.android.frenchcalendar.common;
 
+/**
+ * A timestamp in the french revolutionary calendar. Months are from 1 to 13,
+ * days are from 1 to 30, hours are from 1 to 10, minutes and seconds are from 1
+ * to 100.
+ * 
+ * @author calvarez
+ * 
+ */
 public class FrenchCalendarDate {
 	public int year;
 	public int month;
@@ -17,19 +25,23 @@ public class FrenchCalendarDate {
 		this.minute = minute;
 		this.second = second;
 	}
-	
-	public int getDayInWeek()
-	{
-		return this.day - (10*(this.day /10));
+
+	/**
+	 * @return a number from 1 to 10.
+	 */
+	public int getDayInWeek() {
+		return this.day - (10 * (this.day / 10));
 	}
-	
-	public int getWeekInMonth()
-	{
-		return this.day %10;
+
+	/**
+	 * @return a number from 1 to 3.
+	 */
+	public int getWeekInMonth() {
+		return this.day % 10;
 	}
 
 	public String toString() {
-		return year + "-" + (month) + "-" + (day) + " " + hour + ":" + minute + ":"
-				+ second;
+		return year + "-" + (month) + "-" + (day) + " " + hour + ":" + minute
+				+ ":" + second;
 	}
 }

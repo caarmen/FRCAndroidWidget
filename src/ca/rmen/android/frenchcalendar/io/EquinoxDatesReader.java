@@ -12,10 +12,16 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import android.util.Log;
-
 import ca.rmen.android.frenchcalendar.common.FrenchCalendarUtil;
 import ca.rmen.android.frenchcalendar.lib.CSVReader;
 
+/**
+ * @author calvarez Reads in a CSV file with timestamps for autumn equinoxes for
+ *         a list of years. The CSV file has three columns: Year, Date, Time.
+ *         Year: the year for which we want to know the equinox time. Date: the
+ *         date (day) of the equinox. Time: a timestamp (with timezone) of the
+ *         equinox moment.
+ */
 public class EquinoxDatesReader {
 
 	CSVReader reader;
@@ -23,9 +29,11 @@ public class EquinoxDatesReader {
 	private static final String COL_DAY = "Date";
 	private static final String COL_TIME = "Time";
 	private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss z";
+	public static final TimeZone TIMEZONE_PARIS = TimeZone.getTimeZone("Europe/Paris");
+	
 	private final SimpleDateFormat sdf;
 
-	Map<Integer, Long> equinoxDates = new HashMap<Integer, Long>();
+	Map<Integer, Integer> equinoxDates = new HashMap<Integer, Integer>();
 
 	public EquinoxDatesReader(InputStream is) throws IOException {
 		sdf = new SimpleDateFormat(DATE_FORMAT);
@@ -40,14 +48,23 @@ public class EquinoxDatesReader {
 			int year = Integer.parseInt(yearStr);
 			try {
 
+				// The timezone of the equinox moment.
 				Date date = sdf.parse(timestampStr);
-				Calendar dateParis = Calendar.getInstance(FrenchCalendarUtil.TIMEZONE_PARIS);
+
+				// Determine the date (without time) in Paris, for the equinox
+				// moment.
+
+				// Create a date object in the Paris timezone.
+				Calendar dateParis = Calendar
+						.getInstance(TIMEZONE_PARIS);
+				// Set the equinox moment in the Paris timezone
 				dateParis.setTimeInMillis(date.getTime());
-				dateParis.set(Calendar.HOUR_OF_DAY, 0);
-				dateParis.set(Calendar.MINUTE, 0);
-				dateParis.set(Calendar.SECOND, 0);
-				dateParis.set(Calendar.MILLISECOND, 0);
-				equinoxDates.put(year, dateParis.getTime().getTime());
+
+				// Get the day of month of the equinox. We assume we always know
+				// the month (for autumn, it is September), so we only need to
+				// store the day.
+				int day = dateParis.get(Calendar.DAY_OF_MONTH);
+				equinoxDates.put(year, day);
 			} catch (ParseException e) {
 				Log.d(getClass().getName(), "Error reading equinox for line "
 						+ line, e);
@@ -55,7 +72,7 @@ public class EquinoxDatesReader {
 		}
 	}
 
-	public Map<Integer, Long> getEquinoxDates() {
+	public Map<Integer, Integer> getEquinoxDates() {
 		return Collections.unmodifiableMap(equinoxDates);
 	}
 }

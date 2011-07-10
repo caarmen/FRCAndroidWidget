@@ -8,13 +8,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Map;
-import java.util.TimeZone;
 
 import ca.rmen.android.frenchcalendar.io.EquinoxDatesReader;
 
+/**
+ * 
+ * @author calvarez
+ * 
+ */
 public class FrenchCalendarUtil {
 
-	public static final TimeZone TIMEZONE_PARIS = TimeZone.getTimeZone("Europe/Paris");
 	public static final int MODE_EQUINOX = 0;
 	public static final int MODE_ROMME = 1;
 	public static final int MODE_CONTINUOUS = 2;
@@ -23,24 +26,32 @@ public class FrenchCalendarUtil {
 	private static final String FRENCH_ERA_BEGIN = "1792-09-22 00:00:00";
 	private static final String FRENCH_ERA_END = "1811-09-23 00:00:00";
 	private static final long NUM_MILLISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
-	
-	private Date frenchEraBegin;
-	private Date frenchEraEnd;
-	private Map<Integer, Long> autumnEquinoxes;
+	private static final int EQUINOX_MONTH = 8; // September
+
+	private Calendar frenchEraBegin;
+	private Calendar frenchEraEnd;
+	private Map<Integer, Integer> autumnEquinoxes;
 	private int mode;
 
-
 	public FrenchCalendarUtil(InputStream is, int mode) {
+		// How will we calculate the Gregorian date of the beginning of each
+		// French year?
 		setMode(mode);
+
+		// Read in the dates of the beginning and end of the French calendar,
+		// for which equinoxes were used.
 		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
-		sdf.setTimeZone(TIMEZONE_PARIS);
 		try {
-			frenchEraBegin = sdf.parse(FRENCH_ERA_BEGIN);
-			frenchEraEnd = sdf.parse(FRENCH_ERA_END);
+
+			frenchEraBegin = Calendar.getInstance();
+			frenchEraBegin.setTime(sdf.parse(FRENCH_ERA_BEGIN));
+			frenchEraEnd = Calendar.getInstance();
+			frenchEraEnd.setTime(sdf.parse(FRENCH_ERA_END));
 		} catch (ParseException e) {
 			debug("Error reading French epoch " + FRENCH_ERA_BEGIN, e);
 		}
 
+		// Read in the dates of the autumn equinox.
 		EquinoxDatesReader reader = null;
 		try {
 			reader = new EquinoxDatesReader(is);
@@ -51,87 +62,181 @@ public class FrenchCalendarUtil {
 			autumnEquinoxes = reader.getEquinoxDates();
 	}
 
+	/**
+	 * @param mode
+	 *            the mode in which we calculate the first day of the French
+	 *            year, in the Gregorian calendar. Supported modes for now are
+	 *            MODE_EQUINOX and MODE_ROMME.
+	 */
 	public void setMode(int mode) {
 		this.mode = mode;
 	}
 
+	/**
+	 * @param gregorianDate
+	 * @return the French date corresponding to the Gregorian calendar date.
+	 */
 	public FrenchCalendarDate getDate(GregorianCalendar gregorianDate) {
-		Calendar gregorianDateParis = Calendar.getInstance(TIMEZONE_PARIS);
-		gregorianDateParis.setTimeInMillis(gregorianDate.getTimeInMillis());
 
+		// Determine the method of calculating the first day of the French year.
+
+		// If we are using the equinox mode, or if we are within the dates the
+		// calendar was used (regardless of the selected mode), use the equinox
+		// mode.
 		if (mode == MODE_EQUINOX
-				|| (gregorianDateParis.getTime().after(frenchEraBegin) && gregorianDateParis
-						.getTime().before(frenchEraEnd))) {
-			return getDateEquinox(gregorianDateParis);
+				|| (gregorianDate.after(frenchEraBegin) && gregorianDate
+						.before(frenchEraEnd))) {
+			return getDateEquinox(gregorianDate);
 		} else if (mode == MODE_ROMME) {
-			return getDateRomme(gregorianDateParis);
+			return getDateRomme(gregorianDate);
 		} else {
 			throw new IllegalArgumentException("Can't convert date "
 					+ gregorianDate + " in mode " + mode);
 		}
-
 	}
 
-	private FrenchCalendarDate getDateEquinox(Calendar gregorianDateParis) {
+	/**
+	 * @param gregorianDate
+	 * @return The French date corresponding to the Gregorian calendar date,
+	 *         using the equinox mode to determine the Gregorian date for the
+	 *         first day of the French year.
+	 */
+	private FrenchCalendarDate getDateEquinox(Calendar gregorianDate) {
 
-		int gyear = gregorianDateParis.get(Calendar.YEAR);
-
-		Long gAutumnEquinoxTimestamp = autumnEquinoxes.get(gyear);
-		if (gAutumnEquinoxTimestamp == null)
+		int gyear = gregorianDate.get(Calendar.YEAR);
+		Calendar gAutumnEquinox = getAutumnEquinox(gyear);
+		if (gAutumnEquinox == null)
 			throw new IllegalArgumentException("Date not supported: "
-					+ gregorianDateParis);
-		Calendar gAutumnEquinox = Calendar.getInstance(TIMEZONE_PARIS);
-		
-		gAutumnEquinox.setTimeInMillis(gAutumnEquinoxTimestamp);
+					+ gregorianDate);
 
+		// Determine the first day of the French year.
 		Calendar g1stVendemiaire = gAutumnEquinox;
-		// Case 1, date from January to September
-		if (gregorianDateParis.compareTo(gAutumnEquinox) < 0) {
-			Long g1stVendemiaireTimestamp = autumnEquinoxes.get(gyear - 1);
-			if (g1stVendemiaireTimestamp == null)
+		// Case 1, date from January to September, use the equinox date from
+		// last year
+		if (gregorianDate.compareTo(gAutumnEquinox) < 0) {
+			g1stVendemiaire = getAutumnEquinox(gyear - 1);
+			if (g1stVendemiaire == null)
 				throw new IllegalArgumentException("Date not supported: "
-						+ gregorianDateParis);
-
-			g1stVendemiaire.setTimeInMillis(g1stVendemiaireTimestamp);
+						+ gregorianDate);
 		}
 		// Case 2, date from September to December
 		else {
 
 		}
-		int frenchYear = g1stVendemiaire.get(Calendar.YEAR) - (frenchEraBegin.getYear() + 1900)
-				+ 1;
-		int numberDaysInFrenchYear = (int) ((gregorianDateParis
-				.getTimeInMillis() - g1stVendemiaire.getTimeInMillis()) / NUM_MILLISECONDS_IN_DAY);
-		FrenchCalendarDate result = getFrenchDate(frenchYear, numberDaysInFrenchYear);
+		// The year in the French date: Gregorian year at 1st vendemiaire -
+		// 1792. This is the number of years elapsed since the French calendar
+		// had been started.
+		int frenchYear = g1stVendemiaire.get(Calendar.YEAR)
+				- frenchEraBegin.get(Calendar.YEAR) + 1;
+		// The DAY_OF_YEAR in the French year, from 0 to 365. This is the
+		// number of days elapsed 1stVendemiaire of the French year and the
+		// given timestamp.
+		int numberDaysInFrenchYear = (int) ((gregorianDate.getTimeInMillis() - g1stVendemiaire
+				.getTimeInMillis()) / NUM_MILLISECONDS_IN_DAY);
+		// Create and return the French calendar object.
+		FrenchCalendarDate result = getFrenchDate(frenchYear,
+				numberDaysInFrenchYear);
 		return result;
 	}
 
-	private FrenchCalendarDate getDateRomme(Calendar gregorianDateParis) {
-		long numMillisSinceEndOfFrenchEra = (gregorianDateParis.getTimeInMillis() + gregorianDateParis.get(Calendar.DST_OFFSET) - frenchEraEnd
-				.getTime());
+	/**
+	 * @param gregorianDate
+	 * @return The French date corresponding to the Gregorian calendar date,
+	 *         using the Romme mode to determine the Gregorian date for the
+	 *         first day of the French year.
+	 */
+	private FrenchCalendarDate getDateRomme(Calendar gregorianDate) {
+		// Time elapsed between the end of the French calendar and the given
+		// date. We have to include the daylight savings offset, because back in
+		// 1792-1811,
+		// daylight savings time wasn't being used. If we don't take into
+		// account the offset, a calculation like 8/5/1996 00:00:00 - 8/5/1796
+		// 00:00:00 will not return 200 years, but 200 years - 1 hour, which is not
+		// the desired result.
+		long numMillisSinceEndOfFrenchEra = gregorianDate.getTimeInMillis()
+				- frenchEraEnd.getTimeInMillis()
+				+ gregorianDate.get(Calendar.DST_OFFSET);
+
+		// The Romme method applies the same
+		// rules (mostly) of the Gregorian calendar to the French calendar.
+		// One difference is the year 4000, which is a leap year in the
+		// Gregorian system, but not in the French system. For now we ignore
+		// this difference. We may address it and fix this code in the year
+		// 3999 :)
+
+		// Create a fake calendar object (fake because this is not really a
+		// Gregorian date), corresponding to the end of the French calendar era.
+		// This was in the French year 20. Since in the Gregorian year 20, there
+		// were no leap years yet, we add 10000 to the year, so that the
+		// Gregorian calendar implementation can handle the leap years.
+
+		// The end of the French calendar system was the beginning of the year
+		// 20.
 		long fakeEndFrenchEraTimestamp = new GregorianCalendar(10020, 0, 1)
 				.getTimeInMillis();
+		// Add the elapsed time to the French date.
 		long fakeFrenchTimestamp = fakeEndFrenchEraTimestamp
 				+ numMillisSinceEndOfFrenchEra;
-		
-		Calendar fakeFrenchDate = Calendar.getInstance(TIMEZONE_PARIS);
+
+		// Create a calendar object for the French date
+		Calendar fakeFrenchDate = Calendar.getInstance();
 		fakeFrenchDate.setTimeInMillis(fakeFrenchTimestamp);
+
+		// Extract the year, and day in year from the French date.
 		int frenchYear = fakeFrenchDate.get(Calendar.YEAR);
 		int frenchDayInYear = fakeFrenchDate.get(Calendar.DAY_OF_YEAR);
-		FrenchCalendarDate result = getFrenchDate(frenchYear-10000, frenchDayInYear-1);
+
+		// Create and return a French calendar object.
+		FrenchCalendarDate result = getFrenchDate(frenchYear - 10000,
+				frenchDayInYear - 1);
 		return result;
 	}
 
+	/**
+	 * @param frenchYear
+	 *            the year in the French calendar
+	 * @param numberDaysInFrenchYear
+	 *            number of days since 1st Vendemiare of the given year,
+	 *            starting with 0.
+	 * @return A French calendar object for the given French day.
+	 */
 	private FrenchCalendarDate getFrenchDate(int frenchYear,
 			int numberDaysInFrenchYear) {
+		// Find the month in the French year, starting from 0.
 		int numberMonthInFrenchYear = numberDaysInFrenchYear / 30;
+
+		// Find the day in the French month, starting from 0.
 		int numberDaysInFrenchMonth = numberDaysInFrenchYear
 				- (numberMonthInFrenchYear * 30);
 
+		// Create and return the French calendar object.
 		FrenchCalendarDate result = new FrenchCalendarDate(frenchYear,
 				numberMonthInFrenchYear + 1, numberDaysInFrenchMonth + 1, 0, 0,
 				0);
 		return result;
+	}
+
+	/**
+	 * @param year
+	 *            a year in the Gregorian calendar
+	 * @return the day, in the Gregorian calendar, of the autumn equinox (at
+	 *         midnight) in the current timezone, for the given year.
+	 */
+	private Calendar getAutumnEquinox(int gyear) {
+		// Create a date object for the autumn equinox date (at midnight) in the
+		// current timezone.
+		Integer gAutumnEquinoxDay = autumnEquinoxes.get(gyear);
+		if (gAutumnEquinoxDay == null)
+			return null;
+		Calendar gAutumnEquinox = Calendar.getInstance();
+		gAutumnEquinox.set(Calendar.YEAR, gyear);
+		gAutumnEquinox.set(Calendar.MONTH, EQUINOX_MONTH);
+		gAutumnEquinox.set(Calendar.DAY_OF_MONTH, gAutumnEquinoxDay);
+		gAutumnEquinox.set(Calendar.HOUR, 0);
+		gAutumnEquinox.set(Calendar.MINUTE, 0);
+		gAutumnEquinox.set(Calendar.SECOND, 0);
+		gAutumnEquinox.set(Calendar.MILLISECOND, 0);
+		return gAutumnEquinox;
 	}
 
 	private void debug(Object o) {
