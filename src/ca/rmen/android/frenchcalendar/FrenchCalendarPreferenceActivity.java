@@ -4,7 +4,6 @@ import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.util.Log;
 
 public abstract class FrenchCalendarPreferenceActivity extends PreferenceActivity {
 	int mAppWidgetId = -1;
@@ -14,7 +13,6 @@ public abstract class FrenchCalendarPreferenceActivity extends PreferenceActivit
 		super.onCreate(icicle);
 		Intent intent = getIntent();
 		Bundle extras = intent.getExtras();
-		Log.d(getClass().getName(),""+extras.keySet());
 		mAppWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID,
 				AppWidgetManager.INVALID_APPWIDGET_ID);
 		addPreferencesFromResource(R.xml.widget_settings);

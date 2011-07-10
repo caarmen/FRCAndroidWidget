@@ -44,25 +44,17 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 		final AppWidgetManager appWidgetManager = AppWidgetManager
 				.getInstance(context);
 		final ComponentName provider = intent.getComponent();
-		if (provider == null)
-			return;
-
-		if (!provider.getClassName().equals(getClass().getName()))
-			return;
-		debug(context, "category: " + intent.getCategories());
 		if ((context.getPackageName() + BROADCAST_MESSAGE_UPDATE).equals(intent
 				.getAction())) {
 			if (intent != null && intent.getExtras() != null) {
 				String broadcaster = intent.getExtras().getString(
 						EXTRA_WIDGET_CLASS);
-				debug(context, "broadcaster: " + broadcaster);
 				if (!getClass().getName().equals(broadcaster))
 					return;
 			}
 			final int[] appWidgetIds = appWidgetManager
 					.getAppWidgetIds(provider);
 			if (appWidgetIds.length == 0) {
-				debug(context, "No widgets visible: " + provider.getClassName());
 				stopWidgetNotifier(context);
 			} else
 				updateAll(context, appWidgetManager, appWidgetIds);
