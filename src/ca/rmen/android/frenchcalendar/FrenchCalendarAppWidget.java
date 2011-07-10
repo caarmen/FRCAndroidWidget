@@ -14,6 +14,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.View;
 import android.widget.RemoteViews;
 import ca.rmen.android.frenchcalendar.common.FrenchCalendarDate;
 import ca.rmen.android.frenchcalendar.common.FrenchCalendarUtil;
@@ -25,6 +26,10 @@ public class FrenchCalendarAppWidget extends AppWidgetProvider {
 	public static final String PREF_FREQUENCY = "setting_frequency";
 	public static final String BROADCAST_MESSAGE_UPDATE = ".UPDATE_WIDGET";
 	public static final String BROADCAST_MESSAGE_CONF_CHANGE = ".CONF_CHANGE";
+	private static final String FREQUENCY_SECONDS = "864";
+	private static final String FREQUENCY_MINUTES = "86400";
+	private static final String FREQUENCY_DAYS = "86400000";
+
 	private boolean initialized = false;
 	private FrenchCalendarUtil util = null;
 	private PendingIntent updatePendingIntent = null;
@@ -70,9 +75,8 @@ public class FrenchCalendarAppWidget extends AppWidgetProvider {
 		}
 		SharedPreferences sharedPreferences = PreferenceManager
 				.getDefaultSharedPreferences(context);
-
 		String frequencyPrefStr = sharedPreferences.getString(PREF_FREQUENCY,
-				"864");
+				FREQUENCY_SECONDS);
 
 		int frequency = Integer.parseInt(frequencyPrefStr);
 		debug(context, "Start alarm with frequency " + frequency);
@@ -162,10 +166,24 @@ public class FrenchCalendarAppWidget extends AppWidgetProvider {
 				frenchDate.month - 1);
 		views.setTextViewText(R.id.text_month, monthLabel);
 		views.setTextViewText(R.id.text_weekday, weekdayLabel);
-		String timestamp = String.format("%02d:%02d:%02d", frenchDate.hour,
-				frenchDate.minute, frenchDate.second);
+
+		String frequencyPrefStr = sharedPreferences.getString(PREF_FREQUENCY,
+				FREQUENCY_SECONDS);
+
+		String timestamp = null;
+		if (FREQUENCY_SECONDS.equals(frequencyPrefStr)) {
+			views.setViewVisibility(R.id.text_time, View.VISIBLE);
+			timestamp = String.format("%02d:%02d:%02d", frenchDate.hour,
+					frenchDate.minute, frenchDate.second);
+		} else if (FREQUENCY_MINUTES.equals(frequencyPrefStr)) {
+			views.setViewVisibility(R.id.text_time, View.VISIBLE);
+			timestamp = String.format("%02d:%02d", frenchDate.hour,
+					frenchDate.minute);
+		} else {
+			views.setViewVisibility(R.id.text_time, View.INVISIBLE);
+			timestamp="";
+		}
 		views.setTextViewText(R.id.text_time, timestamp);
-		
 
 		final Intent intent = new Intent(context,
 				FrenchCalendarPreferenceActivity.class);
@@ -173,7 +191,7 @@ public class FrenchCalendarAppWidget extends AppWidgetProvider {
 		intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
 		final PendingIntent pendingIntent = PendingIntent.getActivity(context,
 				0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-		
+
 		views.setOnClickPendingIntent(R.id.linearLayout1, pendingIntent);
 		appWidgetManager.updateAppWidget(appWidgetId, views);
 	}
