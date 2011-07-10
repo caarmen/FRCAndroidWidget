@@ -11,6 +11,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.widget.RemoteViews;
 import ca.rmen.android.frenchcalendar.common.FrenchCalendarDate;
@@ -121,6 +122,8 @@ public class FrenchCalendarAppWidget extends AppWidgetProvider {
 		util = new FrenchCalendarUtil(equinoxFile,
 				FrenchCalendarUtil.MODE_ROMME);
 		FrenchCalendarDate frenchDate = util.getDate(now);
+		Typeface tf = Typeface.createFromAsset(context.getAssets(),
+                "learningcurve_ot.otf");
 		views.setTextViewText(R.id.text_year, "" + frenchDate.year);
 		views.setTextViewText(R.id.text_dayofmonth, "" + frenchDate.day);
 		CharSequence weekdayLabel = getLabel(context, R.array.weekdays,
