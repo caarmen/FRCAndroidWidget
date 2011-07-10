@@ -83,16 +83,25 @@ public class FrenchCalendarUtil {
 		// If we are using the equinox mode, or if we are within the dates the
 		// calendar was used (regardless of the selected mode), use the equinox
 		// mode.
+		FrenchCalendarDate result = null;
 		if (mode == MODE_EQUINOX
 				|| (gregorianDate.after(frenchEraBegin) && gregorianDate
 						.before(frenchEraEnd))) {
-			return getDateEquinox(gregorianDate);
+			result = getDateEquinox(gregorianDate);
 		} else if (mode == MODE_ROMME) {
-			return getDateRomme(gregorianDate);
+			result = getDateRomme(gregorianDate);
 		} else {
 			throw new IllegalArgumentException("Can't convert date "
 					+ gregorianDate + " in mode " + mode);
 		}
+		// Get the decimal time portion of the French date
+		if (result != null) {
+			int[] timeInDay = getFrenchTime(gregorianDate);
+			result.hour = timeInDay[0];
+			result.minute = timeInDay[1];
+			result.second = timeInDay[2];
+		}
+		return result;
 	}
 
 	/**
@@ -151,7 +160,8 @@ public class FrenchCalendarUtil {
 		// 1792-1811,
 		// daylight savings time wasn't being used. If we don't take into
 		// account the offset, a calculation like 8/5/1996 00:00:00 - 8/5/1796
-		// 00:00:00 will not return 200 years, but 200 years - 1 hour, which is not
+		// 00:00:00 will not return 200 years, but 200 years - 1 hour, which is
+		// not
 		// the desired result.
 		long numMillisSinceEndOfFrenchEra = gregorianDate.getTimeInMillis()
 				- frenchEraEnd.getTimeInMillis()
@@ -214,6 +224,26 @@ public class FrenchCalendarUtil {
 				numberMonthInFrenchYear + 1, numberDaysInFrenchMonth + 1, 0, 0,
 				0);
 		return result;
+	}
+
+	/**
+	 * @param gtime
+	 * @return a decimal representation of the time within this day. Returns
+	 *         three ints for hour, minutes, seconds, respectively. The hour is
+	 *         from 0 to 9, the minute is from 0 to 99, and the second is from
+	 *         0 to 99.
+	 */
+	private int[] getFrenchTime(Calendar gtime) {
+		int ghour = gtime.get(Calendar.HOUR);
+		int gmin = gtime.get(Calendar.MINUTE);
+		int gsec = gtime.get(Calendar.SECOND);
+
+		float dayFraction = ((float) ghour / 24) + ((float) gmin / 1440)
+				+ ((float) gsec / 86400);
+		int fhour = (int) (dayFraction * 10);
+		int fmin = (int) ((dayFraction*10 - fhour) * 100);
+		int fsec = (int) ((dayFraction*10 - (fhour + (float) fmin / 100)) * 10000);
+		return new int[] { fhour, fmin, fsec};
 	}
 
 	/**
