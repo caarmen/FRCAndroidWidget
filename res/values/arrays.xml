@@ -28,4 +28,22 @@
 		<item>Thermidor</item>
 		<item>Fructidor</item>
 	</string-array>
+	<string-array name="setting_method_labels">
+		<item>Equinox</item>
+		<item>Romme</item>
+	</string-array>
+	<string-array name="setting_method_values">
+		<item>0</item>
+		<item>1</item>
+	</string-array>
+	<string-array name="setting_frequency_labels">
+		<item>Every second (drains battery!)</item>
+		<item>Every minute</item>
+		<item>Once every hour</item>
+	</string-array>
+	<string-array name="setting_frequency_values">
+		<item>864</item>
+		<item>86400</item>
+		<item>8640000</item>
+	</string-array>
 </resources>

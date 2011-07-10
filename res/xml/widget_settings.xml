@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/widget_settings"
+    android:key="livewallpaper_settings">
+
+    <ListPreference android:key="setting_method"
+        android:summary="@string/setting_method_summary"
+        android:title="@string/setting_method"
+        android:entries="@array/setting_method_labels"
+        android:entryValues="@array/setting_method_values"
+        android:dialogTitle="@string/setting_method" android:defaultValue="0"/>
+    <ListPreference android:key="setting_frequency"
+        android:summary="@string/setting_frequency_summary"
+        android:title="@string/setting_frequency"
+        android:entries="@array/setting_frequency_labels"
+        android:entryValues="@array/setting_frequency_values"
+        android:dialogTitle="@string/setting_frequency" android:defaultValue="864"/>
+</PreferenceScreen>

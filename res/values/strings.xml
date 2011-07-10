@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World, FrenchCalendarActivity!</string>
-    <string name="app_name">FrenchCalendar</string>
+    <string name="app_name">French Calendar</string>
+    <string name="widget_settings">French Calendar Settings</string>
+    <string name="setting_method">Calculation method</string>
+    <string name="setting_method_summary">How the first of each year is determined</string>
+    <string name="setting_frequency">Update frequency</string>
+    <string name="setting_frequency_summary">How often the widget is updated</string>
 </resources>

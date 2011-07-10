@@ -5,29 +5,22 @@
 	<uses-sdk android:minSdkVersion="4" />
 
 	<application android:icon="@drawable/icon" android:label="@string/app_name">
-		<!-- activity android:name=".FrenchCalendarActivity"
-			android:label="@string/app_name">
+		<activity android:name=".FrenchCalendarPreferenceActivity">
 			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
+				<action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
 			</intent-filter>
-		</activity-->
-		<receiver
-			android:name="ca.rmen.android.frenchcalendar.FrenchCalendarAppWidget"
+		</activity>
+		<receiver android:name="ca.rmen.android.frenchcalendar.FrenchCalendarAppWidget"
 			android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
 			</intent-filter>
 			<intent-filter>
-				<action android:name="ca.rmen.android.frenchcalendar.UPDATE_WIDGET" />
-			</intent-filter>
-			<!-- intent-filter>
-				<action android:name="android.intent.action.SCREEN_ON" />
+				<action android:name="ca.rmen.android.frenchcalendar.CONF_CHANGE" />
 			</intent-filter>
 			<intent-filter>
-				<action android:name="android.intent.action.SCREEN_OFF" />
-			</intent-filter -->
-			
+				<action android:name="ca.rmen.android.frenchcalendar.UPDATE_WIDGET" />
+			</intent-filter>
 			<meta-data android:name="android.appwidget.provider"
 				android:resource="@xml/appwidget" />
 		</receiver>
