@@ -19,7 +19,7 @@ import android.widget.RemoteViews;
 import ca.rmen.android.frenchcalendar.common.FrenchCalendarDate;
 import ca.rmen.android.frenchcalendar.common.FrenchCalendarUtil;
 
-public class FrenchCalendarAppWidget extends AppWidgetProvider {
+public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 
 	public static final String SHARED_PREFS_NAME = "frenchcalwidgetprefs";
 	public static final String PREF_METHOD = "setting_method";
@@ -29,26 +29,42 @@ public class FrenchCalendarAppWidget extends AppWidgetProvider {
 	private static final String FREQUENCY_SECONDS = "864";
 	private static final String FREQUENCY_MINUTES = "86400";
 	private static final String FREQUENCY_DAYS = "86400000";
-
+	private static final String EXTRA_WIDGET_CLASS = "WIDGET_CLASS";
 	private boolean initialized = false;
 	private FrenchCalendarUtil util = null;
-	private PendingIntent updatePendingIntent = null;
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		debug(context, "received! " + intent.getAction());
+		debug(context,
+				"received! "
+						+ intent.getAction()
+						+ ": "
+						+ (intent.getComponent() == null ? "" : intent
+								.getComponent().getClassName()));
+		final AppWidgetManager appWidgetManager = AppWidgetManager
+				.getInstance(context);
+		final ComponentName provider = intent.getComponent();
+		if (provider == null)
+			return;
 
+		if (!provider.getClassName().equals(getClass().getName()))
+			return;
+		debug(context, "category: " + intent.getCategories());
 		if ((context.getPackageName() + BROADCAST_MESSAGE_UPDATE).equals(intent
 				.getAction())) {
-			final AppWidgetManager appWidgetManager = AppWidgetManager
-					.getInstance(context);
-			final ComponentName provider = new ComponentName(context,
-					FrenchCalendarAppWidget.class);
+			if (intent != null && intent.getExtras() != null) {
+				String broadcaster = intent.getExtras().getString(
+						EXTRA_WIDGET_CLASS);
+				debug(context, "broadcaster: " + broadcaster);
+				if (!getClass().getName().equals(broadcaster))
+					return;
+			}
 			final int[] appWidgetIds = appWidgetManager
 					.getAppWidgetIds(provider);
-			if (appWidgetIds.length == 0)
+			if (appWidgetIds.length == 0) {
+				debug(context, "No widgets visible: " + provider.getClassName());
 				stopWidgetNotifier(context);
-			else
+			} else
 				updateAll(context, appWidgetManager, appWidgetIds);
 		} else if ((context.getPackageName() + BROADCAST_MESSAGE_CONF_CHANGE)
 				.equals(intent.getAction())) {
@@ -70,9 +86,7 @@ public class FrenchCalendarAppWidget extends AppWidgetProvider {
 	}
 
 	private void startWidgetNotifier(Context context) {
-		if (updatePendingIntent == null) {
-			updatePendingIntent = createWidgetNotifier(context);
-		}
+		PendingIntent updatePendingIntent = createWidgetNotifier(context);
 		SharedPreferences sharedPreferences = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		String frequencyPrefStr = sharedPreferences.getString(PREF_FREQUENCY,
@@ -89,9 +103,7 @@ public class FrenchCalendarAppWidget extends AppWidgetProvider {
 
 	private void stopWidgetNotifier(Context context) {
 		debug(context, "Will cancel updater");
-		if (updatePendingIntent == null) {
-			updatePendingIntent = createWidgetNotifier(context);
-		}
+		PendingIntent updatePendingIntent = createWidgetNotifier(context);
 		AlarmManager mgr = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
 		mgr.cancel(updatePendingIntent);
@@ -101,9 +113,10 @@ public class FrenchCalendarAppWidget extends AppWidgetProvider {
 	private PendingIntent createWidgetNotifier(Context context) {
 		Intent updateIntent = new Intent(context.getPackageName()
 				+ BROADCAST_MESSAGE_UPDATE);
-
-		updatePendingIntent = PendingIntent.getBroadcast(context, 0,
-				updateIntent, 0);
+		updateIntent.putExtra(EXTRA_WIDGET_CLASS, getClass().getName());
+		updateIntent.addCategory(getClass().getName());
+		PendingIntent updatePendingIntent = PendingIntent.getBroadcast(context,
+				0, updateIntent, 0);
 		return updatePendingIntent;
 	}
 
@@ -127,7 +140,7 @@ public class FrenchCalendarAppWidget extends AppWidgetProvider {
 
 	private void init(final Context context,
 			final AppWidgetManager appWidgetManager, final int[] appWidgetIds) {
-		restartWidgetNotifier(context);
+		startWidgetNotifier(context);
 		IntentFilter filterOn = new IntentFilter(Intent.ACTION_SCREEN_ON);
 		IntentFilter filterOff = new IntentFilter(Intent.ACTION_SCREEN_OFF);
 		context.getApplicationContext().registerReceiver(this, filterOn);
@@ -142,12 +155,16 @@ public class FrenchCalendarAppWidget extends AppWidgetProvider {
 			update(context, appWidgetManager, appWidgetId);
 	}
 
+	protected abstract int getLayoutResourceId();
+
+	protected abstract Class getPreferenceActivityClass();
+
 	public void update(Context context,
 			final AppWidgetManager appWidgetManager, final int appWidgetId) {
 
 		debug(context, "update widget " + appWidgetId);
 		final RemoteViews views = new RemoteViews(context.getPackageName(),
-				R.layout.appwidget);
+				getLayoutResourceId());
 		GregorianCalendar now = new GregorianCalendar();
 		final InputStream equinoxFile = context.getResources().openRawResource(
 				R.raw.equinoxdates);
@@ -181,14 +198,14 @@ public class FrenchCalendarAppWidget extends AppWidgetProvider {
 					frenchDate.minute);
 		} else {
 			views.setViewVisibility(R.id.text_time, View.INVISIBLE);
-			timestamp="";
+			timestamp = "";
 		}
 		views.setTextViewText(R.id.text_time, timestamp);
 
-		final Intent intent = new Intent(context,
-				FrenchCalendarPreferenceActivity.class);
+		final Intent intent = new Intent(context, getPreferenceActivityClass());
 
 		intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+		intent.addCategory(getClass().getName());
 		final PendingIntent pendingIntent = PendingIntent.getActivity(context,
 				0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 

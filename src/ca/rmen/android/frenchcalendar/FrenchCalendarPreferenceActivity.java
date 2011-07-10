@@ -4,8 +4,9 @@ import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.util.Log;
 
-public class FrenchCalendarPreferenceActivity extends PreferenceActivity {
+public abstract class FrenchCalendarPreferenceActivity extends PreferenceActivity {
 	int mAppWidgetId = -1;
 
 	@Override
@@ -13,6 +14,7 @@ public class FrenchCalendarPreferenceActivity extends PreferenceActivity {
 		super.onCreate(icicle);
 		Intent intent = getIntent();
 		Bundle extras = intent.getExtras();
+		Log.d(getClass().getName(),""+extras.keySet());
 		mAppWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID,
 				AppWidgetManager.INVALID_APPWIDGET_ID);
 		addPreferencesFromResource(R.xml.widget_settings);
@@ -26,6 +28,8 @@ public class FrenchCalendarPreferenceActivity extends PreferenceActivity {
 		super.onDestroy();
 		Intent updateIntent = new Intent(getPackageName()
 				+ FrenchCalendarAppWidget.BROADCAST_MESSAGE_CONF_CHANGE);
+		updateIntent.addCategory(getWidgetCategory());
 		sendBroadcast(updateIntent);
 	}
+	abstract protected String getWidgetCategory();
 }

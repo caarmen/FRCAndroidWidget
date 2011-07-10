@@ -5,24 +5,47 @@
 	<uses-sdk android:minSdkVersion="4" />
 
 	<application android:icon="@drawable/icon" android:label="@string/app_name">
-		<activity android:name=".FrenchCalendarPreferenceActivity">
+		<activity android:name=".FrenchCalendarWidePreferenceActivity">
 			<intent-filter>
 				<action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
 			</intent-filter>
 		</activity>
-		<receiver android:name="ca.rmen.android.frenchcalendar.FrenchCalendarAppWidget"
+		<activity android:name=".FrenchCalendarNarrowPreferenceActivity">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+			</intent-filter>
+		</activity>		<receiver android:name="ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetNarrow"
 			android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
 			</intent-filter>
 			<intent-filter>
 				<action android:name="ca.rmen.android.frenchcalendar.CONF_CHANGE" />
+				<category android:name="ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetNarrow"/>
 			</intent-filter>
 			<intent-filter>
 				<action android:name="ca.rmen.android.frenchcalendar.UPDATE_WIDGET" />
+				<category android:name="ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetNarrow"/>
 			</intent-filter>
 			<meta-data android:name="android.appwidget.provider"
 				android:resource="@xml/appwidget" />
+		</receiver>
+
+		<receiver android:name="ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetWide"
+			android:label="@string/app_name_wide">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+			</intent-filter>
+			<intent-filter>
+				<action android:name="ca.rmen.android.frenchcalendar.CONF_CHANGE" />
+				<category android:name="ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetWide"/>
+			</intent-filter>
+			<intent-filter>
+				<action android:name="ca.rmen.android.frenchcalendar.UPDATE_WIDGET" />
+				<category android:name="ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetWide"/>
+			</intent-filter>
+			<meta-data android:name="android.appwidget.provider"
+				android:resource="@xml/appwidget_wide" />
 		</receiver>
 
 

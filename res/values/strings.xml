@@ -2,6 +2,7 @@
 <resources>
     <string name="hello">Hello World, FrenchCalendarActivity!</string>
     <string name="app_name">French Calendar</string>
+    <string name="app_name_wide">French Calendar (wide)</string>
     <string name="widget_settings">French Calendar Settings</string>
     <string name="setting_method">Calculation method</string>
     <string name="setting_method_summary">How the first of each year is determined</string>
