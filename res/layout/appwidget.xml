@@ -1,4 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_height="wrap_content" android:id="@+id/textView1"
-	android:layout_width="wrap_content" android:text="TextView"></TextView>
+<LinearLayout android:id="@+id/linearLayout1"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical">
+	<TextView android:id="@+id/text_weekday"
+		android:layout_height="wrap_content" android:layout_width="wrap_content"
+		android:layout_gravity="center_horizontal" />
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal" android:gravity="center_horizontal">
+
+		<TextView android:id="@+id/text_dayofmonth"
+			android:layout_height="wrap_content" android:layout_width="wrap_content"
+			android:paddingRight="3dip" />
+		<TextView android:id="@+id/text_month" android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:paddingRight="3dip" />
+		<TextView android:id="@+id/text_year" android:layout_height="wrap_content"
+			android:layout_width="wrap_content" />
+	</LinearLayout>
+	<TextView android:id="@+id/text_time" android:layout_height="fill_parent"
+		android:layout_width="wrap_content" />
+
+</LinearLayout>
+
+
