@@ -17,6 +17,16 @@ public class FrenchCalendarDate {
 		this.minute = minute;
 		this.second = second;
 	}
+	
+	public int getDayInWeek()
+	{
+		return this.day - (10*(this.day /10));
+	}
+	
+	public int getWeekInMonth()
+	{
+		return this.day %10;
+	}
 
 	public String toString() {
 		return year + "-" + (month) + "-" + (day) + " " + hour + ":" + minute + ":"
