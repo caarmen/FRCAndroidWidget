@@ -11,6 +11,15 @@ public class FrenchCalendarAppWidgetNarrow extends FrenchCalendarAppWidget {
 	protected Class getPreferenceActivityClass() {
 		return FrenchCalendarNarrowPreferenceActivity.class;
 	}
+	
+	@Override
+	protected int getWidthResourceId() {
+		return R.dimen.narrow_widget_width;
+	}
+	@Override
+	protected int getHeightResourceId() {
+		return R.dimen.narrow_widget_height;
+	}
 
 
 }

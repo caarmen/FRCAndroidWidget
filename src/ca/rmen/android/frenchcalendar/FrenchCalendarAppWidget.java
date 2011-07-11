@@ -12,10 +12,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RemoteViews;
+import android.widget.TextView;
 import ca.rmen.android.frenchcalendar.common.FrenchCalendarDate;
 import ca.rmen.android.frenchcalendar.common.FrenchCalendarUtil;
 
@@ -150,13 +154,14 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 	protected abstract int getLayoutResourceId();
 
 	protected abstract Class getPreferenceActivityClass();
+	
+	protected abstract int getWidthResourceId();
+	
+	protected abstract int getHeightResourceId();
 
 	public void update(Context context,
 			final AppWidgetManager appWidgetManager, final int appWidgetId) {
 
-		debug(context, "update widget " + appWidgetId);
-		final RemoteViews views = new RemoteViews(context.getPackageName(),
-				getLayoutResourceId());
 		GregorianCalendar now = new GregorianCalendar();
 		final InputStream equinoxFile = context.getResources().openRawResource(
 				R.raw.equinoxdates);
@@ -167,32 +172,48 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 
 		util = new FrenchCalendarUtil(equinoxFile, mode);
 		FrenchCalendarDate frenchDate = util.getDate(now);
-		views.setTextViewText(R.id.text_year, "" + frenchDate.year);
-		views.setTextViewText(R.id.text_dayofmonth, "" + frenchDate.day);
+		
+		LayoutInflater inflater = LayoutInflater.from(context);
+		View view = inflater.inflate(getLayoutResourceId(), null, false);
+		int width = context.getResources().getDimensionPixelSize(getWidthResourceId());
+		int height = context.getResources().getDimensionPixelSize(getHeightResourceId());
+		Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+		
+		Canvas canvas = new Canvas(bitmap);
+		
+		setText(view, R.id.text_year, ""+frenchDate.year);
 		CharSequence weekdayLabel = getLabel(context, R.array.weekdays,
 				frenchDate.getDayInWeek() - 1);
 		CharSequence monthLabel = getLabel(context, R.array.months,
 				frenchDate.month - 1);
-		views.setTextViewText(R.id.text_month, monthLabel);
-		views.setTextViewText(R.id.text_weekday, weekdayLabel);
+		setText(view, R.id.text_weekday, weekdayLabel);
+		setText(view, R.id.text_month, monthLabel);
 
 		String frequencyPrefStr = sharedPreferences.getString(PREF_FREQUENCY,
 				FREQUENCY_SECONDS);
 
 		String timestamp = null;
+		TextView timeView = (TextView) view.findViewById(R.id.text_time);
 		if (FREQUENCY_SECONDS.equals(frequencyPrefStr)) {
-			views.setViewVisibility(R.id.text_time, View.VISIBLE);
+			timeView.setVisibility(View.VISIBLE);
 			timestamp = String.format("%02d:%02d:%02d", frenchDate.hour,
 					frenchDate.minute, frenchDate.second);
 		} else if (FREQUENCY_MINUTES.equals(frequencyPrefStr)) {
-			views.setViewVisibility(R.id.text_time, View.VISIBLE);
+			timeView.setVisibility(View.VISIBLE);
 			timestamp = String.format("%02d:%02d", frenchDate.hour,
 					frenchDate.minute);
 		} else {
-			views.setViewVisibility(R.id.text_time, View.GONE);
+			timeView.setVisibility(View.GONE);
 			timestamp = "";
 		}
-		views.setTextViewText(R.id.text_time, timestamp);
+		timeView.setText(timestamp);
+		
+		view.measure(width, height);
+		view.layout(0,0,width-1,height-1);		
+		view.draw(canvas);
+		
+		final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.imageview);
+		views.setImageViewBitmap(R.id.imageView1, bitmap);
 
 		final Intent intent = new Intent(context, getPreferenceActivityClass());
 
@@ -205,6 +226,11 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 		appWidgetManager.updateAppWidget(appWidgetId, views);
 	}
 
+	private void setText(View view, int resourceId, CharSequence text)
+	{
+		TextView textView = (TextView) view.findViewById(resourceId);
+		textView.setText(text);
+	}
 	private CharSequence getLabel(Context context, int arrayResource, int index) {
 		CharSequence[] labels = context.getResources().getTextArray(
 				arrayResource);
