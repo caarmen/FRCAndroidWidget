@@ -14,6 +14,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -181,13 +182,14 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 		
 		Canvas canvas = new Canvas(bitmap);
 		
-		setText(view, R.id.text_year, ""+frenchDate.year);
+		setText(context,view, R.id.text_year, ""+frenchDate.year);
+		setText(context, view, R.id.text_dayofmonth, "" + frenchDate.day);
 		CharSequence weekdayLabel = getLabel(context, R.array.weekdays,
 				frenchDate.getDayInWeek() - 1);
 		CharSequence monthLabel = getLabel(context, R.array.months,
 				frenchDate.month - 1);
-		setText(view, R.id.text_weekday, weekdayLabel);
-		setText(view, R.id.text_month, monthLabel);
+		setText(context,view, R.id.text_weekday, weekdayLabel);
+		setText(context,view, R.id.text_month, monthLabel);
 
 		String frequencyPrefStr = sharedPreferences.getString(PREF_FREQUENCY,
 				FREQUENCY_SECONDS);
@@ -206,7 +208,7 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 			timeView.setVisibility(View.GONE);
 			timestamp = "";
 		}
-		timeView.setText(timestamp);
+		setText(context, view, R.id.text_time, timestamp);
 		
 		view.measure(width, height);
 		view.layout(0,0,width-1,height-1);		
@@ -226,9 +228,11 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 		appWidgetManager.updateAppWidget(appWidgetId, views);
 	}
 
-	private void setText(View view, int resourceId, CharSequence text)
+	private void setText(Context context, View view, int resourceId, CharSequence text)
 	{
+		Typeface font = Typeface.createFromAsset(context.getAssets(),"learningcurve_ot.otf");
 		TextView textView = (TextView) view.findViewById(resourceId);
+		textView.setTypeface(font);
 		textView.setText(text);
 	}
 	private CharSequence getLabel(Context context, int arrayResource, int index) {
