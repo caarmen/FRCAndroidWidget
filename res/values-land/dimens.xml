@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<dimen name="wide_widget_width">160dip</dimen>
+	<dimen name="wide_widget_height">74dip</dimen>
+	<dimen name="narrow_widget_width">106dip</dimen>
+	<dimen name="narrow_widget_height">74dip</dimen>
+</resources>

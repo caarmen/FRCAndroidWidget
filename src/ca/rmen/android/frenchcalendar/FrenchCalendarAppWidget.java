@@ -224,13 +224,13 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 		final PendingIntent pendingIntent = PendingIntent.getActivity(context,
 				0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-		views.setOnClickPendingIntent(R.id.linearLayout1, pendingIntent);
+		views.setOnClickPendingIntent(R.id.imageView1, pendingIntent);
 		appWidgetManager.updateAppWidget(appWidgetId, views);
 	}
 
 	private void setText(Context context, View view, int resourceId, CharSequence text)
 	{
-		Typeface font = Typeface.createFromAsset(context.getAssets(),"learningcurve_ot.otf");
+		Typeface font = Typeface.createFromAsset(context.getAssets(),"HoneyScript-SemiBold.ttf");
 		TextView textView = (TextView) view.findViewById(resourceId);
 		textView.setTypeface(font);
 		textView.setText(text);

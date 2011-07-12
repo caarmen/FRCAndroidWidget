@@ -10,29 +10,29 @@
 	<TextView android:id="@+id/text_weekday"
 		android:layout_height="wrap_content" android:layout_width="wrap_content"
 		android:layout_gravity="center_horizontal" android:textColor="#100903"
-		android:text="Primidi" android:textSize="16dip" />
+		android:text="Primidi" android:textSize="26dip" android:layout_marginBottom="-10dip"/>
 
 	<LinearLayout android:orientation="horizontal"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:layout_gravity="center_horizontal" android:gravity="center_horizontal"
-		android:textColor="#100903">
+		android:textColor="#100903" >
 
 		<TextView android:id="@+id/text_dayofmonth"
 			android:layout_height="wrap_content" android:layout_width="wrap_content"
-			android:paddingRight="3dip" android:textSize="14dip"
+			android:paddingRight="3dip" android:textSize="18dip"
 			android:textColor="#100903" android:text="30" />
 		<TextView android:id="@+id/text_month" android:layout_height="wrap_content"
 			android:layout_width="wrap_content" android:paddingRight="3dip"
-			android:textSize="16dip" android:textColor="#100903" android:text="Vendémiaire" />
+			android:textSize="18dip" android:textColor="#100903" android:text="Vendémiaire" />
 	</LinearLayout>
 
 
 	<TextView android:id="@+id/text_year" android:layout_height="wrap_content"
 		android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
-		android:textColor="#100903" android:text="209" android:textSize="16dip" />
-	<TextView android:id="@+id/text_time" android:layout_height="fill_parent"
+		android:textColor="#100903" android:text="209" android:textSize="20dip" android:layout_marginTop="-10dip"/>
+	<TextView android:id="@+id/text_time" android:layout_height="wrap_content"
 		android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
-		android:textColor="#100903" android:text="00:00:00" android:textSize="16dip" />
+		android:textColor="#100903" android:text="00:00:00" android:textSize="20dip" android:layout_marginTop="-10dip"/>
 
 </LinearLayout>
 
