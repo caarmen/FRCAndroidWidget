@@ -3,9 +3,17 @@
     <string name="hello">Hello World, FrenchCalendarActivity!</string>
     <string name="app_name">French Calendar</string>
     <string name="app_name_wide">French Calendar (wide)</string>
+    <string name="app_full_name">French Republican Calendar</string>
+    <string name="author">Carmen Alvarez (c@rmen.ca)</string>
+    <string name="app_version">1.0.0</string>
+    <string name="description">Widget which displays the current date and time in the French Republican Calendar.</string>
+    <string name="credits">Credits:</string>
+    <string name="wikipedia">Wikipedia article: http://en.wikipedia.org/wiki/French_Republican_Calendar</string>
+    <string name="equinox_tool">AstroLib C++ program by Mark Huss, to determine the first day of autumn in each year: http://mhuss.com/AstroLib/</string>
     <string name="widget_settings">French Calendar Settings</string>
     <string name="setting_method">Calculation method</string>
     <string name="setting_method_summary">How the first of each year is determined</string>
     <string name="setting_frequency">Update frequency</string>
     <string name="setting_frequency_summary">How often the widget is updated</string>
+    <string name="about">About</string>
 </resources>

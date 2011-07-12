@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:layout_marginTop="12dip">
+	<TextView android:layout_height="wrap_content" android:text="@string/app_full_name"
+		android:layout_gravity="center_horizontal" android:layout_width="wrap_content"
+		android:textSize="26dip" android:gravity="center_horizontal"
+		android:textColor="#ffffff" android:textStyle="bold"/>
+	<TextView android:layout_height="wrap_content" android:text="@string/app_version"
+		android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
+		android:textSize="14dip" android:textColor="#ff8888" />
+	<TextView android:layout_height="wrap_content" android:text="@string/author"
+		android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
+		android:textSize="14dip" android:autoLink="email" android:textColor="#bbbbff"/>
+	<TextView android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:text="@string/description"
+		android:layout_marginTop="12dip" android:textColor="#ffffff"/>
+	<TextView android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="@string/credits"
+		android:textColor="#ffff00" android:layout_marginTop="12dip" />
+	<TextView android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="@string/wikipedia"
+		android:autoLink="web" />
+	<TextView android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="@string/equinox_tool"
+		android:autoLink="web" />
+
+</LinearLayout>
