@@ -10,7 +10,7 @@
 	<TextView android:id="@+id/text_weekday"
 		android:layout_height="wrap_content" android:layout_width="wrap_content"
 		android:layout_gravity="center_horizontal" android:textColor="#100903"
-		android:text="Primidi" android:textSize="22dip" android:layout_marginBottom="-10dip"/>
+		android:text="Primidi" android:textSize="22dip" android:layout_marginBottom="-5dip"/>
 	<LinearLayout android:orientation="horizontal"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
 		android:layout_gravity="center_horizontal" android:gravity="center_horizontal"
@@ -31,7 +31,7 @@
 
 	<TextView android:id="@+id/text_time" android:layout_height="wrap_content"
 		android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
-		android:textColor="#100903" android:text="00:00:00" android:textSize="22dip" android:layout_marginTop="-10dip"/>
+		android:textColor="#100903" android:text="00:00:00" android:textSize="22dip" android:layout_marginTop="-5dip"/>
 
 </LinearLayout>
 
