@@ -35,6 +35,7 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 	private static final String FREQUENCY_MINUTES = "86400";
 	private static final String FREQUENCY_DAYS = "86400000";
 	private static final String EXTRA_WIDGET_CLASS = "WIDGET_CLASS";
+	private static final String FONT_FILE = "Gabrielle.ttf";
 	private boolean initialized = false;
 	private FrenchCalendarUtil util = null;
 
@@ -230,7 +231,7 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 
 	private void setText(Context context, View view, int resourceId, CharSequence text)
 	{
-		Typeface font = Typeface.createFromAsset(context.getAssets(),"HoneyScript-SemiBold.ttf");
+		Typeface font = Typeface.createFromAsset(context.getAssets(),FONT_FILE);
 		TextView textView = (TextView) view.findViewById(resourceId);
 		textView.setTypeface(font);
 		textView.setText(text);
