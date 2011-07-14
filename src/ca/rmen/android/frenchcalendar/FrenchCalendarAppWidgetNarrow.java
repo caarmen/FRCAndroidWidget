@@ -21,5 +21,9 @@ public class FrenchCalendarAppWidgetNarrow extends FrenchCalendarAppWidget {
 		return R.dimen.narrow_widget_height;
 	}
 
+	@Override
+	protected int getTextWidthResourceId() {
+		return R.dimen.narrow_widget_text_width;
+	}
 
 }

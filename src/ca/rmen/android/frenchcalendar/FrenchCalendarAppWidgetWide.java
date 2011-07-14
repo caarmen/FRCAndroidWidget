@@ -18,4 +18,8 @@ public class FrenchCalendarAppWidgetWide extends FrenchCalendarAppWidget {
 	protected int getHeightResourceId() {
 		return R.dimen.wide_widget_height;
 	}
+	@Override
+	protected int getTextWidthResourceId() {
+		return R.dimen.wide_widget_text_width;
+	}
 }

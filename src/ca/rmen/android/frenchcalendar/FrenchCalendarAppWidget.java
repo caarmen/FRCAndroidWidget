@@ -19,6 +19,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 import ca.rmen.android.frenchcalendar.common.FrenchCalendarDate;
@@ -160,7 +161,9 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 	protected abstract int getWidthResourceId();
 	
 	protected abstract int getHeightResourceId();
-
+	
+	protected abstract int getTextWidthResourceId();
+	
 	public void update(Context context,
 			final AppWidgetManager appWidgetManager, final int appWidgetId) {
 
@@ -212,7 +215,11 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 		setText(context, view, R.id.text_time, timestamp);
 		
 		view.measure(width, height);
-		view.layout(0,0,width-1,height-1);		
+		view.layout(0,0,width-1,height-1);
+		
+		squeezeMonthLine(context, view);
+		view.measure(width, height);
+		view.layout(0,0,width-1,height-1);
 		view.draw(canvas);
 		
 		final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.imageview);
@@ -244,6 +251,34 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 		return "";
 	}
 
+	private void squeezeMonthLine(Context context, View view)
+	{
+		TextView dateView = (TextView) view.findViewById(R.id.text_dayofmonth);
+		TextView monthView = (TextView) view.findViewById(R.id.text_month);
+		LinearLayout monthLine = (LinearLayout) monthView.getParent();
+		TextView yearView = (TextView) monthLine.findViewById(R.id.text_year);
+		
+		int textWidth = dateView.getWidth() + monthView.getWidth() + (yearView == null ? 0 : yearView.getWidth());
+		int textViewableWidthResourceId = getTextWidthResourceId();
+		int textViewableWidth = context.getResources().getDimensionPixelSize(textViewableWidthResourceId);
+
+		if(textWidth > textViewableWidth)
+		{
+			float squeezeFactor = (float) textViewableWidth/ textWidth;
+			
+			debug(context, squeezeFactor);
+			resizeTextView(context, dateView, squeezeFactor);
+			resizeTextView(context, monthView, squeezeFactor);
+			resizeTextView(context, yearView, squeezeFactor);
+		}
+	}
+	
+	private void resizeTextView(Context context, TextView textView, float squeezeFactor)
+	{
+		if(textView == null)
+			return;
+		textView.setTextScaleX(squeezeFactor);
+	}
 	private void debug(Context context, Object message) {
 		Log.d(context.getPackageName(), getClass().getName() + ": " + message);
 	}
