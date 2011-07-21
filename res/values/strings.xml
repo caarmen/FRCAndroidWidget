@@ -8,8 +8,8 @@
     <string name="app_version">1.0.0</string>
     <string name="description">Widget which displays the current date and time in the French Republican Calendar.</string>
     <string name="credits">Credits:</string>
-    <string name="wikipedia">Wikipedia article: http://en.wikipedia.org/wiki/French_Republican_Calendar</string>
-    <string name="equinox_tool">AstroLib C++ program by Mark Huss, to determine the first day of autumn in each year: http://mhuss.com/AstroLib/</string>
+    <string name="wikipedia">* Wikipedia article: http://en.wikipedia.org/wiki/French_Republican_Calendar</string>
+    <string name="equinox_tool">* AstroLib C++ program by Mark Huss, to determine the first day of autumn in each year: http://mhuss.com/AstroLib/</string>
     <string name="widget_settings">French Calendar Settings</string>
     <string name="setting_method">Calculation method</string>
     <string name="setting_method_summary">How the first day of each year is determined</string>

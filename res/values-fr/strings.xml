@@ -9,8 +9,8 @@
 	<string name="description">Widget qui montre la date et heure actuelle dans le
 		calendrier républicain.</string>
 	<string name="credits">Remerciments :</string>
-	<string name="wikipedia">Article Wikipedia : http://fr.wikipedia.org/wiki/Calendrier_républicain</string>
-	<string name="equinox_tool">AstroLib C++, programme de Mark Huss, qui détermine le premier jour de l\'automne de chaque année : http://mhuss.com/AstroLib/
+	<string name="wikipedia">* Article Wikipedia : http://fr.wikipedia.org/wiki/Calendrier_républicain</string>
+	<string name="equinox_tool">* AstroLib C++, programme de Mark Huss, qui détermine le premier jour de l\'automne de chaque année : http://mhuss.com/AstroLib/
 	</string>
 	<string name="widget_settings">Configuration du calendrier</string>
 	<string name="setting_method">Methode de calcul</string>

@@ -1,28 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent" android:layout_marginTop="12dip">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="fill_parent"
+	android:layout_width="fill_parent">
+<LinearLayout 
+	android:id="@+id/aboutview" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:layout_marginTop="12dip" android:background="@drawable/scroll"
+	android:gravity="center" android:orientation="vertical" android:paddingTop="50dip" android:paddingBottom="50dip">
 	<TextView android:layout_height="wrap_content" android:text="@string/app_full_name"
 		android:layout_gravity="center_horizontal" android:layout_width="wrap_content"
-		android:textSize="26dip" android:gravity="center_horizontal"
-		android:textColor="#ffffff" android:textStyle="bold"/>
+		android:textSize="38dip" android:gravity="center_horizontal"
+		android:textColor="#381f0a"/>
 	<TextView android:layout_height="wrap_content" android:text="@string/app_version"
 		android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
-		android:textSize="14dip" android:textColor="#ff8888" />
+		android:textSize="22dip" android:textColor="#381f0a" />
 	<TextView android:layout_height="wrap_content" android:text="@string/author"
 		android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
-		android:textSize="14dip" android:autoLink="email" android:textColor="#bbbbff"/>
+		android:textSize="22dip" android:autoLink="email" android:textColor="#381f0a"/>
 	<TextView android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:text="@string/description"
-		android:layout_marginTop="12dip" android:textColor="#ffffff"/>
+		android:layout_marginTop="12dip" android:textColor="#381f0a" 
+		android:paddingLeft="50dip" android:paddingRight="50dip"
+		android:textSize="18dip" />
 	<TextView android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:text="@string/credits"
-		android:textColor="#ffff00" android:layout_marginTop="12dip" />
+		android:textColor="#381f0a" android:layout_marginTop="12dip" 
+		android:paddingLeft="50dip" 
+		android:textSize="18dip"/>
 	<TextView android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:text="@string/wikipedia"
-		android:autoLink="web" />
+		android:autoLink="web" android:textColor="#381f0a"
+		android:paddingLeft="50dip" android:paddingRight="50dip"
+		android:textSize="18dip"/>
 	<TextView android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:text="@string/equinox_tool"
-		android:autoLink="web" />
+		android:autoLink="web" android:textColor="#381f0a"
+		android:paddingLeft="50dip" android:paddingRight="50dip"
+		android:textSize="18dip"/>
 
 </LinearLayout>
+</ScrollView>

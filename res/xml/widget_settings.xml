@@ -10,9 +10,5 @@
 		android:summary="@string/setting_frequency_summary" android:title="@string/setting_frequency"
 		android:entries="@array/setting_frequency_labels" android:entryValues="@array/setting_frequency_values"
 		android:dialogTitle="@string/setting_frequency" android:defaultValue="86400" />
-	<PreferenceScreen android:title="@string/about">
-		<Preference android:title="@string/about"
-			android:layout="@layout/about"
-			android:selectable="true"></Preference>
-	</PreferenceScreen>
+	<Preference android:title="@string/about" android:key="PREF_ABOUT"></Preference>
 </PreferenceScreen>

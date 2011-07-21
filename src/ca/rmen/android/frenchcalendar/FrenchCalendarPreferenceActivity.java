@@ -3,7 +3,9 @@ package ca.rmen.android.frenchcalendar;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceScreen;
 
 public abstract class FrenchCalendarPreferenceActivity extends PreferenceActivity {
 	int mAppWidgetId = -1;
@@ -28,6 +30,17 @@ public abstract class FrenchCalendarPreferenceActivity extends PreferenceActivit
 				+ FrenchCalendarAppWidget.BROADCAST_MESSAGE_CONF_CHANGE);
 		updateIntent.addCategory(getWidgetCategory());
 		sendBroadcast(updateIntent);
+	}
+	@Override
+	public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
+			Preference preference) {
+		if("PREF_ABOUT".equals(preference.getKey()))
+		{
+			Intent aboutIntent = new Intent(this, FrenchCalendarAboutActivity.class);
+			startActivity(aboutIntent);
+			return true;
+		}
+		return super.onPreferenceTreeClick(preferenceScreen, preference);
 	}
 	abstract protected String getWidgetCategory();
 }
