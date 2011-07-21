@@ -157,13 +157,13 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 	protected abstract int getLayoutResourceId();
 
 	protected abstract Class getPreferenceActivityClass();
-	
+
 	protected abstract int getWidthResourceId();
-	
+
 	protected abstract int getHeightResourceId();
-	
+
 	protected abstract int getTextWidthResourceId();
-	
+
 	public void update(Context context,
 			final AppWidgetManager appWidgetManager, final int appWidgetId) {
 
@@ -177,23 +177,28 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 
 		util = new FrenchCalendarUtil(equinoxFile, mode);
 		FrenchCalendarDate frenchDate = util.getDate(now);
-		
+
 		LayoutInflater inflater = LayoutInflater.from(context);
 		View view = inflater.inflate(getLayoutResourceId(), null, false);
-		int width = context.getResources().getDimensionPixelSize(getWidthResourceId());
-		int height = context.getResources().getDimensionPixelSize(getHeightResourceId());
-		Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-		
+		int scrollResourceId = getDrawableResourceIdForMonth(frenchDate.month);
+		view.setBackgroundResource(scrollResourceId);
+		int width = context.getResources().getDimensionPixelSize(
+				getWidthResourceId());
+		int height = context.getResources().getDimensionPixelSize(
+				getHeightResourceId());
+		Bitmap bitmap = Bitmap.createBitmap(width, height,
+				Bitmap.Config.ARGB_8888);
+
 		Canvas canvas = new Canvas(bitmap);
-		
-		setText(context,view, R.id.text_year, ""+frenchDate.year);
+
+		setText(context, view, R.id.text_year, "" + frenchDate.year);
 		setText(context, view, R.id.text_dayofmonth, "" + frenchDate.day);
 		CharSequence weekdayLabel = getLabel(context, R.array.weekdays,
 				frenchDate.getDayInWeek() - 1);
 		CharSequence monthLabel = getLabel(context, R.array.months,
 				frenchDate.month - 1);
-		setText(context,view, R.id.text_weekday, weekdayLabel);
-		setText(context,view, R.id.text_month, monthLabel);
+		setText(context, view, R.id.text_weekday, weekdayLabel);
+		setText(context, view, R.id.text_month, monthLabel);
 
 		String frequencyPrefStr = sharedPreferences.getString(PREF_FREQUENCY,
 				FREQUENCY_SECONDS);
@@ -213,16 +218,17 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 			timestamp = "";
 		}
 		setText(context, view, R.id.text_time, timestamp);
-		
+
 		view.measure(width, height);
-		view.layout(0,0,width-1,height-1);
-		
+		view.layout(0, 0, width - 1, height - 1);
+
 		squeezeMonthLine(context, view);
 		view.measure(width, height);
-		view.layout(0,0,width-1,height-1);
+		view.layout(0, 0, width - 1, height - 1);
 		view.draw(canvas);
-		
-		final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.imageview);
+
+		final RemoteViews views = new RemoteViews(context.getPackageName(),
+				R.layout.imageview);
 		views.setImageViewBitmap(R.id.imageView1, bitmap);
 
 		final Intent intent = new Intent(context, getPreferenceActivityClass());
@@ -236,13 +242,15 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 		appWidgetManager.updateAppWidget(appWidgetId, views);
 	}
 
-	private void setText(Context context, View view, int resourceId, CharSequence text)
-	{
-		Typeface font = Typeface.createFromAsset(context.getAssets(),FONT_FILE);
+	private void setText(Context context, View view, int resourceId,
+			CharSequence text) {
+		Typeface font = Typeface
+				.createFromAsset(context.getAssets(), FONT_FILE);
 		TextView textView = (TextView) view.findViewById(resourceId);
 		textView.setTypeface(font);
 		textView.setText(text);
 	}
+
 	private CharSequence getLabel(Context context, int arrayResource, int index) {
 		CharSequence[] labels = context.getResources().getTextArray(
 				arrayResource);
@@ -251,34 +259,71 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 		return "";
 	}
 
-	private void squeezeMonthLine(Context context, View view)
-	{
+	private void squeezeMonthLine(Context context, View view) {
 		TextView dateView = (TextView) view.findViewById(R.id.text_dayofmonth);
 		TextView monthView = (TextView) view.findViewById(R.id.text_month);
 		LinearLayout monthLine = (LinearLayout) monthView.getParent();
 		TextView yearView = (TextView) monthLine.findViewById(R.id.text_year);
-		
-		int textWidth = dateView.getWidth() + monthView.getWidth() + (yearView == null ? 0 : yearView.getWidth());
-		int textViewableWidthResourceId = getTextWidthResourceId();
-		int textViewableWidth = context.getResources().getDimensionPixelSize(textViewableWidthResourceId);
 
-		if(textWidth > textViewableWidth)
-		{
-			float squeezeFactor = (float) textViewableWidth/ textWidth;
-			
+		int textWidth = dateView.getWidth() + monthView.getWidth()
+				+ (yearView == null ? 0 : yearView.getWidth());
+		int textViewableWidthResourceId = getTextWidthResourceId();
+		int textViewableWidth = context.getResources().getDimensionPixelSize(
+				textViewableWidthResourceId);
+
+		if (textWidth > textViewableWidth) {
+			float squeezeFactor = (float) textViewableWidth / textWidth;
+
 			debug(context, squeezeFactor);
 			resizeTextView(context, dateView, squeezeFactor);
 			resizeTextView(context, monthView, squeezeFactor);
 			resizeTextView(context, yearView, squeezeFactor);
 		}
 	}
-	
-	private void resizeTextView(Context context, TextView textView, float squeezeFactor)
-	{
-		if(textView == null)
+
+	private void resizeTextView(Context context, TextView textView,
+			float squeezeFactor) {
+		if (textView == null)
 			return;
 		textView.setTextScaleX(squeezeFactor);
 	}
+
+	/**
+	 * This is so ugly, but better for performance.
+	 * 
+	 * @param month
+	 * @return the resource id for the bitmap of the scroll for the given month
+	 */
+	private int getDrawableResourceIdForMonth(int month) {
+		if (month == 1)
+			return R.drawable.scroll1;
+		if (month == 2)
+			return R.drawable.scroll2;
+		if (month == 3)
+			return R.drawable.scroll3;
+		if (month == 4)
+			return R.drawable.scroll4;
+		if (month == 5)
+			return R.drawable.scroll5;
+		if (month == 6)
+			return R.drawable.scroll6;
+		if (month == 7)
+			return R.drawable.scroll7;
+		if (month == 8)
+			return R.drawable.scroll8;
+		if (month == 9)
+			return R.drawable.scroll9;
+		if (month == 10)
+			return R.drawable.scroll10;
+		if (month == 11)
+			return R.drawable.scroll11;
+		if (month == 12)
+			return R.drawable.scroll12;
+		if (month == 13)
+			return R.drawable.scroll13;
+		return R.drawable.scroll;
+	}
+
 	private void debug(Context context, Object message) {
 		Log.d(context.getPackageName(), getClass().getName() + ": " + message);
 	}
