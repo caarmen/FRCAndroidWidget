@@ -9,30 +9,30 @@
 
 	<TextView android:id="@+id/text_weekday"
 		android:layout_height="wrap_content" android:layout_width="wrap_content"
-		android:layout_gravity="center_horizontal" android:textColor="#100903"
+		android:layout_gravity="center_horizontal" android:textColor="#381f0a"
 		android:text="Primidi" android:textSize="24sp" android:layout_marginBottom="-4dip"/>
 
 	<LinearLayout android:orientation="horizontal"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:layout_gravity="center_horizontal" android:gravity="center_horizontal"
-		android:textColor="#100903" >
+		android:textColor="#381f0a" >
 
 		<TextView android:id="@+id/text_dayofmonth"
 			android:layout_height="wrap_content" android:layout_width="wrap_content"
 			android:paddingRight="3dip" android:textSize="17sp"
-			android:textColor="#100903" android:text="30" />
+			android:textColor="#381f0a" android:text="30" />
 		<TextView android:id="@+id/text_month" android:layout_height="wrap_content"
 			android:layout_width="wrap_content" android:paddingRight="3dip"
-			android:textSize="17sp" android:textColor="#100903" android:text="Vendémiaire" />
+			android:textSize="17sp" android:textColor="#381f0a" android:text="Vendémiaire" />
 	</LinearLayout>
 
 
 	<TextView android:id="@+id/text_year" android:layout_height="wrap_content"
 		android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
-		android:textColor="#100903" android:text="209" android:textSize="19sp" android:layout_marginTop="-3dip"/>
+		android:textColor="#381f0a" android:text="209" android:textSize="19sp" android:layout_marginTop="-3dip"/>
 	<TextView android:id="@+id/text_time" android:layout_height="wrap_content"
 		android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
-		android:textColor="#100903" android:text="00:00:00" android:textSize="17sp" android:layout_marginTop="-4dip"/>
+		android:textColor="#381f0a" android:text="00:00:00" android:textSize="17sp" android:layout_marginTop="-4dip"/>
 
 </LinearLayout>
 
