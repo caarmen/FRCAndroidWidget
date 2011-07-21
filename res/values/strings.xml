@@ -12,7 +12,7 @@
     <string name="equinox_tool">AstroLib C++ program by Mark Huss, to determine the first day of autumn in each year: http://mhuss.com/AstroLib/</string>
     <string name="widget_settings">French Calendar Settings</string>
     <string name="setting_method">Calculation method</string>
-    <string name="setting_method_summary">How the first of each year is determined</string>
+    <string name="setting_method_summary">How the first day of each year is determined</string>
     <string name="setting_frequency">Update frequency</string>
     <string name="setting_frequency_summary">How often the widget is updated</string>
     <string name="about">About</string>
