@@ -1,6 +1,7 @@
 package ca.rmen.android.frenchcalendar;
 
 import java.io.InputStream;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import android.app.AlarmManager;
@@ -34,7 +35,7 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 	public static final String BROADCAST_MESSAGE_CONF_CHANGE = ".CONF_CHANGE";
 	private static final String FREQUENCY_SECONDS = "864";
 	private static final String FREQUENCY_MINUTES = "86400";
-	private static final String FREQUENCY_DAYS = "86400000";
+	private static final int FREQUENCY_DAYS = 86400000;
 	private static final String EXTRA_WIDGET_CLASS = "WIDGET_CLASS";
 	private static final String FONT_FILE = "Gabrielle.ttf";
 	private boolean initialized = false;
@@ -48,9 +49,7 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 						+ ": "
 						+ (intent.getComponent() == null ? "" : intent
 								.getComponent().getClassName()));
-		final AppWidgetManager appWidgetManager = AppWidgetManager
-				.getInstance(context);
-		final ComponentName provider = intent.getComponent();
+
 		if ((context.getPackageName() + BROADCAST_MESSAGE_UPDATE).equals(intent
 				.getAction())) {
 			if (intent != null && intent.getExtras() != null) {
@@ -59,6 +58,9 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 				if (!getClass().getName().equals(broadcaster))
 					return;
 			}
+			final AppWidgetManager appWidgetManager = AppWidgetManager
+					.getInstance(context);
+			final ComponentName provider = intent.getComponent();
 			final int[] appWidgetIds = appWidgetManager
 					.getAppWidgetIds(provider);
 			if (appWidgetIds.length == 0) {
@@ -68,14 +70,11 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 		} else if ((context.getPackageName() + BROADCAST_MESSAGE_CONF_CHANGE)
 				.equals(intent.getAction())) {
 			restartWidgetNotifier(context);
-		}
-
-		else if (Intent.ACTION_SCREEN_ON.equals(intent.getAction())) {
-			startWidgetNotifier(context);
 		} else if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
 			stopWidgetNotifier(context);
+		} else if (Intent.ACTION_SCREEN_ON.equals(intent.getAction())) {
+			startWidgetNotifier(context);
 		}
-
 		super.onReceive(context, intent);
 	}
 
@@ -89,14 +88,25 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 		SharedPreferences sharedPreferences = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		String frequencyPrefStr = sharedPreferences.getString(PREF_FREQUENCY,
-				FREQUENCY_SECONDS);
+				FREQUENCY_MINUTES);
 
 		int frequency = Integer.parseInt(frequencyPrefStr);
 		debug(context, "Start alarm with frequency " + frequency);
+		long nextAlarmTime = System.currentTimeMillis();
 		AlarmManager mgr = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
-		mgr.setRepeating(AlarmManager.RTC, System.currentTimeMillis(),
-				frequency, updatePendingIntent);
+		if (frequency == FREQUENCY_DAYS) {
+			Calendar cal = Calendar.getInstance();
+			cal.set(Calendar.HOUR_OF_DAY, 23);
+			cal.set(Calendar.MINUTE, 59);
+			cal.add(Calendar.MINUTE, 1);
+			nextAlarmTime = cal.getTimeInMillis();
+			mgr.set(AlarmManager.RTC, System.currentTimeMillis(),
+					updatePendingIntent);
+		}
+		mgr.setRepeating(AlarmManager.RTC, nextAlarmTime, frequency,
+				updatePendingIntent);
+
 		debug(context, "Started updater");
 	}
 
@@ -131,14 +141,13 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 		super.onUpdate(context, appWidgetManager, appWidgetIds);
 
 		if (!initialized)
-			init(context, appWidgetManager, appWidgetIds);
+			init(context);
 		else {
 			restartWidgetNotifier(context);
 		}
 	}
 
-	private void init(final Context context,
-			final AppWidgetManager appWidgetManager, final int[] appWidgetIds) {
+	private void init(final Context context) {
 		startWidgetNotifier(context);
 		IntentFilter filterOn = new IntentFilter(Intent.ACTION_SCREEN_ON);
 		IntentFilter filterOff = new IntentFilter(Intent.ACTION_SCREEN_OFF);

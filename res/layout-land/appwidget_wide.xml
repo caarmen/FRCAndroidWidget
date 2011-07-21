@@ -10,7 +10,7 @@
 	<TextView android:id="@+id/text_weekday"
 		android:layout_height="wrap_content" android:layout_width="wrap_content"
 		android:layout_gravity="center_horizontal" android:textColor="#381f0a"
-		android:text="Primidi" android:textSize="22dip" android:layout_marginBottom="-5dip"/>
+		android:textSize="22dip" android:layout_marginBottom="-5dip"/>
 	<LinearLayout android:orientation="horizontal"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
 		android:layout_gravity="center_horizontal" android:gravity="center_horizontal"
@@ -19,19 +19,19 @@
 		<TextView android:id="@+id/text_dayofmonth"
 			android:layout_height="wrap_content" android:layout_width="wrap_content"
 			android:paddingRight="3dip"
-			android:textColor="#381f0a" android:text="30" android:textSize="22dip"/>
+			android:textColor="#381f0a" android:textSize="22dip"/>
 		<TextView android:id="@+id/text_month" android:layout_height="wrap_content"
 			android:layout_width="wrap_content" android:paddingRight="3dip"
-			android:textColor="#381f0a" android:text="Vendémiaire" android:textSize="22dip"/>
+			android:textColor="#381f0a" android:textSize="22dip"/>
 		<TextView android:id="@+id/text_year" android:layout_height="wrap_content"
 			android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
-			android:textColor="#381f0a" android:text="209" android:textSize="22dip" />
+			android:textColor="#381f0a" android:textSize="22dip" />
 	</LinearLayout>
 
 
 	<TextView android:id="@+id/text_time" android:layout_height="wrap_content"
 		android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
-		android:textColor="#381f0a" android:text="00:00:00" android:textSize="22dip" android:layout_marginTop="-5dip"/>
+		android:textColor="#381f0a" android:textSize="22dip" android:layout_marginTop="-5dip"/>
 
 </LinearLayout>
 
