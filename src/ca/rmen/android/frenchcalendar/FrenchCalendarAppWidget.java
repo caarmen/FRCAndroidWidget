@@ -303,34 +303,34 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 	 * @param month
 	 * @return the resource id for the bitmap of the scroll for the given month
 	 */
-	private int getDrawableResourceIdForMonth(int month) {
+	protected int getDrawableResourceIdForMonth(int month) {
 		if (month == 1)
-			return R.drawable.scroll1;
+			return R.drawable.vscroll1;
 		if (month == 2)
-			return R.drawable.scroll2;
+			return R.drawable.vscroll2;
 		if (month == 3)
-			return R.drawable.scroll3;
+			return R.drawable.vscroll3;
 		if (month == 4)
-			return R.drawable.scroll4;
+			return R.drawable.vscroll4;
 		if (month == 5)
-			return R.drawable.scroll5;
+			return R.drawable.vscroll5;
 		if (month == 6)
-			return R.drawable.scroll6;
+			return R.drawable.vscroll6;
 		if (month == 7)
-			return R.drawable.scroll7;
+			return R.drawable.vscroll7;
 		if (month == 8)
-			return R.drawable.scroll8;
+			return R.drawable.vscroll8;
 		if (month == 9)
-			return R.drawable.scroll9;
+			return R.drawable.vscroll9;
 		if (month == 10)
-			return R.drawable.scroll10;
+			return R.drawable.vscroll10;
 		if (month == 11)
-			return R.drawable.scroll11;
+			return R.drawable.vscroll11;
 		if (month == 12)
-			return R.drawable.scroll12;
+			return R.drawable.vscroll12;
 		if (month == 13)
-			return R.drawable.scroll13;
-		return R.drawable.scroll;
+			return R.drawable.vscroll13;
+		return R.drawable.vscroll;
 	}
 
 	private void debug(Context context, Object message) {

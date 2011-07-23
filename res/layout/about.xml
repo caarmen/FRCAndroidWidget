@@ -3,7 +3,7 @@
 	android:layout_width="fill_parent">
 <LinearLayout 
 	android:id="@+id/aboutview" android:layout_width="fill_parent"
-	android:layout_height="fill_parent" android:layout_marginTop="12dip" android:background="@drawable/scroll"
+	android:layout_height="fill_parent" android:layout_marginTop="12dip" android:background="@drawable/vscroll"
 	android:gravity="center" android:orientation="vertical" android:paddingTop="50dip" android:paddingBottom="50dip">
 	<TextView android:layout_height="wrap_content" android:text="@string/app_full_name"
 		android:layout_gravity="center_horizontal" android:layout_width="wrap_content"
