@@ -38,12 +38,12 @@
 		<item>1</item>
 	</string-array>
 	<string-array name="setting_frequency_labels">
-		<item>Every second (drains battery!)</item>
+		<!-- <item>Every second (drains battery!)</item> -->
 		<item>Every minute</item>
 		<item>Once a day</item>
 	</string-array>
 	<string-array name="setting_frequency_values">
-		<item>864</item>
+		<!-- <item>864</item> -->
 		<item>86400</item>
 		<item>86400000</item>
 	</string-array>
