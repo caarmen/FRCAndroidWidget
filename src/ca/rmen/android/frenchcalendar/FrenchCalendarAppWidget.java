@@ -216,11 +216,11 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 		TextView timeView = (TextView) view.findViewById(R.id.text_time);
 		if (FREQUENCY_SECONDS.equals(frequencyPrefStr)) {
 			timeView.setVisibility(View.VISIBLE);
-			timestamp = String.format("%02d:%02d:%02d", frenchDate.hour,
+			timestamp = String.format("%d:%02d:%02d", frenchDate.hour,
 					frenchDate.minute, frenchDate.second);
 		} else if (FREQUENCY_MINUTES.equals(frequencyPrefStr)) {
 			timeView.setVisibility(View.VISIBLE);
-			timestamp = String.format("%02d:%02d", frenchDate.hour,
+			timestamp = String.format("%d:%02d", frenchDate.hour,
 					frenchDate.minute);
 		} else {
 			timeView.setVisibility(View.GONE);
