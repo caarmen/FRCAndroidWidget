@@ -261,7 +261,7 @@ public class FrenchCalendarUtil {
 		gAutumnEquinox.set(Calendar.YEAR, gyear);
 		gAutumnEquinox.set(Calendar.MONTH, EQUINOX_MONTH);
 		gAutumnEquinox.set(Calendar.DAY_OF_MONTH, gAutumnEquinoxDay);
-		gAutumnEquinox.set(Calendar.HOUR, 0);
+		gAutumnEquinox.set(Calendar.HOUR_OF_DAY, 0);
 		gAutumnEquinox.set(Calendar.MINUTE, 0);
 		gAutumnEquinox.set(Calendar.SECOND, 0);
 		gAutumnEquinox.set(Calendar.MILLISECOND, 0);
