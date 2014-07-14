@@ -15,6 +15,20 @@ import ca.rmen.android.frenchcalendar.render.FrenchCalendarAppWidgetRenderParams
 import ca.rmen.android.frenchcalendar.render.FrenchCalendarAppWidgetRenderParamsFactory;
 import ca.rmen.android.frenchcalendar.render.FrenchCalendarAppWidgetRenderer;
 
+/**
+ * Receiver and AppWidgetProvider which updates a list of wide widgets or a list of narrow widgets.
+ * 
+ * At any given point, there will be at most two instances of this class:
+ * <ul>
+ * <li> one {@link FrenchCalendarAppWidgetWide} which will manage all of the wide widgets, and </li>
+ * <li> one {@link FrenchCalendarAppWidgetNarrow} which will manage all of the narrow widgets.</li>
+ * </ul>
+ * These receivers are notified by the system when a widget of the given type is added or deleted,
+ * or when widgets of the given type should be updated.
+ * 
+ * These receivers are also notified by the alarm set up by {@link FrenchCalendarScheduler}, which will
+ * go off either once a minute, or once a day, depending on the preferences.
+ */
 abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 
     private final String TAG = Constants.TAG + getClass().getSimpleName();
@@ -25,9 +39,7 @@ abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
         final AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         final ComponentName provider = intent.getComponent();
         final int[] appWidgetIds = appWidgetManager.getAppWidgetIds(provider);
-        Log.v(TAG, "onReceive: appWidgetIds = " + Arrays.toString(appWidgetIds));
         if ((context.getPackageName() + FrenchCalendarScheduler.BROADCAST_MESSAGE_UPDATE).equals(intent.getAction())) {
-            Log.v(TAG, "Received my scheduled update");
             Set<Integer> allAppWidgetIds = FrenchCalendarAppWidgetManager.getAllAppWidgetIds(context);
             if (allAppWidgetIds.size() == 0) FrenchCalendarScheduler.getInstance(context).stop();
             else
@@ -37,7 +49,7 @@ abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
     }
 
     /**
-     * 
+     * This is called by the parent class when the system broadcasts "android.appwidget.action.APPWIDGET_UPDATE".
      */
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -46,13 +58,19 @@ abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
         FrenchCalendarScheduler.getInstance(context).start();
     }
 
-    private void updateAll(Context context, final AppWidgetManager appWidgetManager, final int[] appWidgetIds) {
+    /**
+     * Rerender all the widgets (for this {@link AppWidgetProvider}).
+     */
+    private void updateAll(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         Log.v(TAG, "updateAll:  appWidgetIds = " + Arrays.toString(appWidgetIds));
         for (int appWidgetId : appWidgetIds)
             update(context, appWidgetManager, appWidgetId);
     }
 
-    private void update(Context context, final AppWidgetManager appWidgetManager, final int appWidgetId) {
+    /**
+     * Rerender a single widget.
+     */
+    private void update(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         Log.v(TAG, "update: appWidgetId = " + appWidgetId);
         FrenchCalendarAppWidgetRenderParams renderParams = FrenchCalendarAppWidgetRenderParamsFactory.getRenderParams(getWidgetType());
         RemoteViews views = FrenchCalendarAppWidgetRenderer.render(context, getClass(), appWidgetId, renderParams);
@@ -61,4 +79,17 @@ abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 
     protected abstract WidgetType getWidgetType();
 
+    public static class FrenchCalendarAppWidgetNarrow extends FrenchCalendarAppWidget {
+        @Override
+        protected WidgetType getWidgetType() {
+            return WidgetType.NARROW;
+        }
+    }
+
+    public static class FrenchCalendarAppWidgetWide extends FrenchCalendarAppWidget {
+        @Override
+        protected WidgetType getWidgetType() {
+            return WidgetType.WIDE;
+        }
+    }
 }

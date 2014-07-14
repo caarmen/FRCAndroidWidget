@@ -1,4 +1,4 @@
-package ca.rmen.android.frenchcalendar;
+package ca.rmen.android.frenchcalendar.render;
 
 import android.content.Context;
 import android.graphics.Typeface;

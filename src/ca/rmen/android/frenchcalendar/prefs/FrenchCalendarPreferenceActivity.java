@@ -1,10 +1,12 @@
-package ca.rmen.android.frenchcalendar;
+package ca.rmen.android.frenchcalendar.prefs;
 
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.util.Log;
+import ca.rmen.android.frenchcalendar.FrenchCalendarScheduler;
+import ca.rmen.android.frenchcalendar.R;
 
 public class FrenchCalendarPreferenceActivity extends PreferenceActivity { // NO_UCD (use default)
 

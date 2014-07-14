@@ -6,6 +6,8 @@ import java.util.Set;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
+import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidget.FrenchCalendarAppWidgetNarrow;
+import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidget.FrenchCalendarAppWidgetWide;
 
 class FrenchCalendarAppWidgetManager {
 

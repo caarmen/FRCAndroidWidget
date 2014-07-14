@@ -1,5 +1,6 @@
 package ca.rmen.android.frenchcalendar;
 
+import ca.rmen.android.frenchcalendar.render.Font;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;

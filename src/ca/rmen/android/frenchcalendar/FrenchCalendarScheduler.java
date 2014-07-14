@@ -11,8 +11,9 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import ca.rmen.android.frenchcalendar.prefs.FrenchCalendarPrefs;
 
-class FrenchCalendarScheduler {
+public class FrenchCalendarScheduler {
     private static final String TAG = Constants.TAG + FrenchCalendarScheduler.class.getSimpleName();
     static final String BROADCAST_MESSAGE_UPDATE = ".UPDATE_WIDGET";
     private static final int FREQUENCY_DAYS = 86400000;
@@ -31,12 +32,12 @@ class FrenchCalendarScheduler {
         context.getApplicationContext().registerReceiver(screenBroadcastReceiver, filterOff);
     }
 
-    synchronized static FrenchCalendarScheduler getInstance(Context context) {
+    public synchronized static FrenchCalendarScheduler getInstance(Context context) {
         if (INSTANCE == null) INSTANCE = new FrenchCalendarScheduler(context);
         return INSTANCE;
     }
 
-    void start() {
+    public void start() {
         Log.v(TAG, "start");
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String frequencyPrefStr = sharedPreferences.getString(FrenchCalendarPrefs.PREF_FREQUENCY, FrenchCalendarPrefs.FREQUENCY_MINUTES);

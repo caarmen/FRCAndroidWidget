@@ -17,10 +17,9 @@ import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 import ca.rmen.android.frenchcalendar.Constants;
-import ca.rmen.android.frenchcalendar.Font;
-import ca.rmen.android.frenchcalendar.FrenchCalendarPreferenceActivity;
-import ca.rmen.android.frenchcalendar.FrenchCalendarPrefs;
 import ca.rmen.android.frenchcalendar.R;
+import ca.rmen.android.frenchcalendar.prefs.FrenchCalendarPreferenceActivity;
+import ca.rmen.android.frenchcalendar.prefs.FrenchCalendarPrefs;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendar;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 

@@ -1,4 +1,4 @@
-package ca.rmen.android.frenchcalendar;
+package ca.rmen.android.frenchcalendar.prefs;
 
 public class FrenchCalendarPrefs {
 
