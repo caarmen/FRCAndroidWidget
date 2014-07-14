@@ -1,4 +1,4 @@
-package ca.rmen.android.frenchcalendar;
+package ca.rmen.android.frenchcalendar.render;
 
 import java.util.GregorianCalendar;
 
@@ -16,30 +16,18 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
+import ca.rmen.android.frenchcalendar.Constants;
+import ca.rmen.android.frenchcalendar.Font;
+import ca.rmen.android.frenchcalendar.FrenchCalendarPreferenceActivity;
+import ca.rmen.android.frenchcalendar.FrenchCalendarPrefs;
+import ca.rmen.android.frenchcalendar.R;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendar;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
-class FrenchCalendarAppWidgetRenderer {
+public class FrenchCalendarAppWidgetRenderer {
     private static final String TAG = Constants.TAG + FrenchCalendarAppWidgetRenderer.class.getSimpleName();
 
-    static class FrenchCalendarAppWidgetRenderParams {
-        private final int layoutResourceId;
-        private final int widthResourceId;
-        private final int heightResourceId;
-        private final int textViewableWidthResourceId;
-        private final int[] scrollResourceIds;
-
-        FrenchCalendarAppWidgetRenderParams(int layoutResourceId, int widthResourceId, int heightResourceId, int textViewableWidthResourceId,
-                int[] scrollResourceIds) {
-            this.layoutResourceId = layoutResourceId;
-            this.widthResourceId = widthResourceId;
-            this.heightResourceId = heightResourceId;
-            this.textViewableWidthResourceId = textViewableWidthResourceId;
-            this.scrollResourceIds = scrollResourceIds;
-        }
-    }
-
-    static RemoteViews render(Context context, Class<?> widgetClass, int appWidgetId, FrenchCalendarAppWidgetRenderParams params) {
+    public static RemoteViews render(Context context, Class<?> widgetClass, int appWidgetId, FrenchCalendarAppWidgetRenderParams params) {
 
         GregorianCalendar now = new GregorianCalendar();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);

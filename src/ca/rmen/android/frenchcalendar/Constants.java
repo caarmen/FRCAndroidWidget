@@ -1,7 +1,11 @@
 package ca.rmen.android.frenchcalendar;
 
-class Constants {
+public class Constants {
 
-    static final String TAG = "FrenchCalendar/";
+    public static final String TAG = "FrenchCalendar/";
+
+    public enum WidgetType {
+        NARROW, WIDE
+    }
 
 }

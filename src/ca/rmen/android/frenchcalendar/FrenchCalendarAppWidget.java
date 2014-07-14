@@ -10,7 +10,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.RemoteViews;
-import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetRenderer.FrenchCalendarAppWidgetRenderParams;
+import ca.rmen.android.frenchcalendar.Constants.WidgetType;
+import ca.rmen.android.frenchcalendar.render.FrenchCalendarAppWidgetRenderParams;
+import ca.rmen.android.frenchcalendar.render.FrenchCalendarAppWidgetRenderParamsFactory;
+import ca.rmen.android.frenchcalendar.render.FrenchCalendarAppWidgetRenderer;
 
 abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 
@@ -19,7 +22,6 @@ abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.v(TAG, "onReceive: action = " + intent.getAction() + ": component = " + (intent.getComponent() == null ? "" : intent.getComponent().getClassName()));
-
         final AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         final ComponentName provider = intent.getComponent();
         final int[] appWidgetIds = appWidgetManager.getAppWidgetIds(provider);
@@ -52,12 +54,11 @@ abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 
     private void update(Context context, final AppWidgetManager appWidgetManager, final int appWidgetId) {
         Log.v(TAG, "update: appWidgetId = " + appWidgetId);
-
-        FrenchCalendarAppWidgetRenderParams renderParams = getRenderParams();
+        FrenchCalendarAppWidgetRenderParams renderParams = FrenchCalendarAppWidgetRenderParamsFactory.getRenderParams(getWidgetType());
         RemoteViews views = FrenchCalendarAppWidgetRenderer.render(context, getClass(), appWidgetId, renderParams);
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
-    protected abstract FrenchCalendarAppWidgetRenderParams getRenderParams();
+    protected abstract WidgetType getWidgetType();
 
 }
