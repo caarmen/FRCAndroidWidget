@@ -19,6 +19,7 @@
 package ca.rmen.android.frenchcalendar.render;
 
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -79,10 +80,10 @@ public class FrenchCalendarAppWidgetRenderer {
         TextView timeView = (TextView) view.findViewById(R.id.text_time);
         if (FrenchCalendarPrefs.FREQUENCY_SECONDS.equals(frequencyPrefStr)) {
             timeView.setVisibility(View.VISIBLE);
-            timestamp = String.format("%d:%02d:%02d", frenchDate.hour, frenchDate.minute, frenchDate.second);
+            timestamp = String.format(Locale.US, "%d:%02d:%02d", frenchDate.hour, frenchDate.minute, frenchDate.second);
         } else if (FrenchCalendarPrefs.FREQUENCY_MINUTES.equals(frequencyPrefStr)) {
             timeView.setVisibility(View.VISIBLE);
-            timestamp = String.format("%d:%02d", frenchDate.hour, frenchDate.minute);
+            timestamp = String.format(Locale.US, "%d:%02d", frenchDate.hour, frenchDate.minute);
         } else {
             timeView.setVisibility(View.GONE);
             timestamp = "";
