@@ -36,6 +36,7 @@ import ca.rmen.android.frenchcalendar.Constants;
 import ca.rmen.android.frenchcalendar.R;
 import ca.rmen.android.frenchcalendar.prefs.FRCPreferences;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendar;
+import ca.rmen.lfrc.FrenchRevolutionaryCalendar.CalculationMethod;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
 /**
@@ -54,8 +55,9 @@ public class FRCAppWidgetRenderer {
         GregorianCalendar now = new GregorianCalendar();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String methodPrefStr = sharedPreferences.getString(FRCPreferences.PREF_METHOD, "0");
-        int mode = Integer.parseInt(methodPrefStr);
-        FrenchRevolutionaryCalendar frcal = new FrenchRevolutionaryCalendar(mode);
+        int calculationMethodInt = Integer.parseInt(methodPrefStr);
+        CalculationMethod calculationMethod = CalculationMethod.values()[calculationMethodInt];
+        FrenchRevolutionaryCalendar frcal = new FrenchRevolutionaryCalendar(calculationMethod);
         FrenchRevolutionaryCalendarDate frenchDate = frcal.getDate(now);
 
         // Create a view with the right scroll image as the background.
@@ -67,11 +69,9 @@ public class FRCAppWidgetRenderer {
 
         // Set all the text fields for the date
         ((TextView) view.findViewById(R.id.text_year)).setText(String.valueOf(frenchDate.year));
-        ((TextView) view.findViewById(R.id.text_dayofmonth)).setText(String.valueOf(frenchDate.day));
-        CharSequence weekdayLabel = getLabel(context, R.array.weekdays, frenchDate.getDayInWeek() - 1);
-        CharSequence monthLabel = getLabel(context, R.array.months, frenchDate.month - 1);
-        ((TextView) view.findViewById(R.id.text_weekday)).setText(weekdayLabel);
-        ((TextView) view.findViewById(R.id.text_month)).setText(monthLabel);
+        ((TextView) view.findViewById(R.id.text_dayofmonth)).setText(String.valueOf(frenchDate.dayOfMonth));
+        ((TextView) view.findViewById(R.id.text_weekday)).setText(frenchDate.getWeekdayName());
+        ((TextView) view.findViewById(R.id.text_month)).setText(frenchDate.getMonthName());
 
         // Set the text fields for the time.
         String frequencyPrefStr = sharedPreferences.getString(FRCPreferences.PREF_FREQUENCY, FRCPreferences.FREQUENCY_MINUTES);
@@ -110,12 +110,6 @@ public class FRCAppWidgetRenderer {
         views.setImageViewBitmap(R.id.imageView1, bitmap);
 
         return views;
-    }
-
-    private static CharSequence getLabel(Context context, int arrayResource, int index) {
-        CharSequence[] labels = context.getResources().getTextArray(arrayResource);
-        if (index >= 0 && index < labels.length) return labels[index];
-        return "";
     }
 
     private static void squeezeMonthLine(Context context, View view, int textViewableWidthResourceId) {

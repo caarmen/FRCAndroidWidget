@@ -20,33 +20,6 @@
 
 <resources>
 
-    <string-array name="weekdays">
-        <item>Primidi</item>
-        <item>Duodi</item>
-        <item>Tridi</item>
-        <item>Quartidi</item>
-        <item>Quintidi</item>
-        <item>Sextidi</item>
-        <item>Septidi</item>
-        <item>Octidi</item>
-        <item>Nonidi</item>
-        <item>Décadi</item>
-    </string-array>
-    <string-array name="months">
-        <item>Vendémiaire</item>
-        <item>Brumaire</item>
-        <item>Frimaire</item>
-        <item>Nivôse</item>
-        <item>Pluviôse</item>
-        <item>Ventôse</item>
-        <item>Germinal</item>
-        <item>Floréal</item>
-        <item>Prairial</item>
-        <item>Messidor</item>
-        <item>Thermidor</item>
-        <item>Fructidor</item>
-        <item>Sanculotides</item>
-    </string-array>
     <string-array name="setting_method_labels">
         <item>Equinox</item>
         <item>Romme</item>
