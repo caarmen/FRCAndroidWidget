@@ -1,0 +1,118 @@
+package ca.rmen.android.frenchcalendar;
+
+import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Typeface;
+import android.preference.PreferenceManager;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RemoteViews;
+import android.widget.TextView;
+import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
+
+public class FrenchCalendarAppWidgetRenderer {
+    private static final String TAG = Constants.TAG + FrenchCalendarAppWidgetRenderer.class.getSimpleName();
+    private static final String FONT_FILE = "Gabrielle.ttf";
+
+    static RemoteViews render(Context context, Class<?> widgetClass, int appWidgetId, FrenchRevolutionaryCalendarDate frenchDate, int layoutResourceId,
+            int widthResourceId, int heightResourceId, int scrollResourceId, int textViewableWidthResourceId) {
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(layoutResourceId, null, false);
+        view.setBackgroundResource(scrollResourceId);
+        int width = context.getResources().getDimensionPixelSize(widthResourceId);
+        int height = context.getResources().getDimensionPixelSize(heightResourceId);
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(bitmap);
+
+        setText(context, view, R.id.text_year, "" + frenchDate.year);
+        setText(context, view, R.id.text_dayofmonth, "" + frenchDate.day);
+        CharSequence weekdayLabel = getLabel(context, R.array.weekdays, frenchDate.getDayInWeek() - 1);
+        CharSequence monthLabel = getLabel(context, R.array.months, frenchDate.month - 1);
+        setText(context, view, R.id.text_weekday, weekdayLabel);
+        setText(context, view, R.id.text_month, monthLabel);
+
+        String frequencyPrefStr = sharedPreferences.getString(FrenchCalendarPrefs.PREF_FREQUENCY, FrenchCalendarPrefs.FREQUENCY_MINUTES);
+
+        String timestamp = null;
+        TextView timeView = (TextView) view.findViewById(R.id.text_time);
+        if (FrenchCalendarPrefs.FREQUENCY_SECONDS.equals(frequencyPrefStr)) {
+            timeView.setVisibility(View.VISIBLE);
+            timestamp = String.format("%d:%02d:%02d", frenchDate.hour, frenchDate.minute, frenchDate.second);
+        } else if (FrenchCalendarPrefs.FREQUENCY_MINUTES.equals(frequencyPrefStr)) {
+            timeView.setVisibility(View.VISIBLE);
+            timestamp = String.format("%d:%02d", frenchDate.hour, frenchDate.minute);
+        } else {
+            timeView.setVisibility(View.GONE);
+            timestamp = "";
+        }
+        setText(context, view, R.id.text_time, timestamp);
+
+        view.measure(width, height);
+        view.layout(0, 0, width - 1, height - 1);
+
+        squeezeMonthLine(context, view, textViewableWidthResourceId);
+        view.measure(width, height);
+        view.layout(0, 0, width - 1, height - 1);
+        view.draw(canvas);
+
+        final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.imageview);
+        views.setImageViewBitmap(R.id.imageView1, bitmap);
+
+        final Intent intent = new Intent(context, FrenchCalendarPreferenceActivity.class);
+
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+        intent.addCategory(widgetClass.getName());
+        final PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        views.setOnClickPendingIntent(R.id.imageView1, pendingIntent);
+        return views;
+    }
+
+    private static void setText(Context context, View view, int resourceId, CharSequence text) {
+        Typeface font = Typeface.createFromAsset(context.getAssets(), FONT_FILE);
+        TextView textView = (TextView) view.findViewById(resourceId);
+        textView.setTypeface(font);
+        textView.setText(text);
+    }
+
+    private static CharSequence getLabel(Context context, int arrayResource, int index) {
+        CharSequence[] labels = context.getResources().getTextArray(arrayResource);
+        if (index >= 0 && index < labels.length) return labels[index];
+        return "";
+    }
+
+    private static void squeezeMonthLine(Context context, View view, int textViewableWidthResourceId) {
+        TextView dateView = (TextView) view.findViewById(R.id.text_dayofmonth);
+        TextView monthView = (TextView) view.findViewById(R.id.text_month);
+        LinearLayout monthLine = (LinearLayout) monthView.getParent();
+        TextView yearView = (TextView) monthLine.findViewById(R.id.text_year);
+
+        int textWidth = dateView.getWidth() + monthView.getWidth() + (yearView == null ? 0 : yearView.getWidth());
+        int textViewableWidth = context.getResources().getDimensionPixelSize(textViewableWidthResourceId);
+
+        if (textWidth > textViewableWidth) {
+            float squeezeFactor = (float) textViewableWidth / textWidth;
+
+            Log.v(TAG, "SqueezeFactor: " + squeezeFactor);
+            resizeTextView(context, dateView, squeezeFactor);
+            resizeTextView(context, monthView, squeezeFactor);
+            resizeTextView(context, yearView, squeezeFactor);
+        }
+    }
+
+    private static void resizeTextView(Context context, TextView textView, float squeezeFactor) {
+        if (textView == null) return;
+        textView.setTextScaleX(squeezeFactor);
+    }
+
+}
