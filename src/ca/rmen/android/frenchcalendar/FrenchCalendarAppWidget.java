@@ -1,5 +1,6 @@
 package ca.rmen.android.frenchcalendar;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -42,22 +43,25 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        debug(context, "received! " + intent.getAction() + ": " + (intent.getComponent() == null ? "" : intent.getComponent().getClassName()));
+        debug(context, "onReceive: action = " + intent.getAction() + ": component = "
+                + (intent.getComponent() == null ? "" : intent.getComponent().getClassName()));
 
+        final AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        final ComponentName provider = intent.getComponent();
+        final int[] appWidgetIds = appWidgetManager.getAppWidgetIds(provider);
+        debug(context, "onReceive: appWidgetIds = " + Arrays.toString(appWidgetIds));
         if ((context.getPackageName() + BROADCAST_MESSAGE_UPDATE).equals(intent.getAction())) {
             if (intent != null && intent.getExtras() != null) {
                 String broadcaster = intent.getExtras().getString(EXTRA_WIDGET_CLASS);
                 if (!getClass().getName().equals(broadcaster)) return;
             }
-            final AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-            final ComponentName provider = intent.getComponent();
-            final int[] appWidgetIds = appWidgetManager.getAppWidgetIds(provider);
             if (appWidgetIds.length == 0) {
                 stopWidgetNotifier(context);
             } else
                 updateAll(context, appWidgetManager, appWidgetIds);
         } else if ((context.getPackageName() + BROADCAST_MESSAGE_CONF_CHANGE).equals(intent.getAction())) {
             restartWidgetNotifier(context);
+            updateAll(context, appWidgetManager, appWidgetIds);
         } else if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
             stopWidgetNotifier(context);
         } else if (Intent.ACTION_SCREEN_ON.equals(intent.getAction())) {
@@ -67,26 +71,30 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
     }
 
     private void restartWidgetNotifier(Context context) {
+        debug(context, "restartWidgetNotifier");
         stopWidgetNotifier(context);
         startWidgetNotifier(context);
     }
 
     private void startWidgetNotifier(Context context) {
+        debug(context, "startWidgetNotifier");
         PendingIntent updatePendingIntent = createWidgetNotifier(context);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String frequencyPrefStr = sharedPreferences.getString(PREF_FREQUENCY, FREQUENCY_MINUTES);
 
         int frequency = Integer.parseInt(frequencyPrefStr);
         debug(context, "Start alarm with frequency " + frequency);
-        long nextAlarmTime = System.currentTimeMillis();
+        // If we show the time, we will update the widget every decimal "minute" (86.4 Gregorian seconds) starting 
+        // one decimal "minute" from now.
+        long nextAlarmTime = System.currentTimeMillis() + frequency;
         AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        // If we only show the date, we will update the widget every day just before midnight
         if (frequency == FREQUENCY_DAYS) {
             Calendar cal = Calendar.getInstance();
             cal.set(Calendar.HOUR_OF_DAY, 23);
             cal.set(Calendar.MINUTE, 59);
             cal.add(Calendar.MINUTE, 1);
             nextAlarmTime = cal.getTimeInMillis();
-            mgr.set(AlarmManager.RTC, System.currentTimeMillis(), updatePendingIntent);
         }
         mgr.setRepeating(AlarmManager.RTC, nextAlarmTime, frequency, updatePendingIntent);
 
@@ -94,11 +102,10 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
     }
 
     private void stopWidgetNotifier(Context context) {
-        debug(context, "Will cancel updater");
+        debug(context, "stopWidgetNotifier");
         PendingIntent updatePendingIntent = createWidgetNotifier(context);
         AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         mgr.cancel(updatePendingIntent);
-        debug(context, "Cancelled updater");
     }
 
     private PendingIntent createWidgetNotifier(Context context) {
@@ -116,7 +123,7 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
      */
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        debug(context, "onUpdate");
+        debug(context, "onUpdate: appWidgetIds = " + Arrays.toString(appWidgetIds));
         super.onUpdate(context, appWidgetManager, appWidgetIds);
 
         if (!initialized) init(context);
@@ -126,6 +133,7 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
     }
 
     private void init(final Context context) {
+        debug(context, "init");
         startWidgetNotifier(context);
         IntentFilter filterOn = new IntentFilter(Intent.ACTION_SCREEN_ON);
         IntentFilter filterOff = new IntentFilter(Intent.ACTION_SCREEN_OFF);
@@ -136,6 +144,7 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
     }
 
     public void updateAll(Context context, final AppWidgetManager appWidgetManager, final int[] appWidgetIds) {
+        debug(context, "updateAll:  appWidgetIds = " + Arrays.toString(appWidgetIds));
         for (int appWidgetId : appWidgetIds)
             update(context, appWidgetManager, appWidgetId);
     }
@@ -151,6 +160,7 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
     protected abstract int getTextWidthResourceId();
 
     public void update(Context context, final AppWidgetManager appWidgetManager, final int appWidgetId) {
+        debug(context, "update: appWidgetId = " + appWidgetId);
 
         GregorianCalendar now = new GregorianCalendar();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
