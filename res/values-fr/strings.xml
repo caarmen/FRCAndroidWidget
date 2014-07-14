@@ -1,21 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  French Revolutionary Calendar Android Widget
+  Copyright (C) 2011 - 2014 Carmen Alvarez
+  
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+-->
 <resources>
-	<string name="hello">Hello World, FrenchCalendarActivity!</string>
-	<string name="app_name">Calendrier républicain</string>
-	<string name="app_name_wide">Calendrier républicain (grand)</string>
-	<string name="app_full_name">Calendrier républicain</string>
-	<string name="author">Carmen Alvarez (c@rmen.ca)</string>
-	<string name="app_version">1.0.4</string>
-	<string name="description">Widget qui montre la date et heure actuelle dans le
+
+    <string name="hello">Hello World, FrenchCalendarActivity!</string>
+    <string name="app_name">Calendrier républicain</string>
+    <string name="app_name_wide">Calendrier républicain (grand)</string>
+    <string name="app_full_name">Calendrier républicain</string>
+    <string name="author">Carmen Alvarez (c@rmen.ca)</string>
+    <string name="app_version">1.0.4</string>
+    <string name="description">Widget qui montre la date et heure actuelle dans le
 		calendrier républicain.</string>
-	<string name="credits">Remerciments :</string>
-	<string name="wikipedia">* Article Wikipedia : http://fr.wikipedia.org/wiki/Calendrier_républicain</string>
-	<string name="equinox_tool">* AstroLib C++, programme de Mark Huss, qui détermine le premier jour de l\'automne de chaque année : http://mhuss.com/AstroLib/
-	</string>
-	<string name="widget_settings">Configuration du calendrier</string>
-	<string name="setting_method">Methode de calcul</string>
-	<string name="setting_method_summary">Comment le premier jour de l\'année est déterminé</string>
-	<string name="setting_frequency">Fréquence des mises à jour</string>
-	<string name="setting_frequency_summary">Fréquence des mises à jour du widget</string>
-	<string name="about">À propos</string>
+    <string name="credits">Remerciments :</string>
+    <string name="wikipedia">* Article Wikipedia : http://fr.wikipedia.org/wiki/Calendrier_républicain</string>
+    <string name="equinox_tool">* AstroLib C++, programme de Mark Huss, qui détermine le premier jour de l\'automne de chaque année : http://mhuss.com/AstroLib/</string>
+    <string name="widget_settings">Configuration du calendrier</string>
+    <string name="setting_method">Methode de calcul</string>
+    <string name="setting_method_summary">Comment le premier jour de l\'année est déterminé</string>
+    <string name="setting_frequency">Fréquence des mises à jour</string>
+    <string name="setting_frequency_summary">Fréquence des mises à jour du widget</string>
+    <string name="about">À propos</string>
+
 </resources>

@@ -1,40 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="fill_parent"
-	android:layout_width="fill_parent">
-<LinearLayout 
-	android:id="@+id/aboutview" android:layout_width="fill_parent"
-	android:layout_height="fill_parent" android:layout_marginTop="12dip" android:background="@drawable/vscroll"
-	android:gravity="center" android:orientation="vertical" android:paddingTop="50dip" android:paddingBottom="50dip">
-	<TextView android:layout_height="wrap_content" android:text="@string/app_full_name"
-		android:layout_gravity="center_horizontal" android:layout_width="wrap_content"
-		android:textSize="38dip" android:gravity="center_horizontal"
-		android:textColor="#381f0a"/>
-	<TextView android:layout_height="wrap_content" android:text="@string/app_version"
-		android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
-		android:textSize="22dip" android:textColor="#381f0a" />
-	<TextView android:layout_height="wrap_content" android:text="@string/author"
-		android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
-		android:textSize="22dip" android:autoLink="email" android:textColor="#381f0a"/>
-	<TextView android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:text="@string/description"
-		android:layout_marginTop="12dip" android:textColor="#381f0a" 
-		android:paddingLeft="50dip" android:paddingRight="50dip"
-		android:textSize="18dip" />
-	<TextView android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:text="@string/credits"
-		android:textColor="#381f0a" android:layout_marginTop="12dip" 
-		android:paddingLeft="50dip" 
-		android:textSize="18dip"/>
-	<TextView android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:text="@string/wikipedia"
-		android:autoLink="web" android:textColor="#381f0a"
-		android:paddingLeft="50dip" android:paddingRight="50dip"
-		android:textSize="18dip"/>
-	<TextView android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:text="@string/equinox_tool"
-		android:autoLink="web" android:textColor="#381f0a"
-		android:paddingLeft="50dip" android:paddingRight="50dip"
-		android:textSize="18dip"/>
+<!--
+  French Revolutionary Calendar Android Widget
+  Copyright (C) 2011 - 2014 Carmen Alvarez
+  
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/aboutview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dip"
+        android:background="@drawable/vscroll"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="50dip"
+        android:paddingTop="50dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:text="@string/app_full_name"
+            android:textColor="#381f0a"
+            android:textSize="38dip" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/app_version"
+            android:textColor="#381f0a"
+            android:textSize="22dip" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:autoLink="email"
+            android:text="@string/author"
+            android:textColor="#381f0a"
+            android:textSize="22dip" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dip"
+            android:paddingLeft="50dip"
+            android:paddingRight="50dip"
+            android:text="@string/description"
+            android:textColor="#381f0a"
+            android:textSize="18dip" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dip"
+            android:paddingLeft="50dip"
+            android:text="@string/credits"
+            android:textColor="#381f0a"
+            android:textSize="18dip" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:paddingLeft="50dip"
+            android:paddingRight="50dip"
+            android:text="@string/wikipedia"
+            android:textColor="#381f0a"
+            android:textSize="18dip" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:paddingLeft="50dip"
+            android:paddingRight="50dip"
+            android:text="@string/equinox_tool"
+            android:textColor="#381f0a"
+            android:textSize="18dip" />
+    </LinearLayout>
+
 </ScrollView>

@@ -1,41 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/linearLayout1"
-	android:layout_width="wrap_content" android:layout_height="wrap_content"
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:background="@drawable/vscroll"
-	android:layout_gravity="center" android:gravity="center"
-	android:clickable="true">
+<!--
+  French Revolutionary Calendar Android Widget
+  Copyright (C) 2011 - 2014 Carmen Alvarez
+  
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/vscroll"
+    android:clickable="true"
+    android:gravity="center"
+    android:orientation="vertical" >
 
+    <TextView
+        android:id="@+id/text_weekday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="-8dip"
+        android:textColor="#381f0a"
+        android:textSize="21sp" />
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:textColor="#381f0a" >
 
-	<TextView android:id="@+id/text_weekday"
-		android:layout_height="wrap_content" android:layout_width="wrap_content"
-		android:layout_gravity="center_horizontal" android:textColor="#381f0a"
-		android:textSize="21sp" android:layout_marginBottom="-8dip" />
+        <TextView
+            android:id="@+id/text_dayofmonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="3dip"
+            android:textColor="#381f0a"
+            android:textSize="19sp" />
 
-	<LinearLayout android:orientation="horizontal"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:layout_gravity="center_horizontal" android:gravity="center_horizontal"
-		android:textColor="#381f0a">
+        <TextView
+            android:id="@+id/text_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="3dip"
+            android:textColor="#381f0a"
+            android:textSize="19sp" />
+    </LinearLayout>
 
-		<TextView android:id="@+id/text_dayofmonth"
-			android:layout_height="wrap_content" android:layout_width="wrap_content"
-			android:paddingRight="3dip" android:textSize="19sp"
-			android:textColor="#381f0a" />
-		<TextView android:id="@+id/text_month" android:layout_height="wrap_content"
-			android:layout_width="wrap_content" android:paddingRight="3dip"
-			android:textSize="19sp" android:textColor="#381f0a" />
-	</LinearLayout>
+    <TextView
+        android:id="@+id/text_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-8dip"
+        android:textColor="#381f0a"
+        android:textSize="17sp" />
 
-
-	<TextView android:id="@+id/text_year" android:layout_height="wrap_content"
-		android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
-		android:textColor="#381f0a" android:textSize="17sp"
-		android:layout_marginTop="-8dip" />
-	<TextView android:id="@+id/text_time" android:layout_height="wrap_content"
-		android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
-		android:textColor="#381f0a" android:textSize="17sp"
-		android:layout_marginTop="-8dip" />
+    <TextView
+        android:id="@+id/text_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-8dip"
+        android:textColor="#381f0a"
+        android:textSize="17sp" />
 
 </LinearLayout>
-
