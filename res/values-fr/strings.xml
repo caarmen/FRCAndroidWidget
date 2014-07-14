@@ -19,7 +19,6 @@
 -->
 <resources>
 
-    <string name="hello">Hello World, FrenchCalendarActivity!</string>
     <string name="app_name">Calendrier républicain</string>
     <string name="app_name_wide">Calendrier républicain (grand)</string>
     <string name="app_full_name">Calendrier républicain</string>
