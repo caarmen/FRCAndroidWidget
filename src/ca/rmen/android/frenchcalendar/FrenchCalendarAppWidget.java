@@ -142,7 +142,7 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 
     protected abstract int getLayoutResourceId();
 
-    protected abstract Class getPreferenceActivityClass();
+    protected abstract Class<?> getPreferenceActivityClass();
 
     protected abstract int getWidthResourceId();
 
@@ -276,6 +276,6 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
     }
 
     private void debug(Context context, Object message) {
-        Log.d(context.getPackageName(), getClass().getName() + ": " + message);
+        Log.d(context.getPackageName(), getClass().getSimpleName() + ": " + message);
     }
 }
