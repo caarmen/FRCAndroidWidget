@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
-abstract class FrenchCalendarPreferenceActivity extends PreferenceActivity {
+public class FrenchCalendarPreferenceActivity extends PreferenceActivity {
     private int mAppWidgetId = -1;
 
     @SuppressWarnings("deprecation")
@@ -25,9 +25,6 @@ abstract class FrenchCalendarPreferenceActivity extends PreferenceActivity {
     protected void onDestroy() {
         super.onDestroy();
         Intent updateIntent = new Intent(getPackageName() + FrenchCalendarAppWidget.BROADCAST_MESSAGE_CONF_CHANGE);
-        updateIntent.addCategory(getWidgetCategory());
         sendBroadcast(updateIntent);
     }
-
-    abstract protected String getWidgetCategory();
 }

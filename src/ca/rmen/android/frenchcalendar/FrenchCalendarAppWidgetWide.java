@@ -8,11 +8,6 @@ public class FrenchCalendarAppWidgetWide extends FrenchCalendarAppWidget { // NO
     }
 
     @Override
-    protected Class<?> getPreferenceActivityClass() {
-        return FrenchCalendarWidePreferenceActivity.class;
-    }
-
-    @Override
     protected int getWidthResourceId() {
         return R.dimen.wide_widget_width;
     }

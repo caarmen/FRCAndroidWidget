@@ -51,6 +51,7 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
         final int[] appWidgetIds = appWidgetManager.getAppWidgetIds(provider);
         debug(context, "onReceive: appWidgetIds = " + Arrays.toString(appWidgetIds));
         if ((context.getPackageName() + BROADCAST_MESSAGE_UPDATE).equals(intent.getAction())) {
+            debug(context, "Received my scheduled update");
             if (intent != null && intent.getExtras() != null) {
                 String broadcaster = intent.getExtras().getString(EXTRA_WIDGET_CLASS);
                 if (!getClass().getName().equals(broadcaster)) return;
@@ -60,6 +61,7 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
             } else
                 updateAll(context, appWidgetManager, appWidgetIds);
         } else if ((context.getPackageName() + BROADCAST_MESSAGE_CONF_CHANGE).equals(intent.getAction())) {
+            debug(context, "Preferences changed");
             restartWidgetNotifier(context);
             updateAll(context, appWidgetManager, appWidgetIds);
         } else if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
@@ -130,6 +132,7 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
         else {
             restartWidgetNotifier(context);
         }
+        updateAll(context, appWidgetManager, appWidgetIds);
     }
 
     private void init(final Context context) {
@@ -150,8 +153,6 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
     }
 
     protected abstract int getLayoutResourceId();
-
-    protected abstract Class<?> getPreferenceActivityClass();
 
     protected abstract int getWidthResourceId();
 
@@ -214,7 +215,7 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
         final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.imageview);
         views.setImageViewBitmap(R.id.imageView1, bitmap);
 
-        final Intent intent = new Intent(context, getPreferenceActivityClass());
+        final Intent intent = new Intent(context, FrenchCalendarPreferenceActivity.class);
 
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         intent.addCategory(getClass().getName());

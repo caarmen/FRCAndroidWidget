@@ -10,18 +10,13 @@
         android:icon="@drawable/icon"
         android:allowBackup="true"
         android:label="@string/app_name" >
-        <activity android:name=".FrenchCalendarWidePreferenceActivity" >
+        <activity android:name=".FrenchCalendarPreferenceActivity" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".FrenchCalendarNarrowPreferenceActivity" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
         <activity android:name=".FrenchCalendarAboutActivity" >
@@ -40,8 +35,6 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="ca.rmen.android.frenchcalendar.CONF_CHANGE" />
-
-                <category android:name="ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetNarrow" />
             </intent-filter>
             <intent-filter>
                 <action android:name="ca.rmen.android.frenchcalendar.UPDATE_WIDGET" />
@@ -61,8 +54,6 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="ca.rmen.android.frenchcalendar.CONF_CHANGE" />
-
-                <category android:name="ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetWide" />
             </intent-filter>
             <intent-filter>
                 <action android:name="ca.rmen.android.frenchcalendar.UPDATE_WIDGET" />
