@@ -23,7 +23,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.util.Log;
-import ca.rmen.android.frenchcalendar.FrenchCalendarScheduler;
+import ca.rmen.android.frenchcalendar.FRCScheduler;
 import ca.rmen.android.frenchcalendar.R;
 
 /**
@@ -31,9 +31,9 @@ import ca.rmen.android.frenchcalendar.R;
  * 
  * @author calvarez
  */
-public class FrenchCalendarPreferenceActivity extends PreferenceActivity { // NO_UCD (use default)
+public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use default)
 
-    private static final String TAG = FrenchCalendarPreferenceActivity.class.getSimpleName();
+    private static final String TAG = FRCPreferenceActivity.class.getSimpleName();
 
     @SuppressWarnings("deprecation")
     @Override
@@ -61,6 +61,6 @@ public class FrenchCalendarPreferenceActivity extends PreferenceActivity { // NO
         Log.v(TAG, "onDestroy");
         super.onDestroy();
         // When we leave the preference screen, reupdate all our widgets
-        FrenchCalendarScheduler.getInstance(this).schedule();
+        FRCScheduler.getInstance(this).schedule();
     }
 }

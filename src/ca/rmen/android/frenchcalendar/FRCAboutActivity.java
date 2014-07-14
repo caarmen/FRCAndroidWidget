@@ -23,7 +23,7 @@ import android.os.Bundle;
 import android.view.View;
 import ca.rmen.android.frenchcalendar.render.Font;
 
-public class FrenchCalendarAboutActivity extends Activity { // NO_UCD (use default)
+public class FRCAboutActivity extends Activity { // NO_UCD (use default)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -39,7 +39,7 @@
         android:title="@string/setting_frequency" />
 
     <Preference android:title="@string/about" >
-        <intent android:action="ca.rmen.android.frenchcalendar.FrenchCalendarAboutActivity" />
+        <intent android:action="ca.rmen.android.frenchcalendar.FRCAboutActivity" />
     </Preference>
 
 </PreferenceScreen>

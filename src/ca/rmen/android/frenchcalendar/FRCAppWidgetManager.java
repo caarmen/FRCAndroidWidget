@@ -24,18 +24,18 @@ import java.util.Set;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
-import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidget.FrenchCalendarAppWidgetNarrow;
-import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidget.FrenchCalendarAppWidgetWide;
+import ca.rmen.android.frenchcalendar.FRCAppWidget.FRCAppWidgetNarrow;
+import ca.rmen.android.frenchcalendar.FRCAppWidget.FRCAppWidgetWide;
 
-class FrenchCalendarAppWidgetManager {
+class FRCAppWidgetManager {
 
     /**
      * @return all the widget ids for both narrow and wide widgets.
      */
     static Set<Integer> getAllAppWidgetIds(Context context) {
         Set<Integer> result = new HashSet<Integer>();
-        result.addAll(getAppWidgetIds(context, FrenchCalendarAppWidgetWide.class));
-        result.addAll(getAppWidgetIds(context, FrenchCalendarAppWidgetNarrow.class));
+        result.addAll(getAppWidgetIds(context, FRCAppWidgetWide.class));
+        result.addAll(getAppWidgetIds(context, FRCAppWidgetNarrow.class));
         return result;
     }
 

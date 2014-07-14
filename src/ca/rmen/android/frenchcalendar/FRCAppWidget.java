@@ -30,26 +30,26 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.RemoteViews;
 import ca.rmen.android.frenchcalendar.Constants.WidgetType;
-import ca.rmen.android.frenchcalendar.prefs.FrenchCalendarPreferenceActivity;
-import ca.rmen.android.frenchcalendar.render.FrenchCalendarAppWidgetRenderParams;
-import ca.rmen.android.frenchcalendar.render.FrenchCalendarAppWidgetRenderParamsFactory;
-import ca.rmen.android.frenchcalendar.render.FrenchCalendarAppWidgetRenderer;
+import ca.rmen.android.frenchcalendar.prefs.FRCPreferenceActivity;
+import ca.rmen.android.frenchcalendar.render.FRCAppWidgetRenderParams;
+import ca.rmen.android.frenchcalendar.render.FRCAppWidgetRenderParamsFactory;
+import ca.rmen.android.frenchcalendar.render.FRCAppWidgetRenderer;
 
 /**
  * Receiver and AppWidgetProvider which updates a list of wide widgets or a list of narrow widgets.
  * 
  * At any given point, there will be at most two instances of this class:
  * <ul>
- * <li> one {@link FrenchCalendarAppWidgetWide} which will manage all of the wide widgets, and </li>
- * <li> one {@link FrenchCalendarAppWidgetNarrow} which will manage all of the narrow widgets.</li>
+ * <li> one {@link FRCAppWidgetWide} which will manage all of the wide widgets, and </li>
+ * <li> one {@link FRCAppWidgetNarrow} which will manage all of the narrow widgets.</li>
  * </ul>
  * These receivers are notified by the system when a widget of the given type is added or deleted,
  * or when widgets of the given type should be updated.
  * 
- * These receivers are also notified by the alarm set up by {@link FrenchCalendarScheduler}, which will
+ * These receivers are also notified by the alarm set up by {@link FRCScheduler}, which will
  * go off either once a minute, or once a day, depending on the preferences.
  */
-abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
+abstract class FRCAppWidget extends AppWidgetProvider {
 
     private final String TAG = Constants.TAG + getClass().getSimpleName();
 
@@ -59,9 +59,9 @@ abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         ComponentName provider = intent.getComponent();
         final int[] appWidgetIds = appWidgetManager.getAppWidgetIds(provider);
-        if ((context.getPackageName() + FrenchCalendarScheduler.BROADCAST_MESSAGE_UPDATE).equals(intent.getAction())) {
-            Set<Integer> allAppWidgetIds = FrenchCalendarAppWidgetManager.getAllAppWidgetIds(context);
-            if (allAppWidgetIds.size() == 0) FrenchCalendarScheduler.getInstance(context).cancel();
+        if ((context.getPackageName() + FRCScheduler.BROADCAST_MESSAGE_UPDATE).equals(intent.getAction())) {
+            Set<Integer> allAppWidgetIds = FRCAppWidgetManager.getAllAppWidgetIds(context);
+            if (allAppWidgetIds.size() == 0) FRCScheduler.getInstance(context).cancel();
             else
                 updateAll(context, appWidgetManager, appWidgetIds);
         }
@@ -75,7 +75,7 @@ abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         Log.v(TAG, "onUpdate: appWidgetIds = " + Arrays.toString(appWidgetIds));
         super.onUpdate(context, appWidgetManager, appWidgetIds);
-        FrenchCalendarScheduler.getInstance(context).schedule();
+        FRCScheduler.getInstance(context).schedule();
     }
 
     /**
@@ -92,10 +92,10 @@ abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
      */
     private void update(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         Log.v(TAG, "update: appWidgetId = " + appWidgetId);
-        FrenchCalendarAppWidgetRenderParams renderParams = FrenchCalendarAppWidgetRenderParamsFactory.getRenderParams(getWidgetType());
-        RemoteViews views = FrenchCalendarAppWidgetRenderer.render(context, renderParams);
+        FRCAppWidgetRenderParams renderParams = FRCAppWidgetRenderParamsFactory.getRenderParams(getWidgetType());
+        RemoteViews views = FRCAppWidgetRenderer.render(context, renderParams);
 
-        Intent intent = new Intent(context, FrenchCalendarPreferenceActivity.class);
+        Intent intent = new Intent(context, FRCPreferenceActivity.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         intent.addCategory(getClass().getName());
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -106,14 +106,14 @@ abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 
     protected abstract WidgetType getWidgetType();
 
-    public static class FrenchCalendarAppWidgetNarrow extends FrenchCalendarAppWidget {
+    public static class FRCAppWidgetNarrow extends FRCAppWidget {
         @Override
         protected WidgetType getWidgetType() {
             return WidgetType.NARROW;
         }
     }
 
-    public static class FrenchCalendarAppWidgetWide extends FrenchCalendarAppWidget {
+    public static class FRCAppWidgetWide extends FRCAppWidget {
         @Override
         protected WidgetType getWidgetType() {
             return WidgetType.WIDE;

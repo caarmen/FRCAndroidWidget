@@ -18,7 +18,7 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:configure="ca.rmen.android.frenchcalendar.prefs.FrenchCalendarPreferenceActivity"
+    android:configure="ca.rmen.android.frenchcalendar.prefs.FRCPreferenceActivity"
     android:initialLayout="@layout/appwidget_wide"
     android:minHeight="72dip"
     android:minWidth="144dip"

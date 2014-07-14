@@ -34,7 +34,7 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 import ca.rmen.android.frenchcalendar.Constants;
 import ca.rmen.android.frenchcalendar.R;
-import ca.rmen.android.frenchcalendar.prefs.FrenchCalendarPrefs;
+import ca.rmen.android.frenchcalendar.prefs.FRCPreferences;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendar;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
@@ -44,16 +44,16 @@ import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
  * @author calvarez
  * 
  */
-public class FrenchCalendarAppWidgetRenderer {
-    private static final String TAG = Constants.TAG + FrenchCalendarAppWidgetRenderer.class.getSimpleName();
+public class FRCAppWidgetRenderer {
+    private static final String TAG = Constants.TAG + FRCAppWidgetRenderer.class.getSimpleName();
 
-    public static RemoteViews render(Context context, FrenchCalendarAppWidgetRenderParams params) {
+    public static RemoteViews render(Context context, FRCAppWidgetRenderParams params) {
         Log.v(TAG, "render");
 
         // Get the current timestamp in the French revolutionary calendar.
         GregorianCalendar now = new GregorianCalendar();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        String methodPrefStr = sharedPreferences.getString(FrenchCalendarPrefs.PREF_METHOD, "0");
+        String methodPrefStr = sharedPreferences.getString(FRCPreferences.PREF_METHOD, "0");
         int mode = Integer.parseInt(methodPrefStr);
         FrenchRevolutionaryCalendar frcal = new FrenchRevolutionaryCalendar(mode);
         FrenchRevolutionaryCalendarDate frenchDate = frcal.getDate(now);
@@ -74,14 +74,14 @@ public class FrenchCalendarAppWidgetRenderer {
         ((TextView) view.findViewById(R.id.text_month)).setText(monthLabel);
 
         // Set the text fields for the time.
-        String frequencyPrefStr = sharedPreferences.getString(FrenchCalendarPrefs.PREF_FREQUENCY, FrenchCalendarPrefs.FREQUENCY_MINUTES);
+        String frequencyPrefStr = sharedPreferences.getString(FRCPreferences.PREF_FREQUENCY, FRCPreferences.FREQUENCY_MINUTES);
 
         String timestamp = null;
         TextView timeView = (TextView) view.findViewById(R.id.text_time);
-        if (FrenchCalendarPrefs.FREQUENCY_SECONDS.equals(frequencyPrefStr)) {
+        if (FRCPreferences.FREQUENCY_SECONDS.equals(frequencyPrefStr)) {
             timeView.setVisibility(View.VISIBLE);
             timestamp = String.format(Locale.US, "%d:%02d:%02d", frenchDate.hour, frenchDate.minute, frenchDate.second);
-        } else if (FrenchCalendarPrefs.FREQUENCY_MINUTES.equals(frequencyPrefStr)) {
+        } else if (FRCPreferences.FREQUENCY_MINUTES.equals(frequencyPrefStr)) {
             timeView.setVisibility(View.VISIBLE);
             timestamp = String.format(Locale.US, "%d:%02d", frenchDate.hour, frenchDate.minute);
         } else {

@@ -30,7 +30,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import ca.rmen.android.frenchcalendar.prefs.FrenchCalendarPrefs;
+import ca.rmen.android.frenchcalendar.prefs.FRCPreferences;
 
 /**
  * 
@@ -42,15 +42,15 @@ import ca.rmen.android.frenchcalendar.prefs.FrenchCalendarPrefs;
  * @author calvarez
  * 
  */
-public class FrenchCalendarScheduler {
-    private static final String TAG = Constants.TAG + FrenchCalendarScheduler.class.getSimpleName();
+public class FRCScheduler {
+    private static final String TAG = Constants.TAG + FRCScheduler.class.getSimpleName();
     static final String BROADCAST_MESSAGE_UPDATE = ".UPDATE_WIDGET";
 
-    private static FrenchCalendarScheduler INSTANCE;
+    private static FRCScheduler INSTANCE;
     private final Context context;
     private final PendingIntent updatePendingIntent;
 
-    private FrenchCalendarScheduler(Context context) {
+    private FRCScheduler(Context context) {
         this.context = context.getApplicationContext();
         Intent updateIntent = new Intent(context.getPackageName() + BROADCAST_MESSAGE_UPDATE);
         updatePendingIntent = PendingIntent.getBroadcast(context, 0, updateIntent, 0);
@@ -60,8 +60,8 @@ public class FrenchCalendarScheduler {
         context.getApplicationContext().registerReceiver(screenBroadcastReceiver, filterOff);
     }
 
-    public synchronized static FrenchCalendarScheduler getInstance(Context context) {
-        if (INSTANCE == null) INSTANCE = new FrenchCalendarScheduler(context);
+    public synchronized static FRCScheduler getInstance(Context context) {
+        if (INSTANCE == null) INSTANCE = new FRCScheduler(context);
         return INSTANCE;
     }
 
@@ -71,7 +71,7 @@ public class FrenchCalendarScheduler {
     public void schedule() {
         Log.v(TAG, "schedule");
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        String frequencyPrefStr = sharedPreferences.getString(FrenchCalendarPrefs.PREF_FREQUENCY, FrenchCalendarPrefs.FREQUENCY_MINUTES);
+        String frequencyPrefStr = sharedPreferences.getString(FRCPreferences.PREF_FREQUENCY, FRCPreferences.FREQUENCY_MINUTES);
 
         int frequency = Integer.parseInt(frequencyPrefStr);
         Log.v(TAG, "Start alarm with frequency " + frequency);
@@ -80,7 +80,7 @@ public class FrenchCalendarScheduler {
         long nextAlarmTime = System.currentTimeMillis() + frequency;
         AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         // If we only show the date, we will update the widget every day just before midnight
-        if (frequency == FrenchCalendarPrefs.FREQUENCY_DAYS) {
+        if (frequency == FRCPreferences.FREQUENCY_DAYS) {
             Calendar cal = Calendar.getInstance();
             cal.set(Calendar.HOUR_OF_DAY, 23);
             cal.set(Calendar.MINUTE, 59);

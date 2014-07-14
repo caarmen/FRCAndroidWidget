@@ -16,21 +16,19 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package ca.rmen.android.frenchcalendar.render;
+package ca.rmen.android.frenchcalendar.prefs;
 
-public class FrenchCalendarAppWidgetRenderParams {
-    final int layoutResourceId;
-    final int widthResourceId;
-    final int heightResourceId;
-    final int textViewableWidthResourceId;
-    final int[] scrollResourceIds;
+/**
+ * Preference names and values used by this app.
+ * 
+ * @author calvarez
+ */
+public class FRCPreferences {
 
-    public FrenchCalendarAppWidgetRenderParams(int layoutResourceId, int widthResourceId, int heightResourceId, int textViewableWidthResourceId,
-            int[] scrollResourceIds) {
-        this.layoutResourceId = layoutResourceId;
-        this.widthResourceId = widthResourceId;
-        this.heightResourceId = heightResourceId;
-        this.textViewableWidthResourceId = textViewableWidthResourceId;
-        this.scrollResourceIds = scrollResourceIds;
-    }
+    public static final String PREF_METHOD = "setting_method";
+    public static final String PREF_FREQUENCY = "setting_frequency";
+    public static final String FREQUENCY_SECONDS = "864";
+    public static final String FREQUENCY_MINUTES = "86400";
+    public static final int FREQUENCY_DAYS = 86400000;
+
 }
