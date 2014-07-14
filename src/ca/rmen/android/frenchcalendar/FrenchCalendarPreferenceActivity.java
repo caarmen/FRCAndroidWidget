@@ -4,13 +4,17 @@ import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.util.Log;
 
 public class FrenchCalendarPreferenceActivity extends PreferenceActivity {
+
+    private static final String TAG = FrenchCalendarPreferenceActivity.class.getSimpleName();
     private int mAppWidgetId = -1;
 
     @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle icicle) {
+        Log.v(TAG, "onCreate: bundle = " + icicle);
         super.onCreate(icicle);
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -23,8 +27,8 @@ public class FrenchCalendarPreferenceActivity extends PreferenceActivity {
 
     @Override
     protected void onDestroy() {
+        Log.v(TAG, "onDestroy");
         super.onDestroy();
-        Intent updateIntent = new Intent(getPackageName() + FrenchCalendarAppWidget.BROADCAST_MESSAGE_CONF_CHANGE);
-        sendBroadcast(updateIntent);
+        FrenchCalendarScheduler.getInstance(this).start();
     }
 }
