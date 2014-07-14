@@ -21,15 +21,30 @@ public class FrenchCalendarAppWidgetRenderer {
     private static final String TAG = Constants.TAG + FrenchCalendarAppWidgetRenderer.class.getSimpleName();
     private static final String FONT_FILE = "Gabrielle.ttf";
 
-    static RemoteViews render(Context context, Class<?> widgetClass, int appWidgetId, FrenchRevolutionaryCalendarDate frenchDate, int layoutResourceId,
-            int widthResourceId, int heightResourceId, int scrollResourceId, int textViewableWidthResourceId) {
+    static class FrenchCalendarAppWidgetRenderParams {
+        final int layoutResourceId;
+        final int widthResourceId;
+        final int heightResourceId;
+        final int textViewableWidthResourceId;
+        int scrollResourceId;
+
+        public FrenchCalendarAppWidgetRenderParams(int layoutResourceId, int widthResourceId, int heightResourceId, int textViewableWidthResourceId) {
+            this.layoutResourceId = layoutResourceId;
+            this.widthResourceId = widthResourceId;
+            this.heightResourceId = heightResourceId;
+            this.textViewableWidthResourceId = textViewableWidthResourceId;
+        }
+    }
+
+    static RemoteViews render(Context context, Class<?> widgetClass, int appWidgetId, FrenchRevolutionaryCalendarDate frenchDate,
+            FrenchCalendarAppWidgetRenderParams params) {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(layoutResourceId, null, false);
-        view.setBackgroundResource(scrollResourceId);
-        int width = context.getResources().getDimensionPixelSize(widthResourceId);
-        int height = context.getResources().getDimensionPixelSize(heightResourceId);
+        View view = inflater.inflate(params.layoutResourceId, null, false);
+        view.setBackgroundResource(params.scrollResourceId);
+        int width = context.getResources().getDimensionPixelSize(params.widthResourceId);
+        int height = context.getResources().getDimensionPixelSize(params.heightResourceId);
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
         Canvas canvas = new Canvas(bitmap);
@@ -60,7 +75,7 @@ public class FrenchCalendarAppWidgetRenderer {
         view.measure(width, height);
         view.layout(0, 0, width - 1, height - 1);
 
-        squeezeMonthLine(context, view, textViewableWidthResourceId);
+        squeezeMonthLine(context, view, params.textViewableWidthResourceId);
         view.measure(width, height);
         view.layout(0, 0, width - 1, height - 1);
         view.draw(canvas);

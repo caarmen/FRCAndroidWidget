@@ -1,25 +1,13 @@
 package ca.rmen.android.frenchcalendar;
 
+import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetRenderer.FrenchCalendarAppWidgetRenderParams;
+
 public class FrenchCalendarAppWidgetWide extends FrenchCalendarAppWidget { // NO_UCD (use default)
 
     @Override
-    protected int getLayoutResourceId() {
-        return R.layout.appwidget_wide;
-    }
-
-    @Override
-    protected int getWidthResourceId() {
-        return R.dimen.wide_widget_width;
-    }
-
-    @Override
-    protected int getHeightResourceId() {
-        return R.dimen.wide_widget_height;
-    }
-
-    @Override
-    protected int getTextWidthResourceId() {
-        return R.dimen.wide_widget_text_width;
+    protected FrenchCalendarAppWidgetRenderParams getRenderParams() {
+        return new FrenchCalendarAppWidgetRenderParams(R.layout.appwidget_wide, R.dimen.wide_widget_width, R.dimen.wide_widget_height,
+                R.dimen.wide_widget_text_width);
     }
 
     @Override

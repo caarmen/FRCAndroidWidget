@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.RemoteViews;
+import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetRenderer.FrenchCalendarAppWidgetRenderParams;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendar;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
@@ -56,13 +57,7 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
             update(context, appWidgetManager, appWidgetId);
     }
 
-    protected abstract int getLayoutResourceId();
-
-    protected abstract int getWidthResourceId();
-
-    protected abstract int getHeightResourceId();
-
-    protected abstract int getTextWidthResourceId();
+    protected abstract FrenchCalendarAppWidgetRenderParams getRenderParams();
 
     public void update(Context context, final AppWidgetManager appWidgetManager, final int appWidgetId) {
         Log.v(TAG, "update: appWidgetId = " + appWidgetId);
@@ -74,8 +69,9 @@ public abstract class FrenchCalendarAppWidget extends AppWidgetProvider {
 
         FrenchRevolutionaryCalendar frcal = new FrenchRevolutionaryCalendar(mode);
         FrenchRevolutionaryCalendarDate frenchDate = frcal.getDate(now);
-        RemoteViews views = FrenchCalendarAppWidgetRenderer.render(context, getClass(), appWidgetId, frenchDate, getLayoutResourceId(), getWidthResourceId(),
-                getHeightResourceId(), getDrawableResourceIdForMonth(frenchDate.month), getTextWidthResourceId());
+        FrenchCalendarAppWidgetRenderParams renderParams = getRenderParams();
+        renderParams.scrollResourceId = getDrawableResourceIdForMonth(frenchDate.month);
+        RemoteViews views = FrenchCalendarAppWidgetRenderer.render(context, getClass(), appWidgetId, frenchDate, renderParams);
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
