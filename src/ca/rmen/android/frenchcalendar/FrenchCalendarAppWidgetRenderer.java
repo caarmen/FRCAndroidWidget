@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,7 +21,6 @@ import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
 class FrenchCalendarAppWidgetRenderer {
     private static final String TAG = Constants.TAG + FrenchCalendarAppWidgetRenderer.class.getSimpleName();
-    private static final String FONT_FILE = "Gabrielle.ttf";
 
     static class FrenchCalendarAppWidgetRenderParams {
         private final int layoutResourceId;
@@ -59,12 +57,12 @@ class FrenchCalendarAppWidgetRenderer {
 
         Canvas canvas = new Canvas(bitmap);
 
-        setText(context, view, R.id.text_year, "" + frenchDate.year);
-        setText(context, view, R.id.text_dayofmonth, "" + frenchDate.day);
+        ((TextView) view.findViewById(R.id.text_year)).setText(String.valueOf(frenchDate.year));
+        ((TextView) view.findViewById(R.id.text_dayofmonth)).setText(String.valueOf(frenchDate.day));
         CharSequence weekdayLabel = getLabel(context, R.array.weekdays, frenchDate.getDayInWeek() - 1);
         CharSequence monthLabel = getLabel(context, R.array.months, frenchDate.month - 1);
-        setText(context, view, R.id.text_weekday, weekdayLabel);
-        setText(context, view, R.id.text_month, monthLabel);
+        ((TextView) view.findViewById(R.id.text_weekday)).setText(weekdayLabel);
+        ((TextView) view.findViewById(R.id.text_month)).setText(monthLabel);
 
         String frequencyPrefStr = sharedPreferences.getString(FrenchCalendarPrefs.PREF_FREQUENCY, FrenchCalendarPrefs.FREQUENCY_MINUTES);
 
@@ -80,7 +78,8 @@ class FrenchCalendarAppWidgetRenderer {
             timeView.setVisibility(View.GONE);
             timestamp = "";
         }
-        setText(context, view, R.id.text_time, timestamp);
+        ((TextView) view.findViewById(R.id.text_time)).setText(timestamp);
+        Font.applyFont(context, view);
 
         view.measure(width, height);
         view.layout(0, 0, width - 1, height - 1);
@@ -101,13 +100,6 @@ class FrenchCalendarAppWidgetRenderer {
 
         views.setOnClickPendingIntent(R.id.imageView1, pendingIntent);
         return views;
-    }
-
-    private static void setText(Context context, View view, int resourceId, CharSequence text) {
-        Typeface font = Typeface.createFromAsset(context.getAssets(), FONT_FILE);
-        TextView textView = (TextView) view.findViewById(resourceId);
-        textView.setTypeface(font);
-        textView.setText(text);
     }
 
     private static CharSequence getLabel(Context context, int arrayResource, int index) {
