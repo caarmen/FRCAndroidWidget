@@ -1,11 +1,26 @@
+/*
+ * French Revolutionary Calendar Android Widget
+ * Copyright (C) 2011 - 2014 Carmen Alvarez
+ * 
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 package ca.rmen.android.frenchcalendar.render;
 
 import java.util.GregorianCalendar;
 
-import android.app.PendingIntent;
-import android.appwidget.AppWidgetManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -18,32 +33,38 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 import ca.rmen.android.frenchcalendar.Constants;
 import ca.rmen.android.frenchcalendar.R;
-import ca.rmen.android.frenchcalendar.prefs.FrenchCalendarPreferenceActivity;
 import ca.rmen.android.frenchcalendar.prefs.FrenchCalendarPrefs;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendar;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
+/**
+ * Responsible for drawing the widgets.
+ * 
+ * @author calvarez
+ * 
+ */
 public class FrenchCalendarAppWidgetRenderer {
     private static final String TAG = Constants.TAG + FrenchCalendarAppWidgetRenderer.class.getSimpleName();
 
-    public static RemoteViews render(Context context, Class<?> widgetClass, int appWidgetId, FrenchCalendarAppWidgetRenderParams params) {
+    public static RemoteViews render(Context context, FrenchCalendarAppWidgetRenderParams params) {
+        Log.v(TAG, "render");
 
+        // Get the current timestamp in the French revolutionary calendar.
         GregorianCalendar now = new GregorianCalendar();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String methodPrefStr = sharedPreferences.getString(FrenchCalendarPrefs.PREF_METHOD, "0");
         int mode = Integer.parseInt(methodPrefStr);
-
         FrenchRevolutionaryCalendar frcal = new FrenchRevolutionaryCalendar(mode);
         FrenchRevolutionaryCalendarDate frenchDate = frcal.getDate(now);
+
+        // Create a view with the right scroll image as the background.
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(params.layoutResourceId, null, false);
         view.setBackgroundResource(params.scrollResourceIds[frenchDate.month - 1]);
         int width = context.getResources().getDimensionPixelSize(params.widthResourceId);
         int height = context.getResources().getDimensionPixelSize(params.heightResourceId);
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
-        Canvas canvas = new Canvas(bitmap);
-
+        // Set all the text fields for the date
         ((TextView) view.findViewById(R.id.text_year)).setText(String.valueOf(frenchDate.year));
         ((TextView) view.findViewById(R.id.text_dayofmonth)).setText(String.valueOf(frenchDate.day));
         CharSequence weekdayLabel = getLabel(context, R.array.weekdays, frenchDate.getDayInWeek() - 1);
@@ -51,6 +72,7 @@ public class FrenchCalendarAppWidgetRenderer {
         ((TextView) view.findViewById(R.id.text_weekday)).setText(weekdayLabel);
         ((TextView) view.findViewById(R.id.text_month)).setText(monthLabel);
 
+        // Set the text fields for the time.
         String frequencyPrefStr = sharedPreferences.getString(FrenchCalendarPrefs.PREF_FREQUENCY, FrenchCalendarPrefs.FREQUENCY_MINUTES);
 
         String timestamp = null;
@@ -66,26 +88,26 @@ public class FrenchCalendarAppWidgetRenderer {
             timestamp = "";
         }
         ((TextView) view.findViewById(R.id.text_time)).setText(timestamp);
+
         Font.applyFont(context, view);
 
         view.measure(width, height);
         view.layout(0, 0, width - 1, height - 1);
 
+        // Just in case the line with the month name is too long for the widget, we'll squeeze it so it fits.
         squeezeMonthLine(context, view, params.textViewableWidthResourceId);
         view.measure(width, height);
         view.layout(0, 0, width - 1, height - 1);
+
+        // Draw everything to a bitmap.
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
         view.draw(canvas);
 
-        final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.imageview);
+        // Write that bitmap to the ImageView which will be our final view.
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.imageview);
         views.setImageViewBitmap(R.id.imageView1, bitmap);
 
-        final Intent intent = new Intent(context, FrenchCalendarPreferenceActivity.class);
-
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        intent.addCategory(widgetClass.getName());
-        final PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        views.setOnClickPendingIntent(R.id.imageView1, pendingIntent);
         return views;
     }
 
@@ -108,15 +130,10 @@ public class FrenchCalendarAppWidgetRenderer {
             float squeezeFactor = (float) textViewableWidth / textWidth;
 
             Log.v(TAG, "SqueezeFactor: " + squeezeFactor);
-            resizeTextView(context, dateView, squeezeFactor);
-            resizeTextView(context, monthView, squeezeFactor);
-            resizeTextView(context, yearView, squeezeFactor);
+            dateView.setTextScaleX(squeezeFactor);
+            monthView.setTextScaleX(squeezeFactor);
+            if (yearView != null) yearView.setTextScaleX(squeezeFactor);
         }
-    }
-
-    private static void resizeTextView(Context context, TextView textView, float squeezeFactor) {
-        if (textView == null) return;
-        textView.setTextScaleX(squeezeFactor);
     }
 
 }
