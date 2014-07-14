@@ -1,5 +1,7 @@
 package ca.rmen.android.frenchcalendar;
 
+import java.util.GregorianCalendar;
+
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
+import ca.rmen.lfrc.FrenchRevolutionaryCalendar;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
 public class FrenchCalendarAppWidgetRenderer {
@@ -26,23 +29,30 @@ public class FrenchCalendarAppWidgetRenderer {
         final int widthResourceId;
         final int heightResourceId;
         final int textViewableWidthResourceId;
-        int scrollResourceId;
+        final int[] scrollResourceIds;
 
-        public FrenchCalendarAppWidgetRenderParams(int layoutResourceId, int widthResourceId, int heightResourceId, int textViewableWidthResourceId) {
+        public FrenchCalendarAppWidgetRenderParams(int layoutResourceId, int widthResourceId, int heightResourceId, int textViewableWidthResourceId,
+                int[] scrollResourceIds) {
             this.layoutResourceId = layoutResourceId;
             this.widthResourceId = widthResourceId;
             this.heightResourceId = heightResourceId;
             this.textViewableWidthResourceId = textViewableWidthResourceId;
+            this.scrollResourceIds = scrollResourceIds;
         }
     }
 
-    static RemoteViews render(Context context, Class<?> widgetClass, int appWidgetId, FrenchRevolutionaryCalendarDate frenchDate,
-            FrenchCalendarAppWidgetRenderParams params) {
+    static RemoteViews render(Context context, Class<?> widgetClass, int appWidgetId, FrenchCalendarAppWidgetRenderParams params) {
 
+        GregorianCalendar now = new GregorianCalendar();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String methodPrefStr = sharedPreferences.getString(FrenchCalendarPrefs.PREF_METHOD, "0");
+        int mode = Integer.parseInt(methodPrefStr);
+
+        FrenchRevolutionaryCalendar frcal = new FrenchRevolutionaryCalendar(mode);
+        FrenchRevolutionaryCalendarDate frenchDate = frcal.getDate(now);
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(params.layoutResourceId, null, false);
-        view.setBackgroundResource(params.scrollResourceId);
+        view.setBackgroundResource(params.scrollResourceIds[frenchDate.month - 1]);
         int width = context.getResources().getDimensionPixelSize(params.widthResourceId);
         int height = context.getResources().getDimensionPixelSize(params.heightResourceId);
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
