@@ -1,6 +1,6 @@
 package ca.rmen.android.frenchcalendar;
 
-public class Constants {
+class Constants {
 
     static final String TAG = "FrenchCalendar/";
 

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.util.Log;
 
-public class FrenchCalendarPreferenceActivity extends PreferenceActivity {
+public class FrenchCalendarPreferenceActivity extends PreferenceActivity { // NO_UCD (use default)
 
     private static final String TAG = FrenchCalendarPreferenceActivity.class.getSimpleName();
     private int mAppWidgetId = -1;

@@ -1,6 +1,6 @@
 package ca.rmen.android.frenchcalendar;
 
-public class FrenchCalendarPrefs {
+class FrenchCalendarPrefs {
 
     static final String PREF_METHOD = "setting_method";
     static final String PREF_FREQUENCY = "setting_frequency";

@@ -7,7 +7,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 
-public class FrenchCalendarAppWidgetManager {
+class FrenchCalendarAppWidgetManager {
 
     /**
      * @return all the widget ids for both narrow and wide widgets.

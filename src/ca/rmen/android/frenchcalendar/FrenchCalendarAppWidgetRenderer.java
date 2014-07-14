@@ -20,18 +20,18 @@ import android.widget.TextView;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendar;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
-public class FrenchCalendarAppWidgetRenderer {
+class FrenchCalendarAppWidgetRenderer {
     private static final String TAG = Constants.TAG + FrenchCalendarAppWidgetRenderer.class.getSimpleName();
     private static final String FONT_FILE = "Gabrielle.ttf";
 
     static class FrenchCalendarAppWidgetRenderParams {
-        final int layoutResourceId;
-        final int widthResourceId;
-        final int heightResourceId;
-        final int textViewableWidthResourceId;
-        final int[] scrollResourceIds;
+        private final int layoutResourceId;
+        private final int widthResourceId;
+        private final int heightResourceId;
+        private final int textViewableWidthResourceId;
+        private final int[] scrollResourceIds;
 
-        public FrenchCalendarAppWidgetRenderParams(int layoutResourceId, int widthResourceId, int heightResourceId, int textViewableWidthResourceId,
+        FrenchCalendarAppWidgetRenderParams(int layoutResourceId, int widthResourceId, int heightResourceId, int textViewableWidthResourceId,
                 int[] scrollResourceIds) {
             this.layoutResourceId = layoutResourceId;
             this.widthResourceId = widthResourceId;

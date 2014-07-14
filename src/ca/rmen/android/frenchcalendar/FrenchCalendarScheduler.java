@@ -12,9 +12,9 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-public class FrenchCalendarScheduler {
+class FrenchCalendarScheduler {
     private static final String TAG = Constants.TAG + FrenchCalendarScheduler.class.getSimpleName();
-    public static final String BROADCAST_MESSAGE_UPDATE = ".UPDATE_WIDGET";
+    static final String BROADCAST_MESSAGE_UPDATE = ".UPDATE_WIDGET";
     private static final int FREQUENCY_DAYS = 86400000;
 
     private static FrenchCalendarScheduler INSTANCE;
@@ -31,7 +31,7 @@ public class FrenchCalendarScheduler {
         context.getApplicationContext().registerReceiver(screenBroadcastReceiver, filterOff);
     }
 
-    public synchronized static FrenchCalendarScheduler getInstance(Context context) {
+    synchronized static FrenchCalendarScheduler getInstance(Context context) {
         if (INSTANCE == null) INSTANCE = new FrenchCalendarScheduler(context);
         return INSTANCE;
     }
