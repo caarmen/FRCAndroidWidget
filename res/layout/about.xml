@@ -71,7 +71,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dip"
+            android:layout_marginTop="30dip"
             android:paddingLeft="50dip"
             android:text="@string/credits"
             android:textColor="#381f0a"
@@ -94,6 +94,26 @@
             android:paddingLeft="50dip"
             android:paddingRight="50dip"
             android:text="@string/equinox_tool"
+            android:textColor="#381f0a"
+            android:textSize="18dip" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dip"
+            android:paddingLeft="50dip"
+            android:paddingRight="50dip"
+            android:text="@string/github"
+            android:textColor="#381f0a"
+            android:textSize="18dip" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:paddingLeft="50dip"
+            android:paddingRight="50dip"
+            android:text="@string/link_github"
             android:textColor="#381f0a"
             android:textSize="18dip" />
     </LinearLayout>
