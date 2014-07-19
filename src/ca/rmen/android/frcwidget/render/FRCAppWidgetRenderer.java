@@ -27,8 +27,11 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.MeasureSpec;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
@@ -48,8 +51,8 @@ import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 public class FRCAppWidgetRenderer {
     private static final String TAG = Constants.TAG + FRCAppWidgetRenderer.class.getSimpleName();
 
-    public static RemoteViews render(Context context, FRCAppWidgetRenderParams params) {
-        Log.v(TAG, "render");
+    public static RemoteViews render(Context context, FRCAppWidgetRenderParams params, float scaleFactor) {
+        Log.v(TAG, "render: scaleFactor =" + scaleFactor);
 
         // Get the current timestamp in the French revolutionary calendar.
         GregorianCalendar now = new GregorianCalendar();
@@ -64,8 +67,8 @@ public class FRCAppWidgetRenderer {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(params.layoutResourceId, null, false);
         view.setBackgroundResource(params.scrollResourceIds[frenchDate.month - 1]);
-        int width = context.getResources().getDimensionPixelSize(params.widthResourceId);
-        int height = context.getResources().getDimensionPixelSize(params.heightResourceId);
+        int width = (int) (scaleFactor * context.getResources().getDimensionPixelSize(params.widthResourceId));
+        int height = (int) (scaleFactor * context.getResources().getDimensionPixelSize(params.heightResourceId));
         Log.v(TAG, "Creating widget of size " + width + "x" + height);
 
         // Set all the text fields for the date
@@ -91,14 +94,18 @@ public class FRCAppWidgetRenderer {
         }
         ((TextView) view.findViewById(R.id.text_time)).setText(timestamp);
 
+        scaleViews(view, scaleFactor);
         Font.applyFont(context, view);
+        int widthSpec = MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY);
+        int heightSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
 
-        view.measure(width, height);
+        view.measure(widthSpec, heightSpec);
         view.layout(0, 0, width - 1, height - 1);
 
         // Just in case the line with the month name is too long for the widget, we'll squeeze it so it fits.
-        squeezeMonthLine(context, view, params.textViewableWidthResourceId);
-        view.measure(width, height);
+        int textViewableWidth = (int) (scaleFactor * context.getResources().getDimensionPixelSize(params.textViewableWidthResourceId));
+        squeezeMonthLine(context, view, textViewableWidth);
+        view.measure(widthSpec, heightSpec);
         view.layout(0, 0, width - 1, height - 1);
 
         // Draw everything to a bitmap.
@@ -113,14 +120,13 @@ public class FRCAppWidgetRenderer {
         return views;
     }
 
-    private static void squeezeMonthLine(Context context, View view, int textViewableWidthResourceId) {
+    private static void squeezeMonthLine(Context context, View view, int textViewableWidth) {
         TextView dateView = (TextView) view.findViewById(R.id.text_dayofmonth);
         TextView monthView = (TextView) view.findViewById(R.id.text_month);
         LinearLayout monthLine = (LinearLayout) monthView.getParent();
         TextView yearView = (TextView) monthLine.findViewById(R.id.text_year);
 
         int textWidth = dateView.getWidth() + monthView.getWidth() + (yearView == null ? 0 : yearView.getWidth());
-        int textViewableWidth = context.getResources().getDimensionPixelSize(textViewableWidthResourceId);
 
         if (textWidth > textViewableWidth) {
             float squeezeFactor = (float) textViewableWidth / textWidth;
@@ -129,6 +135,40 @@ public class FRCAppWidgetRenderer {
             dateView.setTextScaleX(squeezeFactor);
             monthView.setTextScaleX(squeezeFactor);
             if (yearView != null) yearView.setTextScaleX(squeezeFactor);
+        }
+    }
+
+    /**
+     * Rescale the given parent view and all its child views. The following will be rescaled:
+     * 1) text sizes, 2) padding, 3) margins.
+     */
+    private static void scaleViews(View parent, float scaleFactor) {
+
+        // Scale the padding
+        parent.setPadding((int) (parent.getPaddingLeft() * scaleFactor), (int) (parent.getPaddingTop() * scaleFactor),
+                (int) (parent.getPaddingRight() * scaleFactor), (int) (parent.getPaddingBottom() * scaleFactor));
+        // Scale the margins, if any
+        LinearLayout.LayoutParams layoutParams = (android.widget.LinearLayout.LayoutParams) parent.getLayoutParams();
+        if (layoutParams != null) {
+            layoutParams.leftMargin *= scaleFactor;
+            layoutParams.rightMargin *= scaleFactor;
+            layoutParams.bottomMargin *= scaleFactor;
+            layoutParams.topMargin *= scaleFactor;
+            parent.setLayoutParams(layoutParams);
+        }
+        // Scale the text size
+        if (parent instanceof TextView) {
+            TextView textView = (TextView) parent;
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textView.getTextSize() * scaleFactor);
+        }
+        // Scale all child views
+        else if (parent instanceof ViewGroup) {
+            final ViewGroup parentGroup = (ViewGroup) parent;
+            final int childCount = parentGroup.getChildCount();
+            for (int i = 0; i < childCount; i++) {
+                final View v = parentGroup.getChildAt(i);
+                scaleViews(v, scaleFactor);
+            }
         }
     }
 

@@ -19,30 +19,28 @@
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/linearLayout1"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:background="@drawable/vscroll"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:clickable="true"
     android:gravity="center"
-    android:minHeight="@dimen/narrow_widget_height"
-    android:minWidth="@dimen/narrow_widget_width"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/narrow_top_bottom_margin"
+    android:paddingTop="@dimen/narrow_top_bottom_margin" >
 
     <TextView
         android:id="@+id/text_weekday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/narrow_top_bottom_margin"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
         android:textColor="#381f0a"
         android:textSize="@dimen/narrow_weekday_textsize" />
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
         android:orientation="horizontal" >
 
         <TextView
@@ -57,26 +55,25 @@
             android:id="@+id/text_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="@dimen/narrow_right_margin"
             android:textColor="#381f0a"
             android:textSize="@dimen/narrow_month_textsize" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/text_year"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/narrow_year_top_margin"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
         android:textColor="#381f0a"
         android:textSize="@dimen/narrow_year_textsize" />
 
     <TextView
         android:id="@+id/text_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/narrow_top_bottom_margin"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
         android:textColor="#381f0a"
         android:textSize="@dimen/narrow_time_textsize" />
 

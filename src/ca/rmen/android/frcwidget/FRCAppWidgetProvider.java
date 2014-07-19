@@ -28,6 +28,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
@@ -36,6 +37,7 @@ import ca.rmen.android.frcwidget.prefs.FRCPreferenceActivity;
 import ca.rmen.android.frcwidget.render.FRCAppWidgetRenderParams;
 import ca.rmen.android.frcwidget.render.FRCAppWidgetRenderParamsFactory;
 import ca.rmen.android.frcwidget.render.FRCAppWidgetRenderer;
+import ca.rmen.android.frcwidget.render.FRCRenderApi16;
 import ca.rmen.android.frenchcalendar.R;
 
 /**
@@ -104,7 +106,9 @@ public abstract class FRCAppWidgetProvider extends AppWidgetProvider {
     private void update(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         Log.v(TAG, "update: appWidgetId = " + appWidgetId);
         FRCAppWidgetRenderParams renderParams = FRCAppWidgetRenderParamsFactory.getRenderParams(getWidgetType());
-        RemoteViews views = FRCAppWidgetRenderer.render(context, renderParams);
+        float scaleFactor = 1.0f;
+        if (Build.VERSION.SDK_INT >= 16) scaleFactor = FRCRenderApi16.getScaleFactor(context, appWidgetManager, appWidgetId, renderParams);
+        RemoteViews views = FRCAppWidgetRenderer.render(context, renderParams, scaleFactor);
 
         Intent intent = new Intent(context, FRCPreferenceActivity.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -117,14 +121,14 @@ public abstract class FRCAppWidgetProvider extends AppWidgetProvider {
 
     protected abstract WidgetType getWidgetType();
 
-    public static class FRCAppWidgetNarrow extends FRCAppWidgetProvider {
+    public static class FRCAppWidgetNarrow extends FRCAppWidgetProvider { // NO_UCD (use default)
         @Override
         protected WidgetType getWidgetType() {
             return WidgetType.NARROW;
         }
     }
 
-    public static class FRCAppWidgetWide extends FRCAppWidgetProvider {
+    public static class FRCAppWidgetWide extends FRCAppWidgetProvider { // NO_UCD (use default)
         @Override
         protected WidgetType getWidgetType() {
             return WidgetType.WIDE;

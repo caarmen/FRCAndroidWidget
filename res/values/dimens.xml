@@ -22,21 +22,22 @@
     <dimen name="wide_widget_width">250dp</dimen>
     <dimen name="wide_widget_text_width">200dp</dimen>
     <dimen name="wide_widget_height">140dp</dimen>
-    <dimen name="wide_weekday_textsize">40sp</dimen>
-    <dimen name="wide_month_textsize">35sp</dimen>
-    <dimen name="wide_time_textsize">40sp</dimen>
-    <dimen name="wide_top_bottom_margin">-3dp</dimen>
-    <dimen name="wide_right_margin">4dp</dimen>
+    <dimen name="wide_weekday_textsize">31sp</dimen>
+    <dimen name="wide_month_textsize">32sp</dimen>
+    <dimen name="wide_time_textsize">31sp</dimen>
+    <dimen name="wide_left_right_margin">4dp</dimen>
+    <dimen name="wide_top_margin">16dp</dimen>
+    <dimen name="wide_bottom_margin">20dp</dimen>
+    <dimen name="wide_right_margin">8dp</dimen>
 
     <dimen name="narrow_widget_width">80dp</dimen>
     <dimen name="narrow_widget_text_width">60dp</dimen>
     <dimen name="narrow_widget_height">100dp</dimen>
-    <dimen name="narrow_weekday_textsize">24sp</dimen>
+    <dimen name="narrow_weekday_textsize">20sp</dimen>
     <dimen name="narrow_month_textsize">17sp</dimen>
     <dimen name="narrow_year_textsize">19sp</dimen>
     <dimen name="narrow_time_textsize">17sp</dimen>
-    <dimen name="narrow_top_bottom_margin">-4dp</dimen>
+    <dimen name="narrow_top_bottom_margin">8dp</dimen>
     <dimen name="narrow_right_margin">4dp</dimen>
-    <dimen name="narrow_year_top_margin">-3dp</dimen>
 
 </resources>
