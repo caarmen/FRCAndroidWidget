@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package ca.rmen.android.frenchcalendar.render;
+package ca.rmen.android.frcwidget.render;
 
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -32,9 +32,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
-import ca.rmen.android.frenchcalendar.Constants;
+import ca.rmen.android.frcwidget.Constants;
+import ca.rmen.android.frcwidget.prefs.FRCPreferences;
 import ca.rmen.android.frenchcalendar.R;
-import ca.rmen.android.frenchcalendar.prefs.FRCPreferences;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendar;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendar.CalculationMethod;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;

@@ -16,14 +16,20 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package ca.rmen.android.frenchcalendar;
+package ca.rmen.android.frcwidget.render;
 
-public class Constants {
+public class FRCAppWidgetRenderParams {
+    final int layoutResourceId;
+    final int widthResourceId;
+    final int heightResourceId;
+    final int textViewableWidthResourceId;
+    final int[] scrollResourceIds;
 
-    public static final String TAG = "FrenchCalendar/";
-
-    public enum WidgetType {
-        NARROW, WIDE
+    FRCAppWidgetRenderParams(int layoutResourceId, int widthResourceId, int heightResourceId, int textViewableWidthResourceId, int[] scrollResourceIds) {
+        this.layoutResourceId = layoutResourceId;
+        this.widthResourceId = widthResourceId;
+        this.heightResourceId = heightResourceId;
+        this.textViewableWidthResourceId = textViewableWidthResourceId;
+        this.scrollResourceIds = scrollResourceIds;
     }
-
 }

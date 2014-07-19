@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package ca.rmen.android.frenchcalendar;
+package ca.rmen.android.frcwidget;
 
 import java.util.Calendar;
 
@@ -30,7 +30,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import ca.rmen.android.frenchcalendar.prefs.FRCPreferences;
+import ca.rmen.android.frcwidget.prefs.FRCPreferences;
 
 /**
  * 
@@ -44,7 +44,7 @@ import ca.rmen.android.frenchcalendar.prefs.FRCPreferences;
  */
 public class FRCScheduler {
     private static final String TAG = Constants.TAG + FRCScheduler.class.getSimpleName();
-    static final String BROADCAST_MESSAGE_UPDATE = ".UPDATE_WIDGET";
+    static final String BROADCAST_MESSAGE_UPDATE = "ca.rmen.android.frcwidget.UPDATE_WIDGET";
 
     private static FRCScheduler INSTANCE;
     private final Context context;
@@ -52,7 +52,7 @@ public class FRCScheduler {
 
     private FRCScheduler(Context context) {
         this.context = context.getApplicationContext();
-        Intent updateIntent = new Intent(context.getPackageName() + BROADCAST_MESSAGE_UPDATE);
+        Intent updateIntent = new Intent(BROADCAST_MESSAGE_UPDATE);
         updatePendingIntent = PendingIntent.getBroadcast(context, 0, updateIntent, 0);
         IntentFilter filterOn = new IntentFilter(Intent.ACTION_SCREEN_ON);
         IntentFilter filterOff = new IntentFilter(Intent.ACTION_SCREEN_OFF);
@@ -92,7 +92,7 @@ public class FRCScheduler {
         mgr.setRepeating(AlarmManager.RTC, nextAlarmTime, frequency, updatePendingIntent);
 
         // Also send a broadcast to force an update now.
-        Intent updateIntent = new Intent(context.getPackageName() + BROADCAST_MESSAGE_UPDATE);
+        Intent updateIntent = new Intent(BROADCAST_MESSAGE_UPDATE);
         context.sendBroadcast(updateIntent);
 
         Log.v(TAG, "Started updater");

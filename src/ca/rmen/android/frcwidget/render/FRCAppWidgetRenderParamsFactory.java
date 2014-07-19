@@ -16,9 +16,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package ca.rmen.android.frenchcalendar.render;
+package ca.rmen.android.frcwidget.render;
 
-import ca.rmen.android.frenchcalendar.Constants.WidgetType;
+import ca.rmen.android.frcwidget.Constants.WidgetType;
 import ca.rmen.android.frenchcalendar.R;
 
 /**
@@ -40,11 +40,11 @@ public class FRCAppWidgetRenderParamsFactory {
         switch (widgetType) {
             case WIDE:
                 return new FRCAppWidgetRenderParams(R.layout.appwidget_wide, R.dimen.wide_widget_width, R.dimen.wide_widget_height,
-                        R.dimen.wide_widget_text_width, NARROW_SCROLL_RESOURCE_IDS);
+                        R.dimen.wide_widget_text_width, WIDE_SCROLL_RESOURCE_IDS);
             case NARROW:
             default:
                 return new FRCAppWidgetRenderParams(R.layout.appwidget, R.dimen.narrow_widget_width, R.dimen.narrow_widget_height,
-                        R.dimen.narrow_widget_text_width, WIDE_SCROLL_RESOURCE_IDS);
+                        R.dimen.narrow_widget_text_width, NARROW_SCROLL_RESOURCE_IDS);
         }
     }
 

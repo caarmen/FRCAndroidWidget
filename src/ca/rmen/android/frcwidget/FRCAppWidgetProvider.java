@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package ca.rmen.android.frenchcalendar;
+package ca.rmen.android.frcwidget;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -29,11 +29,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.RemoteViews;
-import ca.rmen.android.frenchcalendar.Constants.WidgetType;
-import ca.rmen.android.frenchcalendar.prefs.FRCPreferenceActivity;
-import ca.rmen.android.frenchcalendar.render.FRCAppWidgetRenderParams;
-import ca.rmen.android.frenchcalendar.render.FRCAppWidgetRenderParamsFactory;
-import ca.rmen.android.frenchcalendar.render.FRCAppWidgetRenderer;
+import ca.rmen.android.frcwidget.Constants.WidgetType;
+import ca.rmen.android.frcwidget.prefs.FRCPreferenceActivity;
+import ca.rmen.android.frcwidget.render.FRCAppWidgetRenderParams;
+import ca.rmen.android.frcwidget.render.FRCAppWidgetRenderParamsFactory;
+import ca.rmen.android.frcwidget.render.FRCAppWidgetRenderer;
+import ca.rmen.android.frenchcalendar.R;
 
 /**
  * Receiver and AppWidgetProvider which updates a list of wide widgets or a list of narrow widgets.
@@ -49,7 +50,7 @@ import ca.rmen.android.frenchcalendar.render.FRCAppWidgetRenderer;
  * These receivers are also notified by the alarm set up by {@link FRCScheduler}, which will
  * go off either once a minute, or once a day, depending on the preferences.
  */
-abstract class FRCAppWidget extends AppWidgetProvider {
+public abstract class FRCAppWidgetProvider extends AppWidgetProvider {
 
     private final String TAG = Constants.TAG + getClass().getSimpleName();
 
@@ -59,7 +60,7 @@ abstract class FRCAppWidget extends AppWidgetProvider {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         ComponentName provider = intent.getComponent();
         final int[] appWidgetIds = appWidgetManager.getAppWidgetIds(provider);
-        if ((context.getPackageName() + FRCScheduler.BROADCAST_MESSAGE_UPDATE).equals(intent.getAction())) {
+        if (FRCScheduler.BROADCAST_MESSAGE_UPDATE.equals(intent.getAction())) {
             Set<Integer> allAppWidgetIds = FRCAppWidgetManager.getAllAppWidgetIds(context);
             if (allAppWidgetIds.size() == 0) FRCScheduler.getInstance(context).cancel();
             else
@@ -106,14 +107,14 @@ abstract class FRCAppWidget extends AppWidgetProvider {
 
     protected abstract WidgetType getWidgetType();
 
-    public static class FRCAppWidgetNarrow extends FRCAppWidget {
+    public static class FRCAppWidgetNarrow extends FRCAppWidgetProvider {
         @Override
         protected WidgetType getWidgetType() {
             return WidgetType.NARROW;
         }
     }
 
-    public static class FRCAppWidgetWide extends FRCAppWidget {
+    public static class FRCAppWidgetWide extends FRCAppWidgetProvider {
         @Override
         protected WidgetType getWidgetType() {
             return WidgetType.WIDE;

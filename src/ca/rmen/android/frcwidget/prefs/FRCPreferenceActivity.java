@@ -16,14 +16,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package ca.rmen.android.frenchcalendar.prefs;
+package ca.rmen.android.frcwidget.prefs;
 
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.util.Log;
-import ca.rmen.android.frenchcalendar.FRCScheduler;
+import ca.rmen.android.frcwidget.FRCScheduler;
 import ca.rmen.android.frenchcalendar.R;
 
 /**

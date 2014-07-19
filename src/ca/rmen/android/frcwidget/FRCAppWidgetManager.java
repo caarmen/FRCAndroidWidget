@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package ca.rmen.android.frenchcalendar;
+package ca.rmen.android.frcwidget;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,8 +24,8 @@ import java.util.Set;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
-import ca.rmen.android.frenchcalendar.FRCAppWidget.FRCAppWidgetNarrow;
-import ca.rmen.android.frenchcalendar.FRCAppWidget.FRCAppWidgetWide;
+import ca.rmen.android.frcwidget.FRCAppWidgetProvider.FRCAppWidgetNarrow;
+import ca.rmen.android.frcwidget.FRCAppWidgetProvider.FRCAppWidgetWide;
 
 class FRCAppWidgetManager {
 

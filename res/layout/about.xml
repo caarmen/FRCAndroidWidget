@@ -39,15 +39,15 @@
             android:gravity="center_horizontal"
             android:text="@string/app_full_name"
             android:textColor="#381f0a"
-            android:textSize="38dip" />
+            android:textSize="38sp" />
 
         <TextView
+            android:id="@+id/tv_app_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/app_version"
             android:textColor="#381f0a"
-            android:textSize="22dip" />
+            android:textSize="22sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -56,7 +56,7 @@
             android:autoLink="email"
             android:text="@string/author"
             android:textColor="#381f0a"
-            android:textSize="22dip" />
+            android:textSize="22sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
             android:paddingRight="50dip"
             android:text="@string/description"
             android:textColor="#381f0a"
-            android:textSize="18dip" />
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -75,7 +75,7 @@
             android:paddingLeft="50dip"
             android:text="@string/credits"
             android:textColor="#381f0a"
-            android:textSize="18dip" />
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -85,7 +85,7 @@
             android:paddingRight="50dip"
             android:text="@string/wikipedia"
             android:textColor="#381f0a"
-            android:textSize="18dip" />
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -95,7 +95,7 @@
             android:paddingRight="50dip"
             android:text="@string/equinox_tool"
             android:textColor="#381f0a"
-            android:textSize="18dip" />
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -105,7 +105,7 @@
             android:paddingRight="50dip"
             android:text="@string/github"
             android:textColor="#381f0a"
-            android:textSize="18dip" />
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -115,7 +115,7 @@
             android:paddingRight="50dip"
             android:text="@string/link_github"
             android:textColor="#381f0a"
-            android:textSize="18dip" />
+            android:textSize="18sp" />
     </LinearLayout>
 
 </ScrollView>

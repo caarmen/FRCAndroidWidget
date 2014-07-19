@@ -20,7 +20,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ca.rmen.android.frenchcalendar"
     android:versionCode="105"
-    android:versionName="@string/app_version" >
+    android:versionName="1.0.5" >
 
     <uses-sdk
         android:minSdkVersion="4"
@@ -36,7 +36,7 @@
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name" >
-        <activity android:name="ca.rmen.android.frenchcalendar.prefs.FRCPreferenceActivity" >
+        <activity android:name="ca.rmen.android.frcwidget.prefs.FRCPreferenceActivity" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
@@ -46,22 +46,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FRCAboutActivity" >
+        <activity android:name="ca.rmen.android.frcwidget.FRCAboutActivity" >
             <intent-filter>
-                <action android:name="ca.rmen.android.frenchcalendar.FRCAboutActivity" />
+                <action android:name="ca.rmen.android.frcwidget.FRCAboutActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
         <receiver
-            android:name="ca.rmen.android.frenchcalendar.FRCAppWidget$FRCAppWidgetNarrow"
+            android:name="ca.rmen.android.frcwidget.FRCAppWidgetProvider$FRCAppWidgetNarrow"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <intent-filter>
-                <action android:name="ca.rmen.android.frenchcalendar.UPDATE_WIDGET" />
+                <action android:name="ca.rmen.android.frcwidget.UPDATE_WIDGET" />
             </intent-filter>
 
             <meta-data
@@ -69,13 +69,13 @@
                 android:resource="@xml/appwidget" />
         </receiver>
         <receiver
-            android:name="ca.rmen.android.frenchcalendar.FRCAppWidget$FRCAppWidgetWide"
+            android:name="ca.rmen.android.frcwidget.FRCAppWidgetProvider$FRCAppWidgetWide"
             android:label="@string/app_name_wide" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <intent-filter>
-                <action android:name="ca.rmen.android.frenchcalendar.UPDATE_WIDGET" />
+                <action android:name="ca.rmen.android.frcwidget.UPDATE_WIDGET" />
             </intent-filter>
 
             <meta-data
