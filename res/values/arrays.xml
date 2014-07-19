@@ -24,7 +24,7 @@
         <item>Equinox</item>
         <item>Romme</item>
     </string-array>
-    <string-array name="setting_method_values">
+    <string-array name="setting_method_values" translatable="false">
         <item>0</item>
         <item>1</item>
     </string-array>
@@ -34,7 +34,7 @@
         <item>Every minute</item>
         <item>Once a day</item>
     </string-array>
-    <string-array name="setting_frequency_values">
+    <string-array name="setting_frequency_values" translatable="false">
 
         <!-- <item>864</item> -->
         <item>86400</item>
