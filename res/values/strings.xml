@@ -20,8 +20,9 @@
 <resources>
 
     <string name="app_name">French Calendar</string>
-    <string name="app_name_wide">French Calendar (wide)</string>
-    <string name="app_full_name">French Republican Calendar</string>
+    <string name="app_name_wide">French Calendar (horizontal)</string>
+    <string name="app_name_narrow">French Calendar (vertical)</string>
+    <string name="app_full_name">French Calendar</string>
     <string name="author" translatable="false">Carmen Alvarez (c@rmen.ca)</string>
     <string name="description">Widget which displays the current date and time in the French Republican Calendar.</string>
     <string name="credits">Credits:</string>

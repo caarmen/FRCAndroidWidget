@@ -66,6 +66,7 @@ public class FRCAppWidgetRenderer {
         view.setBackgroundResource(params.scrollResourceIds[frenchDate.month - 1]);
         int width = context.getResources().getDimensionPixelSize(params.widthResourceId);
         int height = context.getResources().getDimensionPixelSize(params.heightResourceId);
+        Log.v(TAG, "Creating widget of size " + width + "x" + height);
 
         // Set all the text fields for the date
         ((TextView) view.findViewById(R.id.text_year)).setText(String.valueOf(frenchDate.year));

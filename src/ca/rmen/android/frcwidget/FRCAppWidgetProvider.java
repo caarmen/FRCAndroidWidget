@@ -21,12 +21,14 @@ package ca.rmen.android.frcwidget;
 import java.util.Arrays;
 import java.util.Set;
 
+import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 import ca.rmen.android.frcwidget.Constants.WidgetType;
@@ -67,6 +69,14 @@ public abstract class FRCAppWidgetProvider extends AppWidgetProvider {
                 updateAll(context, appWidgetManager, appWidgetIds);
         }
         super.onReceive(context, intent);
+    }
+
+    @Override
+    @TargetApi(16)
+    public void onAppWidgetOptionsChanged(Context context, AppWidgetManager appWidgetManager, int appWidgetId, Bundle newOptions) {
+        newOptions.isEmpty();
+        Log.v(TAG, "onAppWidgetOptionsChanged: appWidgetId  " + appWidgetId + ", newOptions = " + newOptions);
+        update(context, appWidgetManager, appWidgetId);
     }
 
     /**

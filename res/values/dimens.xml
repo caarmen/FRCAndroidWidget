@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  French Revolutionary Calendar Android Widget
+  Copyright (C) 2011 - 2014 Carmen Alvarez
+  
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+-->
+<resources>
+
+    <dimen name="wide_widget_width">250dp</dimen>
+    <dimen name="wide_widget_text_width">200dp</dimen>
+    <dimen name="wide_widget_height">140dp</dimen>
+    <dimen name="wide_weekday_textsize">40sp</dimen>
+    <dimen name="wide_month_textsize">35sp</dimen>
+    <dimen name="wide_time_textsize">40sp</dimen>
+    <dimen name="wide_top_bottom_margin">-3dp</dimen>
+    <dimen name="wide_right_margin">4dp</dimen>
+
+    <dimen name="narrow_widget_width">80dp</dimen>
+    <dimen name="narrow_widget_text_width">60dp</dimen>
+    <dimen name="narrow_widget_height">100dp</dimen>
+    <dimen name="narrow_weekday_textsize">24sp</dimen>
+    <dimen name="narrow_month_textsize">17sp</dimen>
+    <dimen name="narrow_year_textsize">19sp</dimen>
+    <dimen name="narrow_time_textsize">17sp</dimen>
+    <dimen name="narrow_top_bottom_margin">-4dp</dimen>
+    <dimen name="narrow_right_margin">4dp</dimen>
+    <dimen name="narrow_year_top_margin">-3dp</dimen>
+
+</resources>
