@@ -43,7 +43,7 @@ public class FRCAppWidgetRenderParamsFactory {
                         R.dimen.wide_widget_text_width, WIDE_SCROLL_RESOURCE_IDS);
             case NARROW:
             default:
-                return new FRCAppWidgetRenderParams(R.layout.appwidget, R.dimen.narrow_widget_width, R.dimen.narrow_widget_height,
+                return new FRCAppWidgetRenderParams(R.layout.appwidget_narrow, R.dimen.narrow_widget_width, R.dimen.narrow_widget_height,
                         R.dimen.narrow_widget_text_width, NARROW_SCROLL_RESOURCE_IDS);
         }
     }

@@ -67,7 +67,7 @@
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/appwidget" />
+                android:resource="@xml/appwidget_narrow" />
         </receiver>
         <receiver
             android:name="ca.rmen.android.frcwidget.FRCAppWidgetProvider$FRCAppWidgetWide"
