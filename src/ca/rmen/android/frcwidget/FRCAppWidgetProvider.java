@@ -121,17 +121,4 @@ public abstract class FRCAppWidgetProvider extends AppWidgetProvider {
 
     protected abstract WidgetType getWidgetType();
 
-    public static class FRCAppWidgetNarrow extends FRCAppWidgetProvider { // NO_UCD (use default)
-        @Override
-        protected WidgetType getWidgetType() {
-            return WidgetType.NARROW;
-        }
-    }
-
-    public static class FRCAppWidgetWide extends FRCAppWidgetProvider { // NO_UCD (use default)
-        @Override
-        protected WidgetType getWidgetType() {
-            return WidgetType.WIDE;
-        }
-    }
 }
