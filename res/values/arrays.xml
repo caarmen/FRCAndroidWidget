@@ -45,10 +45,14 @@
     <string-array name="setting_language_labels" translatable="false">
         <item>Français</item>
         <item>English (day of year only)</item>
+        <item>Español</item>
+        <item>Català</item>
     </string-array>
     <string-array name="setting_language_values" translatable="false">
         <item>fr</item>
         <item>en</item>
+        <item>es</item>
+        <item>ca</item>
     </string-array>
 
 </resources>
