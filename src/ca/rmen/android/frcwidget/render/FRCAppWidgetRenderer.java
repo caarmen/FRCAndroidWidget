@@ -78,19 +78,19 @@ public class FRCAppWidgetRenderer {
         ((TextView) view.findViewById(R.id.text_month)).setText(frenchDate.getMonthName());
 
         // Set the text fields for the time.
-        String frequencyPrefStr = sharedPreferences.getString(FRCPreferences.PREF_FREQUENCY, FRCPreferences.FREQUENCY_MINUTES);
+        String detailedViewValue = sharedPreferences.getString(FRCPreferences.PREF_DETAILED_VIEW, FRCPreferences.PREF_VALUE_DETAILED_VIEW_DAY_OF_YEAR);
 
         String timestamp = null;
         TextView timeView = (TextView) view.findViewById(R.id.text_time);
-        if (FRCPreferences.FREQUENCY_SECONDS.equals(frequencyPrefStr)) {
-            timeView.setVisibility(View.VISIBLE);
-            timestamp = String.format(Locale.US, "%d:%02d:%02d", frenchDate.hour, frenchDate.minute, frenchDate.second);
-        } else if (FRCPreferences.FREQUENCY_MINUTES.equals(frequencyPrefStr)) {
-            timeView.setVisibility(View.VISIBLE);
-            timestamp = String.format(Locale.US, "%d:%02d", frenchDate.hour, frenchDate.minute);
-        } else {
+        if (FRCPreferences.PREF_VALUE_DETAILED_VIEW_NONE.equals(detailedViewValue)) {
             timeView.setVisibility(View.GONE);
             timestamp = "";
+        } else {
+            timeView.setVisibility(View.VISIBLE);
+            if (FRCPreferences.PREF_VALUE_DETAILED_VIEW_TIME.equals(detailedViewValue)) timestamp = String.format(Locale.US, "%d:%02d", frenchDate.hour,
+                    frenchDate.minute);
+            else
+                timestamp = frenchDate.getDayOfYear();
         }
         ((TextView) view.findViewById(R.id.text_time)).setText(timestamp);
 
@@ -105,6 +105,7 @@ public class FRCAppWidgetRenderer {
         // Just in case the line with the month name is too long for the widget, we'll squeeze it so it fits.
         int textViewableWidth = (int) (scaleFactor * context.getResources().getDimensionPixelSize(params.textViewableWidthResourceId));
         squeezeMonthLine(context, view, textViewableWidth);
+        squeezeTextView(context, timeView, textViewableWidth);
         view.measure(widthSpec, heightSpec);
         view.layout(0, 0, width - 1, height - 1);
 
@@ -135,6 +136,14 @@ public class FRCAppWidgetRenderer {
             dateView.setTextScaleX(squeezeFactor);
             monthView.setTextScaleX(squeezeFactor);
             if (yearView != null) yearView.setTextScaleX(squeezeFactor);
+        }
+    }
+
+    private static void squeezeTextView(Context context, TextView view, int textViewableWidth) {
+        int textWidth = view.getWidth();
+        if (textWidth > textViewableWidth) {
+            float squeezeFactor = (float) textViewableWidth / textWidth;
+            view.setTextScaleX(squeezeFactor);
         }
     }
 

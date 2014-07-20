@@ -28,17 +28,19 @@
         <item>0</item>
         <item>1</item>
     </string-array>
-    <string-array name="setting_frequency_labels">
+    <string-array name="setting_detailed_view_labels">
 
         <!-- <item>Every second (drains battery!)</item> -->
-        <item>Every minute</item>
-        <item>Once a day</item>
+        <item>None</item>
+        <item>Time (decimal clock)</item>
+        <item>Day of the year</item>
     </string-array>
-    <string-array name="setting_frequency_values" translatable="false">
+    <string-array name="setting_detailed_view_values" translatable="false">
 
         <!-- <item>864</item> -->
-        <item>86400</item>
-        <item>86400000</item>
+        <item>none</item>
+        <item>time</item>
+        <item>day_of_year</item>
     </string-array>
 
 </resources>

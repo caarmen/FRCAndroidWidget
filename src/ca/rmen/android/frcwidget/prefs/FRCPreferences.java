@@ -26,9 +26,12 @@ package ca.rmen.android.frcwidget.prefs;
 public class FRCPreferences {
 
     public static final String PREF_METHOD = "setting_method";
-    public static final String PREF_FREQUENCY = "setting_frequency";
-    public static final String FREQUENCY_SECONDS = "864";
-    public static final String FREQUENCY_MINUTES = "86400";
+    public static final String PREF_DETAILED_VIEW = "setting_detailed_view";
+    public static final String PREF_VALUE_DETAILED_VIEW_NONE = "none";
+    public static final String PREF_VALUE_DETAILED_VIEW_TIME = "time";
+    public static final String PREF_VALUE_DETAILED_VIEW_DAY_OF_YEAR = "day_of_year";
+    public static final int FREQUENCY_SECONDS = 86;
+    public static final int FREQUENCY_MINUTES = 86400;
     public static final int FREQUENCY_DAYS = 86400000;
 
 }

@@ -30,13 +30,12 @@
         android:summary="@string/setting_method_summary"
         android:title="@string/setting_method" />
     <ListPreference
-        android:defaultValue="86400"
-        android:dialogTitle="@string/setting_frequency"
-        android:entries="@array/setting_frequency_labels"
-        android:entryValues="@array/setting_frequency_values"
-        android:key="setting_frequency"
-        android:summary="@string/setting_frequency_summary"
-        android:title="@string/setting_frequency" />
+        android:defaultValue="day_of_year"
+        android:dialogTitle="@string/setting_detailed_view"
+        android:entries="@array/setting_detailed_view_labels"
+        android:entryValues="@array/setting_detailed_view_values"
+        android:key="setting_detailed_view"
+        android:title="@string/setting_detailed_view" />
 
     <Preference android:title="@string/about" >
         <intent android:action="ca.rmen.android.frcwidget.FRCAboutActivity" />

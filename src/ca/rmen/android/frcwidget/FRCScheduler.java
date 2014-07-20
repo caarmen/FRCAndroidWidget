@@ -71,9 +71,12 @@ public class FRCScheduler {
     public void schedule() {
         Log.v(TAG, "schedule");
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        String frequencyPrefStr = sharedPreferences.getString(FRCPreferences.PREF_FREQUENCY, FRCPreferences.FREQUENCY_MINUTES);
+        String detailedViewValue = sharedPreferences.getString(FRCPreferences.PREF_DETAILED_VIEW, FRCPreferences.PREF_VALUE_DETAILED_VIEW_DAY_OF_YEAR);
+        final int frequency;
+        if (FRCPreferences.PREF_VALUE_DETAILED_VIEW_TIME.equals(detailedViewValue)) frequency = FRCPreferences.FREQUENCY_MINUTES;
+        else
+            frequency = FRCPreferences.FREQUENCY_DAYS;
 
-        int frequency = Integer.parseInt(frequencyPrefStr);
         Log.v(TAG, "Start alarm with frequency " + frequency);
         // If we show the time, we will update the widget every decimal "minute" (86.4 Gregorian seconds) starting 
         // one decimal "minute" from now.

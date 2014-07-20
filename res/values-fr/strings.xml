@@ -32,8 +32,8 @@
     <string name="widget_settings">Configuration du calendrier</string>
     <string name="setting_method">Methode de calcul</string>
     <string name="setting_method_summary">Comment le premier jour de l\'année est déterminé</string>
-    <string name="setting_frequency">Fréquence des mises à jour</string>
-    <string name="setting_frequency_summary">Fréquence des mises à jour du widget</string>
+    <string name="setting_detailed_view">Vue détaillée</string>
+    <string name="setting_detailed_view_summary">%s</string>
     <string name="about">À propos</string>
 
 </resources>

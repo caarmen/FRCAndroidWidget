@@ -24,11 +24,12 @@
         <item>Equinox</item>
         <item>Romme</item>
     </string-array>
-    <string-array name="setting_frequency_labels">
+    <string-array name="setting_detailed_view_labels">
 
         <!-- item>Chaque seconde (consomme de la batterie !)</item> -->
-        <item>Chaque minute</item>
-        <item>Une fois par jour</item>
+        <item>Aucun</item>
+        <item>Heure (temps décimal)</item>
+        <item>Nom du jour de l\'année</item>
     </string-array>
 
 </resources>

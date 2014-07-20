@@ -20,8 +20,12 @@ package ca.rmen.android.frcwidget.prefs;
 
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import ca.rmen.android.frcwidget.FRCScheduler;
 import ca.rmen.android.frenchcalendar.R;
@@ -41,6 +45,9 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         Log.v(TAG, "onCreate: bundle = " + icicle);
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.widget_settings);
+
+        updatePreferenceSummary(FRCPreferences.PREF_METHOD, R.string.setting_method_summary);
+        updatePreferenceSummary(FRCPreferences.PREF_DETAILED_VIEW, R.string.setting_detailed_view_summary);
         /*
          * From the documentation: https://developer.android.com/guide/topics/appwidgets/index.html
          * The App Widget host calls the configuration Activity and the configuration
@@ -56,6 +63,25 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         setResult(RESULT_OK, resultValue);
     }
 
+    private void updatePreferenceSummary(String key, int summaryResId) {
+        @SuppressWarnings("deprecation")
+        ListPreference pref = (ListPreference) getPreferenceManager().findPreference(key);
+        String summary = getString(summaryResId, pref.getEntry());
+        pref.setSummary(summary);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
+    }
+
+    @Override
+    protected void onStop() {
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
+        super.onStop();
+    }
+
     @Override
     protected void onDestroy() {
         Log.v(TAG, "onDestroy");
@@ -63,4 +89,16 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         // When we leave the preference screen, reupdate all our widgets
         FRCScheduler.getInstance(this).schedule();
     }
+
+    private final OnSharedPreferenceChangeListener mOnSharedPreferenceChangeListener = new OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            if (FRCPreferences.PREF_METHOD.equals(key)) {
+                updatePreferenceSummary(key, R.string.setting_method_summary);
+            } else if (FRCPreferences.PREF_DETAILED_VIEW.equals(key)) {
+                updatePreferenceSummary(key, R.string.setting_detailed_view_summary);
+            }
+        }
+    };
+
 }
