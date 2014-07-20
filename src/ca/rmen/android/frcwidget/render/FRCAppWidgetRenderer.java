@@ -22,10 +22,8 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -37,6 +35,7 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 import ca.rmen.android.frcwidget.Constants;
 import ca.rmen.android.frcwidget.prefs.FRCPreferences;
+import ca.rmen.android.frcwidget.prefs.FRCPreferences.DetailedView;
 import ca.rmen.android.frenchcalendar.R;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendar;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendar.CalculationMethod;
@@ -56,11 +55,9 @@ public class FRCAppWidgetRenderer {
 
         // Get the current timestamp in the French revolutionary calendar.
         GregorianCalendar now = new GregorianCalendar();
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        String methodPrefStr = sharedPreferences.getString(FRCPreferences.PREF_METHOD, "0");
-        int calculationMethodInt = Integer.parseInt(methodPrefStr);
-        CalculationMethod calculationMethod = CalculationMethod.values()[calculationMethodInt];
-        FrenchRevolutionaryCalendar frcal = new FrenchRevolutionaryCalendar(calculationMethod);
+        Locale locale = FRCPreferences.getInstance(context).getLocale();
+        CalculationMethod calculationMethod = FRCPreferences.getInstance(context).getCalculationMethod();
+        FrenchRevolutionaryCalendar frcal = new FrenchRevolutionaryCalendar(locale, calculationMethod);
         FrenchRevolutionaryCalendarDate frenchDate = frcal.getDate(now);
 
         // Create a view with the right scroll image as the background.
@@ -78,17 +75,17 @@ public class FRCAppWidgetRenderer {
         ((TextView) view.findViewById(R.id.text_month)).setText(frenchDate.getMonthName());
 
         // Set the text fields for the time.
-        String detailedViewValue = sharedPreferences.getString(FRCPreferences.PREF_DETAILED_VIEW, FRCPreferences.PREF_VALUE_DETAILED_VIEW_DAY_OF_YEAR);
 
         String timestamp = null;
+        DetailedView detailedView = FRCPreferences.getInstance(context).getDetailedView();
+
         TextView timeView = (TextView) view.findViewById(R.id.text_time);
-        if (FRCPreferences.PREF_VALUE_DETAILED_VIEW_NONE.equals(detailedViewValue)) {
+        if (detailedView == DetailedView.NONE) {
             timeView.setVisibility(View.GONE);
             timestamp = "";
         } else {
             timeView.setVisibility(View.VISIBLE);
-            if (FRCPreferences.PREF_VALUE_DETAILED_VIEW_TIME.equals(detailedViewValue)) timestamp = String.format(Locale.US, "%d:%02d", frenchDate.hour,
-                    frenchDate.minute);
+            if (detailedView == DetailedView.TIME) timestamp = String.format(Locale.US, "%d:%02d", frenchDate.hour, frenchDate.minute);
             else
                 timestamp = frenchDate.getDayOfYear();
         }

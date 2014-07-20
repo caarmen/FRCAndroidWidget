@@ -48,6 +48,7 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
 
         updatePreferenceSummary(FRCPreferences.PREF_METHOD, R.string.setting_method_summary);
         updatePreferenceSummary(FRCPreferences.PREF_DETAILED_VIEW, R.string.setting_detailed_view_summary);
+        updatePreferenceSummary(FRCPreferences.PREF_LANGUAGE, R.string.setting_language_summary);
         /*
          * From the documentation: https://developer.android.com/guide/topics/appwidgets/index.html
          * The App Widget host calls the configuration Activity and the configuration
@@ -97,6 +98,8 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
                 updatePreferenceSummary(key, R.string.setting_method_summary);
             } else if (FRCPreferences.PREF_DETAILED_VIEW.equals(key)) {
                 updatePreferenceSummary(key, R.string.setting_detailed_view_summary);
+            } else if (FRCPreferences.PREF_LANGUAGE.equals(key)) {
+                updatePreferenceSummary(key, R.string.setting_language_summary);
             }
         }
     };

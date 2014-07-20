@@ -37,6 +37,14 @@
         android:key="setting_detailed_view"
         android:title="@string/setting_detailed_view" />
 
+    <ListPreference
+        android:defaultValue="fr"
+        android:dialogTitle="@string/setting_language"
+        android:entries="@array/setting_language_labels"
+        android:entryValues="@array/setting_language_values"
+        android:key="setting_language"
+        android:title="@string/setting_language" />
+
     <Preference android:title="@string/about" >
         <intent android:action="ca.rmen.android.frcwidget.FRCAboutActivity" />
     </Preference>

@@ -35,6 +35,8 @@
     <string name="setting_method_summary">How the first day of each year is determined: %s</string>
     <string name="setting_detailed_view">Detailed view</string>
     <string name="setting_detailed_view_summary">%s</string>
+    <string name="setting_language">Language</string>
+    <string name="setting_language_summary">%s</string>
     <string name="about">About</string>
 
 </resources>

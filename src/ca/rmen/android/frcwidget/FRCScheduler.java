@@ -27,8 +27,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import ca.rmen.android.frcwidget.prefs.FRCPreferences;
 
@@ -70,13 +68,8 @@ public class FRCScheduler {
      */
     public void schedule() {
         Log.v(TAG, "schedule");
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        String detailedViewValue = sharedPreferences.getString(FRCPreferences.PREF_DETAILED_VIEW, FRCPreferences.PREF_VALUE_DETAILED_VIEW_DAY_OF_YEAR);
-        final int frequency;
-        if (FRCPreferences.PREF_VALUE_DETAILED_VIEW_TIME.equals(detailedViewValue)) frequency = FRCPreferences.FREQUENCY_MINUTES;
-        else
-            frequency = FRCPreferences.FREQUENCY_DAYS;
 
+        int frequency = FRCPreferences.getInstance(context).getUpdateFrequency();
         Log.v(TAG, "Start alarm with frequency " + frequency);
         // If we show the time, we will update the widget every decimal "minute" (86.4 Gregorian seconds) starting 
         // one decimal "minute" from now.

@@ -20,8 +20,8 @@ package ca.rmen.android.frcwidget.render;
 
 public class FRCAppWidgetRenderParams {
     final int layoutResourceId;
-    public final int widthResourceId;
-    public final int heightResourceId;
+    final int widthResourceId;
+    final int heightResourceId;
     final int textViewableWidthResourceId;
     final int[] scrollResourceIds;
 
