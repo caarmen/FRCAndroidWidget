@@ -20,21 +20,13 @@
 
 <resources>
 
-    <string-array name="setting_method_labels">
-        <item>Equinox</item>
-        <item>Romme</item>
-    </string-array>
-    <string-array name="setting_detailed_view_labels">
-        <item>Aucun</item>
-        <item>Heure (temps décimal)</item>
-        <item>Nom du jour de l\'année</item>
-    </string-array>
-    <string-array name="daily_object_types">
-        <item>La plante</item>
-        <item>L\'animal</item>
-        <item>L\'outil</item>
-        <item>Le minéral</item>
-        <item>Le concept</item>
-    </string-array>
+    <style name="Theme.Transparent" parent="android:Theme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
 
 </resources>

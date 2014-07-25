@@ -29,15 +29,11 @@
         <item>1</item>
     </string-array>
     <string-array name="setting_detailed_view_labels">
-
-        <!-- <item>Every second (drains battery!)</item> -->
         <item>None</item>
         <item>Time (decimal clock)</item>
         <item>Day of the year</item>
     </string-array>
     <string-array name="setting_detailed_view_values" translatable="false">
-
-        <!-- <item>864</item> -->
         <item>none</item>
         <item>time</item>
         <item>day_of_year</item>
@@ -53,6 +49,13 @@
         <item>en</item>
         <item>es</item>
         <item>ca</item>
+    </string-array>
+    <string-array name="daily_object_types">
+        <item>The plant</item>
+        <item>The animal</item>
+        <item>The tool</item>
+        <item>The mineral</item>
+        <item>The concept</item>
     </string-array>
 
 </resources>

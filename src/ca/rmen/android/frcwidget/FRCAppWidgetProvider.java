@@ -33,7 +33,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 import ca.rmen.android.frcwidget.Constants.WidgetType;
-import ca.rmen.android.frcwidget.prefs.FRCPreferenceActivity;
 import ca.rmen.android.frcwidget.render.FRCAppWidgetRenderParams;
 import ca.rmen.android.frcwidget.render.FRCAppWidgetRenderParamsFactory;
 import ca.rmen.android.frcwidget.render.FRCAppWidgetRenderer;
@@ -110,9 +109,7 @@ public abstract class FRCAppWidgetProvider extends AppWidgetProvider {
         if (Build.VERSION.SDK_INT >= 16) scaleFactor = FRCRenderApi16.getScaleFactor(context, appWidgetManager, appWidgetId, renderParams);
         RemoteViews views = FRCAppWidgetRenderer.render(context, renderParams, scaleFactor);
 
-        Intent intent = new Intent(context, FRCPreferenceActivity.class);
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        intent.addCategory(getClass().getName());
+        Intent intent = new Intent(context, FRCPopupActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         views.setOnClickPendingIntent(R.id.imageView1, pendingIntent);

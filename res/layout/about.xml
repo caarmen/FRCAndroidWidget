@@ -38,7 +38,7 @@
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
             android:text="@string/app_full_name"
-            android:textColor="#381f0a"
+            android:textColor="@color/primaryTextColor"
             android:textSize="38sp" />
 
         <TextView
@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textColor="#381f0a"
+            android:textColor="@color/primaryTextColor"
             android:textSize="22sp" />
 
         <TextView
@@ -55,7 +55,7 @@
             android:layout_gravity="center_horizontal"
             android:autoLink="email"
             android:text="@string/author"
-            android:textColor="#381f0a"
+            android:textColor="@color/primaryTextColor"
             android:textSize="22sp" />
 
         <TextView
@@ -65,7 +65,7 @@
             android:paddingLeft="50dip"
             android:paddingRight="50dip"
             android:text="@string/description"
-            android:textColor="#381f0a"
+            android:textColor="@color/primaryTextColor"
             android:textSize="18sp" />
 
         <TextView
@@ -74,7 +74,7 @@
             android:layout_marginTop="30dip"
             android:paddingLeft="50dip"
             android:text="@string/credits"
-            android:textColor="#381f0a"
+            android:textColor="@color/primaryTextColor"
             android:textSize="18sp" />
 
         <TextView
@@ -84,7 +84,7 @@
             android:paddingLeft="50dip"
             android:paddingRight="50dip"
             android:text="@string/wikipedia"
-            android:textColor="#381f0a"
+            android:textColor="@color/primaryTextColor"
             android:textSize="18sp" />
 
         <TextView
@@ -94,7 +94,7 @@
             android:paddingLeft="50dip"
             android:paddingRight="50dip"
             android:text="@string/equinox_tool"
-            android:textColor="#381f0a"
+            android:textColor="@color/primaryTextColor"
             android:textSize="18sp" />
 
         <TextView
@@ -104,7 +104,7 @@
             android:paddingLeft="50dip"
             android:paddingRight="50dip"
             android:text="@string/github"
-            android:textColor="#381f0a"
+            android:textColor="@color/primaryTextColor"
             android:textSize="18sp" />
 
         <TextView
@@ -114,7 +114,7 @@
             android:paddingLeft="50dip"
             android:paddingRight="50dip"
             android:text="@string/link_github"
-            android:textColor="#381f0a"
+            android:textColor="@color/primaryTextColor"
             android:textSize="18sp" />
     </LinearLayout>
 

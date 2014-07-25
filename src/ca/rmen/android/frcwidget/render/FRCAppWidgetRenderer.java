@@ -18,7 +18,6 @@
  */
 package ca.rmen.android.frcwidget.render;
 
-import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import android.content.Context;
@@ -34,11 +33,10 @@ import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 import ca.rmen.android.frcwidget.Constants;
+import ca.rmen.android.frcwidget.FRCDateUtils;
 import ca.rmen.android.frcwidget.prefs.FRCPreferences;
 import ca.rmen.android.frcwidget.prefs.FRCPreferences.DetailedView;
 import ca.rmen.android.frenchcalendar.R;
-import ca.rmen.lfrc.FrenchRevolutionaryCalendar;
-import ca.rmen.lfrc.FrenchRevolutionaryCalendar.CalculationMethod;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
 /**
@@ -53,12 +51,7 @@ public class FRCAppWidgetRenderer {
     public static RemoteViews render(Context context, FRCAppWidgetRenderParams params, float scaleFactor) {
         Log.v(TAG, "render: scaleFactor =" + scaleFactor);
 
-        // Get the current timestamp in the French revolutionary calendar.
-        GregorianCalendar now = new GregorianCalendar();
-        Locale locale = FRCPreferences.getInstance(context).getLocale();
-        CalculationMethod calculationMethod = FRCPreferences.getInstance(context).getCalculationMethod();
-        FrenchRevolutionaryCalendar frcal = new FrenchRevolutionaryCalendar(locale, calculationMethod);
-        FrenchRevolutionaryCalendarDate frenchDate = frcal.getDate(now);
+        FrenchRevolutionaryCalendarDate frenchDate = FRCDateUtils.getToday(context);
 
         // Create a view with the right scroll image as the background.
         LayoutInflater inflater = LayoutInflater.from(context);

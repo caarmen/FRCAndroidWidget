@@ -20,21 +20,8 @@
 
 <resources>
 
-    <string-array name="setting_method_labels">
-        <item>Equinox</item>
-        <item>Romme</item>
-    </string-array>
-    <string-array name="setting_detailed_view_labels">
-        <item>Aucun</item>
-        <item>Heure (temps décimal)</item>
-        <item>Nom du jour de l\'année</item>
-    </string-array>
-    <string-array name="daily_object_types">
-        <item>La plante</item>
-        <item>L\'animal</item>
-        <item>L\'outil</item>
-        <item>Le minéral</item>
-        <item>Le concept</item>
-    </string-array>
+    <color name="primaryTextColor">#381f0a</color>
+    <color name="item_pressed">#e8cfba</color>
+    <color name="item_normal">#ffe8d3</color>
 
 </resources>

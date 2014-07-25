@@ -37,7 +37,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="#381f0a"
+        android:textColor="@color/primaryTextColor"
         android:textSize="@dimen/wide_weekday_textsize" />
 
     <LinearLayout
@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingRight="@dimen/wide_right_margin"
-            android:textColor="#381f0a"
+            android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/wide_month_textsize" />
 
         <TextView
@@ -60,14 +60,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingRight="@dimen/wide_right_margin"
-            android:textColor="#381f0a"
+            android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/wide_month_textsize" />
 
         <TextView
             android:id="@+id/text_year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#381f0a"
+            android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/wide_month_textsize" />
     </LinearLayout>
 
@@ -77,7 +77,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="#381f0a"
+        android:textColor="@color/primaryTextColor"
         android:textSize="@dimen/wide_time_textsize" />
 
 </LinearLayout>
