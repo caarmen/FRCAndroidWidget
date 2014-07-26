@@ -50,6 +50,6 @@ public class FRCRenderApi13 {
         int maxHeight = point.y / 2;
         Log.v(TAG, "getScaleFactor: using whole screen as max size: " + maxWidth + "x" + maxHeight);
         if (maxWidth <= 0 || maxHeight <= 0) return 1.0f;
-        return Math.min((float) maxWidth / width, (float) maxHeight / height);
+        return Math.max((float) maxWidth / width, (float) maxHeight / height);
     }
 }
