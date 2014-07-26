@@ -36,6 +36,7 @@ import ca.rmen.android.frcwidget.Constants.WidgetType;
 import ca.rmen.android.frcwidget.render.FRCAppWidgetRenderParams;
 import ca.rmen.android.frcwidget.render.FRCAppWidgetRenderParamsFactory;
 import ca.rmen.android.frcwidget.render.FRCAppWidgetRenderer;
+import ca.rmen.android.frcwidget.render.FRCRenderApi13;
 import ca.rmen.android.frcwidget.render.FRCRenderApi16;
 import ca.rmen.android.frenchcalendar.R;
 
@@ -106,7 +107,11 @@ public abstract class FRCAppWidgetProvider extends AppWidgetProvider {
         Log.v(TAG, "update: appWidgetId = " + appWidgetId);
         FRCAppWidgetRenderParams renderParams = FRCAppWidgetRenderParamsFactory.getRenderParams(getWidgetType());
         float scaleFactor = 1.0f;
-        if (Build.VERSION.SDK_INT >= 16) scaleFactor = FRCRenderApi16.getScaleFactor(context, appWidgetManager, appWidgetId, renderParams);
+        if (Build.VERSION.SDK_INT >= 16) {
+            scaleFactor = FRCRenderApi16.getScaleFactor(context, appWidgetManager, appWidgetId, renderParams);
+        } else if (Build.VERSION.SDK_INT >= 13) {
+            scaleFactor = FRCRenderApi13.getMaxScaleFactor(context, renderParams);
+        }
         RemoteViews views = FRCAppWidgetRenderer.render(context, renderParams, scaleFactor);
 
         Intent intent = new Intent(context, FRCPopupActivity.class);
