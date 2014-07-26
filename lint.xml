@@ -3,4 +3,8 @@
     <issue id="OldTargetApi">
         <ignore path="AndroidManifest.xml" />
     </issue>
+    <issue id="Overdraw">
+        <ignore path="res/layout/appwidget_narrow_initial.xml" />
+        <ignore path="res/layout/appwidget_wide_initial.xml" />
+    </issue>
 </lint>

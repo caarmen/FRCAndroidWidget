@@ -21,7 +21,7 @@
     android:id="@+id/linearLayout1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/vscroll"
+    android:background="@drawable/vscroll11"
     android:clickable="true"
     android:gravity="center"
     android:orientation="vertical"

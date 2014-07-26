@@ -46,7 +46,7 @@ public class FRCDateUtils {
     /**
      * @return the number of days since the first day of the French Republican Calendar (September 22, 1792.
      */
-    public static final long getDaysSinceDay1() {
+    static final long getDaysSinceDay1() {
         Log.v(TAG, "getDaysSinceDay1");
         Calendar now = Calendar.getInstance();
         Calendar day1 = Calendar.getInstance();

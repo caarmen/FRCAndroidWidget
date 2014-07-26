@@ -107,9 +107,11 @@ public abstract class FRCAppWidgetProvider extends AppWidgetProvider {
         Log.v(TAG, "update: appWidgetId = " + appWidgetId);
         FRCAppWidgetRenderParams renderParams = FRCAppWidgetRenderParamsFactory.getRenderParams(getWidgetType());
         float scaleFactor = 1.0f;
-        if (Build.VERSION.SDK_INT >= 16) {
+        @SuppressWarnings("deprecation")
+        int sdk = Integer.valueOf(Build.VERSION.SDK);
+        if (sdk >= 16) {
             scaleFactor = FRCRenderApi16.getScaleFactor(context, appWidgetManager, appWidgetId, renderParams);
-        } else if (Build.VERSION.SDK_INT >= 13) {
+        } else if (sdk >= 13) {
             scaleFactor = FRCRenderApi13.getMaxScaleFactor(context, renderParams);
         }
         RemoteViews views = FRCAppWidgetRenderer.render(context, renderParams, scaleFactor);

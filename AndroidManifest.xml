@@ -19,11 +19,11 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ca.rmen.android.frenchcalendar"
-    android:versionCode="121"
-    android:versionName="1.2.1" >
+    android:versionCode="122"
+    android:versionName="1.2.2" >
 
     <uses-sdk
-        android:minSdkVersion="4"
+        android:minSdkVersion="3"
         android:targetSdkVersion="18" />
 
     <supports-screens

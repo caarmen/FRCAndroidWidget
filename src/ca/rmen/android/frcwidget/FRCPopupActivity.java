@@ -18,6 +18,8 @@
  */
 package ca.rmen.android.frcwidget;
 
+import java.util.Locale;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -105,7 +107,7 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
                     FrenchRevolutionaryCalendarDate frenchDate = FRCDateUtils.getToday(getApplication());
                     String subject = getString(R.string.share_subject, frenchDate.getWeekdayName(), frenchDate.dayOfMonth, frenchDate.getMonthName(),
                             frenchDate.year);
-                    String time = String.format("%02d:%02d:%02d", frenchDate.hour, frenchDate.minute, frenchDate.second);
+                    String time = String.format(Locale.US, "%02d:%02d:%02d", frenchDate.hour, frenchDate.minute, frenchDate.second);
                     String objectType = getResources().getStringArray(R.array.daily_object_types)[frenchDate.getObjectType().ordinal()];
                     String body = getString(R.string.share_body, frenchDate.getWeekdayName(), frenchDate.dayOfMonth, frenchDate.getMonthName(),
                             frenchDate.year, time, objectType, frenchDate.getDayOfYear(), FRCDateUtils.getDaysSinceDay1());
