@@ -1,0 +1,172 @@
+ca.rmen.android.frcwidget.Constants -> ca.rmen.android.frcwidget.a:
+ca.rmen.android.frcwidget.Constants$WidgetType -> ca.rmen.android.frcwidget.b:
+    ca.rmen.android.frcwidget.Constants$WidgetType NARROW -> a
+    ca.rmen.android.frcwidget.Constants$WidgetType WIDE -> b
+    ca.rmen.android.frcwidget.Constants$WidgetType[] $VALUES -> c
+    25:25:ca.rmen.android.frcwidget.Constants$WidgetType[] values() -> values
+    25:25:ca.rmen.android.frcwidget.Constants$WidgetType valueOf(java.lang.String) -> valueOf
+ca.rmen.android.frcwidget.FRCAboutActivity -> ca.rmen.android.frcwidget.FRCAboutActivity:
+    java.lang.String TAG -> a
+    36:49:void onCreate(android.os.Bundle) -> onCreate
+ca.rmen.android.frcwidget.FRCAppWidgetManager -> ca.rmen.android.frcwidget.c:
+    46:54:java.util.Set getAppWidgetIds(android.content.Context,java.lang.Class) -> a
+ca.rmen.android.frcwidget.FRCAppWidgetProvider -> ca.rmen.android.frcwidget.d:
+    java.lang.String TAG -> a
+    63:74:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+    79:82:void onAppWidgetOptionsChanged(android.content.Context,android.appwidget.AppWidgetManager,int,android.os.Bundle) -> onAppWidgetOptionsChanged
+    89:92:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]) -> onUpdate
+    98:101:void updateAll(android.content.Context,android.appwidget.AppWidgetManager,int[]) -> a
+    107:122:void update(android.content.Context,android.appwidget.AppWidgetManager,int) -> a
+    ca.rmen.android.frcwidget.Constants$WidgetType getWidgetType() -> a
+ca.rmen.android.frcwidget.FRCDateUtils -> ca.rmen.android.frcwidget.e:
+    java.lang.String TAG -> a
+    36:43:ca.rmen.lfrc.FrenchRevolutionaryCalendarDate getToday(android.content.Context) -> a
+    50:61:long getDaysSinceDay1() -> a
+ca.rmen.android.frcwidget.FRCPopupActivity -> ca.rmen.android.frcwidget.FRCPopupActivity:
+    java.lang.String TAG -> a
+    android.content.DialogInterface$OnClickListener listener -> b
+    android.content.DialogInterface$OnDismissListener dismissListener -> c
+    51:65:void onCreate(android.os.Bundle) -> onCreate
+ca.rmen.android.frcwidget.FRCPopupActivity$1 -> ca.rmen.android.frcwidget.f:
+    ca.rmen.android.frcwidget.FRCPopupActivity this$0 -> a
+    100:129:void onClick(android.content.DialogInterface,int) -> onClick
+ca.rmen.android.frcwidget.FRCPopupActivity$2 -> ca.rmen.android.frcwidget.g:
+    ca.rmen.android.frcwidget.FRCPopupActivity this$0 -> a
+    135:136:void onDismiss(android.content.DialogInterface) -> onDismiss
+ca.rmen.android.frcwidget.FRCPopupActivity$Action -> ca.rmen.android.frcwidget.h:
+    int id -> a
+    int titleId -> b
+    int iconId -> c
+ca.rmen.android.frcwidget.FRCPopupActivity$ActionsAdapter -> ca.rmen.android.frcwidget.i:
+    87:92:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+ca.rmen.android.frcwidget.FRCScheduler -> ca.rmen.android.frcwidget.j:
+    java.lang.String TAG -> a
+    ca.rmen.android.frcwidget.FRCScheduler INSTANCE -> b
+    android.content.Context context -> c
+    android.app.PendingIntent updatePendingIntent -> d
+    android.content.BroadcastReceiver screenBroadcastReceiver -> e
+    62:63:ca.rmen.android.frcwidget.FRCScheduler getInstance(android.content.Context) -> a
+    70:95:void schedule() -> a
+    101:104:void cancel() -> b
+    43:43:java.lang.String access$000() -> c
+ca.rmen.android.frcwidget.FRCScheduler$1 -> ca.rmen.android.frcwidget.k:
+    ca.rmen.android.frcwidget.FRCScheduler this$0 -> a
+    113:120:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+ca.rmen.android.frcwidget.prefs.FRCPreferenceActivity -> ca.rmen.android.frcwidget.prefs.FRCPreferenceActivity:
+    java.lang.String TAG -> a
+    android.content.SharedPreferences$OnSharedPreferenceChangeListener mOnSharedPreferenceChangeListener -> b
+    45:65:void onCreate(android.os.Bundle) -> onCreate
+    69:72:void updatePreferenceSummary(java.lang.String,int) -> a
+    76:78:void onStart() -> onStart
+    82:84:void onStop() -> onStop
+    88:92:void onDestroy() -> onDestroy
+    38:38:void access$000(ca.rmen.android.frcwidget.prefs.FRCPreferenceActivity,java.lang.String,int) -> a
+ca.rmen.android.frcwidget.prefs.FRCPreferenceActivity$1 -> ca.rmen.android.frcwidget.prefs.a:
+    ca.rmen.android.frcwidget.prefs.FRCPreferenceActivity this$0 -> a
+    97:104:void onSharedPreferenceChanged(android.content.SharedPreferences,java.lang.String) -> onSharedPreferenceChanged
+ca.rmen.android.frcwidget.prefs.FRCPreferences -> ca.rmen.android.frcwidget.prefs.b:
+    ca.rmen.android.frcwidget.prefs.FRCPreferences me -> a
+    android.content.SharedPreferences sharedPrefs -> b
+    50:51:ca.rmen.android.frcwidget.prefs.FRCPreferences getInstance(android.content.Context) -> a
+    59:60:java.util.Locale getLocale() -> a
+    64:67:ca.rmen.lfrc.FrenchRevolutionaryCalendar$CalculationMethod getCalculationMethod() -> b
+    71:76:int getUpdateFrequency() -> c
+    80:81:ca.rmen.android.frcwidget.prefs.FRCPreferences$DetailedView getDetailedView() -> d
+ca.rmen.android.frcwidget.prefs.FRCPreferences$DetailedView -> ca.rmen.android.frcwidget.prefs.c:
+    ca.rmen.android.frcwidget.prefs.FRCPreferences$DetailedView NONE -> a
+    ca.rmen.android.frcwidget.prefs.FRCPreferences$DetailedView TIME -> b
+    ca.rmen.android.frcwidget.prefs.FRCPreferences$DetailedView DAY_OF_YEAR -> c
+    ca.rmen.android.frcwidget.prefs.FRCPreferences$DetailedView[] $VALUES -> d
+    45:45:ca.rmen.android.frcwidget.prefs.FRCPreferences$DetailedView[] values() -> values
+    45:45:ca.rmen.android.frcwidget.prefs.FRCPreferences$DetailedView valueOf(java.lang.String) -> valueOf
+ca.rmen.android.frcwidget.render.FRCAppWidgetRenderParams -> ca.rmen.android.frcwidget.a.a:
+    int layoutResourceId -> a
+    int widthResourceId -> b
+    int heightResourceId -> c
+    int textViewableWidthResourceId -> d
+    int[] scrollResourceIds -> e
+ca.rmen.android.frcwidget.render.FRCAppWidgetRenderParamsFactory -> ca.rmen.android.frcwidget.a.b:
+    int[] NARROW_SCROLL_RESOURCE_IDS -> a
+    int[] WIDE_SCROLL_RESOURCE_IDS -> b
+    40:46:ca.rmen.android.frcwidget.render.FRCAppWidgetRenderParams getRenderParams(ca.rmen.android.frcwidget.Constants$WidgetType) -> a
+ca.rmen.android.frcwidget.render.FRCAppWidgetRenderParamsFactory$1 -> ca.rmen.android.frcwidget.a.c:
+    int[] $SwitchMap$ca$rmen$android$frcwidget$Constants$WidgetType -> a
+ca.rmen.android.frcwidget.render.FRCAppWidgetRenderer -> ca.rmen.android.frcwidget.a.d:
+    java.lang.String TAG -> a
+    52:111:android.widget.RemoteViews render(android.content.Context,ca.rmen.android.frcwidget.render.FRCAppWidgetRenderParams,float) -> a
+    147:172:void scaleViews(android.view.View,float) -> a
+ca.rmen.android.frcwidget.render.FRCRenderApi13 -> ca.rmen.android.frcwidget.a.e:
+    java.lang.String TAG -> a
+    43:53:float getMaxScaleFactor(android.content.Context,ca.rmen.android.frcwidget.render.FRCAppWidgetRenderParams) -> a
+ca.rmen.android.frcwidget.render.FRCRenderApi16 -> ca.rmen.android.frcwidget.a.f:
+    java.lang.String TAG -> a
+    44:57:float getScaleFactor(android.content.Context,android.appwidget.AppWidgetManager,int,ca.rmen.android.frcwidget.render.FRCAppWidgetRenderParams) -> a
+ca.rmen.android.frcwidget.render.Font -> ca.rmen.android.frcwidget.a.g:
+    android.graphics.Typeface sTypeface -> a
+    48:60:void applyFont(android.content.Context,android.view.View) -> a
+ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetNarrow -> ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetNarrow:
+    28:28:ca.rmen.android.frcwidget.Constants$WidgetType getWidgetType() -> a
+ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetWide -> ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetWide:
+    28:28:ca.rmen.android.frcwidget.Constants$WidgetType getWidgetType() -> a
+ca.rmen.lfrc.EquinoxDates -> ca.rmen.a.a:
+    java.util.TimeZone TIMEZONE_PARIS -> a
+    java.text.SimpleDateFormat sdf -> b
+    java.util.Map equinoxDates -> c
+    50:56:int getAutumnEquinox(int) -> a
+    64:82:void addEquinoxDate(int,java.lang.String) -> a
+    182:4184:void loadFullEquinoxList() -> a
+ca.rmen.lfrc.FrenchRevolutionaryCalendar -> ca.rmen.a.b:
+    java.util.Locale locale -> a
+    java.util.Calendar frenchEraBegin -> b
+    java.util.Calendar frenchEraEnd -> c
+    ca.rmen.lfrc.FrenchRevolutionaryCalendar$CalculationMethod calculationMethod -> d
+    208:216:ca.rmen.lfrc.FrenchRevolutionaryCalendarDate getFrenchDate(int,int) -> a
+    247:257:java.util.Calendar getAutumnEquinox(int) -> a
+ca.rmen.lfrc.FrenchRevolutionaryCalendar$CalculationMethod -> ca.rmen.a.c:
+    ca.rmen.lfrc.FrenchRevolutionaryCalendar$CalculationMethod EQUINOX -> a
+    ca.rmen.lfrc.FrenchRevolutionaryCalendar$CalculationMethod ROMME -> b
+    ca.rmen.lfrc.FrenchRevolutionaryCalendar$CalculationMethod[] $VALUES -> c
+    37:37:ca.rmen.lfrc.FrenchRevolutionaryCalendar$CalculationMethod[] values() -> values
+    37:37:ca.rmen.lfrc.FrenchRevolutionaryCalendar$CalculationMethod valueOf(java.lang.String) -> valueOf
+ca.rmen.lfrc.FrenchRevolutionaryCalendar$DailyObjectType -> ca.rmen.a.d:
+    ca.rmen.lfrc.FrenchRevolutionaryCalendar$DailyObjectType PLANT -> a
+    ca.rmen.lfrc.FrenchRevolutionaryCalendar$DailyObjectType ANIMAL -> b
+    ca.rmen.lfrc.FrenchRevolutionaryCalendar$DailyObjectType TOOL -> c
+    ca.rmen.lfrc.FrenchRevolutionaryCalendar$DailyObjectType MINERAL -> d
+    ca.rmen.lfrc.FrenchRevolutionaryCalendar$DailyObjectType CONCEPT -> e
+    ca.rmen.lfrc.FrenchRevolutionaryCalendar$DailyObjectType[] $VALUES -> f
+    41:41:ca.rmen.lfrc.FrenchRevolutionaryCalendar$DailyObjectType[] values() -> values
+    41:41:ca.rmen.lfrc.FrenchRevolutionaryCalendar$DailyObjectType valueOf(java.lang.String) -> valueOf
+ca.rmen.lfrc.FrenchRevolutionaryCalendarDate -> ca.rmen.a.e:
+    java.util.Locale locale -> g
+    int year -> a
+    int month -> b
+    int dayOfMonth -> c
+    int hour -> d
+    int minute -> e
+    int second -> f
+    86:86:java.lang.String getMonthName() -> a
+    91:92:java.lang.String getWeekdayName() -> b
+    99:99:java.lang.String getDayOfYear() -> c
+    103:103:java.lang.String toString() -> toString
+ca.rmen.lfrc.i18n.FrenchRevolutionaryCalendarLabels -> ca.rmen.a.a.a:
+    java.util.Map instances -> a
+    java.lang.String[] weekdays -> b
+    java.lang.String[] months -> c
+    java.lang.String[][] daysOfYear -> d
+    53:53:java.lang.String getWeekdayName(int) -> a
+    60:60:java.lang.String getMonthName(int) -> b
+    68:68:java.lang.String getDayOfYear(int,int) -> a
+    81:90:ca.rmen.lfrc.i18n.FrenchRevolutionaryCalendarLabels getInstance(java.util.Locale) -> a
+ca.rmen.lfrc.i18n.FrenchRevolutionaryCalendarLabelsCA -> ca.rmen.a.a.b:
+    java.lang.String[] MONTHS -> a
+    java.lang.String[][] DAY_OF_YEAR -> b
+ca.rmen.lfrc.i18n.FrenchRevolutionaryCalendarLabelsEN -> ca.rmen.a.a.c:
+    java.lang.String[][] DAY_OF_YEAR -> a
+ca.rmen.lfrc.i18n.FrenchRevolutionaryCalendarLabelsES -> ca.rmen.a.a.d:
+    java.lang.String[] MONTHS -> a
+    java.lang.String[][] DAY_OF_YEAR -> b
+ca.rmen.lfrc.i18n.FrenchRevolutionaryCalendarLabelsFR -> ca.rmen.a.a.e:
+    java.lang.String[] WEEKDAYS -> a
+    java.lang.String[] MONTHS -> b
+    java.lang.String[][] DAY_OF_YEAR -> c
