@@ -55,6 +55,7 @@
         </activity>
         <activity
             android:name="ca.rmen.android.frcwidget.FRCPopupActivity"
+            android:exported="true"
             android:theme="@style/Theme.Transparent" />
 
         <receiver
