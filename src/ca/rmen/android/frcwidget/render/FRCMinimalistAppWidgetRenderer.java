@@ -22,12 +22,8 @@ import java.util.Locale;
 
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.os.Build;
 import android.util.Log;
 import android.view.View;
-import android.view.View.MeasureSpec;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 import ca.rmen.android.frcwidget.Constants;
@@ -39,6 +35,7 @@ import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
 /**
  * Responsible for drawing the minimalist widget.
+ * TODO try to share as much as logic as possible between the scroll widgets and the minimalist widgets.
  * 
  * @author calvarez
  * 
@@ -49,26 +46,11 @@ public class FRCMinimalistAppWidgetRenderer implements FRCAppWidgetRenderer {
     public RemoteViews render(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         Log.v(TAG, "render");
 
-        FrenchRevolutionaryCalendarDate frenchDate = FRCDateUtils.getToday(context);
-        float scaleFactor = 1.0f;
-        float defaultWidgetWidth = context.getResources().getDimension(R.dimen.minimalist_widget_width);
-        float defaultWidgetHeight = context.getResources().getDimension(R.dimen.minimalist_widget_height);
-        @SuppressWarnings("deprecation")
-        int sdk = Integer.valueOf(Build.VERSION.SDK);
-        if (sdk >= 16) {
-            scaleFactor = FRCRenderApi16.getScaleFactor(context, appWidgetManager, appWidgetId, defaultWidgetWidth, defaultWidgetHeight);
-        } else if (sdk >= 13) {
-            scaleFactor = FRCRenderApi13.getMaxScaleFactor(context, defaultWidgetWidth, defaultWidgetHeight);
-        }
-        Log.v(TAG, "render: scaleFactor=" + scaleFactor);
-
         View view = View.inflate(context, R.layout.appwidget_minimalist, null);
-        int width = (int) (scaleFactor * defaultWidgetWidth);
-        int height = (int) (scaleFactor * defaultWidgetHeight);
-        Log.v(TAG, "Creating widget of size " + width + "x" + height);
 
         // Set all the text fields for the date
-        String date = frenchDate.dayOfMonth + " " + frenchDate.getMonthName() + " " + frenchDate.year;
+        FrenchRevolutionaryCalendarDate frenchDate = FRCDateUtils.getToday(context);
+        String date = " " + frenchDate.dayOfMonth + " " + frenchDate.getMonthName() + " " + frenchDate.year + " ";
         TextView tvWeekday = (TextView) view.findViewById(R.id.text_weekday);
         TextView tvDate = (TextView) view.findViewById(R.id.text_date);
         tvWeekday.setText(frenchDate.getWeekdayName());
@@ -90,21 +72,19 @@ public class FRCMinimalistAppWidgetRenderer implements FRCAppWidgetRenderer {
                 timestamp = frenchDate.getDayOfYear();
             tvTime.setText(timestamp);
         }
+        
+        // Scale the views.
+        float defaultWidgetWidth = context.getResources().getDimension(R.dimen.minimalist_widget_width);
+        float defaultWidgetHeight = context.getResources().getDimension(R.dimen.minimalist_widget_height);
+        float scaleFactor = FRCRender.getScaleFactor(context, appWidgetManager, appWidgetId, defaultWidgetWidth, defaultWidgetHeight);
+        Log.v(TAG, "render: scaleFactor=" + scaleFactor);
         FRCRender.scaleViews(view, scaleFactor);
-        int widthSpec = MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY);
-        int heightSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
-
-        view.measure(widthSpec, heightSpec);
-        view.layout(0, 0, width - 1, height - 1);
-        // Draw everything to a bitmap.
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        view.draw(canvas);
-
-        // Write that bitmap to the ImageView which will be our final view.
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.imageview);
-        views.setImageViewBitmap(R.id.rootView, bitmap);
-        return views;
+        
+        // Render the views to a bitmap and return a RemoteViews containing this image.
+        int width = (int) (scaleFactor * defaultWidgetWidth);
+        int height = (int) (scaleFactor * defaultWidgetHeight);
+        Log.v(TAG, "Creating widget of size " + width + "x" + height);
+        return FRCRender.createRemoteViews(context, view, width, height);
     }
 
 }

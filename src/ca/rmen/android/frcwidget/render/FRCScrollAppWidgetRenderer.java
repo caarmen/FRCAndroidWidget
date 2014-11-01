@@ -22,9 +22,6 @@ import java.util.Locale;
 
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +38,7 @@ import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
 /**
  * Responsible for drawing the scroll widgets.
+ * TODO try to share as much as logic as possible between the scroll widgets and the minimalist widgets.
  * 
  * @author calvarez
  * 
@@ -56,17 +54,10 @@ public class FRCScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
     public RemoteViews render(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         Log.v(TAG, "render");
 
-        float scaleFactor = 1.0f;
-        @SuppressWarnings("deprecation")
-        int sdk = Integer.valueOf(Build.VERSION.SDK);
         float defaultWidgetWidth = context.getResources().getDimension(mParams.widthResourceId);
         float defaultWidgetHeight= context.getResources().getDimension(mParams.heightResourceId);
 
-        if (sdk >= 16) {
-            scaleFactor = FRCRenderApi16.getScaleFactor(context, appWidgetManager, appWidgetId, defaultWidgetWidth, defaultWidgetHeight);
-        } else if (sdk >= 13) {
-            scaleFactor = FRCRenderApi13.getMaxScaleFactor(context, defaultWidgetWidth, defaultWidgetHeight);
-        }
+        float scaleFactor = FRCRender.getScaleFactor(context, appWidgetManager, appWidgetId, defaultWidgetWidth, defaultWidgetHeight);
 
         FrenchRevolutionaryCalendarDate frenchDate = FRCDateUtils.getToday(context);
 
@@ -85,7 +76,6 @@ public class FRCScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
         ((TextView) view.findViewById(R.id.text_month)).setText(frenchDate.getMonthName());
 
         // Set the text fields for the time.
-
         String timestamp = null;
         DetailedView detailedView = FRCPreferences.getInstance(context).getDetailedView();
 
@@ -113,19 +103,7 @@ public class FRCScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
         int textViewableWidth = (int) (scaleFactor * context.getResources().getDimensionPixelSize(mParams.textViewableWidthResourceId));
         squeezeMonthLine(context, view, textViewableWidth);
         squeezeTextView(context, timeView, textViewableWidth);
-        view.measure(widthSpec, heightSpec);
-        view.layout(0, 0, width - 1, height - 1);
-
-        // Draw everything to a bitmap.
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        view.draw(canvas);
-
-        // Write that bitmap to the ImageView which will be our final view.
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.imageview);
-        views.setImageViewBitmap(R.id.rootView, bitmap);
-
-        return views;
+        return FRCRender.createRemoteViews(context, view, width, height);
     }
 
     private static void squeezeMonthLine(Context context, View view, int textViewableWidth) {
