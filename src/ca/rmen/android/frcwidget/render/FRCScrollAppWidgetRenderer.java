@@ -26,11 +26,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Build;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.MeasureSpec;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
@@ -65,7 +63,7 @@ public class FRCScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
         float defaultWidgetHeight= context.getResources().getDimension(mParams.heightResourceId);
 
         if (sdk >= 16) {
-            scaleFactor = FRCScrollRenderApi16.getScaleFactor(context, appWidgetManager, appWidgetId, defaultWidgetWidth, defaultWidgetHeight);
+            scaleFactor = FRCRenderApi16.getScaleFactor(context, appWidgetManager, appWidgetId, defaultWidgetWidth, defaultWidgetHeight);
         } else if (sdk >= 13) {
             scaleFactor = FRCRenderApi13.getMaxScaleFactor(context, defaultWidgetWidth, defaultWidgetHeight);
         }
@@ -103,7 +101,7 @@ public class FRCScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
         }
         ((TextView) view.findViewById(R.id.text_time)).setText(timestamp);
 
-        scaleViews(view, scaleFactor);
+        FRCRender.scaleViews(view, scaleFactor);
         Font.applyFont(context, view);
         int widthSpec = MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY);
         int heightSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
@@ -156,38 +154,5 @@ public class FRCScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
         }
     }
 
-    /**
-     * Rescale the given parent view and all its child views. The following will be rescaled:
-     * 1) text sizes, 2) padding, 3) margins.
-     */
-    private static void scaleViews(View parent, float scaleFactor) {
-
-        // Scale the padding
-        parent.setPadding((int) (parent.getPaddingLeft() * scaleFactor), (int) (parent.getPaddingTop() * scaleFactor),
-                (int) (parent.getPaddingRight() * scaleFactor), (int) (parent.getPaddingBottom() * scaleFactor));
-        // Scale the margins, if any
-        LinearLayout.LayoutParams layoutParams = (android.widget.LinearLayout.LayoutParams) parent.getLayoutParams();
-        if (layoutParams != null) {
-            layoutParams.leftMargin *= scaleFactor;
-            layoutParams.rightMargin *= scaleFactor;
-            layoutParams.bottomMargin *= scaleFactor;
-            layoutParams.topMargin *= scaleFactor;
-            parent.setLayoutParams(layoutParams);
-        }
-        // Scale the text size
-        if (parent instanceof TextView) {
-            TextView textView = (TextView) parent;
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textView.getTextSize() * scaleFactor);
-        }
-        // Scale all child views
-        else if (parent instanceof ViewGroup) {
-            final ViewGroup parentGroup = (ViewGroup) parent;
-            final int childCount = parentGroup.getChildCount();
-            for (int i = 0; i < childCount; i++) {
-                final View v = parentGroup.getChildAt(i);
-                scaleViews(v, scaleFactor);
-            }
-        }
-    }
 
 }

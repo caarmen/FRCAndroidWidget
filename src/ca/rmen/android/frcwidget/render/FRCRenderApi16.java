@@ -32,8 +32,8 @@ import ca.rmen.android.frcwidget.Constants;
  * 
  * @author calvarez
  */
-public class FRCScrollRenderApi16 {
-    private static final String TAG = Constants.TAG + FRCScrollRenderApi16.class.getSimpleName();
+public class FRCRenderApi16 {
+    private static final String TAG = Constants.TAG + FRCRenderApi16.class.getSimpleName();
 
     /**
      * @return Looks at the size of the given widget, and returns the scale factor based on this widget's default size. All the widget's default dimensions
