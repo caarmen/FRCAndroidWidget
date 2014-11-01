@@ -28,16 +28,12 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 import ca.rmen.android.frcwidget.Constants.WidgetType;
-import ca.rmen.android.frcwidget.render.FRCAppWidgetRenderParams;
-import ca.rmen.android.frcwidget.render.FRCAppWidgetRenderParamsFactory;
 import ca.rmen.android.frcwidget.render.FRCAppWidgetRenderer;
-import ca.rmen.android.frcwidget.render.FRCRenderApi13;
-import ca.rmen.android.frcwidget.render.FRCRenderApi16;
+import ca.rmen.android.frcwidget.render.FRCAppWidgetRendererFactory;
 import ca.rmen.android.frenchcalendar.R;
 
 /**
@@ -105,21 +101,13 @@ public abstract class FRCAppWidgetProvider extends AppWidgetProvider {
      */
     private void update(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         Log.v(TAG, "update: appWidgetId = " + appWidgetId);
-        FRCAppWidgetRenderParams renderParams = FRCAppWidgetRenderParamsFactory.getRenderParams(getWidgetType());
-        float scaleFactor = 1.0f;
-        @SuppressWarnings("deprecation")
-        int sdk = Integer.valueOf(Build.VERSION.SDK);
-        if (sdk >= 16) {
-            scaleFactor = FRCRenderApi16.getScaleFactor(context, appWidgetManager, appWidgetId, renderParams);
-        } else if (sdk >= 13) {
-            scaleFactor = FRCRenderApi13.getMaxScaleFactor(context, renderParams);
-        }
-        RemoteViews views = FRCAppWidgetRenderer.render(context, renderParams, scaleFactor);
+        FRCAppWidgetRenderer renderer = FRCAppWidgetRendererFactory.getRenderer(getWidgetType());
+        RemoteViews views = renderer.render(context, appWidgetManager, appWidgetId);
 
         Intent intent = new Intent(context, FRCPopupActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        views.setOnClickPendingIntent(R.id.imageView1, pendingIntent);
+        views.setOnClickPendingIntent(R.id.rootView, pendingIntent);
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 

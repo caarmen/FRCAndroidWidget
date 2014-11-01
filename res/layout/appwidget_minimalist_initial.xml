@@ -17,11 +17,22 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
-
-<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rootView"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:clickable="true"
-    android:contentDescription="@string/app_name"
-    android:scaleType="fitCenter" />
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/wide_bottom_margin"
+    android:paddingLeft="@dimen/wide_left_right_margin"
+    android:paddingRight="@dimen/wide_left_right_margin"
+    android:paddingTop="@dimen/wide_top_margin" >
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true" />
+
+</LinearLayout>

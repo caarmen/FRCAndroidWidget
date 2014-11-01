@@ -24,60 +24,42 @@
     android:layout_gravity="center"
     android:clickable="true"
     android:gravity="center"
-    android:orientation="vertical"
-    android:paddingTop="@dimen/wide_top_margin" 
-    android:paddingBottom="@dimen/wide_bottom_margin"
-    android:paddingRight="@dimen/wide_left_right_margin"
-    android:paddingLeft="@dimen/wide_left_right_margin"
-    >
+    android:orientation="vertical" >
 
     <TextView
         android:id="@+id/text_weekday"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:fontFamily="sans-serif-light"
         android:gravity="center"
-        android:textColor="@color/primaryTextColor"
+        android:shadowColor="@color/primaryTextColor"
+        android:shadowRadius="4"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/wide_weekday_textsize" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <TextView
+        android:id="@+id/text_date"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:fontFamily="sans-serif-light"
         android:gravity="center"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:id="@+id/text_dayofmonth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="@dimen/wide_right_margin"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/wide_month_textsize" />
-
-        <TextView
-            android:id="@+id/text_month"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="@dimen/wide_right_margin"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/wide_month_textsize" />
-
-        <TextView
-            android:id="@+id/text_year"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/wide_month_textsize" />
-    </LinearLayout>
+        android:shadowColor="@color/primaryTextColor"
+        android:shadowRadius="4"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/wide_month_textsize" />
 
     <TextView
         android:id="@+id/text_time"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:fontFamily="sans-serif-light"
         android:gravity="center"
-        android:textColor="@color/primaryTextColor"
+        android:shadowColor="@color/primaryTextColor"
+        android:shadowRadius="4"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/wide_time_textsize" />
 
 </LinearLayout>

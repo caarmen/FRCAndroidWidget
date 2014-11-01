@@ -24,6 +24,7 @@ import java.util.Set;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
+import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetMinimalist;
 import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetNarrow;
 import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetWide;
 
@@ -36,6 +37,7 @@ class FRCAppWidgetManager {
         Set<Integer> result = new HashSet<Integer>();
         result.addAll(getAppWidgetIds(context, FrenchCalendarAppWidgetNarrow.class));
         result.addAll(getAppWidgetIds(context, FrenchCalendarAppWidgetWide.class));
+        result.addAll(getAppWidgetIds(context, FrenchCalendarAppWidgetMinimalist.class));
         return result;
     }
 

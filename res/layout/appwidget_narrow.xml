@@ -18,7 +18,7 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/linearLayout1"
+    android:id="@+id/rootView"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:clickable="true"

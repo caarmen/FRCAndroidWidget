@@ -17,11 +17,11 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
-
-<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rootView"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:clickable="true"
-    android:contentDescription="@string/app_name"
-    android:scaleType="fitCenter" />
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:configure="ca.rmen.android.frcwidget.prefs.FRCPreferenceActivity"
+    android:initialLayout="@layout/appwidget_minimalist_initial"
+    android:minHeight="40dp"
+    android:minWidth="110dp"
+    android:previewImage="@drawable/icon_minimalist"
+    android:resizeMode="horizontal|vertical"
+    android:updatePeriodMillis="3600000" />

@@ -16,14 +16,16 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package ca.rmen.android.frcwidget;
+package ca.rmen.android.frenchcalendar;
 
-public class Constants {
+import ca.rmen.android.frcwidget.Constants.WidgetType;
+import ca.rmen.android.frcwidget.FRCAppWidgetProvider;
 
-    public static final String TAG = "FRCWidget/";
+public class FrenchCalendarAppWidgetMinimalist extends FRCAppWidgetProvider {
 
-    public enum WidgetType {
-        NARROW, WIDE, MINIMALIST
+    @Override
+    protected WidgetType getWidgetType() {
+        return WidgetType.MINIMALIST;
     }
 
 }

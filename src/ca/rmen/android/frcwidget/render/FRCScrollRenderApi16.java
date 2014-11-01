@@ -32,15 +32,15 @@ import ca.rmen.android.frcwidget.Constants;
  * 
  * @author calvarez
  */
-public class FRCRenderApi16 {
-    private static final String TAG = Constants.TAG + FRCRenderApi16.class.getSimpleName();
+public class FRCScrollRenderApi16 {
+    private static final String TAG = Constants.TAG + FRCScrollRenderApi16.class.getSimpleName();
 
     /**
      * @return Looks at the size of the given widget, and returns the scale factor based on this widget's default size. All the widget's default dimensions
      *         should be multiplied by this scale factor when rendering the widget.
      */
     @TargetApi(16)
-    public static float getScaleFactor(Context context, AppWidgetManager appWidgetManager, int appWidgetId, FRCAppWidgetRenderParams renderParams) {
+    public static float getScaleFactor(Context context, AppWidgetManager appWidgetManager, int appWidgetId, float defaultWidgetWidth, float defaultWidgetHeight) {
         Log.v(TAG, "getScaleFactor for widget " + appWidgetId);
         Bundle widgetOptions = appWidgetManager.getAppWidgetOptions(appWidgetId);
         Set<String> keys = widgetOptions.keySet();
@@ -50,10 +50,8 @@ public class FRCRenderApi16 {
         int minHeight = widgetOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT);
         int maxWidth = widgetOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH);
         int maxHeight = widgetOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT);
-        float width = context.getResources().getDimension(renderParams.widthResourceId);
-        float height = context.getResources().getDimension(renderParams.heightResourceId);
-        Log.v(TAG, "getScaleFactor: min:" + minWidth + "x" + minHeight + ", max:" + maxWidth + "x" + maxHeight + ", default:" + width + "x" + height);
-        if (maxWidth <= 0 || maxHeight <= 0) return FRCRenderApi13.getMaxScaleFactor(context, renderParams);
-        return Math.min((float) maxWidth / width, (float) maxHeight / height);
+        Log.v(TAG, "getScaleFactor: min:" + minWidth + "x" + minHeight + ", max:" + maxWidth + "x" + maxHeight + ", default:" + defaultWidgetWidth + "x" + defaultWidgetHeight);
+        if (maxWidth <= 0 || maxHeight <= 0) return FRCRenderApi13.getMaxScaleFactor(context, defaultWidgetWidth, defaultWidgetHeight);
+        return Math.min((float) maxWidth / defaultWidgetWidth, (float) maxHeight / defaultWidgetHeight);
     }
 }

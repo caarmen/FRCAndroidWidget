@@ -39,17 +39,15 @@ public class FRCRenderApi13 {
      *         should be multiplied by this scale factor when rendering the widget.
      */
     @TargetApi(13)
-    public static float getMaxScaleFactor(Context context, FRCAppWidgetRenderParams renderParams) {
+    public static float getMaxScaleFactor(Context context, float defaultWidgetWidth, float defaultWidgetHeight) {
         Log.v(TAG, "getMaxScaleFactor");
         Display defaultDisplay = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         Point point = new Point();
         defaultDisplay.getSize(point);
-        float width = context.getResources().getDimension(renderParams.widthResourceId);
-        float height = context.getResources().getDimension(renderParams.heightResourceId);
         int maxWidth = point.x / 2;
         int maxHeight = point.y / 2;
         Log.v(TAG, "getScaleFactor: using whole screen as max size: " + maxWidth + "x" + maxHeight);
         if (maxWidth <= 0 || maxHeight <= 0) return 1.0f;
-        return Math.max((float) maxWidth / width, (float) maxHeight / height);
+        return Math.max((float) maxWidth / defaultWidgetWidth, (float) maxHeight / defaultWidgetHeight);
     }
 }

@@ -18,14 +18,14 @@
  */
 package ca.rmen.android.frcwidget.render;
 
-public class FRCAppWidgetRenderParams {
+public class FRCScrollAppWidgetRenderParams {
     final int layoutResourceId;
     final int widthResourceId;
     final int heightResourceId;
     final int textViewableWidthResourceId;
     final int[] scrollResourceIds;
 
-    FRCAppWidgetRenderParams(int layoutResourceId, int widthResourceId, int heightResourceId, int textViewableWidthResourceId, int[] scrollResourceIds) {
+    FRCScrollAppWidgetRenderParams(int layoutResourceId, int widthResourceId, int heightResourceId, int textViewableWidthResourceId, int[] scrollResourceIds) {
         this.layoutResourceId = layoutResourceId;
         this.widthResourceId = widthResourceId;
         this.heightResourceId = heightResourceId;

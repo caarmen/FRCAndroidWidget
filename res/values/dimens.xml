@@ -40,4 +40,9 @@
     <dimen name="narrow_top_bottom_margin">8dp</dimen>
     <dimen name="narrow_right_margin">4dp</dimen>
 
+    <dimen name="minimalist_widget_width">250dp</dimen>
+    <dimen name="minimalist_widget_height">140dp</dimen>
+    <dimen name="minimalist_weekday_textsize">31sp</dimen>
+    <dimen name="minimalist_month_textsize">24sp</dimen>
+
 </resources>
