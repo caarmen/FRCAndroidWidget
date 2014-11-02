@@ -40,7 +40,7 @@ import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
  * @author calvarez
  * 
  */
-public class FRCMinimalistAppWidgetRenderer implements FRCAppWidgetRenderer {
+class FRCMinimalistAppWidgetRenderer implements FRCAppWidgetRenderer {
     private static final String TAG = Constants.TAG + FRCMinimalistAppWidgetRenderer.class.getSimpleName();
 
     public RemoteViews render(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {

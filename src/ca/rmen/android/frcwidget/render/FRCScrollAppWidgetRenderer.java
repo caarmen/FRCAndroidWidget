@@ -43,7 +43,7 @@ import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
  * @author calvarez
  * 
  */
-public class FRCScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
+class FRCScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
     private static final String TAG = Constants.TAG + FRCScrollAppWidgetRenderer.class.getSimpleName();
     private final FRCScrollAppWidgetRenderParams mParams;
 

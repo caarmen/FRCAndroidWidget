@@ -18,7 +18,7 @@
  */
 package ca.rmen.android.frcwidget.render;
 
-public class FRCScrollAppWidgetRenderParams {
+class FRCScrollAppWidgetRenderParams {
     final int layoutResourceId;
     final int widthResourceId;
     final int heightResourceId;

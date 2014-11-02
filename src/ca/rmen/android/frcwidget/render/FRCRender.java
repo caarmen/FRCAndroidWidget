@@ -37,7 +37,7 @@ import ca.rmen.android.frenchcalendar.R;
  * 
  * @author calvarez
  */
-public class FRCRender {
+class FRCRender {
 
     /**
      * Depending on our api level and whether the launcher provides us the max

@@ -31,7 +31,7 @@ import ca.rmen.android.frcwidget.Constants;
  * 
  * @author calvarez
  */
-public class FRCRenderApi13 {
+class FRCRenderApi13 {
     private static final String TAG = Constants.TAG + FRCRenderApi13.class.getSimpleName();
 
     /**
@@ -39,7 +39,7 @@ public class FRCRenderApi13 {
      *         should be multiplied by this scale factor when rendering the widget.
      */
     @TargetApi(13)
-    public static float getMaxScaleFactor(Context context, float defaultWidgetWidth, float defaultWidgetHeight) {
+    static float getMaxScaleFactor(Context context, float defaultWidgetWidth, float defaultWidgetHeight) {
         Log.v(TAG, "getMaxScaleFactor");
         Display defaultDisplay = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         Point point = new Point();

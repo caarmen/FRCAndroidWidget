@@ -32,7 +32,7 @@ import ca.rmen.android.frcwidget.Constants;
  * 
  * @author calvarez
  */
-public class FRCRenderApi16 {
+class FRCRenderApi16 {
     private static final String TAG = Constants.TAG + FRCRenderApi16.class.getSimpleName();
 
     /**
@@ -40,7 +40,7 @@ public class FRCRenderApi16 {
      *         should be multiplied by this scale factor when rendering the widget.
      */
     @TargetApi(16)
-    public static float getScaleFactor(Context context, AppWidgetManager appWidgetManager, int appWidgetId, float defaultWidgetWidth, float defaultWidgetHeight) {
+    static float getScaleFactor(Context context, AppWidgetManager appWidgetManager, int appWidgetId, float defaultWidgetWidth, float defaultWidgetHeight) {
         Log.v(TAG, "getScaleFactor for widget " + appWidgetId);
         Bundle widgetOptions = appWidgetManager.getAppWidgetOptions(appWidgetId);
         Set<String> keys = widgetOptions.keySet();
