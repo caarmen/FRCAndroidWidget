@@ -36,7 +36,7 @@
         android:shadowColor="@color/primaryTextColor"
         android:shadowRadius="4"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/wide_weekday_textsize" />
+        android:textSize="@dimen/minimalist_weekday_textsize" />
 
     <TextView
         android:id="@+id/text_date"
@@ -48,7 +48,7 @@
         android:shadowColor="@color/primaryTextColor"
         android:shadowRadius="4"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/wide_month_textsize" />
+        android:textSize="@dimen/minimalist_month_textsize" />
 
     <TextView
         android:id="@+id/text_time"
@@ -60,6 +60,6 @@
         android:shadowColor="@color/primaryTextColor"
         android:shadowRadius="4"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/wide_time_textsize" />
+        android:textSize="@dimen/minimalist_weekday_textsize" />
 
 </LinearLayout>

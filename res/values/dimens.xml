@@ -43,6 +43,6 @@
     <dimen name="minimalist_widget_width">250dp</dimen>
     <dimen name="minimalist_widget_height">140dp</dimen>
     <dimen name="minimalist_weekday_textsize">31sp</dimen>
-    <dimen name="minimalist_month_textsize">24sp</dimen>
+    <dimen name="minimalist_month_textsize">28sp</dimen>
 
 </resources>
