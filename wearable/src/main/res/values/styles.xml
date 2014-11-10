@@ -1,0 +1,12 @@
+<resources>
+
+    <style name="NotificationContentTitleTextAppearance" >
+        <item name="android:textSize">26sp</item>
+        <item name="android:textColor">@color/notif_content_title</item>
+    </style>
+
+    <style name="NotificationContentTextTextAppearance" >
+        <item name="android:textColor">@color/notif_content_text</item>
+    </style>
+
+</resources>

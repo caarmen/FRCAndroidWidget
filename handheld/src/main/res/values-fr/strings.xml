@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  French Revolutionary Calendar Android Widget
+  Copyright (C) 2011 - 2014 Carmen Alvarez
+  
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+-->
+<resources>
+
+    <string name="app_name">Calendrier républicain</string>
+    <string name="app_name_wide">Calendrier républicain (horizontal)</string>
+    <string name="app_name_narrow">Calendrier républicain (vertical)</string>
+    <string name="app_name_minimalist">Calendrier républicain (minimaliste)</string>
+    <string name="app_full_name">Calendrier républicain</string>
+    <string name="description">Widget qui montre la date et heure actuelle dans le
+		calendrier républicain.</string>
+    <string name="credits">Remerciments :</string>
+    <string name="wikipedia">* Article Wikipedia : http://fr.wikipedia.org/wiki/Calendrier_républicain</string>
+    <string name="equinox_tool">* AstroLib C++, programme de Mark Huss, qui détermine le premier jour de l\'automne de chaque année : http://mhuss.com/AstroLib/</string>
+    <string name="github">Projet sur GitHub:</string>
+    <string name="widget_settings">Configuration du calendrier</string>
+    <string name="setting_method">Methode de calcul</string>
+    <string name="setting_method_summary">Comment le premier jour de l\'année est déterminé</string>
+    <string name="setting_detailed_view">Vue détaillée</string>
+    <string name="setting_detailed_view_summary">%s</string>
+    <string name="setting_language">Langue</string>
+    <string name="setting_language_summary">%s</string>
+    <string name="setting_android_wear">Android Wear</string>
+    <string name="setting_android_wear_summary">Affiche une notification une fois par jour sur les objets Android Wear connectés</string>
+    <string name="share_chooser_title">Séléctionner une appli</string>
+    <string name="popup_action_share">Partager</string>
+    <string name="popup_action_settings">Préférences</string>
+    <string name="share_subject">%1$s, %2$d %3$s %4$d</string>
+    <string name="share_body">Aujourd\'hui nous sommes %1$s, le %2$d %3$s %4$d.
+\n\n\
+L\'heure actuelle est %5$s.
+\n\n\
+%6$s du jour : %7$s.
+\n\n\
+%8$d jours se sont écoulés depuis la formation de la République.</string>
+    <string name="about">À propos</string>
+
+</resources>

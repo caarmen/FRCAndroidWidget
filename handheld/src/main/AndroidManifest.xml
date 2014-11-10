@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  French Revolutionary Calendar Android Widget
+  Copyright (C) 2011 - 2014 Carmen Alvarez
+  
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+-->
+<manifest
+    package="ca.rmen.android.frenchcalendar"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:installLocation="internalOnly"
+    tools:ignore="MissingVersion,UnusedAttribute">
+
+    <uses-sdk tools:overrideLibrary="com.google.android.gms, android.support.v4" />
+
+    <supports-screens
+        android:anyDensity="false"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true" />
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name">
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity android:name="ca.rmen.android.frcwidget.prefs.FRCPreferenceActivity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="ca.rmen.android.frcwidget.FRCAboutActivity">
+            <intent-filter>
+                <action android:name="ca.rmen.android.frcwidget.FRCAboutActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="ca.rmen.android.frcwidget.FRCPopupActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Transparent" />
+
+        <receiver
+            android:name="ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetNarrow"
+            android:label="@string/app_name_narrow"
+            android:previewImage="@drawable/icon_narrow">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="ca.rmen.android.frcwidget.UPDATE_WIDGET" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/appwidget_narrow" />
+        </receiver>
+
+        <receiver
+            android:name="ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetWide"
+            android:label="@string/app_name_wide">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="ca.rmen.android.frcwidget.UPDATE_WIDGET" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/appwidget_wide" />
+        </receiver>
+
+        <receiver
+            android:name="ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetMinimalist"
+            android:label="@string/app_name_minimalist">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="ca.rmen.android.frcwidget.UPDATE_WIDGET" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/appwidget_minimalist" />
+        </receiver>
+
+        <receiver android:name="ca.rmen.android.frcwidget.FRCBootCompletedBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="ca.rmen.android.frcwidget.wear.AndroidWearService" />
+
+    </application>
+
+</manifest>

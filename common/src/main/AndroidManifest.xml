@@ -1,0 +1,6 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ca.rmen.android.frenchcalendar.common">
+
+    <application />
+
+</manifest>
