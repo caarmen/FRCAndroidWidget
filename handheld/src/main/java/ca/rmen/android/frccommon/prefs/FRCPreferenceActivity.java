@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package ca.rmen.android.frcwidget.prefs;
+package ca.rmen.android.frccommon.prefs;
 
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
@@ -30,8 +30,8 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import ca.rmen.android.frcwidget.FRCWidgetScheduler;
-import ca.rmen.android.frcwidget.wear.FRCAndroidWearService;
-import ca.rmen.android.frcwidget.wear.FRCWearScheduler;
+import ca.rmen.android.frcwear.FRCAndroidWearService;
+import ca.rmen.android.frcwear.FRCWearScheduler;
 import ca.rmen.android.frenchcalendar.R;
 
 /**

@@ -33,7 +33,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import ca.rmen.android.frcwidget.prefs.FRCPreferenceActivity;
+
+import ca.rmen.android.frccommon.Constants;
+import ca.rmen.android.frccommon.FRCDateUtils;
+import ca.rmen.android.frccommon.prefs.FRCPreferenceActivity;
 import ca.rmen.android.frcwidget.render.Font;
 import ca.rmen.android.frenchcalendar.R;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;

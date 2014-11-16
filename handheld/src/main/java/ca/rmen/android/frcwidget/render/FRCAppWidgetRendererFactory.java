@@ -18,7 +18,7 @@
  */
 package ca.rmen.android.frcwidget.render;
 
-import ca.rmen.android.frcwidget.Constants.WidgetType;
+import ca.rmen.android.frccommon.Constants.WidgetType;
 import ca.rmen.android.frenchcalendar.R;
 
 /**

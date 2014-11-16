@@ -28,7 +28,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
-import ca.rmen.android.frcwidget.prefs.FRCPreferences;
+
+import ca.rmen.android.frccommon.Constants;
+import ca.rmen.android.frccommon.prefs.FRCPreferences;
 
 /**
  * 

@@ -42,7 +42,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name="ca.rmen.android.frcwidget.prefs.FRCPreferenceActivity">
+        <activity android:name="ca.rmen.android.frccommon.prefs.FRCPreferenceActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
@@ -53,7 +53,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="ca.rmen.android.frcwidget.FRCAboutActivity">
+        <activity android:name="ca.rmen.android.frccommon.FRCAboutActivity">
             <intent-filter>
                 <action android:name="ca.rmen.android.frcwidget.FRCAboutActivity" />
 
@@ -112,13 +112,13 @@
                 android:resource="@xml/appwidget_minimalist" />
         </receiver>
 
-        <receiver android:name="ca.rmen.android.frcwidget.FRCBootCompletedBroadcastReceiver">
+        <receiver android:name="ca.rmen.android.frcwear.FRCBootCompletedBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <service android:name="ca.rmen.android.frcwidget.wear.FRCAndroidWearService" />
+        <service android:name="ca.rmen.android.frcwear.FRCAndroidWearService" />
 
     </application>
 

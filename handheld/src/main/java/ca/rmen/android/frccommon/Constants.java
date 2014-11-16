@@ -16,11 +16,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package ca.rmen.android.frcwidget;
+package ca.rmen.android.frccommon;
 
 public class Constants {
 
-    public static final String TAG = "FRCWidget/";
+    public static final String TAG = "FRC/";
 
     public enum WidgetType {
         NARROW, WIDE, MINIMALIST

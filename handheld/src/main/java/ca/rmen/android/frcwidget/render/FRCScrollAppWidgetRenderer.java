@@ -29,10 +29,10 @@ import android.view.View.MeasureSpec;
 import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
-import ca.rmen.android.frcwidget.Constants;
-import ca.rmen.android.frcwidget.FRCDateUtils;
-import ca.rmen.android.frcwidget.prefs.FRCPreferences;
-import ca.rmen.android.frcwidget.prefs.FRCPreferences.DetailedView;
+import ca.rmen.android.frccommon.Constants;
+import ca.rmen.android.frccommon.FRCDateUtils;
+import ca.rmen.android.frccommon.prefs.FRCPreferences;
+import ca.rmen.android.frccommon.prefs.FRCPreferences.DetailedView;
 import ca.rmen.android.frenchcalendar.R;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 

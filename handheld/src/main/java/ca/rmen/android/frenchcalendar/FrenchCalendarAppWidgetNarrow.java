@@ -18,7 +18,7 @@
  */
 package ca.rmen.android.frenchcalendar;
 
-import ca.rmen.android.frcwidget.Constants.WidgetType;
+import ca.rmen.android.frccommon.Constants.WidgetType;
 import ca.rmen.android.frcwidget.FRCAppWidgetProvider;
 
 public class FrenchCalendarAppWidgetNarrow extends FRCAppWidgetProvider {

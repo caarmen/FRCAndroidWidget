@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package ca.rmen.android.frcwidget.wear;
+package ca.rmen.android.frcwear;
 
 import android.content.Context;
 import android.net.Uri;
@@ -31,6 +31,7 @@ import com.google.android.gms.wearable.PutDataMapRequest;
 import com.google.android.gms.wearable.PutDataRequest;
 import com.google.android.gms.wearable.Wearable;
 
+import ca.rmen.android.frccommon.Constants;
 import ca.rmen.android.frenchcalendar.common.WearCommConstants;
 
 /**
@@ -38,7 +39,7 @@ import ca.rmen.android.frenchcalendar.common.WearCommConstants;
  * Note: {@link #connect(android.content.Context)} must be called prior to calling all the other methods.<br/>
  */
 public class FRCWearCommHelper {
-    private static final String TAG = FRCWearCommHelper.class.getSimpleName();
+    private static final String TAG = Constants.TAG + FRCWearCommHelper.class.getSimpleName();
 
     private static final FRCWearCommHelper INSTANCE = new FRCWearCommHelper();
 

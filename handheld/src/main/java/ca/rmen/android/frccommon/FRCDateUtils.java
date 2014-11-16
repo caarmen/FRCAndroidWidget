@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package ca.rmen.android.frcwidget;
+package ca.rmen.android.frccommon;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -24,7 +24,7 @@ import java.util.Locale;
 
 import android.content.Context;
 import android.util.Log;
-import ca.rmen.android.frcwidget.prefs.FRCPreferences;
+import ca.rmen.android.frccommon.prefs.FRCPreferences;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendar;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendar.CalculationMethod;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
@@ -46,7 +46,7 @@ public class FRCDateUtils {
     /**
      * @return the number of days since the first day of the French Republican Calendar (September 22, 1792.
      */
-    static final long getDaysSinceDay1() {
+    public static final long getDaysSinceDay1() {
         Log.v(TAG, "getDaysSinceDay1");
         Calendar now = Calendar.getInstance();
         Calendar day1 = Calendar.getInstance();

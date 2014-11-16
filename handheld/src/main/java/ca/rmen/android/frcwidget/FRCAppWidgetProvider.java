@@ -31,7 +31,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
-import ca.rmen.android.frcwidget.Constants.WidgetType;
+
+import ca.rmen.android.frccommon.Constants;
+import ca.rmen.android.frccommon.Constants.WidgetType;
 import ca.rmen.android.frcwidget.render.FRCAppWidgetRenderer;
 import ca.rmen.android.frcwidget.render.FRCAppWidgetRendererFactory;
 import ca.rmen.android.frenchcalendar.R;

@@ -18,7 +18,7 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:configure="ca.rmen.android.frcwidget.prefs.FRCPreferenceActivity"
+    android:configure="ca.rmen.android.frccommon.prefs.FRCPreferenceActivity"
     android:initialLayout="@layout/appwidget_narrow_initial"
     android:minHeight="80dp"
     android:minResizeHeight="40dp"

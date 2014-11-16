@@ -24,7 +24,7 @@ import android.graphics.Point;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
-import ca.rmen.android.frcwidget.Constants;
+import ca.rmen.android.frccommon.Constants;
 
 /**
  * Provides methods used to render widgets. These methods are available only on api level 13+

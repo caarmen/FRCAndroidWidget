@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package ca.rmen.android.frcwidget;
+package ca.rmen.android.frcwear;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -26,12 +26,11 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import ca.rmen.android.frcwidget.prefs.FRCPreferences;
-import ca.rmen.android.frcwidget.wear.FRCAndroidWearService;
-import ca.rmen.android.frcwidget.wear.FRCWearScheduler;
+import ca.rmen.android.frccommon.Constants;
+import ca.rmen.android.frccommon.prefs.FRCPreferences;
 
 public class FRCBootCompletedBroadcastReceiver extends BroadcastReceiver {
-    private final String TAG = Constants.TAG + getClass().getSimpleName();
+    private final String TAG = Constants.TAG + FRCBootCompletedBroadcastReceiver.class.getSimpleName();
 
     @Override
     public void onReceive(final Context context, Intent intent) {

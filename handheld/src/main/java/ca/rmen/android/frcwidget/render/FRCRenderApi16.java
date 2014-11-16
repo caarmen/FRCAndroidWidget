@@ -25,7 +25,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import ca.rmen.android.frcwidget.Constants;
+import ca.rmen.android.frccommon.Constants;
 
 /**
  * Provides methods used to render widgets. These methods are available only on api level 16+

@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package ca.rmen.android.frcwidget.wear;
+package ca.rmen.android.frcwear;
 
 import android.app.IntentService;
 import android.app.PendingIntent;
@@ -27,8 +27,8 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 
-import ca.rmen.android.frcwidget.FRCDateUtils;
-import ca.rmen.android.frcwidget.prefs.FRCPreferences;
+import ca.rmen.android.frccommon.FRCDateUtils;
+import ca.rmen.android.frccommon.prefs.FRCPreferences;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
 public class FRCAndroidWearService extends IntentService {
