@@ -61,33 +61,33 @@ dependencies {
     wearApp project(':wearable')
 }
 
-task deploy(dependsOn: assembleRelease) << {
+task deploy(/*dependsOn: assembleRelease*/) << {
     description 'Build a release apk, copy the result to the deploy and \'etc\' folders, then increment the build number.'
 
-    // Copy the apk to the 'etc' folder
-    new File('../etc/apk').mkdirs()
-    copy {
-        from buildDir.getPath() + "/outputs/apk/${project.name}-release.apk"
-        into '../etc/apk'
-        rename "${project.name}-release.apk", "${globalProjectName}-${android.defaultConfig.versionCode}-signed.apk"
-    }
+    def projectFlavorNames = project.("android").productFlavors.collect { it.name };
+    for (flavorName in projectFlavorNames) {
 
-    // Also copy the apk to the deploy folder
-    copy {
-        from buildDir.getPath() + "/outputs/apk/${project.name}-release.apk"
-        into buildProperties['deploy-folder']
-        rename "${project.name}-release.apk", "${globalProjectName}-${android.defaultConfig.versionCode}-signed.apk"
-    }
+        // Copy the apk to the 'etc' folder
+        new File('../etc/apk').mkdirs()
+        copy {
+            from buildDir.getPath() + "/outputs/apk/${project.name}-${flavorName}-release.apk"
+            into '../etc/apk'
+            rename "${project.name}-${flavorName}-release.apk", "${globalProjectName}-${flavorName}-${android.defaultConfig.versionCode}-signed.apk"
+        }
 
-    // Copy the proguard mapping to the 'etc' folder
-    new File('../etc/proguard').mkdirs()
-    copy {
-        from buildDir.getPath() + '/outputs/proguard/release/mapping.txt'
-        into '../etc/proguard'
-        rename 'mapping.txt', "mapping-${android.defaultConfig.versionCode}.txt"
-    }
+        // Also copy the apk to the deploy folder
+        copy {
+            from buildDir.getPath() + "/outputs/apk/${project.name}-${flavorName}-release.apk"
+            into buildProperties['deploy-folder']
+            rename "${project.name}-${flavorName}-release.apk", "${globalProjectName}-${flavorName}-${android.defaultConfig.versionCode}-signed.apk"
+        }
 
-    // Increment build number
-    buildNumberProperties['build.number'] = (buildNumber + 1).toString()
-    buildNumberProperties.store(buildNumberFile.newWriter(), null)
+        // Copy the proguard mapping to the 'etc' folder
+        new File('../etc/proguard').mkdirs()
+        copy {
+            from buildDir.getPath() + "/outputs/mapping/${flavorName}/release/mapping.txt"
+            into '../etc/proguard'
+            rename 'mapping.txt', "mapping-${flavorName}-${android.defaultConfig.versionCode}.txt"
+        }
+    }
 }
