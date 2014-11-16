@@ -29,6 +29,7 @@
     <string name="credits">Credits:</string>
     <string name="wikipedia">* Wikipedia article: http://en.wikipedia.org/wiki/French_Republican_Calendar</string>
     <string name="equinox_tool">* AstroLib C++ program by Mark Huss, to determine the first day of autumn in each year: http://mhuss.com/AstroLib/</string>
+    <string name="wearable">* BoD, for the wearable implementation: http://jraf.org/</string>
     <string name="github">Project on GitHub:</string>
     <string name="link_github" translatable="false">https://github.com/caarmen/FRCAndroidWidget</string>
     <string name="widget_settings">French Calendar Settings</string>

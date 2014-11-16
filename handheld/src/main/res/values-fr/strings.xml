@@ -29,6 +29,7 @@
     <string name="credits">Remerciments :</string>
     <string name="wikipedia">* Article Wikipedia : http://fr.wikipedia.org/wiki/Calendrier_républicain</string>
     <string name="equinox_tool">* AstroLib C++, programme de Mark Huss, qui détermine le premier jour de l\'automne de chaque année : http://mhuss.com/AstroLib/</string>
+    <string name="wearable">* BoD, pour son implémentation wearable: http://jraf.org/</string>
     <string name="github">Projet sur GitHub:</string>
     <string name="widget_settings">Configuration du calendrier</string>
     <string name="setting_method">Methode de calcul</string>
