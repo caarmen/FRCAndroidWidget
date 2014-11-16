@@ -29,9 +29,8 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import ca.rmen.android.frcwear.FRCWearPreferenceListener;
 import ca.rmen.android.frcwidget.FRCWidgetScheduler;
-import ca.rmen.android.frcwear.FRCAndroidWearService;
-import ca.rmen.android.frcwear.FRCWearScheduler;
 import ca.rmen.android.frenchcalendar.R;
 
 /**
@@ -42,12 +41,14 @@ import ca.rmen.android.frenchcalendar.R;
 public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use default)
 
     private static final String TAG = FRCPreferenceActivity.class.getSimpleName();
+    private FRCWearPreferenceListener mWearPreferenceListener;
 
     @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle icicle) {
         Log.v(TAG, "onCreate: bundle = " + icicle);
         super.onCreate(icicle);
+
         addPreferencesFromResource(R.xml.widget_settings);
 
         updatePreferenceSummary(FRCPreferences.PREF_METHOD, R.string.setting_method_summary);
@@ -71,6 +72,7 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         if (Integer.valueOf(Build.VERSION.SDK) < Build.VERSION_CODES.JELLY_BEAN_MR2) {
             getPreferenceScreen().removePreference(findPreference(FRCPreferences.PREF_ANDROID_WEAR));
         }
+        mWearPreferenceListener = new FRCWearPreferenceListener(getApplicationContext());
     }
 
     private void updatePreferenceSummary(String key, int summaryResId) {
@@ -83,11 +85,15 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
     protected void onStart() {
         super.onStart();
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(mWearPreferenceListener);
+
     }
 
     @Override
     protected void onStop() {
         PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(mWearPreferenceListener);
+
         super.onStop();
     }
 
@@ -104,38 +110,12 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             if (FRCPreferences.PREF_METHOD.equals(key)) {
                 updatePreferenceSummary(key, R.string.setting_method_summary);
-                // Update the Android Wear notification (if enabled)
-                updateWearNotificationIfEnabled(sharedPreferences);
             } else if (FRCPreferences.PREF_DETAILED_VIEW.equals(key)) {
                 updatePreferenceSummary(key, R.string.setting_detailed_view_summary);
             } else if (FRCPreferences.PREF_LANGUAGE.equals(key)) {
                 updatePreferenceSummary(key, R.string.setting_language_summary);
-                // Update the Android Wear notification (if enabled)
-                updateWearNotificationIfEnabled(sharedPreferences);
-            } else if (FRCPreferences.PREF_ANDROID_WEAR.equals(key)) {
-                boolean androidWearEnabled = sharedPreferences.getBoolean(FRCPreferences.PREF_ANDROID_WEAR, false);
-                if (androidWearEnabled) {
-                    // Schedule an alarm
-                    FRCWearScheduler.scheduleRepeatingAlarm(FRCPreferenceActivity.this);
-
-                    // Also send the value now
-                    FRCAndroidWearService.backgroundRemoveAndUpdateDays(FRCPreferenceActivity.this);
-
-                    // Also send the value in a minute (this allows the Wearable app to finish installing)
-                    FRCWearScheduler.scheduleOnceAlarm(FRCPreferenceActivity.this);
-                } else {
-                    // Unschedule the alarm
-                    FRCWearScheduler.unscheduleRepeatingAlarm(FRCPreferenceActivity.this);
-                }
             }
         }
     };
 
-    private void updateWearNotificationIfEnabled(SharedPreferences sharedPreferences) {
-        boolean androidWearEnabled = sharedPreferences.getBoolean(FRCPreferences.PREF_ANDROID_WEAR, false);
-        if (androidWearEnabled) {
-            // Update the value now
-            FRCAndroidWearService.backgroundRemoveAndUpdateDays(this);
-        }
-    }
 }
