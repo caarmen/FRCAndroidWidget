@@ -14,6 +14,16 @@ android {
         buildConfigField 'String', 'BUILD_DATE', '"' + buildDate() + '"'
         // For now we enable strict mode for all the configs
         buildConfigField 'boolean', 'STRICT_MODE', 'true'
+
+    }
+
+    productFlavors {
+        foss {
+            buildConfigField 'boolean', 'FOSS', 'true'
+        }
+        wear {
+            buildConfigField 'boolean', 'FOSS', 'false'
+        }
     }
 
     signingConfigs {
@@ -32,6 +42,7 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
 }
 
 android.applicationVariants.all { variant ->
