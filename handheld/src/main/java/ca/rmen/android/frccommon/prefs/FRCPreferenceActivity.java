@@ -31,6 +31,7 @@ import android.util.Log;
 
 import ca.rmen.android.frcwear.FRCWearPreferenceListener;
 import ca.rmen.android.frcwidget.FRCWidgetScheduler;
+import ca.rmen.android.frenchcalendar.BuildConfig;
 import ca.rmen.android.frenchcalendar.R;
 
 /**
@@ -69,10 +70,12 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         setResult(RESULT_OK, resultValue);
 
         // Don't show Android Wear stuff for old devices that don't support it
-        if (Integer.valueOf(Build.VERSION.SDK) < Build.VERSION_CODES.JELLY_BEAN_MR2) {
+        if (BuildConfig.FOSS || Integer.valueOf(Build.VERSION.SDK) < Build.VERSION_CODES.JELLY_BEAN_MR2) {
             getPreferenceScreen().removePreference(findPreference(FRCPreferences.PREF_ANDROID_WEAR));
         }
-        mWearPreferenceListener = new FRCWearPreferenceListener(getApplicationContext());
+        if(!BuildConfig.FOSS) {
+            mWearPreferenceListener = new FRCWearPreferenceListener(getApplicationContext());
+        }
     }
 
     private void updatePreferenceSummary(String key, int summaryResId) {
@@ -85,14 +88,15 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
     protected void onStart() {
         super.onStart();
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
-        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(mWearPreferenceListener);
-
+        if(!BuildConfig.FOSS)
+            PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(mWearPreferenceListener);
     }
 
     @Override
     protected void onStop() {
         PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
-        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(mWearPreferenceListener);
+        if(!BuildConfig.FOSS)
+            PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(mWearPreferenceListener);
 
         super.onStop();
     }
