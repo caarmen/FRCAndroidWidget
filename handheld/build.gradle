@@ -20,9 +20,11 @@ android {
     productFlavors {
         foss {
             buildConfigField 'boolean', 'FOSS', 'true'
+            manifestPlaceholders = [googlePlayServicesVersion:"N/A"]
         }
         wear {
             buildConfigField 'boolean', 'FOSS', 'false'
+            manifestPlaceholders = [googlePlayServicesVersion:"@integer/google_play_services_version"]
         }
     }
 
@@ -54,11 +56,12 @@ android.applicationVariants.all { variant ->
 
 dependencies {
     compile 'ca.rmen:lib-french-revolutionary-calendar:1.0.5'
-    compile 'com.google.android.gms:play-services:6.1.71'
+    wearCompile 'com.google.android.gms:play-services:6.1.71'
+
     compile project(':common')
 
     // Package the wear apk inside this one
-    wearApp project(':wearable')
+    wearApp project(':wearable') // This can't (yet) be specified per flavor: https://code.google.com/p/android/issues/detail?id=74658
 }
 
 task deploy(/*dependsOn: assembleRelease*/) << {
