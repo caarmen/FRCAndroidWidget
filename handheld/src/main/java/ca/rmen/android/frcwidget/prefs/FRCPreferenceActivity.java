@@ -29,9 +29,9 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import ca.rmen.android.frcwidget.FRCScheduler;
+import ca.rmen.android.frcwidget.FRCWidgetScheduler;
 import ca.rmen.android.frcwidget.wear.AndroidWearService;
-import ca.rmen.android.frcwidget.wear.ScheduleUtil;
+import ca.rmen.android.frcwidget.wear.FRCWearScheduler;
 import ca.rmen.android.frenchcalendar.R;
 
 /**
@@ -96,7 +96,7 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         Log.v(TAG, "onDestroy");
         super.onDestroy();
         // When we leave the preference screen, reupdate all our widgets
-        FRCScheduler.getInstance(this).schedule();
+        FRCWidgetScheduler.getInstance(this).schedule();
     }
 
     private final OnSharedPreferenceChangeListener mOnSharedPreferenceChangeListener = new OnSharedPreferenceChangeListener() {
@@ -116,16 +116,16 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
                 boolean androidWearEnabled = sharedPreferences.getBoolean(FRCPreferences.PREF_ANDROID_WEAR, false);
                 if (androidWearEnabled) {
                     // Schedule an alarm
-                    ScheduleUtil.scheduleRepeatingAlarm(FRCPreferenceActivity.this);
+                    FRCWearScheduler.scheduleRepeatingAlarm(FRCPreferenceActivity.this);
 
                     // Also send the value now
                     AndroidWearService.backgroundRemoveAndUpdateDays(FRCPreferenceActivity.this);
 
                     // Also send the value in a minute (this allows the Wearable app to finish installing)
-                    ScheduleUtil.scheduleOnceAlarm(FRCPreferenceActivity.this);
+                    FRCWearScheduler.scheduleOnceAlarm(FRCPreferenceActivity.this);
                 } else {
                     // Unschedule the alarm
-                    ScheduleUtil.unscheduleRepeatingAlarm(FRCPreferenceActivity.this);
+                    FRCWearScheduler.unscheduleRepeatingAlarm(FRCPreferenceActivity.this);
                 }
             }
         }

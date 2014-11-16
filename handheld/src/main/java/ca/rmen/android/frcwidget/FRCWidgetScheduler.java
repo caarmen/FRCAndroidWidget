@@ -40,26 +40,26 @@ import ca.rmen.android.frcwidget.prefs.FRCPreferences;
  * @author calvarez
  * 
  */
-public class FRCScheduler {
-    private static final String TAG = Constants.TAG + FRCScheduler.class.getSimpleName();
-    static final String BROADCAST_MESSAGE_UPDATE = "ca.rmen.android.frcwidget.UPDATE_WIDGET";
+public class FRCWidgetScheduler {
+    private static final String TAG = Constants.TAG + FRCWidgetScheduler.class.getSimpleName();
+    static final String ACTION_WIDGET_UPDATE = "ca.rmen.android.frcwidget.UPDATE_WIDGET";
 
-    private static FRCScheduler INSTANCE;
+    private static FRCWidgetScheduler INSTANCE;
     private final Context context;
-    private final PendingIntent updatePendingIntent;
+    private final PendingIntent updateWidgetPendingIntent;
 
-    private FRCScheduler(Context context) {
+    private FRCWidgetScheduler(Context context) {
         this.context = context.getApplicationContext();
-        Intent updateIntent = new Intent(BROADCAST_MESSAGE_UPDATE);
-        updatePendingIntent = PendingIntent.getBroadcast(context, 0, updateIntent, 0);
+        Intent updateWidgetIntent = new Intent(ACTION_WIDGET_UPDATE);
+        updateWidgetPendingIntent = PendingIntent.getBroadcast(context, 0, updateWidgetIntent, 0);
         IntentFilter filterOn = new IntentFilter(Intent.ACTION_SCREEN_ON);
         IntentFilter filterOff = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         context.getApplicationContext().registerReceiver(screenBroadcastReceiver, filterOn);
         context.getApplicationContext().registerReceiver(screenBroadcastReceiver, filterOff);
     }
 
-    public synchronized static FRCScheduler getInstance(Context context) {
-        if (INSTANCE == null) INSTANCE = new FRCScheduler(context);
+    public synchronized static FRCWidgetScheduler getInstance(Context context) {
+        if (INSTANCE == null) INSTANCE = new FRCWidgetScheduler(context);
         return INSTANCE;
     }
 
@@ -85,10 +85,10 @@ public class FRCScheduler {
         }
 
         // Schedule the periodic updates.
-        mgr.setRepeating(AlarmManager.RTC, nextAlarmTime, frequency, updatePendingIntent);
+        mgr.setRepeating(AlarmManager.RTC, nextAlarmTime, frequency, updateWidgetPendingIntent);
 
         // Also send a broadcast to force an update now.
-        Intent updateIntent = new Intent(BROADCAST_MESSAGE_UPDATE);
+        Intent updateIntent = new Intent(ACTION_WIDGET_UPDATE);
         context.sendBroadcast(updateIntent);
 
         Log.v(TAG, "Started updater");
@@ -100,7 +100,7 @@ public class FRCScheduler {
     void cancel() {
         Log.v(TAG, "cancel");
         AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        mgr.cancel(updatePendingIntent);
+        mgr.cancel(updateWidgetPendingIntent);
     }
 
     /**

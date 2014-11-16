@@ -35,19 +35,23 @@ import ca.rmen.android.frcwidget.Constants.WidgetType;
 import ca.rmen.android.frcwidget.render.FRCAppWidgetRenderer;
 import ca.rmen.android.frcwidget.render.FRCAppWidgetRendererFactory;
 import ca.rmen.android.frenchcalendar.R;
+import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetWide;
+import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetNarrow;
+import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetMinimalist;
 
 /**
  * Receiver and AppWidgetProvider which updates a list of wide widgets or a list of narrow widgets.
  * 
- * At any given point, there will be at most two instances of this class:
+ * At any given point, there will be at most three instances of this class:
  * <ul>
- * <li> one {@link FRCAppWidgetWide} which will manage all of the wide widgets, and </li>
- * <li> one {@link FRCAppWidgetNarrow} which will manage all of the narrow widgets.</li>
+ * <li> one {@link FrenchCalendarAppWidgetWide} which will manage all of the wide widgets, and </li>
+ * <li> one {@link FrenchCalendarAppWidgetNarrow} which will manage all of the narrow widgets.</li>
+ * <li> one {@link FrenchCalendarAppWidgetMinimalist} which will manage all of the minimalist widgets.</li>
  * </ul>
  * These receivers are notified by the system when a widget of the given type is added or deleted,
  * or when widgets of the given type should be updated.
  * 
- * These receivers are also notified by the alarm set up by {@link FRCScheduler}, which will
+ * These receivers are also notified by the alarm set up by {@link FRCWidgetScheduler}, which will
  * go off either once a minute, or once a day, depending on the preferences.
  */
 public abstract class FRCAppWidgetProvider extends AppWidgetProvider {
@@ -60,9 +64,9 @@ public abstract class FRCAppWidgetProvider extends AppWidgetProvider {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         ComponentName provider = intent.getComponent();
         final int[] appWidgetIds = appWidgetManager.getAppWidgetIds(provider);
-        if (FRCScheduler.BROADCAST_MESSAGE_UPDATE.equals(intent.getAction())) {
+        if (FRCWidgetScheduler.ACTION_WIDGET_UPDATE.equals(intent.getAction())) {
             Set<Integer> allAppWidgetIds = FRCAppWidgetManager.getAllAppWidgetIds(context);
-            if (allAppWidgetIds.size() == 0) FRCScheduler.getInstance(context).cancel();
+            if (allAppWidgetIds.size() == 0) FRCWidgetScheduler.getInstance(context).cancel();
             else
                 updateAll(context, appWidgetManager, appWidgetIds);
         }
@@ -84,7 +88,7 @@ public abstract class FRCAppWidgetProvider extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         Log.v(TAG, "onUpdate: appWidgetIds = " + Arrays.toString(appWidgetIds));
         super.onUpdate(context, appWidgetManager, appWidgetIds);
-        FRCScheduler.getInstance(context).schedule();
+        FRCWidgetScheduler.getInstance(context).schedule();
     }
 
     /**

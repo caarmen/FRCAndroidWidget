@@ -32,8 +32,6 @@ import ca.rmen.android.frcwidget.prefs.FRCPreferences;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
 public class AndroidWearService extends IntentService {
-    public static final String ACTION_UPDATE = "ACTION_UPDATE";
-    public static final String ACTION_REMOVE_AND_UPDATE = "ACTION_REMOVE_AND_UPDATE";
 
     public AndroidWearService() {
         super("AndroidWearService");
@@ -54,7 +52,7 @@ public class AndroidWearService extends IntentService {
         }
 
         WearCommHelper wearCommHelper = WearCommHelper.get();
-        if (ACTION_REMOVE_AND_UPDATE.equals(intent.getAction())) {
+        if (FRCWearScheduler.ACTION_WEAR_REMOVE_AND_UPDATE.equals(intent.getAction())) {
             wearCommHelper.removeToday();
         }
         FrenchRevolutionaryCalendarDate frenchDate = FRCDateUtils.getToday(this);

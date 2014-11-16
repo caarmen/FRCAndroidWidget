@@ -25,24 +25,26 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 
-public class ScheduleUtil {
+public class FRCWearScheduler {
     private static final long ONE_DAY = 24 * 60 * 60 * 1000;
+    public static final String ACTION_WEAR_UPDATE = "ACTION_WEAR_UPDATE";
+    public static final String ACTION_WEAR_REMOVE_AND_UPDATE = "ACTION_WEAR_REMOVE_AND_UPDATE";
 
     public static void scheduleRepeatingAlarm(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        PendingIntent pendingIntent = AndroidWearService.getPendingIntent(context, AndroidWearService.ACTION_UPDATE);
+        PendingIntent pendingIntent = AndroidWearService.getPendingIntent(context, ACTION_WEAR_UPDATE);
         alarmManager.setInexactRepeating(AlarmManager.RTC, getTomorrowAtEight(), ONE_DAY, pendingIntent);
     }
 
     public static void unscheduleRepeatingAlarm(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        PendingIntent pendingIntent = AndroidWearService.getPendingIntent(context, AndroidWearService.ACTION_UPDATE);
+        PendingIntent pendingIntent = AndroidWearService.getPendingIntent(context, ACTION_WEAR_UPDATE);
         alarmManager.cancel(pendingIntent);
     }
 
     public static void scheduleOnceAlarm(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        PendingIntent pendingIntent = AndroidWearService.getPendingIntent(context, AndroidWearService.ACTION_REMOVE_AND_UPDATE);
+        PendingIntent pendingIntent = AndroidWearService.getPendingIntent(context, ACTION_WEAR_REMOVE_AND_UPDATE);
         alarmManager.set(AlarmManager.RTC, getInXSeconds(15), pendingIntent);
     }
 
