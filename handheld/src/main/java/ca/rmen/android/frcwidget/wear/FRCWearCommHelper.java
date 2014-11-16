@@ -37,16 +37,16 @@ import ca.rmen.android.frenchcalendar.common.WearCommConstants;
  * Helper singleton class to communicate with wearables.<br/>
  * Note: {@link #connect(android.content.Context)} must be called prior to calling all the other methods.<br/>
  */
-public class WearCommHelper {
-    private static final String TAG = WearCommHelper.class.getSimpleName();
+public class FRCWearCommHelper {
+    private static final String TAG = FRCWearCommHelper.class.getSimpleName();
 
-    private static final WearCommHelper INSTANCE = new WearCommHelper();
+    private static final FRCWearCommHelper INSTANCE = new FRCWearCommHelper();
 
     private GoogleApiClient mGoogleApiClient;
 
-    private WearCommHelper() {}
+    private FRCWearCommHelper() {}
 
-    public static WearCommHelper get() {
+    public static FRCWearCommHelper get() {
         return INSTANCE;
     }
 

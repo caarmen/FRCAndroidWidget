@@ -32,19 +32,19 @@ public class FRCWearScheduler {
 
     public static void scheduleRepeatingAlarm(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        PendingIntent pendingIntent = AndroidWearService.getPendingIntent(context, ACTION_WEAR_UPDATE);
+        PendingIntent pendingIntent = FRCAndroidWearService.getPendingIntent(context, ACTION_WEAR_UPDATE);
         alarmManager.setInexactRepeating(AlarmManager.RTC, getTomorrowAtEight(), ONE_DAY, pendingIntent);
     }
 
     public static void unscheduleRepeatingAlarm(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        PendingIntent pendingIntent = AndroidWearService.getPendingIntent(context, ACTION_WEAR_UPDATE);
+        PendingIntent pendingIntent = FRCAndroidWearService.getPendingIntent(context, ACTION_WEAR_UPDATE);
         alarmManager.cancel(pendingIntent);
     }
 
     public static void scheduleOnceAlarm(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        PendingIntent pendingIntent = AndroidWearService.getPendingIntent(context, ACTION_WEAR_REMOVE_AND_UPDATE);
+        PendingIntent pendingIntent = FRCAndroidWearService.getPendingIntent(context, ACTION_WEAR_REMOVE_AND_UPDATE);
         alarmManager.set(AlarmManager.RTC, getInXSeconds(15), pendingIntent);
     }
 

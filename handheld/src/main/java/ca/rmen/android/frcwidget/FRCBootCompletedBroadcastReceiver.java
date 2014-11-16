@@ -27,7 +27,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import ca.rmen.android.frcwidget.prefs.FRCPreferences;
-import ca.rmen.android.frcwidget.wear.AndroidWearService;
+import ca.rmen.android.frcwidget.wear.FRCAndroidWearService;
 import ca.rmen.android.frcwidget.wear.FRCWearScheduler;
 
 public class FRCBootCompletedBroadcastReceiver extends BroadcastReceiver {
@@ -43,7 +43,7 @@ public class FRCBootCompletedBroadcastReceiver extends BroadcastReceiver {
             FRCWearScheduler.scheduleRepeatingAlarm(context);
 
             // Also send the value now
-            AndroidWearService.backgroundRemoveAndUpdateDays(context);
+            FRCAndroidWearService.backgroundRemoveAndUpdateDays(context);
 
             // Also send the value in a minute (this allows the phone to finish booting and the Wear connexion to be up)
             FRCWearScheduler.scheduleOnceAlarm(context);

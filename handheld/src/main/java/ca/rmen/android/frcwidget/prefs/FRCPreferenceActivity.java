@@ -30,7 +30,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import ca.rmen.android.frcwidget.FRCWidgetScheduler;
-import ca.rmen.android.frcwidget.wear.AndroidWearService;
+import ca.rmen.android.frcwidget.wear.FRCAndroidWearService;
 import ca.rmen.android.frcwidget.wear.FRCWearScheduler;
 import ca.rmen.android.frenchcalendar.R;
 
@@ -119,7 +119,7 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
                     FRCWearScheduler.scheduleRepeatingAlarm(FRCPreferenceActivity.this);
 
                     // Also send the value now
-                    AndroidWearService.backgroundRemoveAndUpdateDays(FRCPreferenceActivity.this);
+                    FRCAndroidWearService.backgroundRemoveAndUpdateDays(FRCPreferenceActivity.this);
 
                     // Also send the value in a minute (this allows the Wearable app to finish installing)
                     FRCWearScheduler.scheduleOnceAlarm(FRCPreferenceActivity.this);
@@ -135,7 +135,7 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         boolean androidWearEnabled = sharedPreferences.getBoolean(FRCPreferences.PREF_ANDROID_WEAR, false);
         if (androidWearEnabled) {
             // Update the value now
-            AndroidWearService.backgroundRemoveAndUpdateDays(this);
+            FRCAndroidWearService.backgroundRemoveAndUpdateDays(this);
         }
     }
 }

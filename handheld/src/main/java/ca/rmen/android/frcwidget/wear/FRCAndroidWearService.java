@@ -31,16 +31,16 @@ import ca.rmen.android.frcwidget.FRCDateUtils;
 import ca.rmen.android.frcwidget.prefs.FRCPreferences;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
-public class AndroidWearService extends IntentService {
+public class FRCAndroidWearService extends IntentService {
 
-    public AndroidWearService() {
-        super("AndroidWearService");
+    public FRCAndroidWearService() {
+        super("FRCAndroidWearService");
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        WearCommHelper.get().connect(this);
+        FRCWearCommHelper.get().connect(this);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class AndroidWearService extends IntentService {
             return;
         }
 
-        WearCommHelper wearCommHelper = WearCommHelper.get();
+        FRCWearCommHelper wearCommHelper = FRCWearCommHelper.get();
         if (FRCWearScheduler.ACTION_WEAR_REMOVE_AND_UPDATE.equals(intent.getAction())) {
             wearCommHelper.removeToday();
         }
@@ -64,18 +64,18 @@ public class AndroidWearService extends IntentService {
 
     @Override
     public void onDestroy() {
-        WearCommHelper.get().disconnect();
+        FRCWearCommHelper.get().disconnect();
         super.onDestroy();
     }
 
     public static PendingIntent getPendingIntent(Context context, String action) {
-        Intent intent = new Intent(context, AndroidWearService.class);
+        Intent intent = new Intent(context, FRCAndroidWearService.class);
         intent.setAction(action);
         return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     public static void backgroundRemoveAndUpdateDays(final Context context) {
-        final WearCommHelper wearCommHelper = WearCommHelper.get();
+        final FRCWearCommHelper wearCommHelper = FRCWearCommHelper.get();
         wearCommHelper.connect(context);
         new AsyncTask<Void, Void, Void>() {
             @Override

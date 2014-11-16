@@ -118,7 +118,7 @@
             </intent-filter>
         </receiver>
 
-        <service android:name="ca.rmen.android.frcwidget.wear.AndroidWearService" />
+        <service android:name="ca.rmen.android.frcwidget.wear.FRCAndroidWearService" />
 
     </application>
 
