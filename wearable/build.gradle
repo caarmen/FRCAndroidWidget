@@ -13,8 +13,8 @@ android {
         applicationId "ca.rmen.android.frenchcalendar"
         minSdkVersion 20
         targetSdkVersion 20
-        versionCode buildNumber
-        versionName buildProperties['versionName']
+        versionCode Integer.valueOf(buildProperties['version-code'])
+        versionName buildProperties['version-name']
 
         // For now we enable strict mode for all the configs
         buildConfigField 'boolean', 'STRICT_MODE', 'true'

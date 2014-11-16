@@ -58,7 +58,3 @@ def filterResources(buildVariant) {
 ext.buildProperties = new Properties()
 buildProperties.load(new FileInputStream(file('build.properties')))
 
-ext.buildNumberFile = file('build.number')
-ext.buildNumberProperties = new Properties()
-buildNumberProperties.load(new FileInputStream(buildNumberFile))
-ext.buildNumber = buildNumberProperties['build.number'].toInteger()
