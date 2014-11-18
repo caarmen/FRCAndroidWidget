@@ -20,11 +20,9 @@ android {
     productFlavors {
         foss {
             buildConfigField 'boolean', 'FOSS', 'true'
-            manifestPlaceholders = [googlePlayServicesVersion:"N/A"]
         }
         wear {
             buildConfigField 'boolean', 'FOSS', 'false'
-            manifestPlaceholders = [googlePlayServicesVersion:"@integer/google_play_services_version"]
         }
     }
 
