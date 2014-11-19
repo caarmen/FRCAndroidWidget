@@ -58,8 +58,8 @@ dependencies {
 
     compile project(':common')
 
-    // Package the wear apk inside this one
-    wearApp project(':wearable') // This can't (yet) be specified per flavor: https://code.google.com/p/android/issues/detail?id=74658
+    // Package the wear apk inside this one (only for the 'wear' flavor)
+    wearWearApp project(':wearable')
 }
 
 task deploy(/*dependsOn: assembleRelease*/) << {
