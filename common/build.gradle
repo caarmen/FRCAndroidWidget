@@ -8,8 +8,6 @@ android {
         applicationId "ca.rmen.android.frenchcalendar.common"
         minSdkVersion 3
         targetSdkVersion 21
-        versionCode Integer.valueOf(buildProperties['version-code'])
-        versionName buildProperties['version-name']
     }
     buildTypes {
         release {
