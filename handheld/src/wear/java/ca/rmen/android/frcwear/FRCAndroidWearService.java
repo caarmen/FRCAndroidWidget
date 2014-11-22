@@ -55,11 +55,7 @@ public class FRCAndroidWearService extends IntentService {
         if (FRCWearScheduler.ACTION_WEAR_REMOVE_AND_UPDATE.equals(intent.getAction())) {
             wearCommHelper.removeToday();
         }
-        FrenchRevolutionaryCalendarDate frenchDate = FRCDateUtils.getToday(this);
-        String date = frenchDate.dayOfMonth + " " + frenchDate.getMonthName() + " " + frenchDate.year;
-        String dayOfYear = frenchDate.getDayOfYear();
-        int month = frenchDate.month;
-        wearCommHelper.updateToday(date, dayOfYear, month);
+        updateToday(this, wearCommHelper);
     }
 
     @Override
@@ -83,11 +79,7 @@ public class FRCAndroidWearService extends IntentService {
                 synchronized (wearCommHelper) {
                     wearCommHelper.removeToday();
 
-                    FrenchRevolutionaryCalendarDate frenchDate = FRCDateUtils.getToday(context);
-                    String date = frenchDate.dayOfMonth + " " + frenchDate.getMonthName() + " " + frenchDate.year;
-                    String dayOfYear = frenchDate.getDayOfYear();
-                    int month = frenchDate.month;
-                    wearCommHelper.updateToday(date, dayOfYear, month);
+                    updateToday(context, wearCommHelper);
                     return null;
                 }
             }
@@ -97,5 +89,13 @@ public class FRCAndroidWearService extends IntentService {
                 wearCommHelper.disconnect();
             }
         }.execute();
+    }
+
+    private static void updateToday(Context context, FRCWearCommHelper wearCommHelper) {
+        FrenchRevolutionaryCalendarDate frenchDate = FRCDateUtils.getToday(context);
+        String date = frenchDate.getWeekdayName() + " " + frenchDate.dayOfMonth + " " + frenchDate.getMonthName() + " " + frenchDate.year;
+        String dayOfYear = frenchDate.getDayOfYear();
+        int month = frenchDate.month;
+        wearCommHelper.updateToday(date, dayOfYear, month);
     }
 }

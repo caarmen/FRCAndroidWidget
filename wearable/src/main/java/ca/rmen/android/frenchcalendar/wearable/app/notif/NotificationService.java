@@ -111,14 +111,14 @@ public class NotificationService extends WearableListenerService {
         mainNotifBuilder.setSmallIcon(R.drawable.icon);
 
         // Title
-        String title = mDate;
+        String title = mDayOfYear;
         SpannableString spannableTitle = new SpannableString(title);
         Object span = new TextAppearanceSpan(this, R.style.NotificationContentTitleTextAppearance);
         spannableTitle.setSpan(span, 0, title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         mainNotifBuilder.setContentTitle(spannableTitle);
 
         // Text
-        String text = mDayOfYear;
+        String text = mDate;
         SpannableString spannableText = new SpannableString(text);
         span = new TextAppearanceSpan(this, R.style.NotificationContentTextTextAppearance);
         spannableText.setSpan(span, 0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
