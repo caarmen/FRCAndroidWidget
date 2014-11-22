@@ -8,10 +8,10 @@
     </facet>
     <facet type="android" name="Android">
       <configuration>
-        <option name="SELECTED_BUILD_VARIANT" value="fossRelease" />
-        <option name="ASSEMBLE_TASK_NAME" value="assembleFossRelease" />
-        <option name="COMPILE_JAVA_TASK_NAME" value="compileFossReleaseSources" />
-        <option name="SOURCE_GEN_TASK_NAME" value="generateFossReleaseSources" />
+        <option name="SELECTED_BUILD_VARIANT" value="wearRelease" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleWearRelease" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileWearReleaseSources" />
+        <option name="SOURCE_GEN_TASK_NAME" value="generateWearReleaseSources" />
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
         <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
@@ -21,36 +21,36 @@
     </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/build/intermediates/classes/foss/release" />
+    <output url="file://$MODULE_DIR$/build/intermediates/classes/wear/release" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/foss/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/foss/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/foss/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/foss/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/foss/release" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/generated/foss/release" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/fossRelease/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/fossRelease/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/fossRelease/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/fossRelease/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/fossRelease/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/fossRelease/jni" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/fossRelease/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/foss/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/foss/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/foss/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/foss/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/foss/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/foss/jni" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/foss/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestFoss/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestFoss/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestFoss/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestFoss/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestFoss/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestFoss/jni" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestFoss/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/wear/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/wear/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/wear/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/wear/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/wear/release" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/generated/wear/release" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/wearRelease/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/wearRelease/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/wearRelease/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/wearRelease/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/wearRelease/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/wearRelease/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/wearRelease/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/wear/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/wear/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/wear/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/wear/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/wear/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/wear/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/wear/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestWear/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestWear/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestWear/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestWear/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestWear/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestWear/jni" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestWear/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/assets" type="java-resource" />
@@ -97,6 +97,9 @@
     <orderEntry type="jdk" jdkName="Android API 21 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="lib-french-revolutionary-calendar-1.0.5" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-20.0.0" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-20.0.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-6.1.71" level="project" />
     <orderEntry type="module" module-name="common" exported="" />
   </component>
 </module>
