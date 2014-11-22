@@ -2,15 +2,15 @@
 <resources>
     <color name="month_0">#da9d98</color>
     <color name="month_1">#98daa0</color>
-    <color name="month_2">#d198da</color>
-    <color name="month_3">#98c2da</color>
-    <color name="month_4">#99d9db</color>
-    <color name="month_5">#a898da</color>
-    <color name="month_6">#ededed</color>
-    <color name="month_7">#98b4da</color>
+    <color name="month_2">#ff8aa7d1</color>
+    <color name="month_3">#ffe7e7e7</color>
+    <color name="month_4">#ff9987d1</color>
+    <color name="month_5">#ff8bd2d1</color>
+    <color name="month_6">#ff8ab7d1</color>
+    <color name="month_7">#ffc585d1</color>
     <color name="month_8">#b0da98</color>
-    <color name="month_9">#da98a0</color>
-    <color name="month_10">#da98b4</color>
-    <color name="month_11">#dabf97</color>
-    <color name="month_12">#d8da98</color>
+    <color name="month_9">#ffd0d389</color>
+    <color name="month_10">#ffd0b489</color>
+    <color name="month_11">#ffd086a7</color>
+    <color name="month_12">#ffd08793</color>
 </resources>
