@@ -20,13 +20,18 @@ android {
         buildConfigField 'boolean', 'STRICT_MODE', 'true'
     }
 
-    signingConfigs {
-        release {
-            storeFile file(buildProperties['key-store'])
-            storePassword buildProperties['key-store-password']
-            keyAlias buildProperties['key-alias']
-            keyPassword buildProperties['key-alias-password']
+    if(project.hasProperty("keyStore")) {
+        signingConfigs {
+            release {
+                storeFile file(project.keyStore)
+                storePassword project.keyStorePassword
+                keyAlias project.keyAlias
+                keyPassword project.keyAliasPassword
+            }
         }
+    }
+    else {
+        android.buildTypes.release.signingConfig = null
     }
 
     buildTypes {
@@ -37,7 +42,6 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
     }
 }

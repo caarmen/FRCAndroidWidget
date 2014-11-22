@@ -1,5 +1,0 @@
-key-store=/path/to/key.keystore
-key-alias=my-key-alias
-key-store-password=some-password
-key-alias-password=some-password
-deploy-folder=/path/to/deploy/folder

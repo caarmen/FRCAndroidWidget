@@ -26,20 +26,23 @@ android {
         }
     }
 
-    signingConfigs {
-        release {
-            storeFile file(buildProperties['key-store'])
-            storePassword buildProperties['key-store-password']
-            keyAlias buildProperties['key-alias']
-            keyPassword buildProperties['key-alias-password']
+    if(project.hasProperty("keyStore")) {
+        signingConfigs {
+            release {
+                storeFile file(project.keyStore)
+                storePassword project.keyStorePassword
+                keyAlias project.keyAlias
+                keyPassword project.keyAliasPassword
+            }
         }
+    } else {
+        android.buildTypes.release.signingConfig = null
     }
 
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
     }
 
@@ -48,7 +51,7 @@ android {
 android.applicationVariants.all { variant ->
     // Perform resource filtering
     variant.mergeResources.doLast {
-        filterResources(variant)
+        filterResources(project, variant)
     }
 }
 
@@ -62,7 +65,7 @@ dependencies {
     wearWearApp project(':wearable')
 }
 
-task deploy(/*dependsOn: assembleRelease*/) << {
+task deploy(dependsOn: assembleRelease) << {
     description 'Build a release apk, copy the result to the deploy and \'etc\' folders, then increment the build number.'
 
     def projectFlavorNames = project.("android").productFlavors.collect { it.name };
@@ -76,11 +79,13 @@ task deploy(/*dependsOn: assembleRelease*/) << {
             rename "${project.name}-${flavorName}-release.apk", "${globalProjectName}-${flavorName}-${android.defaultConfig.versionCode}-signed.apk"
         }
 
-        // Also copy the apk to the deploy folder
-        copy {
-            from buildDir.getPath() + "/outputs/apk/${project.name}-${flavorName}-release.apk"
-            into buildProperties['deploy-folder']
-            rename "${project.name}-${flavorName}-release.apk", "${globalProjectName}-${flavorName}-${android.defaultConfig.versionCode}-signed.apk"
+        // Copy the apk to the deploy folder
+        if(project.hasProperty("deployFolder")) {
+            copy {
+                from buildDir.getPath() + "/outputs/apk/${project.name}-${flavorName}-release.apk"
+                into project.deployFolder
+                rename "${project.name}-${flavorName}-release.apk", "${globalProjectName}-${flavorName}-${android.defaultConfig.versionCode}-signed.apk"
+            }
         }
 
         // Copy the proguard mapping to the 'etc' folder
