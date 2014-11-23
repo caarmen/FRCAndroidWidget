@@ -69,7 +69,7 @@ class FRCMinimalistAppWidgetRenderer implements FRCAppWidgetRenderer {
             if (detailedView == DetailedView.TIME)
                 timestamp = String.format(Locale.US, "%d:%02d", frenchDate.hour, frenchDate.minute);
             else
-                timestamp = frenchDate.getDayOfYear();
+                timestamp = " " + frenchDate.getDayOfYear() + " ";
             tvTime.setText(timestamp);
         }
         
