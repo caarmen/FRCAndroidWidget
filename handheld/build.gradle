@@ -56,7 +56,7 @@ android.applicationVariants.all { variant ->
 }
 
 dependencies {
-    compile 'ca.rmen:lib-french-revolutionary-calendar:1.0.5'
+    compile 'ca.rmen:lib-french-revolutionary-calendar:1.0.6'
     wearCompile 'com.google.android.gms:play-services:6.1.71'
 
     compile project(':common')
