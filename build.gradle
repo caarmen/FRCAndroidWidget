@@ -10,9 +10,6 @@ ext.globalProjectName = 'french-revolutionary-calendar-widget'
 buildscript {
     repositories {
         jcenter()
-        maven {
-            url "http://dl.bintray.com/caarmen/maven"
-        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:0.14.4'
