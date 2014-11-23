@@ -29,6 +29,7 @@ android {
                 keyPassword project.keyAliasPassword
             }
         }
+        android.buildTypes.release.signingConfig =signingConfigs.release
     }
     else {
         android.buildTypes.release.signingConfig = null
