@@ -4,4 +4,7 @@ build.properties
 build
 etc/apk
 local.properties
+.classpath
+.settings
+.project
 .DS_Store
