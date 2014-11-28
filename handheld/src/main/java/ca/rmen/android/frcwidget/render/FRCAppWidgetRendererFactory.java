@@ -30,11 +30,11 @@ public class FRCAppWidgetRendererFactory {
 
     private final static int[] NARROW_SCROLL_RESOURCE_IDS = new int[] { R.drawable.vscroll1, R.drawable.vscroll2, R.drawable.vscroll3, R.drawable.vscroll4,
             R.drawable.vscroll5, R.drawable.vscroll6, R.drawable.vscroll7, R.drawable.vscroll8, R.drawable.vscroll9, R.drawable.vscroll10,
-            R.drawable.vscroll11, R.drawable.vscroll12, R.drawable.vscroll13, };
+            R.drawable.vscroll11, R.drawable.vscroll12, R.drawable.vscroll13, R.drawable.vscroll_blank};
 
     private final static int[] WIDE_SCROLL_RESOURCE_IDS = new int[] { R.drawable.hscroll1, R.drawable.hscroll2, R.drawable.hscroll3, R.drawable.hscroll4,
             R.drawable.hscroll5, R.drawable.hscroll6, R.drawable.hscroll7, R.drawable.hscroll8, R.drawable.hscroll9, R.drawable.hscroll10,
-            R.drawable.hscroll11, R.drawable.hscroll12, R.drawable.hscroll13, };
+            R.drawable.hscroll11, R.drawable.hscroll12, R.drawable.hscroll13, R.drawable.hscroll_blank};
 
     
 	public static FRCAppWidgetRenderer getRenderer(WidgetType widgetType) {

@@ -72,7 +72,12 @@ class FRCMinimalistAppWidgetRenderer implements FRCAppWidgetRenderer {
                 timestamp = " " + frenchDate.getDayOfYear() + " ";
             tvTime.setText(timestamp);
         }
-        
+
+        int color = FRCPreferences.getInstance(context).getColor();
+        tvWeekday.setTextColor(color);
+        tvDate.setTextColor(color);
+        tvTime.setTextColor(color);
+
         // Scale the views.
         float defaultWidgetWidth = context.getResources().getDimension(R.dimen.minimalist_widget_width);
         float defaultWidgetHeight = context.getResources().getDimension(R.dimen.minimalist_widget_height);

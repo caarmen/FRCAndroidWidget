@@ -23,7 +23,7 @@
     android:installLocation="internalOnly"
     tools:ignore="MissingVersion,UnusedAttribute">
 
-    <uses-sdk tools:overrideLibrary="com.google.android.gms, android.support.v4" />
+    <uses-sdk tools:overrideLibrary="com.google.android.gms, android.support.v4, net.margaritov.preference.colorpicker" />
 
     <supports-screens
         android:anyDensity="false"

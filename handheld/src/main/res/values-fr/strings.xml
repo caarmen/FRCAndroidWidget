@@ -38,6 +38,7 @@
     <string name="setting_detailed_view_summary">%s</string>
     <string name="setting_language">Langue</string>
     <string name="setting_language_summary">%s</string>
+    <string name="setting_color">Couleur</string>
     <string name="setting_android_wear">Android Wear</string>
     <string name="setting_android_wear_summary">Affiche une notification une fois par jour sur les objets Android Wear connectés</string>
     <string name="share_chooser_title">Séléctionner une appli</string>
@@ -52,5 +53,7 @@ L\'heure actuelle est %5$s.
 \n\n\
 %8$d jours se sont écoulés depuis la formation de la République.</string>
     <string name="about">À propos</string>
+    <string name="dialog_color_picker">Choisir une couleur</string>
+    <string name="press_color_to_apply">Taper sur la couleur pour l\'appliquer</string>
 
 </resources>

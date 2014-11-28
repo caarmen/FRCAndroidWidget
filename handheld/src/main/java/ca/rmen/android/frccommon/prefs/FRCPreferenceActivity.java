@@ -73,8 +73,11 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         if (BuildConfig.FOSS || Integer.valueOf(Build.VERSION.SDK) < Build.VERSION_CODES.JELLY_BEAN_MR2) {
             getPreferenceScreen().removePreference(findPreference(FRCPreferences.PREF_ANDROID_WEAR));
         }
-        if(!BuildConfig.FOSS) {
+        if (!BuildConfig.FOSS) {
             mWearPreferenceListener = new FRCWearPreferenceListener(getApplicationContext());
+        }
+        if (Integer.valueOf(Build.VERSION.SDK) < Build.VERSION_CODES.ECLAIR_MR1) {
+            getPreferenceScreen().removePreference(findPreference(FRCPreferences.PREF_COLOR));
         }
     }
 

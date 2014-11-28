@@ -36,6 +36,7 @@ public class FRCPreferences {
     public static final String PREF_METHOD = "setting_method";
     static final String PREF_DETAILED_VIEW = "setting_detailed_view";
     public static final String PREF_LANGUAGE = "setting_language";
+    static final String PREF_COLOR = "setting_color";
     public static final String PREF_ANDROID_WEAR = "setting_android_wear";
     private static final int FREQUENCY_MINUTES = 86400;
     public static final int FREQUENCY_DAYS = 86400000;
@@ -62,6 +63,10 @@ public class FRCPreferences {
     public Locale getLocale() {
         String language = sharedPrefs.getString(PREF_LANGUAGE, "fr");
         return new Locale(language);
+    }
+
+    public int getColor() {
+        return sharedPrefs.getInt(PREF_COLOR, -1);
     }
 
     public CalculationMethod getCalculationMethod() {

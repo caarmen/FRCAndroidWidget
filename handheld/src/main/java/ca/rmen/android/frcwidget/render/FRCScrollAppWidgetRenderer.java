@@ -22,6 +22,8 @@ import java.util.Locale;
 
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,8 +65,15 @@ class FRCScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
 
         // Create a view with the right scroll image as the background.
         LayoutInflater inflater = LayoutInflater.from(context);
+        int scrollResId = mParams.scrollResourceIds[frenchDate.month - 1];
         View view = inflater.inflate(mParams.layoutResourceId, null, false);
-        view.setBackgroundResource(mParams.scrollResourceIds[frenchDate.month - 1]);
+        int color = FRCPreferences.getInstance(context).getColor();
+        scrollResId = mParams.scrollResourceIds[mParams.scrollResourceIds.length-1];
+        view.setBackgroundResource(scrollResId);
+        Drawable background = view.getBackground();
+        background.setColorFilter(color, PorterDuff.Mode.MULTIPLY);
+        view.setBackgroundDrawable(background);
+
         int width = (int) (scaleFactor * context.getResources().getDimensionPixelSize(mParams.widthResourceId));
         int height = (int) (scaleFactor * context.getResources().getDimensionPixelSize(mParams.heightResourceId));
         Log.v(TAG, "Creating widget of size " + width + "x" + height);
