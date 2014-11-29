@@ -46,20 +46,20 @@
 
     <CheckBoxPreference
         android:defaultValue="false"
-        android:key="setting_android_wear"
-        android:summary="@string/setting_android_wear_summary"
-        android:title="@string/setting_android_wear" />
-
-    <CheckBoxPreference
-        android:defaultValue="false"
         android:key="setting_custom_color_enabled"
-        android:title="@string/setting_custom_color" />
+        android:title="@string/setting_custom_color_enabled" />
 
     <net.margaritov.preference.colorpicker.ColorPickerPreference
         android:defaultValue="@android:color/white"
         android:dependency="setting_custom_color_enabled"
         android:key="setting_custom_color"
-        android:title="@string/setting_color" />
+        android:title="@string/setting_custom_color" />
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="setting_android_wear"
+        android:summary="@string/setting_android_wear_summary"
+        android:title="@string/setting_android_wear" />
 
 
     <Preference android:title="@string/about">

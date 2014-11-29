@@ -39,10 +39,10 @@
     <string name="setting_detailed_view_summary">%s</string>
     <string name="setting_language">Language</string>
     <string name="setting_language_summary">%s</string>
+    <string name="setting_custom_color_enabled">Use a custom color?</string>
+    <string name="setting_custom_color_summary_enabled">Currently using your custom color.</string>
+    <string name="setting_custom_color_summary_disabled">Currently using predefined colors (color changes every month).</string>
     <string name="setting_custom_color">Custom color</string>
-    <string name="setting_custom_color_summary_enabled">Using custom color</string>
-    <string name="setting_custom_color_summary_disabled">Using predefined colors</string>
-    <string name="setting_color">Color</string>
     <string name="setting_android_wear">Android Wear</string>
     <string name="setting_android_wear_summary">Show a notification once a day on connected Android Wear devices</string>
     <string name="share_chooser_title">Choose an app</string>

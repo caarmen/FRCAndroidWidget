@@ -39,9 +39,10 @@
     <string name="setting_language">Langue</string>
     <string name="setting_language_summary">%s</string>
     <string name="setting_color">Couleur</string>
+    <string name="setting_custom_color_enabled">Personaliser la couleur ?</string>
+    <string name="setting_custom_color_summary_enabled">Votre couleur personalisée est utilisée.</string>
+    <string name="setting_custom_color_summary_disabled">Couleurs prédéfinies utilisées (la couleur change chaque mois).</string>
     <string name="setting_custom_color">Couleur personalisée</string>
-    <string name="setting_custom_color_summary_enabled">Couleur personalisée</string>
-    <string name="setting_custom_color_summary_disabled">Couleurs prédéfinies</string>
     <string name="setting_android_wear">Android Wear</string>
     <string name="setting_android_wear_summary">Affiche une notification une fois par jour sur les objets Android Wear connectés</string>
     <string name="share_chooser_title">Séléctionner une appli</string>
