@@ -65,11 +65,9 @@ class FRCScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
 
         // Create a view with the right scroll image as the background.
         LayoutInflater inflater = LayoutInflater.from(context);
-        int scrollResId = mParams.scrollResourceIds[frenchDate.month - 1];
         View view = inflater.inflate(mParams.layoutResourceId, null, false);
-        int color = FRCPreferences.getInstance(context).getColor();
-        scrollResId = mParams.scrollResourceIds[mParams.scrollResourceIds.length-1];
-        view.setBackgroundResource(scrollResId);
+        int color = FRCDateUtils.getColor(context, frenchDate);
+        view.setBackgroundResource(mParams.scrollResourceId);
         Drawable background = view.getBackground();
         background.setColorFilter(color, PorterDuff.Mode.MULTIPLY);
         view.setBackgroundDrawable(background);

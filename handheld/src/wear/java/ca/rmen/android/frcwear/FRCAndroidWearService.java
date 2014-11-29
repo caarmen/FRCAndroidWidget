@@ -96,6 +96,7 @@ public class FRCAndroidWearService extends IntentService {
         String date = frenchDate.getWeekdayName() + " " + frenchDate.dayOfMonth + " " + frenchDate.getMonthName() + " " + frenchDate.year;
         String dayOfYear = frenchDate.getDayOfYear();
         int month = frenchDate.month;
-        wearCommHelper.updateToday(date, dayOfYear, month);
+        int color = FRCDateUtils.getColor(context, frenchDate);
+        wearCommHelper.updateToday(date, dayOfYear, month, color);
     }
 }

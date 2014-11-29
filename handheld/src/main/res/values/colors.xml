@@ -23,5 +23,18 @@
     <color name="primaryTextColor">#381f0a</color>
     <color name="item_pressed">#e8cfba</color>
     <color name="item_normal">#ffe8d3</color>
+    <color name="month_1">#da9d98</color>
+    <color name="month_2">#98daa0</color>
+    <color name="month_3">#ff8aa7d1</color>
+    <color name="month_4">#ffe7e7e7</color>
+    <color name="month_5">#ff9987d1</color>
+    <color name="month_6">#ff8bd2d1</color>
+    <color name="month_7">#ff8ab7d1</color>
+    <color name="month_8">#ffc585d1</color>
+    <color name="month_9">#b0da98</color>
+    <color name="month_10">#ffd0d389</color>
+    <color name="month_11">#ffd0b489</color>
+    <color name="month_12">#ffd086a7</color>
+    <color name="month_13">#ffd08793</color>
 
 </resources>

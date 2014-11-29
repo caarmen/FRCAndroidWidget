@@ -42,4 +42,9 @@ public class WearCommConstants {
      */
     public static final String EXTRA_MONTH = "EXTRA_MONTH";
 
+    /**
+     * The color of the widget or wear notification ({@code int}).
+     */
+    public static final String EXTRA_COLOR = "EXTRA_COLOR";
+
 }

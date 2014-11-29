@@ -18,14 +18,15 @@
  */
 package ca.rmen.android.frcwidget.render;
 
-import java.util.Locale;
-
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.TextView;
+
+import java.util.Locale;
+
 import ca.rmen.android.frccommon.Constants;
 import ca.rmen.android.frccommon.FRCDateUtils;
 import ca.rmen.android.frccommon.prefs.FRCPreferences;
@@ -36,9 +37,8 @@ import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 /**
  * Responsible for drawing the minimalist widget.
  * TODO try to share as much as logic as possible between the scroll widgets and the minimalist widgets.
- * 
+ *
  * @author calvarez
- * 
  */
 class FRCMinimalistAppWidgetRenderer implements FRCAppWidgetRenderer {
     private static final String TAG = Constants.TAG + FRCMinimalistAppWidgetRenderer.class.getSimpleName();
@@ -73,7 +73,7 @@ class FRCMinimalistAppWidgetRenderer implements FRCAppWidgetRenderer {
             tvTime.setText(timestamp);
         }
 
-        int color = FRCPreferences.getInstance(context).getColor();
+        int color = FRCDateUtils.getColor(context, frenchDate);
         tvWeekday.setTextColor(color);
         tvDate.setTextColor(color);
         tvTime.setTextColor(color);
@@ -84,7 +84,7 @@ class FRCMinimalistAppWidgetRenderer implements FRCAppWidgetRenderer {
         float scaleFactor = FRCRender.getScaleFactor(context, appWidgetManager, appWidgetId, defaultWidgetWidth, defaultWidgetHeight);
         Log.v(TAG, "render: scaleFactor=" + scaleFactor);
         FRCRender.scaleViews(view, scaleFactor);
-        
+
         // Render the views to a bitmap and return a RemoteViews containing this image.
         int width = (int) (scaleFactor * defaultWidgetWidth);
         int height = (int) (scaleFactor * defaultWidgetHeight);

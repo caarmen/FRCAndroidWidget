@@ -25,6 +25,7 @@ import java.util.Locale;
 import android.content.Context;
 import android.util.Log;
 import ca.rmen.android.frccommon.prefs.FRCPreferences;
+import ca.rmen.android.frenchcalendar.R;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendar;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendar.CalculationMethod;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
@@ -59,5 +60,19 @@ public class FRCDateUtils {
         day1.set(Calendar.MILLISECOND, now.get(Calendar.MILLISECOND));
         long elapsedMilliseconds = now.getTimeInMillis() - day1.getTimeInMillis();
         return elapsedMilliseconds / (1000 * 60 * 60 * 24);
+    }
+
+    /**
+     * @return the color to display for the widget/notification for the given date (for now it's just based on the month)
+     * TODO this might not be a "date utility" method, but I can't find a better place to put it.
+     */
+    public static final int getColor(Context context, FrenchRevolutionaryCalendarDate date) {
+        FRCPreferences prefs = FRCPreferences.getInstance(context);
+        if(prefs.isCustomColorEnabled()) {
+            return prefs.getColor();
+        }
+        String colorResIdStr = "month_" + date.month;
+        int colorResId = context.getResources().getIdentifier(colorResIdStr, "color", R.class.getPackage().getName());
+        return context.getResources().getColor(colorResId);
     }
 }

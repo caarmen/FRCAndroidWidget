@@ -23,14 +23,14 @@ class FRCScrollAppWidgetRenderParams {
     final int widthResourceId;
     final int heightResourceId;
     final int textViewableWidthResourceId;
-    final int[] scrollResourceIds;
+    final int scrollResourceId;
 
-    FRCScrollAppWidgetRenderParams(int layoutResourceId, int widthResourceId, int heightResourceId, int textViewableWidthResourceId, int[] scrollResourceIds) {
+    FRCScrollAppWidgetRenderParams(int layoutResourceId, int widthResourceId, int heightResourceId, int textViewableWidthResourceId, int scrollResourceId) {
         this.layoutResourceId = layoutResourceId;
         this.widthResourceId = widthResourceId;
         this.heightResourceId = heightResourceId;
         this.textViewableWidthResourceId = textViewableWidthResourceId;
-        this.scrollResourceIds = scrollResourceIds;
+        this.scrollResourceId = scrollResourceId;
     }
 
 }

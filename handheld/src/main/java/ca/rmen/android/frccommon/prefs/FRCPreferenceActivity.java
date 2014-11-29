@@ -24,10 +24,14 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.util.Log;
+
+import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 import ca.rmen.android.frcwear.FRCWearPreferenceListener;
 import ca.rmen.android.frcwidget.FRCWidgetScheduler;
@@ -42,6 +46,20 @@ import ca.rmen.android.frenchcalendar.R;
 public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use default)
 
     private static final String TAG = FRCPreferenceActivity.class.getSimpleName();
+    private final OnSharedPreferenceChangeListener mOnSharedPreferenceChangeListener = new OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            if (FRCPreferences.PREF_METHOD.equals(key)) {
+                updatePreferenceSummary(key, R.string.setting_method_summary);
+            } else if (FRCPreferences.PREF_DETAILED_VIEW.equals(key)) {
+                updatePreferenceSummary(key, R.string.setting_detailed_view_summary);
+            } else if (FRCPreferences.PREF_LANGUAGE.equals(key)) {
+                updatePreferenceSummary(key, R.string.setting_language_summary);
+            } else if (FRCPreferences.PREF_CUSTOM_COLOR_ENABLED.equals(key)) {
+                updatePreferenceSummary(key, 0);
+            }
+        }
+    };
     private FRCWearPreferenceListener mWearPreferenceListener;
 
     @SuppressWarnings("deprecation")
@@ -55,6 +73,7 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         updatePreferenceSummary(FRCPreferences.PREF_METHOD, R.string.setting_method_summary);
         updatePreferenceSummary(FRCPreferences.PREF_DETAILED_VIEW, R.string.setting_detailed_view_summary);
         updatePreferenceSummary(FRCPreferences.PREF_LANGUAGE, R.string.setting_language_summary);
+        updatePreferenceSummary(FRCPreferences.PREF_CUSTOM_COLOR_ENABLED, 0);
         /*
          * From the documentation: https://developer.android.com/guide/topics/appwidgets/index.html
          * The App Widget host calls the configuration Activity and the configuration
@@ -64,9 +83,11 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
-        if (extras != null) appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
+        if (extras != null)
+            appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
         Intent resultValue = new Intent();
-        if (appWidgetId > -1) resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+        if (appWidgetId > -1)
+            resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         setResult(RESULT_OK, resultValue);
 
         // Don't show Android Wear stuff for old devices that don't support it
@@ -76,29 +97,37 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         if (!BuildConfig.FOSS) {
             mWearPreferenceListener = new FRCWearPreferenceListener(getApplicationContext());
         }
-        if (Integer.valueOf(Build.VERSION.SDK) < Build.VERSION_CODES.ECLAIR_MR1) {
-            getPreferenceScreen().removePreference(findPreference(FRCPreferences.PREF_COLOR));
-        }
+        ColorPickerPreference pref = (ColorPickerPreference) getPreferenceScreen().findPreference(FRCPreferences.PREF_COLOR);
+        pref.setAlphaSliderEnabled(true);
     }
 
     private void updatePreferenceSummary(String key, int summaryResId) {
-        @SuppressWarnings("deprecation") ListPreference pref = (ListPreference) getPreferenceManager().findPreference(key);
-        String summary = getString(summaryResId, pref.getEntry());
-        pref.setSummary(summary);
+        Preference pref = getPreferenceManager().findPreference(key);
+        if (pref instanceof ListPreference) {
+            String summary = getString(summaryResId, ((ListPreference) pref).getEntry());
+            pref.setSummary(summary);
+        } else if (FRCPreferences.PREF_CUSTOM_COLOR_ENABLED.equals(key)) {
+            if (((CheckBoxPreference) pref).isChecked()) {
+                pref.setSummary(R.string.setting_custom_color_summary_enabled);
+            } else {
+                pref.setSummary(R.string.setting_custom_color_summary_disabled);
+            }
+
+        }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
-        if(!BuildConfig.FOSS)
+        if (!BuildConfig.FOSS)
             PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(mWearPreferenceListener);
     }
 
     @Override
     protected void onStop() {
         PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
-        if(!BuildConfig.FOSS)
+        if (!BuildConfig.FOSS)
             PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(mWearPreferenceListener);
 
         super.onStop();
@@ -111,18 +140,5 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         // When we leave the preference screen, reupdate all our widgets
         FRCWidgetScheduler.getInstance(this).schedule();
     }
-
-    private final OnSharedPreferenceChangeListener mOnSharedPreferenceChangeListener = new OnSharedPreferenceChangeListener() {
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (FRCPreferences.PREF_METHOD.equals(key)) {
-                updatePreferenceSummary(key, R.string.setting_method_summary);
-            } else if (FRCPreferences.PREF_DETAILED_VIEW.equals(key)) {
-                updatePreferenceSummary(key, R.string.setting_detailed_view_summary);
-            } else if (FRCPreferences.PREF_LANGUAGE.equals(key)) {
-                updatePreferenceSummary(key, R.string.setting_language_summary);
-            }
-        }
-    };
 
 }

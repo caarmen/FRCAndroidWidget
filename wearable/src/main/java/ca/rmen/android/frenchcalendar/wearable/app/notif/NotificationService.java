@@ -45,25 +45,11 @@ public class NotificationService extends WearableListenerService {
     private static final String TAG = NotificationService.class.getSimpleName();
 
     private static final int NOTIFICATION_ID = 0;
-    private static final int[] MONTH_COLORS = {
-            R.color.month_0,
-            R.color.month_1,
-            R.color.month_2,
-            R.color.month_3,
-            R.color.month_4,
-            R.color.month_5,
-            R.color.month_6,
-            R.color.month_7,
-            R.color.month_8,
-            R.color.month_9,
-            R.color.month_10,
-            R.color.month_11,
-            R.color.month_12,
-    };
 
     private String mDate;
     private String mDayOfYear;
     private int mMonth;
+    private int mColor;
 
     public NotificationService() {}
 
@@ -93,6 +79,7 @@ public class NotificationService extends WearableListenerService {
             mDate = dataMap.getString(WearCommConstants.EXTRA_DATE);
             mDayOfYear = dataMap.getString(WearCommConstants.EXTRA_DAY_OF_YEAR);
             mMonth = dataMap.getInt(WearCommConstants.EXTRA_MONTH);
+            mColor = dataMap.getInt(WearCommConstants.EXTRA_COLOR);
             showNotification();
         }
     }
@@ -131,16 +118,14 @@ public class NotificationService extends WearableListenerService {
         Notification.WearableExtender wearableExtender = new Notification.WearableExtender();
         wearableExtender.setHintHideIcon(true);
         // Set the background color depending on month
-        wearableExtender.setBackground(createBitmapForMonth());
+        wearableExtender.setBackground(createBitmapForMonth(mColor));
 
         Notification.Builder wearableNotifBuilder = wearableExtender.extend(mainNotifBuilder);
         Notification res = wearableNotifBuilder.build();
         return res;
     }
 
-    public Bitmap createBitmapForMonth() {
-        int colorId = MONTH_COLORS[mMonth - 1];
-        int color = getResources().getColor(colorId);
+    public Bitmap createBitmapForMonth(int color) {
         int[] colors = {color};
         Bitmap bitmap = Bitmap.createBitmap(colors, 1, 1, Bitmap.Config.ARGB_8888);
         return bitmap;
