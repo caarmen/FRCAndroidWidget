@@ -33,10 +33,10 @@ public class FRCWearPreferenceListener implements SharedPreferences.OnSharedPref
     }
 
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (FRCPreferences.PREF_METHOD.equals(key)) {
-            // Update the Android Wear notification (if enabled)
-            updateWearNotificationIfEnabled(sharedPreferences);
-        } else if (FRCPreferences.PREF_LANGUAGE.equals(key)) {
+        if (FRCPreferences.PREF_METHOD.equals(key)
+                || FRCPreferences.PREF_LANGUAGE.equals(key)
+                || FRCPreferences.PREF_CUSTOM_COLOR_ENABLED.equals(key)
+                || FRCPreferences.PREF_CUSTOM_COLOR.equals(key)) {
             // Update the Android Wear notification (if enabled)
             updateWearNotificationIfEnabled(sharedPreferences);
         } else if (FRCPreferences.PREF_ANDROID_WEAR.equals(key)) {

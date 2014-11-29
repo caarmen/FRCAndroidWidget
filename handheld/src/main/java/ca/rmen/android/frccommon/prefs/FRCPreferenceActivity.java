@@ -97,7 +97,7 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         if (!BuildConfig.FOSS) {
             mWearPreferenceListener = new FRCWearPreferenceListener(getApplicationContext());
         }
-        ColorPickerPreference pref = (ColorPickerPreference) getPreferenceScreen().findPreference(FRCPreferences.PREF_COLOR);
+        ColorPickerPreference pref = (ColorPickerPreference) getPreferenceScreen().findPreference(FRCPreferences.PREF_CUSTOM_COLOR);
         pref.setAlphaSliderEnabled(true);
     }
 

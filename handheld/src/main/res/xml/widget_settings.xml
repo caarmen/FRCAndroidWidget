@@ -58,7 +58,7 @@
     <net.margaritov.preference.colorpicker.ColorPickerPreference
         android:defaultValue="@color/primaryTextColor"
         android:dependency="setting_custom_color_enabled"
-        android:key="setting_color"
+        android:key="setting_custom_color"
         android:title="@string/setting_color" />
 
 
