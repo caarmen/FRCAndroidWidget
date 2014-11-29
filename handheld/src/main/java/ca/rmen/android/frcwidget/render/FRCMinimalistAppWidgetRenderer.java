@@ -21,6 +21,7 @@ package ca.rmen.android.frcwidget.render;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.TextView;
@@ -53,7 +54,7 @@ class FRCMinimalistAppWidgetRenderer implements FRCAppWidgetRenderer {
         String date = " " + frenchDate.dayOfMonth + " " + frenchDate.getMonthName() + " " + frenchDate.year + " ";
         TextView tvWeekday = (TextView) view.findViewById(R.id.text_weekday);
         TextView tvDate = (TextView) view.findViewById(R.id.text_date);
-        tvWeekday.setText(frenchDate.getWeekdayName());
+        tvWeekday.setText(" " + frenchDate.getWeekdayName() + " ");
         tvDate.setText(date);
 
         // Set the text fields for the time.
@@ -73,16 +74,16 @@ class FRCMinimalistAppWidgetRenderer implements FRCAppWidgetRenderer {
             tvTime.setText(timestamp);
         }
 
-        int color = FRCDateUtils.getColor(context, frenchDate);
-        tvWeekday.setTextColor(color);
-        tvDate.setTextColor(color);
-        tvTime.setTextColor(color);
-
         // Scale the views.
         float defaultWidgetWidth = context.getResources().getDimension(R.dimen.minimalist_widget_width);
         float defaultWidgetHeight = context.getResources().getDimension(R.dimen.minimalist_widget_height);
         float scaleFactor = FRCRender.getScaleFactor(context, appWidgetManager, appWidgetId, defaultWidgetWidth, defaultWidgetHeight);
         Log.v(TAG, "render: scaleFactor=" + scaleFactor);
+
+        setTextColors(context, tvWeekday, frenchDate);
+        setTextColors(context, tvDate, frenchDate);
+        setTextColors(context, tvTime, frenchDate);
+
         FRCRender.scaleViews(view, scaleFactor);
 
         // Render the views to a bitmap and return a RemoteViews containing this image.
@@ -90,6 +91,22 @@ class FRCMinimalistAppWidgetRenderer implements FRCAppWidgetRenderer {
         int height = (int) (scaleFactor * defaultWidgetHeight);
         Log.v(TAG, "Creating widget of size " + width + "x" + height);
         return FRCRender.createRemoteViews(context, view, width, height);
+    }
+
+    /**
+     * Set the color of the text according to the preference or the current month.
+     * Set the shadow on the text.
+     */
+    private static void setTextColors(Context context, TextView textView, FrenchRevolutionaryCalendarDate frenchDate) {
+        int color = FRCDateUtils.getColor(context, frenchDate);
+        textView.setTextColor(color);
+
+        // Set the shadow programmatically.  In xml we can only specify pixels.
+        // Programmatically we can specify the shadow in dp.
+        float shadowDx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1f, context.getResources().getDisplayMetrics());
+        float shadowDy = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1f, context.getResources().getDisplayMetrics());
+        float shadowRadius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0.5f, context.getResources().getDisplayMetrics());
+        textView.setShadowLayer(shadowRadius, shadowDx, shadowDy, 0xFF000000);
     }
 
 }

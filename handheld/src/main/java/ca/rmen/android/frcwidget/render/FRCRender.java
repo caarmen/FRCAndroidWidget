@@ -30,11 +30,12 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
+
 import ca.rmen.android.frenchcalendar.R;
 
 /**
  * Provides methods used to render widgets.
- * 
+ *
  * @author calvarez
  */
 class FRCRender {
@@ -43,9 +44,9 @@ class FRCRender {
      * Depending on our api level and whether the launcher provides us the max
      * widget size, we calculate how much we should scale the widget components
      * (TextViews) before we draw them to a bitmap, for the sharpest image.
-     * 
+     *
      * @return The views in the widget should be scaled by this much before
-     *         drawing them to a bitmap.
+     * drawing them to a bitmap.
      */
     static float getScaleFactor(Context context, AppWidgetManager appWidgetManager, int appWidgetId, float defaultWidgetWidth, float defaultWidgetHeight) {
         float scaleFactor = 1.0f;
@@ -81,6 +82,11 @@ class FRCRender {
         if (parent instanceof TextView) {
             TextView textView = (TextView) parent;
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textView.getTextSize() * scaleFactor);
+            @SuppressWarnings("deprecation")
+            int sdk = Integer.valueOf(Build.VERSION.SDK);
+            if (sdk >= 16) {
+                FRCRenderApi16.scaleShadow(textView, scaleFactor);
+            }
         }
         // Scale all child views
         else if (parent instanceof ViewGroup) {
@@ -96,9 +102,9 @@ class FRCRender {
     /**
      * Draw the given view to a bitmap, set the bitmap on an ImageView, and
      * return a RemoteViews containing just this ImageView.
-     * 
+     *
      * @return a RemoteViews containing an ImageView which has a bitmap to which
-     *         the contents of the view parameter are drawn.
+     * the contents of the view parameter are drawn.
      */
     static RemoteViews createRemoteViews(Context context, View view, int width, int height) {
         int widthSpec = MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY);

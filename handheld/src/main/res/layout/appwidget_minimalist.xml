@@ -34,9 +34,6 @@
         android:fontFamily="sans-serif-light"
         android:gravity="center"
         android:shadowColor="@android:color/black"
-        android:shadowDx="2"
-        android:shadowDy="1"
-        android:shadowRadius="4"
         android:textColor="@android:color/white"
         android:textSize="@dimen/minimalist_weekday_textsize" />
 
@@ -48,9 +45,6 @@
         android:fontFamily="sans-serif-light"
         android:gravity="center"
         android:shadowColor="@android:color/black"
-        android:shadowDx="2"
-        android:shadowDy="1"
-        android:shadowRadius="4"
         android:textColor="@android:color/white"
         android:textSize="@dimen/minimalist_month_textsize" />
 
@@ -62,9 +56,6 @@
         android:fontFamily="sans-serif-light"
         android:gravity="center"
         android:shadowColor="@android:color/black"
-        android:shadowDx="2"
-        android:shadowDy="1"
-        android:shadowRadius="4"
         android:textColor="@android:color/white"
         android:textSize="@dimen/minimalist_weekday_textsize" />
 

@@ -18,18 +18,20 @@
  */
 package ca.rmen.android.frcwidget.render;
 
-import java.util.Set;
-
 import android.annotation.TargetApi;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
+
+import java.util.Set;
+
 import ca.rmen.android.frccommon.Constants;
 
 /**
  * Provides methods used to render widgets. These methods are available only on api level 16+
- * 
+ *
  * @author calvarez
  */
 class FRCRenderApi16 {
@@ -37,7 +39,7 @@ class FRCRenderApi16 {
 
     /**
      * @return Looks at the size of the given widget, and returns the scale factor based on this widget's default size. All the widget's default dimensions
-     *         should be multiplied by this scale factor when rendering the widget.
+     * should be multiplied by this scale factor when rendering the widget.
      */
     @TargetApi(16)
     static float getScaleFactor(Context context, AppWidgetManager appWidgetManager, int appWidgetId, float defaultWidgetWidth, float defaultWidgetHeight) {
@@ -51,7 +53,16 @@ class FRCRenderApi16 {
         int maxWidth = widgetOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH);
         int maxHeight = widgetOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT);
         Log.v(TAG, "getScaleFactor: min:" + minWidth + "x" + minHeight + ", max:" + maxWidth + "x" + maxHeight + ", default:" + defaultWidgetWidth + "x" + defaultWidgetHeight);
-        if (maxWidth <= 0 || maxHeight <= 0) return FRCRenderApi13.getMaxScaleFactor(context, defaultWidgetWidth, defaultWidgetHeight);
+        if (maxWidth <= 0 || maxHeight <= 0)
+            return FRCRenderApi13.getMaxScaleFactor(context, defaultWidgetWidth, defaultWidgetHeight);
         return Math.min((float) maxWidth / defaultWidgetWidth, (float) maxHeight / defaultWidgetHeight);
+    }
+
+    @TargetApi(16)
+    static void scaleShadow(TextView textView, float scaleFactor) {
+        textView.setShadowLayer(textView.getShadowRadius() * scaleFactor,
+                textView.getShadowDx() * scaleFactor,
+                textView.getShadowDy() * scaleFactor,
+                textView.getShadowColor());
     }
 }
