@@ -55,7 +55,7 @@ class FRCRenderApi16 {
         Log.v(TAG, "getScaleFactor: min:" + minWidth + "x" + minHeight + ", max:" + maxWidth + "x" + maxHeight + ", default:" + defaultWidgetWidth + "x" + defaultWidgetHeight);
         if (maxWidth <= 0 || maxHeight <= 0)
             return FRCRenderApi13.getMaxScaleFactor(context, defaultWidgetWidth, defaultWidgetHeight);
-        return Math.min((float) maxWidth / defaultWidgetWidth, (float) maxHeight / defaultWidgetHeight);
+        return Math.max((float) maxWidth / defaultWidgetWidth, (float) maxHeight / defaultWidgetHeight);
     }
 
     @TargetApi(16)
