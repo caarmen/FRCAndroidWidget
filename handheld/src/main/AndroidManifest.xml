@@ -42,7 +42,8 @@
 
         <activity-alias
             android:name="ca.rmen.android.frcwidget.prefs.FRCPreferenceActivity"
-            android:targetActivity="ca.rmen.android.frccommon.prefs.FRCPreferenceActivity" >
+            android:targetActivity="ca.rmen.android.frccommon.prefs.FRCPreferenceActivity"
+            android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>

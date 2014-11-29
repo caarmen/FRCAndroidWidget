@@ -59,6 +59,5 @@ It has been %8$d days since the start of the Republic.</string>
     <string name="about">About</string>
     <string name="title_no_widgets">You have no widgets!</string>
     <string name="message_no_widgets">You must first add a widget to the home screen.</string>
-    <string name="message_save">Press back to save your settings.</string>
 
 </resources>

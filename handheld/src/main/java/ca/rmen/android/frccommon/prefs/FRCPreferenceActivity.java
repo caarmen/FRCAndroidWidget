@@ -120,7 +120,6 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
             }
             ColorPickerPreference pref = (ColorPickerPreference) getPreferenceScreen().findPreference(FRCPreferences.PREF_CUSTOM_COLOR);
             pref.setAlphaSliderEnabled(true);
-            Toast.makeText(this, R.string.message_save, Toast.LENGTH_LONG).show();
         }
 
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
@@ -134,6 +133,8 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         if (mWearPreferenceListener != null)
             PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(mWearPreferenceListener);
 
+        // When we leave the preference screen, reupdate all our widgets
+        FRCWidgetScheduler.getInstance(this).schedule();
         super.onStop();
     }
 
@@ -141,8 +142,6 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
     protected void onDestroy() {
         Log.v(TAG, "onDestroy");
         super.onDestroy();
-        // When we leave the preference screen, reupdate all our widgets
-        FRCWidgetScheduler.getInstance(this).schedule();
     }
 
     private void updatePreferenceSummary(String key, int summaryResId) {

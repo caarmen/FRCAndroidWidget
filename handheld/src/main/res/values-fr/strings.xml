@@ -59,7 +59,6 @@ L\'heure actuelle est %5$s.
     <string name="about">À propos</string>
     <string name="title_no_widgets">Vous n\'avez pas de widget !</string>
     <string name="message_no_widgets">Vous devez avant tout ajouter une widget sur votre écran d\'accueil.</string>
-    <string name="message_save">Appuyez sur retour pour sauvegarder vos préférences.</string>
 
     <string name="dialog_color_picker">Choisir une couleur</string>
     <string name="press_color_to_apply">Taper sur la couleur pour l\'appliquer</string>
