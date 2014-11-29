@@ -25,9 +25,9 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 
-public class FRCWearScheduler {
+class FRCWearScheduler {
     private static final long ONE_DAY = 24 * 60 * 60 * 1000;
-    public static final String ACTION_WEAR_UPDATE = "ACTION_WEAR_UPDATE";
+    private static final String ACTION_WEAR_UPDATE = "ACTION_WEAR_UPDATE";
     public static final String ACTION_WEAR_REMOVE_AND_UPDATE = "ACTION_WEAR_REMOVE_AND_UPDATE";
 
     public static void scheduleRepeatingAlarm(Context context) {
@@ -48,7 +48,7 @@ public class FRCWearScheduler {
         alarmManager.set(AlarmManager.RTC, getInXSeconds(15), pendingIntent);
     }
 
-    public static long getTomorrowAtEight() {
+    private static long getTomorrowAtEight() {
         Calendar calendar = Calendar.getInstance();
         // At eight
         stripTime(calendar);
@@ -58,12 +58,12 @@ public class FRCWearScheduler {
         return calendar.getTime().getTime();
     }
 
-    public static long getInXSeconds(int seconds) {
+    private static long getInXSeconds(int seconds) {
         return System.currentTimeMillis() + seconds * 1000;
     }
 
 
-    public static void stripTime(Calendar cal) {
+    private static void stripTime(Calendar cal) {
         cal.set(Calendar.HOUR_OF_DAY, 0);
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);

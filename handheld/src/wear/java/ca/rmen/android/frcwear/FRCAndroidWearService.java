@@ -23,9 +23,7 @@ import android.app.IntentService;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 
 import ca.rmen.android.frccommon.FRCDateUtils;
 import ca.rmen.android.frccommon.prefs.FRCPreferences;
@@ -45,7 +43,6 @@ public class FRCAndroidWearService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        SharedPreferences preferenceManager = PreferenceManager.getDefaultSharedPreferences(this);
         if (!FRCPreferences.getInstance(this).getAndroidWearEnabled()) {
             // We got triggered, but the setting is off so please don't do anything
             return;

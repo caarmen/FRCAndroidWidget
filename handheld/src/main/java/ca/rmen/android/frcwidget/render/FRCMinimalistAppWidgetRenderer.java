@@ -64,7 +64,6 @@ class FRCMinimalistAppWidgetRenderer implements FRCAppWidgetRenderer {
         TextView tvTime = (TextView) view.findViewById(R.id.text_time);
         if (detailedView == DetailedView.NONE) {
             tvTime.setVisibility(View.GONE);
-            timestamp = "";
         } else {
             tvTime.setVisibility(View.VISIBLE);
             if (detailedView == DetailedView.TIME)

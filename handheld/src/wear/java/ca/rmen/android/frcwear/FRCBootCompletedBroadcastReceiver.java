@@ -22,8 +22,6 @@ package ca.rmen.android.frcwear;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import ca.rmen.android.frccommon.Constants;
@@ -36,7 +34,6 @@ public class FRCBootCompletedBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(final Context context, Intent intent) {
         Log.v(TAG, "onReceive: action = " + intent.getAction() + ": component = " + (intent.getComponent() == null ? "" : intent.getComponent().getClassName()));
 
-        SharedPreferences preferenceManager = PreferenceManager.getDefaultSharedPreferences(context);
         if (FRCPreferences.getInstance(context).getAndroidWearEnabled()) {
             // Schedule an alarm
             FRCWearScheduler.scheduleRepeatingAlarm(context);
