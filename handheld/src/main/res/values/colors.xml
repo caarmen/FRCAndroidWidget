@@ -23,18 +23,18 @@
     <color name="primaryTextColor">#381f0a</color>
     <color name="item_pressed">#e8cfba</color>
     <color name="item_normal">#ffe8d3</color>
-    <color name="month_1">#da9d98</color>
-    <color name="month_2">#98daa0</color>
-    <color name="month_3">#ff8aa7d1</color>
-    <color name="month_4">#ffe7e7e7</color>
-    <color name="month_5">#ff9987d1</color>
-    <color name="month_6">#ff8bd2d1</color>
-    <color name="month_7">#ff8ab7d1</color>
-    <color name="month_8">#ffc585d1</color>
-    <color name="month_9">#b0da98</color>
-    <color name="month_10">#ffd0d389</color>
-    <color name="month_11">#ffd0b489</color>
-    <color name="month_12">#ffd086a7</color>
-    <color name="month_13">#ffd08793</color>
+    <color name="month_1">#fff0a199</color>
+    <color name="month_2">#ffbfe4a9</color>
+    <color name="month_3">#ff9fbce6</color>
+    <color name="month_4">#fffcfcfc</color>
+    <color name="month_5">#ffae9ce8</color>
+    <color name="month_6">#ff98e2e1</color>
+    <color name="month_7">#ff95c3dd</color>
+    <color name="month_8">#ffdb97e7</color>
+    <color name="month_9">#ff97e59f</color>
+    <color name="month_10">#ffd8db91</color>
+    <color name="month_11">#ffdabe93</color>
+    <color name="month_12">#ffeb9cbf</color>
+    <color name="month_13">#fff1a1ad</color>
 
 </resources>
