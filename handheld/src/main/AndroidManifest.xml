@@ -112,13 +112,6 @@
                 android:resource="@xml/appwidget_minimalist" />
         </receiver>
 
-        <receiver android:name="ca.rmen.android.frcwear.FRCBootCompletedBroadcastReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-
-        <service android:name="ca.rmen.android.frcwear.FRCAndroidWearService" />
 
     </application>
 
