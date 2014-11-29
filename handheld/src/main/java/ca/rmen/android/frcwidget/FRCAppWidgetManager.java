@@ -28,8 +28,14 @@ import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetMinimalist;
 import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetNarrow;
 import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetWide;
 
-class FRCAppWidgetManager {
+public class FRCAppWidgetManager {
 
+    /**
+     * @return true if at least one widget has been added to the home screen.
+     */
+    public static boolean hasWidgets(Context context) {
+        return !getAllAppWidgetIds(context).isEmpty();
+    }
     /**
      * @return all the widget ids for both narrow and wide widgets.
      */

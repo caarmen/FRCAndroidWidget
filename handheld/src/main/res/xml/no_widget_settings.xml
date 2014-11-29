@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   French Revolutionary Calendar Android Widget
   Copyright (C) 2011 - 2014 Carmen Alvarez
   
@@ -17,9 +16,18 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
-<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:initialLayout="@layout/appwidget_wide_initial"
-    android:minHeight="40dp"
-    android:minWidth="110dp"
-    android:resizeMode="horizontal|vertical"
-    android:updatePeriodMillis="3600000" />
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="widget_settings"
+    android:title="@string/widget_settings">
+
+    <Preference
+        android:key="setting_no_widgets"
+        android:title="@string/title_no_widgets"
+        android:summary="@string/message_no_widgets"/>
+
+
+    <Preference android:title="@string/about">
+        <intent android:action="ca.rmen.android.frcwidget.FRCAboutActivity" />
+    </Preference>
+
+</PreferenceScreen>

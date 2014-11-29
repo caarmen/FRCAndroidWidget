@@ -29,11 +29,14 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
 import android.util.Log;
+import android.widget.Toast;
 
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 import ca.rmen.android.frcwear.FRCWearPreferenceListener;
+import ca.rmen.android.frcwidget.FRCAppWidgetManager;
 import ca.rmen.android.frcwidget.FRCWidgetScheduler;
 import ca.rmen.android.frenchcalendar.BuildConfig;
 import ca.rmen.android.frenchcalendar.R;
@@ -62,18 +65,10 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
     };
     private FRCWearPreferenceListener mWearPreferenceListener;
 
-    @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle icicle) {
         Log.v(TAG, "onCreate: bundle = " + icicle);
         super.onCreate(icicle);
-
-        addPreferencesFromResource(R.xml.widget_settings);
-
-        updatePreferenceSummary(FRCPreferences.PREF_METHOD, R.string.setting_method_summary);
-        updatePreferenceSummary(FRCPreferences.PREF_DETAILED_VIEW, R.string.setting_detailed_view_summary);
-        updatePreferenceSummary(FRCPreferences.PREF_LANGUAGE, R.string.setting_language_summary);
-        updatePreferenceSummary(FRCPreferences.PREF_CUSTOM_COLOR_ENABLED, 0);
         /*
          * From the documentation: https://developer.android.com/guide/topics/appwidgets/index.html
          * The App Widget host calls the configuration Activity and the configuration
@@ -89,16 +84,65 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         if (appWidgetId > -1)
             resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         setResult(RESULT_OK, resultValue);
+    }
 
-        // Don't show Android Wear stuff for old devices that don't support it
-        if (BuildConfig.FOSS || Integer.valueOf(Build.VERSION.SDK) < Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            getPreferenceScreen().removePreference(findPreference(FRCPreferences.PREF_ANDROID_WEAR));
+    @Override
+    protected void onStart() {
+        super.onStart();
+        boolean canUseWear = !BuildConfig.FOSS && Integer.valueOf(Build.VERSION.SDK) >= Build.VERSION_CODES.JELLY_BEAN_MR2;
+
+        // We have to load the preferences in onStart instead of on onCreate, in
+        // case the user pressed home (and not back) to exit the preference screen
+        // last time, and has added or removed widgets since.
+        PreferenceScreen preferencesScreen = getPreferenceScreen();
+        if (preferencesScreen != null)
+            preferencesScreen.removeAll();
+
+        // If we have no widgets, and we can't use wear, then warn the user that they should add
+        // a widget.
+        if (!FRCAppWidgetManager.hasWidgets(this) && !canUseWear) {
+            addPreferencesFromResource(R.xml.no_widget_settings);
         }
-        if (!BuildConfig.FOSS) {
-            mWearPreferenceListener = new FRCWearPreferenceListener(getApplicationContext());
+        // Otherwise we either have some widgets, or we can use wear.  Show all our settings.
+        else {
+            addPreferencesFromResource(R.xml.widget_settings);
+
+            updatePreferenceSummary(FRCPreferences.PREF_METHOD, R.string.setting_method_summary);
+            updatePreferenceSummary(FRCPreferences.PREF_DETAILED_VIEW, R.string.setting_detailed_view_summary);
+            updatePreferenceSummary(FRCPreferences.PREF_LANGUAGE, R.string.setting_language_summary);
+            updatePreferenceSummary(FRCPreferences.PREF_CUSTOM_COLOR_ENABLED, 0);
+
+            // Don't show Android Wear stuff for old devices that don't support it
+            if (!canUseWear) {
+                getPreferenceScreen().removePreference(findPreference(FRCPreferences.PREF_ANDROID_WEAR));
+            } else {
+                mWearPreferenceListener = new FRCWearPreferenceListener(getApplicationContext());
+            }
+            ColorPickerPreference pref = (ColorPickerPreference) getPreferenceScreen().findPreference(FRCPreferences.PREF_CUSTOM_COLOR);
+            pref.setAlphaSliderEnabled(true);
+            Toast.makeText(this, R.string.message_save, Toast.LENGTH_LONG).show();
         }
-        ColorPickerPreference pref = (ColorPickerPreference) getPreferenceScreen().findPreference(FRCPreferences.PREF_CUSTOM_COLOR);
-        pref.setAlphaSliderEnabled(true);
+
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
+        if (mWearPreferenceListener != null)
+            PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(mWearPreferenceListener);
+    }
+
+    @Override
+    protected void onStop() {
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
+        if (mWearPreferenceListener != null)
+            PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(mWearPreferenceListener);
+
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.v(TAG, "onDestroy");
+        super.onDestroy();
+        // When we leave the preference screen, reupdate all our widgets
+        FRCWidgetScheduler.getInstance(this).schedule();
     }
 
     private void updatePreferenceSummary(String key, int summaryResId) {
@@ -114,31 +158,6 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
             }
 
         }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
-        if (!BuildConfig.FOSS)
-            PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(mWearPreferenceListener);
-    }
-
-    @Override
-    protected void onStop() {
-        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
-        if (!BuildConfig.FOSS)
-            PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(mWearPreferenceListener);
-
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        Log.v(TAG, "onDestroy");
-        super.onDestroy();
-        // When we leave the preference screen, reupdate all our widgets
-        FRCWidgetScheduler.getInstance(this).schedule();
     }
 
 }
