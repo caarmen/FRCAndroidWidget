@@ -58,7 +58,7 @@ class FRCMinimalistAppWidgetRenderer implements FRCAppWidgetRenderer {
         tvDate.setText(date);
 
         // Set the text fields for the time.
-        String timestamp = null;
+        final String timestamp;
         DetailedView detailedView = FRCPreferences.getInstance(context).getDetailedView();
 
         TextView tvTime = (TextView) view.findViewById(R.id.text_time);

@@ -31,7 +31,6 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.util.Log;
-import android.widget.Toast;
 
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
@@ -52,14 +51,19 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
     private final OnSharedPreferenceChangeListener mOnSharedPreferenceChangeListener = new OnSharedPreferenceChangeListener() {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (FRCPreferences.PREF_METHOD.equals(key)) {
-                updatePreferenceSummary(key, R.string.setting_method_summary);
-            } else if (FRCPreferences.PREF_DETAILED_VIEW.equals(key)) {
-                updatePreferenceSummary(key, R.string.setting_detailed_view_summary);
-            } else if (FRCPreferences.PREF_LANGUAGE.equals(key)) {
-                updatePreferenceSummary(key, R.string.setting_language_summary);
-            } else if (FRCPreferences.PREF_CUSTOM_COLOR_ENABLED.equals(key)) {
-                updatePreferenceSummary(key, 0);
+            switch (key) {
+                case FRCPreferences.PREF_METHOD:
+                    updatePreferenceSummary(key, R.string.setting_method_summary);
+                    break;
+                case FRCPreferences.PREF_DETAILED_VIEW:
+                    updatePreferenceSummary(key, R.string.setting_detailed_view_summary);
+                    break;
+                case FRCPreferences.PREF_LANGUAGE:
+                    updatePreferenceSummary(key, R.string.setting_language_summary);
+                    break;
+                case FRCPreferences.PREF_CUSTOM_COLOR_ENABLED:
+                    updatePreferenceSummary(key, 0);
+                    break;
             }
         }
     };
@@ -89,11 +93,13 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
     @Override
     protected void onStart() {
         super.onStart();
+        //noinspection deprecation
         boolean canUseWear = !BuildConfig.FOSS && Integer.valueOf(Build.VERSION.SDK) >= Build.VERSION_CODES.JELLY_BEAN_MR2;
 
         // We have to load the preferences in onStart instead of on onCreate, in
         // case the user pressed home (and not back) to exit the preference screen
         // last time, and has added or removed widgets since.
+        //noinspection deprecation
         PreferenceScreen preferencesScreen = getPreferenceScreen();
         if (preferencesScreen != null)
             preferencesScreen.removeAll();
@@ -101,10 +107,12 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         // If we have no widgets, and we can't use wear, then warn the user that they should add
         // a widget.
         if (!FRCAppWidgetManager.hasWidgets(this) && !canUseWear) {
+            //noinspection deprecation
             addPreferencesFromResource(R.xml.no_widget_settings);
         }
         // Otherwise we either have some widgets, or we can use wear.  Show all our settings.
         else {
+            //noinspection deprecation
             addPreferencesFromResource(R.xml.widget_settings);
 
             updatePreferenceSummary(FRCPreferences.PREF_METHOD, R.string.setting_method_summary);
@@ -113,11 +121,13 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
             updatePreferenceSummary(FRCPreferences.PREF_CUSTOM_COLOR_ENABLED, 0);
 
             // Don't show Android Wear stuff for old devices that don't support it
-            if (!canUseWear) {
+            if (!canUseWear)
+                //noinspection deprecation
                 getPreferenceScreen().removePreference(findPreference(FRCPreferences.PREF_ANDROID_WEAR));
-            } else {
+            else
                 mWearPreferenceListener = new FRCWearPreferenceListener(getApplicationContext());
-            }
+
+            //noinspection deprecation
             ColorPickerPreference pref = (ColorPickerPreference) getPreferenceScreen().findPreference(FRCPreferences.PREF_CUSTOM_COLOR);
             pref.setAlphaSliderEnabled(true);
         }
@@ -145,6 +155,7 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
     }
 
     private void updatePreferenceSummary(String key, int summaryResId) {
+        //noinspection deprecation
         Preference pref = getPreferenceManager().findPreference(key);
         if (pref instanceof ListPreference) {
             String summary = getString(summaryResId, ((ListPreference) pref).getEntry());

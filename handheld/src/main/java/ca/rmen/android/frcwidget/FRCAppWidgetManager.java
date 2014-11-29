@@ -40,7 +40,7 @@ public class FRCAppWidgetManager {
      * @return all the widget ids for both narrow and wide widgets.
      */
     static Set<Integer> getAllAppWidgetIds(Context context) {
-        Set<Integer> result = new HashSet<Integer>();
+        Set<Integer> result = new HashSet<>();
         result.addAll(getAppWidgetIds(context, FrenchCalendarAppWidgetNarrow.class));
         result.addAll(getAppWidgetIds(context, FrenchCalendarAppWidgetWide.class));
         result.addAll(getAppWidgetIds(context, FrenchCalendarAppWidgetMinimalist.class));
@@ -53,7 +53,7 @@ public class FRCAppWidgetManager {
     private static Set<Integer> getAppWidgetIds(Context context, Class<?> appWidgetClass) {
         final AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         final ComponentName provider = new ComponentName(context, appWidgetClass);
-        Set<Integer> result = new HashSet<Integer>();
+        Set<Integer> result = new HashSet<>();
         final int[] appWidgetIds = appWidgetManager.getAppWidgetIds(provider);
         if (appWidgetIds != null) {
             for (int appWidgetId : appWidgetIds)

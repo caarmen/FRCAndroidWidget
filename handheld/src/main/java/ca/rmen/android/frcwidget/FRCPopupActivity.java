@@ -70,16 +70,16 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
     }
 
     private static class Action {
-        int id;
-        int titleId;
-        int iconId;
+        final int id;
+        final int titleId;
+        final int iconId;
 
         public Action(int id, int titleId, int iconId) {
             this.id = id;
             this.titleId = titleId;
             this.iconId = iconId;
         }
-    };
+    }
 
     private static class ActionsAdapter extends ArrayAdapter<Action> {
 
@@ -96,7 +96,7 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
             Font.applyFont(getContext(), textView);
             return textView;
         }
-    };
+    }
 
     private final OnClickListener listener = new OnClickListener() {
 
@@ -133,7 +133,7 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
 
         }
     };
-    private OnDismissListener dismissListener = new OnDismissListener() {
+    private final OnDismissListener dismissListener = new OnDismissListener() {
 
         @Override
         public void onDismiss(DialogInterface dialog) {

@@ -70,6 +70,7 @@ class FRCScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
         view.setBackgroundResource(mParams.scrollResourceId);
         Drawable background = view.getBackground();
         background.setColorFilter(color, PorterDuff.Mode.MULTIPLY);
+        //noinspection deprecation
         view.setBackgroundDrawable(background);
 
         int width = (int) (scaleFactor * context.getResources().getDimensionPixelSize(mParams.widthResourceId));
@@ -84,7 +85,7 @@ class FRCScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
         ((TextView) view.findViewById(R.id.text_month)).setText(frenchDate.getMonthName());
 
         // Set the text fields for the time.
-        String timestamp = null;
+        final String timestamp;
         DetailedView detailedView = FRCPreferences.getInstance(context).getDetailedView();
 
         TextView timeView = (TextView) view.findViewById(R.id.text_time);
@@ -109,12 +110,12 @@ class FRCScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
 
         // Just in case the line with the month name is too long for the widget, we'll squeeze it so it fits.
         int textViewableWidth = (int) (scaleFactor * context.getResources().getDimensionPixelSize(mParams.textViewableWidthResourceId));
-        squeezeMonthLine(context, view, textViewableWidth);
-        squeezeTextView(context, timeView, textViewableWidth);
+        squeezeMonthLine(view, textViewableWidth);
+        squeezeTextView(timeView, textViewableWidth);
         return FRCRender.createRemoteViews(context, view, width, height);
     }
 
-    private static void squeezeMonthLine(Context context, View view, int textViewableWidth) {
+    private static void squeezeMonthLine(View view, int textViewableWidth) {
         TextView dateView = (TextView) view.findViewById(R.id.text_dayofmonth);
         TextView monthView = (TextView) view.findViewById(R.id.text_month);
         LinearLayout monthLine = (LinearLayout) monthView.getParent();
@@ -132,7 +133,7 @@ class FRCScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
         }
     }
 
-    private static void squeezeTextView(Context context, TextView view, int textViewableWidth) {
+    private static void squeezeTextView(TextView view, int textViewableWidth) {
         int textWidth = view.getWidth();
         if (textWidth > textViewableWidth) {
             float squeezeFactor = (float) textViewableWidth / textWidth;

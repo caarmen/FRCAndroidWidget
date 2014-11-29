@@ -53,7 +53,7 @@ public class Font {
             final int childCount = parentGroup.getChildCount();
             for (int i = 0; i < childCount; i++) {
                 final View v = parentGroup.getChildAt(i);
-                // recurses
+                // Apply the font recursively.
                 applyFont(context, v);
             }
         }

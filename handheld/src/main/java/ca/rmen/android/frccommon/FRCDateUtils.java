@@ -33,21 +33,20 @@ import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 public class FRCDateUtils {
     private static final String TAG = Constants.TAG + FRCDateUtils.class.getSimpleName();
 
-    public static final FrenchRevolutionaryCalendarDate getToday(Context context) {
+    public static FrenchRevolutionaryCalendarDate getToday(Context context) {
         Log.v(TAG, "getToday");
         // Get the current timestamp in the French revolutionary calendar.
         GregorianCalendar now = new GregorianCalendar();
         Locale locale = FRCPreferences.getInstance(context).getLocale();
         CalculationMethod calculationMethod = FRCPreferences.getInstance(context).getCalculationMethod();
-        FrenchRevolutionaryCalendar frcal = new FrenchRevolutionaryCalendar(locale, calculationMethod);
-        FrenchRevolutionaryCalendarDate frenchDate = frcal.getDate(now);
-        return frenchDate;
+        FrenchRevolutionaryCalendar cal = new FrenchRevolutionaryCalendar(locale, calculationMethod);
+        return cal.getDate(now);
     }
 
     /**
      * @return the number of days since the first day of the French Republican Calendar (September 22, 1792.
      */
-    public static final long getDaysSinceDay1() {
+    public static long getDaysSinceDay1() {
         Log.v(TAG, "getDaysSinceDay1");
         Calendar now = Calendar.getInstance();
         Calendar day1 = Calendar.getInstance();
@@ -66,7 +65,7 @@ public class FRCDateUtils {
      * @return the color to display for the widget/notification for the given date (for now it's just based on the month)
      * TODO this might not be a "date utility" method, but I can't find a better place to put it.
      */
-    public static final int getColor(Context context, FrenchRevolutionaryCalendarDate date) {
+    public static int getColor(Context context, FrenchRevolutionaryCalendarDate date) {
         FRCPreferences prefs = FRCPreferences.getInstance(context);
         if(prefs.isCustomColorEnabled()) {
             return prefs.getColor();

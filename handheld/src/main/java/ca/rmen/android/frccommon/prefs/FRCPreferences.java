@@ -39,7 +39,6 @@ public class FRCPreferences {
     public static final String PREF_CUSTOM_COLOR = "setting_custom_color";
     public static final String PREF_CUSTOM_COLOR_ENABLED = "setting_custom_color_enabled";
     public static final String PREF_ANDROID_WEAR = "setting_android_wear";
-    public static final String PREF_NO_WIDGETS = "setting_no_widgets";
     private static final int FREQUENCY_MINUTES = 86400;
     public static final int FREQUENCY_DAYS = 86400000;
 
@@ -76,8 +75,7 @@ public class FRCPreferences {
     public CalculationMethod getCalculationMethod() {
         String methodPrefStr = sharedPrefs.getString(PREF_METHOD, "0");
         int calculationMethodInt = Integer.parseInt(methodPrefStr);
-        CalculationMethod calculationMethod = CalculationMethod.values()[calculationMethodInt];
-        return calculationMethod;
+        return CalculationMethod.values()[calculationMethodInt];
     }
 
     public int getUpdateFrequency() {
