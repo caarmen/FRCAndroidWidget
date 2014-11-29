@@ -76,8 +76,9 @@ class FRCScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
         int height = (int) (scaleFactor * context.getResources().getDimensionPixelSize(mParams.heightResourceId));
         Log.v(TAG, "Creating widget of size " + width + "x" + height);
 
-        // Set all the text fields for the date
-        ((TextView) view.findViewById(R.id.text_year)).setText(String.valueOf(frenchDate.year));
+        // Set all the text fields for the date.
+        // Add a space before and after the text: this font sometimes cuts off the last letter.
+        ((TextView) view.findViewById(R.id.text_year)).setText(" " + frenchDate.year + " ");
         ((TextView) view.findViewById(R.id.text_dayofmonth)).setText(String.valueOf(frenchDate.dayOfMonth));
         ((TextView) view.findViewById(R.id.text_weekday)).setText(frenchDate.getWeekdayName());
         ((TextView) view.findViewById(R.id.text_month)).setText(frenchDate.getMonthName());
@@ -96,7 +97,7 @@ class FRCScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
             else
                 timestamp = frenchDate.getDayOfYear();
         }
-        ((TextView) view.findViewById(R.id.text_time)).setText(timestamp);
+        ((TextView) view.findViewById(R.id.text_time)).setText(" " + timestamp + " ");
 
         FRCRender.scaleViews(view, scaleFactor);
         Font.applyFont(context, view);
