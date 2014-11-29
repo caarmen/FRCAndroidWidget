@@ -29,7 +29,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -62,7 +61,7 @@ public abstract class FRCAppWidgetProvider extends AppWidgetProvider {
     private final String TAG = Constants.TAG + getClass().getSimpleName();
 
     @Override
-    public void onReceive(@NonNull Context context, @NonNull Intent intent) {
+    public void onReceive(Context context, Intent intent) {
         Log.v(TAG, "onReceive: action = " + intent.getAction() + ": component = " + (intent.getComponent() == null ? "" : intent.getComponent().getClassName()));
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         ComponentName provider = intent.getComponent();
