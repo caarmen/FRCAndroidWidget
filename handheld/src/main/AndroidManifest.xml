@@ -38,7 +38,8 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name">
 
-        <activity android:name="ca.rmen.android.frccommon.prefs.FRCPreferenceActivity"/>
+        <activity android:name="ca.rmen.android.frccommon.prefs.FRCPreferenceActivity"
+            android:noHistory="true"/>
 
         <activity-alias
             android:name="ca.rmen.android.frcwidget.prefs.FRCPreferenceActivity"

@@ -69,6 +69,36 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
         dialog.show();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.v(TAG, "onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.v(TAG, "onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.v(TAG, "onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.v(TAG, "onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.v(TAG, "onDestroy");
+    }
+
     private static class Action {
         final int id;
         final int titleId;
@@ -121,10 +151,12 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
                     shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
                     shareIntent.putExtra(Intent.EXTRA_TEXT, body);
                     startActivity(Intent.createChooser(shareIntent, getString(R.string.share_chooser_title)));
+                    Log.v(TAG, "started share chooser");
                     break;
                 case ACTION_SETTINGS:
                     Intent settingsIntent = new Intent(getApplication(), FRCPreferenceActivity.class);
                     startActivity(settingsIntent);
+                    Log.v(TAG, "started settings activity");
                     break;
                 default:
                     break;

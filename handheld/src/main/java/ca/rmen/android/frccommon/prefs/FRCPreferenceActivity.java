@@ -34,6 +34,7 @@ import android.util.Log;
 
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
+import ca.rmen.android.frccommon.Constants;
 import ca.rmen.android.frcwear.FRCWearPreferenceListener;
 import ca.rmen.android.frcwidget.FRCAppWidgetManager;
 import ca.rmen.android.frcwidget.FRCWidgetScheduler;
@@ -47,7 +48,7 @@ import ca.rmen.android.frenchcalendar.R;
  */
 public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use default)
 
-    private static final String TAG = FRCPreferenceActivity.class.getSimpleName();
+    private static final String TAG = Constants.TAG + FRCPreferenceActivity.class.getSimpleName();
     private final OnSharedPreferenceChangeListener mOnSharedPreferenceChangeListener = new OnSharedPreferenceChangeListener() {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
@@ -93,6 +94,7 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
     @Override
     protected void onStart() {
         super.onStart();
+        Log.v(TAG, "onStart");
         //noinspection deprecation
         boolean canUseWear = !BuildConfig.FOSS && Integer.valueOf(Build.VERSION.SDK) >= Build.VERSION_CODES.JELLY_BEAN_MR2;
 
@@ -139,6 +141,7 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
 
     @Override
     protected void onStop() {
+        Log.v(TAG, "onStop");
         PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
         if (mWearPreferenceListener != null)
             PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(mWearPreferenceListener);
