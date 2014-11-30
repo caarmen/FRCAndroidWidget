@@ -31,6 +31,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.util.Log;
+import android.widget.Toast;
 
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
@@ -82,12 +83,18 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
          */
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
+
+        Log.v(TAG, "intent = " + getIntent());
         int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
-        if (extras != null)
+        if (extras != null) {
             appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
+            Log.v(TAG, "intent extras = " + extras);
+        }
         Intent resultValue = new Intent();
-        if (appWidgetId > -1)
+        if (appWidgetId > 0) {
             resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+            Toast.makeText(this, R.string.message_save, Toast.LENGTH_LONG).show();
+        }
         setResult(RESULT_OK, resultValue);
     }
 
