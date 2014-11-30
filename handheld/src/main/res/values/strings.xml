@@ -39,7 +39,7 @@
     <string name="setting_detailed_view_summary">%s</string>
     <string name="setting_language">Language</string>
     <string name="setting_language_summary">%s</string>
-    <string name="setting_custom_color_enabled">Use a custom color?</string>
+    <string name="setting_custom_color_enabled">Use a custom color</string>
     <string name="setting_custom_color_summary_enabled">Currently using your custom color.</string>
     <string name="setting_custom_color_summary_disabled">Currently using predefined colors (color changes every month).</string>
     <string name="setting_custom_color">Custom color</string>
