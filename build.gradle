@@ -12,9 +12,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.14.4'
-        // wait for this issue to be resolved before using the new version : https://code.google.com/p/android/issues/detail?id=81287
-        // classpath 'com.android.tools.build:gradle:1.0.0-rc1'
+        classpath 'com.android.tools.build:gradle:1.0.0-rc2'
     }
 }
 
