@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   French Revolutionary Calendar Android Widget
   Copyright (C) 2011 - 2014 Carmen Alvarez
   
@@ -24,4 +23,5 @@
     android:minWidth="110dp"
     android:previewImage="@drawable/icon_minimalist"
     android:resizeMode="horizontal|vertical"
-    android:updatePeriodMillis="3600000" />
+    android:updatePeriodMillis="3600000"
+    android:widgetCategory="home_screen|keyguard" />
