@@ -31,8 +31,8 @@
     </string-array>
     <string-array name="daily_object_types">
         <item>La pianta</item>
-        <item>Il animale</item>
-        <item>Il attrezzo</item>
+        <item>L\'animale</item>
+        <item>L\'attrezzo</item>
         <item>Il minerale</item>
         <item>La concezione</item>
     </string-array>

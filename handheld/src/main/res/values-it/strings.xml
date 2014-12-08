@@ -40,7 +40,7 @@ Italian translations provided by Alfonso Fusco
     <string name="setting_language">Lingua</string>
     <string name="setting_language_summary">%s</string>
     <string name="setting_custom_color_enabled">Utilizza un colore personalizzato</string>
-    <string name="setting_custom_color_summary_enabled">Il tue colore personalizzato è utilizzato.</string>
+    <string name="setting_custom_color_summary_enabled">Stai utilizzando il colore personalizzato.</string>
     <string name="setting_custom_color_summary_disabled">Utilizza il colore predefinito (il colore cambia ogni mese).</string>
     <string name="setting_custom_color">Colore personalizzato</string>
     <string name="setting_android_wear">Android Wear</string>
