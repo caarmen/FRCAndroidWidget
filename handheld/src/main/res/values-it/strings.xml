@@ -27,7 +27,7 @@ Italian translations provided by Alfonso Fusco
     <string name="app_full_name">Calendario Rivoluzionario</string>
     <string name="description">Widget che mostra la data e l\'orario corrente nel Calendario Rivoluzionario Francese.</string>
     <string name="credits">Ringraziamenti:</string>
-    <string name="wikipedia">* Articolo su Wikipedia: http://en.wikipedia.org/wiki/French_Republican_Calendar</string>
+    <string name="wikipedia">* Articolo su Wikipedia: http://it.wikipedia.org/wiki/Calendario_rivoluzionario_francese</string>
     <string name="equinox_tool">* AstroLib C++ programma di Mark Huss, per determinare il primo giorno di autunno in ogni anno: http://mhuss.com/AstroLib/</string>
     <string name="wearable">* BoD, per la funzione wearable: http://jraf.org/</string>
     <string name="translation_italian">* Alfonso Fusco, per il suo contributo alla traduzione italiana.</string>
