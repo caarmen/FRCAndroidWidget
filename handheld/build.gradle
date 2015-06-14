@@ -8,8 +8,8 @@ android {
         applicationId "ca.rmen.android.frenchcalendar"
         minSdkVersion 3
         targetSdkVersion 21
-        versionCode 162
-        versionName "1.6.2"
+        versionCode 170
+        versionName "1.7.0"
         buildConfigField 'String', 'GIT_SHA1', '"' + gitSha1() + '"'
         buildConfigField 'String', 'BUILD_DATE', '"' + buildDate() + '"'
         // For now we enable strict mode for all the configs
