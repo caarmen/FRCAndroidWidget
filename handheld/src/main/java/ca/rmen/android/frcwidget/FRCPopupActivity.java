@@ -18,10 +18,9 @@
  */
 package ca.rmen.android.frcwidget;
 
-import java.util.Locale;
-
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -33,6 +32,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import java.util.Locale;
 
 import ca.rmen.android.frccommon.Constants;
 import ca.rmen.android.frccommon.FRCDateUtils;
@@ -48,8 +49,12 @@ import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
  */
 public class FRCPopupActivity extends Activity { // NO_UCD (use default)
     private static final String TAG = Constants.TAG + FRCPopupActivity.class.getSimpleName();
+
+    public static final String EXTRA_DAY_OF_YEAR = "extra_day_of_year";
+
     private static final int ACTION_SHARE = 1;
     private static final int ACTION_SETTINGS = 2;
+    private static final int ACTION_SEARCH = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +63,10 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
 
         // Build our adapter with the list of actions
         ActionsAdapter adapter = new ActionsAdapter(this);
-        adapter.add(new Action(ACTION_SHARE, R.string.popup_action_share, R.drawable.ic_action_share));
-        adapter.add(new Action(ACTION_SETTINGS, R.string.popup_action_settings, R.drawable.ic_action_settings));
+        String dayOfYear = getIntent().getStringExtra(EXTRA_DAY_OF_YEAR);
+        adapter.add(new Action(this, ACTION_SHARE, R.drawable.ic_action_share, R.string.popup_action_share));
+        adapter.add(new Action(this, ACTION_SETTINGS, R.drawable.ic_action_settings, R.string.popup_action_settings));
+        adapter.add(new Action(this, ACTION_SEARCH, R.drawable.ic_action_search, R.string.popup_action_search, dayOfYear));
 
         // Build the alert dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -101,13 +108,13 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
 
     private static class Action {
         final int id;
-        final int titleId;
         final int iconId;
+        final String title;
 
-        public Action(int id, int titleId, int iconId) {
+        public Action(Context context, int id, int iconId, int titleId, Object ... titleParams) {
             this.id = id;
-            this.titleId = titleId;
             this.iconId = iconId;
+            this.title = context.getString(titleId, titleParams);
         }
     }
 
@@ -121,7 +128,7 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
         public View getView(int position, View convertView, ViewGroup parent) {
             TextView textView = (TextView) super.getView(position, convertView, parent);
             Action action = getItem(position);
-            textView.setText(action.titleId);
+            textView.setText(action.title);
             textView.setCompoundDrawablesWithIntrinsicBounds(action.iconId, 0, 0, 0);
             Font.applyFont(getContext(), textView);
             return textView;
@@ -134,10 +141,10 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
         public void onClick(DialogInterface dialog, int which) {
             ActionsAdapter adapter = (ActionsAdapter) ((AlertDialog) dialog).getListView().getAdapter();
             Action action = adapter.getItem(which);
+            FrenchRevolutionaryCalendarDate frenchDate = FRCDateUtils.getToday(getApplication());
             switch (action.id) {
                 case ACTION_SHARE:
                     // Prepare the text to share, based on the current date.
-                    FrenchRevolutionaryCalendarDate frenchDate = FRCDateUtils.getToday(getApplication());
                     String subject = getString(R.string.share_subject, frenchDate.getWeekdayName(), frenchDate.dayOfMonth, frenchDate.getMonthName(),
                             frenchDate.year);
                     String time = String.format(Locale.US, "%d:%02d:%02d", frenchDate.hour, frenchDate.minute, frenchDate.second);
@@ -150,13 +157,18 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
                     shareIntent.setType("text/plain");
                     shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
                     shareIntent.putExtra(Intent.EXTRA_TEXT, body);
-                    startActivity(Intent.createChooser(shareIntent, getString(R.string.share_chooser_title)));
+                    startActivity(Intent.createChooser(shareIntent, getString(R.string.chooser_title)));
                     Log.v(TAG, "started share chooser");
                     break;
                 case ACTION_SETTINGS:
                     Intent settingsIntent = new Intent(getApplication(), FRCPreferenceActivity.class);
                     startActivity(settingsIntent);
                     Log.v(TAG, "started settings activity");
+                    break;
+                case ACTION_SEARCH:
+                    Intent searchIntent = new Intent(Intent.ACTION_WEB_SEARCH);
+                    searchIntent.putExtra(SearchManager.QUERY, frenchDate.getDayOfYear());
+                    startActivity(Intent.createChooser(searchIntent, getString(R.string.chooser_title)));
                     break;
                 default:
                     break;

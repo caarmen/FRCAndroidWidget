@@ -45,8 +45,9 @@ Italian translations provided by Alfonso Fusco
     <string name="setting_custom_color">Colore personalizzato</string>
     <string name="setting_android_wear">Android Wear</string>
     <string name="setting_android_wear_summary">Mostra una notifica una volta al giorno sui dispositivi Android Wear collegati</string>
-    <string name="share_chooser_title">Scegli un\'applicazione</string>
+    <string name="chooser_title">Scegli un\'applicazione</string>
     <string name="popup_action_share">Condividi</string>
+    <string name="popup_action_search">Cercare \'%s\'</string>
     <string name="popup_action_settings">Impostazioni</string>
     <string name="share_subject">%1$s, %2$d %3$s %4$d</string>
 <string name="share_body">Oggi è %1$s, %2$d %3$s %4$d.
