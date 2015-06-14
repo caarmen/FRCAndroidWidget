@@ -18,9 +18,6 @@
  */
 package ca.rmen.android.frcwidget;
 
-import java.util.Arrays;
-import java.util.Set;
-
 import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -32,14 +29,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import java.util.Arrays;
+import java.util.Set;
+
 import ca.rmen.android.frccommon.Constants;
 import ca.rmen.android.frccommon.Constants.WidgetType;
+import ca.rmen.android.frccommon.FRCDateUtils;
 import ca.rmen.android.frcwidget.render.FRCAppWidgetRenderer;
 import ca.rmen.android.frcwidget.render.FRCAppWidgetRendererFactory;
-import ca.rmen.android.frenchcalendar.R;
-import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetWide;
-import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetNarrow;
 import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetMinimalist;
+import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetNarrow;
+import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetWide;
+import ca.rmen.android.frenchcalendar.R;
+import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
 /**
  * Receiver and AppWidgetProvider which updates a list of wide widgets or a list of narrow widgets.
@@ -110,7 +112,9 @@ public abstract class FRCAppWidgetProvider extends AppWidgetProvider {
         FRCAppWidgetRenderer renderer = FRCAppWidgetRendererFactory.getRenderer(getWidgetType());
         RemoteViews views = renderer.render(context, appWidgetManager, appWidgetId);
 
+        FrenchRevolutionaryCalendarDate date = FRCDateUtils.getToday(context.getApplicationContext());
         Intent intent = new Intent(context, FRCPopupActivity.class);
+        intent.putExtra(FRCPopupActivity.EXTRA_DATE, date);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         views.setOnClickPendingIntent(R.id.rootView, pendingIntent);
