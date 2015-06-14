@@ -112,9 +112,9 @@ public abstract class FRCAppWidgetProvider extends AppWidgetProvider {
         FRCAppWidgetRenderer renderer = FRCAppWidgetRendererFactory.getRenderer(getWidgetType());
         RemoteViews views = renderer.render(context, appWidgetManager, appWidgetId);
 
-        FrenchRevolutionaryCalendarDate date = FRCDateUtils.getToday(context);
+        FrenchRevolutionaryCalendarDate date = FRCDateUtils.getToday(context.getApplicationContext());
         Intent intent = new Intent(context, FRCPopupActivity.class);
-        intent.putExtra(FRCPopupActivity.EXTRA_DAY_OF_YEAR, date.getDayOfYear());
+        intent.putExtra(FRCPopupActivity.EXTRA_DATE, date);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         views.setOnClickPendingIntent(R.id.rootView, pendingIntent);

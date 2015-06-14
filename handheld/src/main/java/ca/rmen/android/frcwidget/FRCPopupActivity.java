@@ -50,11 +50,13 @@ import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 public class FRCPopupActivity extends Activity { // NO_UCD (use default)
     private static final String TAG = Constants.TAG + FRCPopupActivity.class.getSimpleName();
 
-    public static final String EXTRA_DAY_OF_YEAR = "extra_day_of_year";
+    public static final String EXTRA_DATE = "extra_date";
 
     private static final int ACTION_SHARE = 1;
     private static final int ACTION_SETTINGS = 2;
     private static final int ACTION_SEARCH = 3;
+
+    private FrenchRevolutionaryCalendarDate mFrenchDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +65,10 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
 
         // Build our adapter with the list of actions
         ActionsAdapter adapter = new ActionsAdapter(this);
-        String dayOfYear = getIntent().getStringExtra(EXTRA_DAY_OF_YEAR);
+        mFrenchDate = (FrenchRevolutionaryCalendarDate) getIntent().getSerializableExtra(EXTRA_DATE);
         adapter.add(new Action(this, ACTION_SHARE, R.drawable.ic_action_share, R.string.popup_action_share));
         adapter.add(new Action(this, ACTION_SETTINGS, R.drawable.ic_action_settings, R.string.popup_action_settings));
-        adapter.add(new Action(this, ACTION_SEARCH, R.drawable.ic_action_search, R.string.popup_action_search, dayOfYear));
+        adapter.add(new Action(this, ACTION_SEARCH, R.drawable.ic_action_search, R.string.popup_action_search, mFrenchDate.getDayOfYear()));
 
         // Build the alert dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -141,16 +143,15 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
         public void onClick(DialogInterface dialog, int which) {
             ActionsAdapter adapter = (ActionsAdapter) ((AlertDialog) dialog).getListView().getAdapter();
             Action action = adapter.getItem(which);
-            FrenchRevolutionaryCalendarDate frenchDate = FRCDateUtils.getToday(getApplication());
             switch (action.id) {
                 case ACTION_SHARE:
                     // Prepare the text to share, based on the current date.
-                    String subject = getString(R.string.share_subject, frenchDate.getWeekdayName(), frenchDate.dayOfMonth, frenchDate.getMonthName(),
-                            frenchDate.year);
-                    String time = String.format(Locale.US, "%d:%02d:%02d", frenchDate.hour, frenchDate.minute, frenchDate.second);
-                    String objectType = getResources().getStringArray(R.array.daily_object_types)[frenchDate.getObjectType().ordinal()];
-                    String body = getString(R.string.share_body, frenchDate.getWeekdayName(), frenchDate.dayOfMonth, frenchDate.getMonthName(),
-                            frenchDate.year, time, objectType, frenchDate.getDayOfYear(), FRCDateUtils.getDaysSinceDay1());
+                    String subject = getString(R.string.share_subject, mFrenchDate.getWeekdayName(), mFrenchDate.dayOfMonth, mFrenchDate.getMonthName(),
+                            mFrenchDate.year);
+                    String time = String.format(Locale.US, "%d:%02d:%02d", mFrenchDate.hour, mFrenchDate.minute, mFrenchDate.second);
+                    String objectType = getResources().getStringArray(R.array.daily_object_types)[mFrenchDate.getObjectType().ordinal()];
+                    String body = getString(R.string.share_body, mFrenchDate.getWeekdayName(), mFrenchDate.dayOfMonth, mFrenchDate.getMonthName(),
+                            mFrenchDate.year, time, objectType, mFrenchDate.getDayOfYear(), FRCDateUtils.getDaysSinceDay1());
 
                     // Open an intent chooser to share our text.
                     Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -167,7 +168,7 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
                     break;
                 case ACTION_SEARCH:
                     Intent searchIntent = new Intent(Intent.ACTION_WEB_SEARCH);
-                    searchIntent.putExtra(SearchManager.QUERY, frenchDate.getDayOfYear());
+                    searchIntent.putExtra(SearchManager.QUERY, mFrenchDate.getDayOfYear());
                     startActivity(Intent.createChooser(searchIntent, getString(R.string.chooser_title)));
                     break;
                 default:
