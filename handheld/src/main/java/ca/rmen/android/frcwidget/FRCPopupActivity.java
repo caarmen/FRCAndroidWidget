@@ -169,6 +169,12 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
                 case ACTION_SEARCH:
                     Intent searchIntent = new Intent(Intent.ACTION_WEB_SEARCH);
                     searchIntent.putExtra(SearchManager.QUERY, mFrenchDate.getDayOfYear());
+                    // No apps can handle ACTION_WEB_SEARCH.  We'll try a more generic intent instead
+                    if(getPackageManager().queryIntentActivities(searchIntent, 0).isEmpty()) {
+                        searchIntent = new Intent(Intent.ACTION_SEND);
+                        searchIntent.setType("text/plain");
+                        searchIntent.putExtra(Intent.EXTRA_TEXT, mFrenchDate.getDayOfYear());
+                    }
                     startActivity(Intent.createChooser(searchIntent, getString(R.string.chooser_title)));
                     break;
                 default:
