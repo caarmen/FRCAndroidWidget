@@ -13,8 +13,8 @@ android {
         applicationId "ca.rmen.android.frenchcalendar"
         minSdkVersion 20
         targetSdkVersion 20
-        versionCode 171
-        versionName "1.7.1"
+        versionCode 172
+        versionName "1.7.2"
 
         // For now we enable strict mode for all the configs
         buildConfigField 'boolean', 'STRICT_MODE', 'true'

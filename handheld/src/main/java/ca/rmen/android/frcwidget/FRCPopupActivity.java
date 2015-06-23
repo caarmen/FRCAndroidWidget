@@ -38,6 +38,7 @@ import java.util.Locale;
 import ca.rmen.android.frccommon.Constants;
 import ca.rmen.android.frccommon.FRCDateUtils;
 import ca.rmen.android.frccommon.prefs.FRCPreferenceActivity;
+import ca.rmen.android.frccommon.prefs.FRCPreferences;
 import ca.rmen.android.frcwidget.render.Font;
 import ca.rmen.android.frenchcalendar.R;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
@@ -173,7 +174,8 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
                     if(getPackageManager().queryIntentActivities(searchIntent, 0).isEmpty()) {
                         searchIntent = new Intent(Intent.ACTION_SEND);
                         searchIntent.setType("text/plain");
-                        searchIntent.putExtra(Intent.EXTRA_TEXT, mFrenchDate.getDayOfYear());
+                        Locale locale = FRCPreferences.getInstance(getApplicationContext()).getLocale();
+                        searchIntent.putExtra(Intent.EXTRA_TEXT, mFrenchDate.getDayOfYear().toLowerCase(locale));
                     }
                     startActivity(Intent.createChooser(searchIntent, getString(R.string.chooser_title)));
                     break;
