@@ -88,6 +88,10 @@ class FRCMinimalistAppWidgetRenderer implements FRCAppWidgetRenderer {
         // Render the views to a bitmap and return a RemoteViews containing this image.
         int width = (int) (scaleFactor * defaultWidgetWidth);
         int height = (int) (scaleFactor * defaultWidgetHeight);
+
+        // In some months and languages, the date field text may be too long to fit.
+        FRCRender.shrinkText(tvDate, width);
+
         Log.v(TAG, "Creating widget of size " + width + "x" + height);
         return FRCRender.createRemoteViews(context, view, width, height);
     }

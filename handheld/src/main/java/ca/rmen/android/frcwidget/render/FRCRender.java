@@ -22,7 +22,9 @@ import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.Build;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.View.MeasureSpec;
@@ -31,6 +33,7 @@ import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
+import ca.rmen.android.frccommon.Constants;
 import ca.rmen.android.frenchcalendar.R;
 
 /**
@@ -39,6 +42,8 @@ import ca.rmen.android.frenchcalendar.R;
  * @author calvarez
  */
 class FRCRender {
+
+    private static final String TAG = Constants.TAG + FRCRender.class.getSimpleName();
 
     /**
      * Depending on our api level and whether the launcher provides us the max
@@ -97,6 +102,21 @@ class FRCRender {
                 scaleViews(v, scaleFactor);
             }
         }
+    }
+
+    /**
+     * If the given TextView's text is too long for the given max width, set the text size on the
+     * TextView to a smaller value so it will fit the width.
+     */
+    static void shrinkText(TextView textView, float maxWidth) {
+        Paint paint = new Paint();
+        float originalTextSize = textView.getTextSize();
+        paint.setTextSize(originalTextSize);
+        float actualWidth = paint.measureText(textView.getText().toString());
+        if (actualWidth < maxWidth) return;
+        float shrunkenTextSize = (maxWidth / actualWidth) * originalTextSize;
+        Log.v(TAG, "Shrunk text size for '" + textView.getText() + "' from " + originalTextSize + "px to " + shrunkenTextSize + "px");
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, shrunkenTextSize);
     }
 
     /**
