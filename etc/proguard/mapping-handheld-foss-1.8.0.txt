@@ -1,0 +1,372 @@
+ca.rmen.android.frccommon.Constants -> ca.rmen.android.frccommon.a:
+ca.rmen.android.frccommon.Constants$WidgetType -> ca.rmen.android.frccommon.b:
+    int NARROW$76ed828b -> a
+    int WIDE$76ed828b -> b
+    int MINIMALIST$76ed828b -> c
+    int[] $VALUES$5efc3bd0 -> d
+    25:25:int[] values$5f1b8311() -> a
+ca.rmen.android.frccommon.FRCAboutActivity -> ca.rmen.android.frccommon.FRCAboutActivity:
+    java.lang.String TAG -> a
+    36:49:void onCreate(android.os.Bundle) -> onCreate
+ca.rmen.android.frccommon.FRCDateUtils -> ca.rmen.android.frccommon.c:
+    java.lang.String TAG -> a
+    37:43:ca.rmen.lfrc.FrenchRevolutionaryCalendarDate getToday(android.content.Context) -> a
+    50:61:long getDaysSinceDay1() -> a
+    69:75:int getColor(android.content.Context,ca.rmen.lfrc.FrenchRevolutionaryCalendarDate) -> a
+ca.rmen.android.frccommon.prefs.FRCPreferenceActivity -> ca.rmen.android.frccommon.prefs.FRCPreferenceActivity:
+    java.lang.String TAG -> a
+    android.content.SharedPreferences$OnSharedPreferenceChangeListener mOnSharedPreferenceChangeListener -> b
+    ca.rmen.android.frcwear.FRCWearPreferenceListener mWearPreferenceListener -> c
+    76:99:void onCreate(android.os.Bundle) -> onCreate
+    103:147:void onStart() -> onStart
+    151:159:void onStop() -> onStop
+    163:165:void onDestroy() -> onDestroy
+    169:181:void updatePreferenceSummary(java.lang.String,int) -> a
+    50:50:void access$000(ca.rmen.android.frccommon.prefs.FRCPreferenceActivity,java.lang.String,int) -> a
+ca.rmen.android.frccommon.prefs.FRCPreferenceActivity$1 -> ca.rmen.android.frccommon.prefs.a:
+    ca.rmen.android.frccommon.prefs.FRCPreferenceActivity this$0 -> a
+    56:70:void onSharedPreferenceChanged(android.content.SharedPreferences,java.lang.String) -> onSharedPreferenceChanged
+ca.rmen.android.frccommon.prefs.FRCPreferences -> ca.rmen.android.frccommon.prefs.b:
+    ca.rmen.android.frccommon.prefs.FRCPreferences me -> b
+    android.content.SharedPreferences sharedPrefs -> a
+    54:55:ca.rmen.android.frccommon.prefs.FRCPreferences getInstance(android.content.Context) -> a
+    63:64:java.util.Locale getLocale() -> a
+    90:91:ca.rmen.android.frccommon.prefs.FRCPreferences$DetailedView getDetailedView() -> b
+ca.rmen.android.frccommon.prefs.FRCPreferences$DetailedView -> ca.rmen.android.frccommon.prefs.c:
+    ca.rmen.android.frccommon.prefs.FRCPreferences$DetailedView NONE -> a
+    ca.rmen.android.frccommon.prefs.FRCPreferences$DetailedView TIME -> b
+    ca.rmen.android.frccommon.prefs.FRCPreferences$DetailedView DAY_OF_YEAR -> c
+    ca.rmen.android.frccommon.prefs.FRCPreferences$DetailedView[] $VALUES -> d
+    49:49:ca.rmen.android.frccommon.prefs.FRCPreferences$DetailedView[] values() -> values
+    49:49:ca.rmen.android.frccommon.prefs.FRCPreferences$DetailedView valueOf(java.lang.String) -> valueOf
+ca.rmen.android.frcwear.FRCWearPreferenceListener -> ca.rmen.android.a.a:
+    31:31:void onSharedPreferenceChanged(android.content.SharedPreferences,java.lang.String) -> onSharedPreferenceChanged
+ca.rmen.android.frcwidget.FRCAppWidgetManager -> ca.rmen.android.frcwidget.a:
+    43:47:java.util.Set getAllAppWidgetIds(android.content.Context) -> a
+    54:62:java.util.Set getAppWidgetIds(android.content.Context,java.lang.Class) -> a
+ca.rmen.android.frcwidget.FRCAppWidgetProvider -> ca.rmen.android.frcwidget.b:
+    java.lang.String TAG -> a
+    67:78:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+    83:86:void onAppWidgetOptionsChanged(android.content.Context,android.appwidget.AppWidgetManager,int,android.os.Bundle) -> onAppWidgetOptionsChanged
+    93:96:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]) -> onUpdate
+    102:105:void updateAll(android.content.Context,android.appwidget.AppWidgetManager,int[]) -> a
+    111:122:void update(android.content.Context,android.appwidget.AppWidgetManager,int) -> a
+    int getWidgetType$389e1c76() -> a
+ca.rmen.android.frcwidget.FRCPopupActivity -> ca.rmen.android.frcwidget.FRCPopupActivity:
+    java.lang.String TAG -> a
+    ca.rmen.lfrc.FrenchRevolutionaryCalendarDate mFrenchDate -> b
+    android.content.DialogInterface$OnClickListener listener -> c
+    android.content.DialogInterface$OnDismissListener dismissListener -> d
+    64:80:void onCreate(android.os.Bundle) -> onCreate
+    84:85:void onStart() -> onStart
+    90:91:void onResume() -> onResume
+    96:97:void onPause() -> onPause
+    102:103:void onStop() -> onStop
+    108:109:void onDestroy() -> onDestroy
+    51:51:ca.rmen.lfrc.FrenchRevolutionaryCalendarDate access$000(ca.rmen.android.frcwidget.FRCPopupActivity) -> a
+    51:51:java.lang.String access$100() -> a
+ca.rmen.android.frcwidget.FRCPopupActivity$1 -> ca.rmen.android.frcwidget.c:
+    ca.rmen.android.frcwidget.FRCPopupActivity this$0 -> a
+    145:187:void onClick(android.content.DialogInterface,int) -> onClick
+ca.rmen.android.frcwidget.FRCPopupActivity$2 -> ca.rmen.android.frcwidget.d:
+    ca.rmen.android.frcwidget.FRCPopupActivity this$0 -> a
+    193:194:void onDismiss(android.content.DialogInterface) -> onDismiss
+ca.rmen.android.frcwidget.FRCPopupActivity$Action -> ca.rmen.android.frcwidget.e:
+    int id -> a
+    int iconId -> b
+    java.lang.String title -> c
+ca.rmen.android.frcwidget.FRCPopupActivity$ActionsAdapter -> ca.rmen.android.frcwidget.f:
+    132:137:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+ca.rmen.android.frcwidget.FRCWidgetScheduler -> ca.rmen.android.frcwidget.g:
+    java.lang.String TAG -> a
+    ca.rmen.android.frcwidget.FRCWidgetScheduler INSTANCE -> b
+    android.content.Context context -> c
+    android.app.PendingIntent updateWidgetPendingIntent -> d
+    android.content.BroadcastReceiver screenBroadcastReceiver -> e
+    64:65:ca.rmen.android.frcwidget.FRCWidgetScheduler getInstance(android.content.Context) -> a
+    72:96:void schedule() -> a
+    103:106:void cancel() -> b
+    45:45:java.lang.String access$000() -> c
+ca.rmen.android.frcwidget.FRCWidgetScheduler$1 -> ca.rmen.android.frcwidget.h:
+    ca.rmen.android.frcwidget.FRCWidgetScheduler this$0 -> a
+    115:122:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+ca.rmen.android.frcwidget.render.FRCAppWidgetRenderer -> ca.rmen.android.frcwidget.a.a:
+    android.widget.RemoteViews render(android.content.Context,android.appwidget.AppWidgetManager,int) -> a
+ca.rmen.android.frcwidget.render.FRCAppWidgetRendererFactory -> ca.rmen.android.frcwidget.a.b:
+ca.rmen.android.frcwidget.render.FRCAppWidgetRendererFactory$1 -> ca.rmen.android.frcwidget.a.c:
+    int[] $SwitchMap$ca$rmen$android$frccommon$Constants$WidgetType -> a
+ca.rmen.android.frcwidget.render.FRCMinimalistAppWidgetRenderer -> ca.rmen.android.frcwidget.a.d:
+    java.lang.String TAG -> a
+    48:96:android.widget.RemoteViews render(android.content.Context,android.appwidget.AppWidgetManager,int) -> a
+    104:113:void setTextColors(android.content.Context,android.widget.TextView,ca.rmen.lfrc.FrenchRevolutionaryCalendarDate) -> a
+ca.rmen.android.frcwidget.render.FRCRender -> ca.rmen.android.frcwidget.a.e:
+    java.lang.String TAG -> a
+    57:65:float getScaleFactor(android.content.Context,android.appwidget.AppWidgetManager,int,float,float) -> a
+    75:105:void scaleViews(android.view.View,float) -> a
+    112:120:void shrinkText(android.widget.TextView,float) -> a
+    130:143:android.widget.RemoteViews createRemoteViews(android.content.Context,android.view.View,int,int) -> a
+ca.rmen.android.frcwidget.render.FRCRenderApi13 -> ca.rmen.android.frcwidget.a.f:
+    java.lang.String TAG -> a
+    43:51:float getMaxScaleFactor(android.content.Context,float,float) -> a
+ca.rmen.android.frcwidget.render.FRCRenderApi16 -> ca.rmen.android.frcwidget.a.g:
+    java.lang.String TAG -> a
+    46:58:float getScaleFactor(android.content.Context,android.appwidget.AppWidgetManager,int,float,float) -> a
+    63:67:void scaleShadow(android.widget.TextView,float) -> a
+ca.rmen.android.frcwidget.render.FRCScrollAppWidgetRenderParams -> ca.rmen.android.frcwidget.a.h:
+    int layoutResourceId -> a
+    int widthResourceId -> b
+    int heightResourceId -> c
+    int textViewableWidthResourceId -> d
+    int scrollResourceId -> e
+ca.rmen.android.frcwidget.render.FRCScrollAppWidgetRenderer -> ca.rmen.android.frcwidget.a.i:
+    java.lang.String TAG -> a
+    ca.rmen.android.frcwidget.render.FRCScrollAppWidgetRenderParams mParams -> b
+    57:115:android.widget.RemoteViews render(android.content.Context,android.appwidget.AppWidgetManager,int) -> a
+ca.rmen.android.frcwidget.render.Font -> ca.rmen.android.frcwidget.a.j:
+    android.graphics.Typeface sTypeface -> a
+    48:60:void applyFont(android.content.Context,android.view.View) -> a
+ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetMinimalist -> ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetMinimalist:
+    28:28:int getWidgetType$389e1c76() -> a
+ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetNarrow -> ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetNarrow:
+    28:28:int getWidgetType$389e1c76() -> a
+ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetWide -> ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetWide:
+    28:28:int getWidgetType$389e1c76() -> a
+ca.rmen.android.frenchcalendar.R -> ca.rmen.android.frenchcalendar.a:
+ca.rmen.lfrc.EquinoxDates -> ca.rmen.a.a:
+    java.util.TimeZone TIMEZONE_PARIS -> a
+    java.text.SimpleDateFormat sdf -> b
+    java.util.Map equinoxDates -> c
+    50:56:int getAutumnEquinox(int) -> a
+    64:82:void addEquinoxDate(int,java.lang.String) -> a
+    182:4184:void loadFullEquinoxList() -> a
+ca.rmen.lfrc.FrenchRevolutionaryCalendar -> ca.rmen.a.b:
+    java.util.Locale locale -> a
+    java.util.Calendar frenchEraBegin -> b
+    java.util.Calendar frenchEraEnd -> c
+    ca.rmen.lfrc.FrenchRevolutionaryCalendar$CalculationMethod calculationMethod -> d
+    216:224:ca.rmen.lfrc.FrenchRevolutionaryCalendarDate getFrenchDate(int,int) -> a
+    255:265:java.util.Calendar getAutumnEquinox(int) -> a
+ca.rmen.lfrc.FrenchRevolutionaryCalendar$CalculationMethod -> ca.rmen.a.c:
+    ca.rmen.lfrc.FrenchRevolutionaryCalendar$CalculationMethod EQUINOX -> a
+    ca.rmen.lfrc.FrenchRevolutionaryCalendar$CalculationMethod ROMME -> b
+    ca.rmen.lfrc.FrenchRevolutionaryCalendar$CalculationMethod[] $VALUES -> c
+    37:37:ca.rmen.lfrc.FrenchRevolutionaryCalendar$CalculationMethod[] values() -> values
+    37:37:ca.rmen.lfrc.FrenchRevolutionaryCalendar$CalculationMethod valueOf(java.lang.String) -> valueOf
+ca.rmen.lfrc.FrenchRevolutionaryCalendar$DailyObjectType -> ca.rmen.a.d:
+    ca.rmen.lfrc.FrenchRevolutionaryCalendar$DailyObjectType PLANT -> a
+    ca.rmen.lfrc.FrenchRevolutionaryCalendar$DailyObjectType ANIMAL -> b
+    ca.rmen.lfrc.FrenchRevolutionaryCalendar$DailyObjectType TOOL -> c
+    ca.rmen.lfrc.FrenchRevolutionaryCalendar$DailyObjectType MINERAL -> d
+    ca.rmen.lfrc.FrenchRevolutionaryCalendar$DailyObjectType CONCEPT -> e
+    ca.rmen.lfrc.FrenchRevolutionaryCalendar$DailyObjectType[] $VALUES -> f
+    41:41:ca.rmen.lfrc.FrenchRevolutionaryCalendar$DailyObjectType[] values() -> values
+    41:41:ca.rmen.lfrc.FrenchRevolutionaryCalendar$DailyObjectType valueOf(java.lang.String) -> valueOf
+ca.rmen.lfrc.FrenchRevolutionaryCalendarDate -> ca.rmen.a.e:
+    java.util.Locale locale -> g
+    int year -> a
+    int month -> b
+    int dayOfMonth -> c
+    int hour -> d
+    int minute -> e
+    int second -> f
+    78:83:ca.rmen.lfrc.FrenchRevolutionaryCalendar$DailyObjectType getObjectType() -> a
+    92:92:java.lang.String getMonthName() -> b
+    97:98:java.lang.String getWeekdayName() -> c
+    105:105:java.lang.String getDayOfYear() -> d
+    109:111:java.lang.String toString() -> toString
+    116:129:boolean equals(java.lang.Object) -> equals
+    134:141:int hashCode() -> hashCode
+ca.rmen.lfrc.i18n.FrenchRevolutionaryCalendarLabels -> ca.rmen.a.a.a:
+    java.util.Map instances -> d
+    java.lang.String[] weekdays -> a
+    java.lang.String[] months -> b
+    java.lang.String[][] daysOfYear -> c
+    java.lang.String[] dailyObjectTypes -> e
+    89:100:ca.rmen.lfrc.i18n.FrenchRevolutionaryCalendarLabels getInstance(java.util.Locale) -> a
+ca.rmen.lfrc.i18n.FrenchRevolutionaryCalendarLabelsCA -> ca.rmen.a.a.b:
+    java.lang.String[] MONTHS -> d
+    java.lang.String[][] DAY_OF_YEAR -> e
+    java.lang.String[] DAILY_OBJECT_TYPES -> f
+ca.rmen.lfrc.i18n.FrenchRevolutionaryCalendarLabelsDE -> ca.rmen.a.a.c:
+    java.lang.String[] MONTHS -> d
+    java.lang.String[][] DAY_OF_YEAR -> e
+    java.lang.String[] DAILY_OBJECT_TYPES -> f
+ca.rmen.lfrc.i18n.FrenchRevolutionaryCalendarLabelsEN -> ca.rmen.a.a.d:
+    java.lang.String[][] DAY_OF_YEAR -> d
+    java.lang.String[] DAILY_OBJECT_TYPES -> e
+ca.rmen.lfrc.i18n.FrenchRevolutionaryCalendarLabelsES -> ca.rmen.a.a.e:
+    java.lang.String[] MONTHS -> d
+    java.lang.String[][] DAY_OF_YEAR -> e
+    java.lang.String[] DAILY_OBJECT_TYPES -> f
+ca.rmen.lfrc.i18n.FrenchRevolutionaryCalendarLabelsFR -> ca.rmen.a.a.f:
+    java.lang.String[] WEEKDAYS -> d
+    java.lang.String[] MONTHS -> e
+    java.lang.String[][] DAY_OF_YEAR -> f
+    java.lang.String[] DAILY_OBJECT_TYPES -> g
+ca.rmen.lfrc.i18n.FrenchRevolutionaryCalendarLabelsIT -> ca.rmen.a.a.g:
+    java.lang.String[] WEEKDAYS -> d
+    java.lang.String[] MONTHS -> e
+    java.lang.String[][] DAY_OF_YEAR -> f
+    java.lang.String[] DAILY_OBJECT_TYPES -> g
+net.margaritov.preference.colorpicker.AlphaPatternDrawable -> net.margaritov.preference.colorpicker.a:
+    int mRectangleSize -> a
+    android.graphics.Paint mPaint -> b
+    android.graphics.Paint mPaintWhite -> c
+    android.graphics.Paint mPaintGray -> d
+    int numRectanglesHorizontal -> e
+    int numRectanglesVertical -> f
+    android.graphics.Bitmap mBitmap -> g
+    57:58:void draw(android.graphics.Canvas) -> draw
+    62:62:int getOpacity() -> getOpacity
+    67:67:void setAlpha(int) -> setAlpha
+    72:72:void setColorFilter(android.graphics.ColorFilter) -> setColorFilter
+    77:87:void onBoundsChange(android.graphics.Rect) -> onBoundsChange
+net.margaritov.preference.colorpicker.ColorPickerDialog -> net.margaritov.preference.colorpicker.b:
+    net.margaritov.preference.colorpicker.ColorPickerView mColorPicker -> a
+    net.margaritov.preference.colorpicker.ColorPickerPanelView mOldColor -> e
+    net.margaritov.preference.colorpicker.ColorPickerPanelView mNewColor -> f
+    android.widget.EditText mHexVal -> b
+    boolean mHexValueEnabled -> c
+    android.content.res.ColorStateList mHexDefaultTextColor -> g
+    net.margaritov.preference.colorpicker.ColorPickerDialog$OnColorChangedListener mListener -> d
+    135:146:void onColorChanged(int) -> a
+    164:168:void updateHexLengthFilter() -> a
+    171:177:void updateHexValue(int) -> b
+    206:212:void onClick(android.view.View) -> onClick
+    216:219:android.os.Bundle onSaveInstanceState() -> onSaveInstanceState
+    224:227:void onRestoreInstanceState(android.os.Bundle) -> onRestoreInstanceState
+    38:38:android.widget.EditText access$000(net.margaritov.preference.colorpicker.ColorPickerDialog) -> a
+    38:38:net.margaritov.preference.colorpicker.ColorPickerView access$100(net.margaritov.preference.colorpicker.ColorPickerDialog) -> b
+    38:38:android.content.res.ColorStateList access$200(net.margaritov.preference.colorpicker.ColorPickerDialog) -> c
+net.margaritov.preference.colorpicker.ColorPickerDialog$1 -> net.margaritov.preference.colorpicker.c:
+    net.margaritov.preference.colorpicker.ColorPickerDialog this$0 -> a
+    96:113:boolean onEditorAction(android.widget.TextView,int,android.view.KeyEvent) -> onEditorAction
+net.margaritov.preference.colorpicker.ColorPickerDialog$OnColorChangedListener -> net.margaritov.preference.colorpicker.d:
+    void onColorChanged(int) -> a
+net.margaritov.preference.colorpicker.ColorPickerPanelView -> net.margaritov.preference.colorpicker.ColorPickerPanelView:
+    float mDensity -> a
+    int mBorderColor -> b
+    int mColor -> c
+    android.graphics.Paint mBorderPaint -> d
+    android.graphics.Paint mColorPaint -> e
+    android.graphics.RectF mDrawingRect -> f
+    android.graphics.RectF mColorRect -> g
+    net.margaritov.preference.colorpicker.AlphaPatternDrawable mAlphaPattern -> h
+    78:92:void onDraw(android.graphics.Canvas) -> onDraw
+    97:101:void onMeasure(int,int) -> onMeasure
+    105:115:void onSizeChanged(int,int,int,int) -> onSizeChanged
+    143:145:void setColor(int) -> setColor
+    152:152:int getColor() -> getColor
+    160:162:void setBorderColor(int) -> setBorderColor
+    168:168:int getBorderColor() -> getBorderColor
+net.margaritov.preference.colorpicker.ColorPickerPreference -> net.margaritov.preference.colorpicker.ColorPickerPreference:
+    android.view.View mView -> a
+    net.margaritov.preference.colorpicker.ColorPickerDialog mDialog -> b
+    int mValue -> d
+    float mDensity -> e
+    boolean mAlphaSliderEnabled -> c
+    boolean mHexValueEnabled -> f
+    68:68:java.lang.Object onGetDefaultValue(android.content.res.TypedArray,int) -> onGetDefaultValue
+    73:74:void onSetInitialValue(boolean,java.lang.Object) -> onSetInitialValue
+    77:83:void init$643f623b(android.util.AttributeSet) -> a
+    87:90:void onBindView(android.view.View) -> onBindView
+    93:113:void setPreviewColor() -> a
+    116:132:android.graphics.Bitmap getPreviewBitmap() -> b
+    137:147:void onColorChanged(int) -> a
+    150:151:boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
+    155:167:void showDialog(android.os.Bundle) -> a
+    191:212:java.lang.String convertToARGB(int) -> b
+    223:239:java.lang.String convertToRGB(int) -> c
+    250:254:int convertToColorInt(java.lang.String) -> a
+    259:266:android.os.Parcelable onSaveInstanceState() -> onSaveInstanceState
+    271:280:void onRestoreInstanceState(android.os.Parcelable) -> onRestoreInstanceState
+net.margaritov.preference.colorpicker.ColorPickerPreference$SavedState -> net.margaritov.preference.colorpicker.ColorPickerPreference$SavedState:
+    android.os.Bundle dialogBundle -> a
+    android.os.Parcelable$Creator CREATOR -> CREATOR
+    292:294:void writeToParcel(android.os.Parcel,int) -> writeToParcel
+net.margaritov.preference.colorpicker.ColorPickerPreference$SavedState$1 -> net.margaritov.preference.colorpicker.e:
+    302:302:java.lang.Object[] newArray(int) -> newArray
+    302:302:java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
+net.margaritov.preference.colorpicker.ColorPickerView -> net.margaritov.preference.colorpicker.ColorPickerView:
+    float HUE_PANEL_WIDTH -> a
+    float ALPHA_PANEL_HEIGHT -> b
+    float PANEL_SPACING -> c
+    float PALETTE_CIRCLE_TRACKER_RADIUS -> d
+    float RECTANGLE_TRACKER_OFFSET -> e
+    float mDensity -> f
+    net.margaritov.preference.colorpicker.ColorPickerView$OnColorChangedListener mListener -> g
+    android.graphics.Paint mSatValPaint -> h
+    android.graphics.Paint mSatValTrackerPaint -> i
+    android.graphics.Paint mHuePaint -> j
+    android.graphics.Paint mHueTrackerPaint -> k
+    android.graphics.Paint mAlphaPaint -> l
+    android.graphics.Paint mAlphaTextPaint -> m
+    android.graphics.Paint mBorderPaint -> n
+    android.graphics.Shader mValShader -> o
+    android.graphics.Shader mSatShader -> p
+    android.graphics.Shader mHueShader -> q
+    android.graphics.Shader mAlphaShader -> r
+    int mAlpha -> s
+    float mHue -> t
+    float mSat -> u
+    float mVal -> v
+    java.lang.String mAlphaSliderText -> w
+    int mSliderTrackerColor -> x
+    int mBorderColor -> y
+    boolean mShowAlphaPanel -> z
+    int mLastTouchedPanel -> A
+    float mDrawingOffset -> B
+    android.graphics.RectF mDrawingRect -> C
+    android.graphics.RectF mSatValRect -> D
+    android.graphics.RectF mHueRect -> E
+    android.graphics.RectF mAlphaRect -> F
+    net.margaritov.preference.colorpicker.AlphaPatternDrawable mAlphaPattern -> G
+    android.graphics.Point mStartTouchPoint -> H
+    209:216:int[] buildHueColorArray() -> a
+    223:229:void onDraw(android.graphics.Canvas) -> onDraw
+    466:561:boolean onTrackballEvent(android.view.MotionEvent) -> onTrackballEvent
+    567:606:boolean onTouchEvent(android.view.MotionEvent) -> onTouchEvent
+    611:647:boolean moveTrackersIfNeeded(android.view.MotionEvent) -> a
+    653:693:void onMeasure(int,int) -> onMeasure
+    713:720:int getPrefferedWidth() -> getPrefferedWidth
+    726:732:int getPrefferedHeight() -> getPrefferedHeight
+    739:750:void onSizeChanged(int,int,int,int) -> onSizeChanged
+    810:811:void setOnColorChangedListener(net.margaritov.preference.colorpicker.ColorPickerView$OnColorChangedListener) -> setOnColorChangedListener
+    818:820:void setBorderColor(int) -> setBorderColor
+    826:826:int getBorderColor() -> getBorderColor
+    834:834:int getColor() -> getColor
+    842:843:void setColor(int) -> setColor
+    853:869:void setColor(int,boolean) -> a
+    880:880:float getDrawingOffset() -> getDrawingOffset
+    890:906:void setAlphaSliderVisible(boolean) -> setAlphaSliderVisible
+    909:909:boolean getAlphaSliderVisible() -> getAlphaSliderVisible
+    913:918:void setSliderTrackerColor(int) -> setSliderTrackerColor
+    921:921:int getSliderTrackerColor() -> getSliderTrackerColor
+    930:932:void setAlphaSliderText(int) -> setAlphaSliderText
+    940:942:void setAlphaSliderText(java.lang.String) -> setAlphaSliderText
+    951:951:java.lang.String getAlphaSliderText() -> getAlphaSliderText
+net.margaritov.preference.colorpicker.ColorPickerView$OnColorChangedListener -> net.margaritov.preference.colorpicker.f:
+    void onColorChanged(int) -> a
+net.margaritov.preference.colorpicker.R -> net.margaritov.preference.colorpicker.g:
+net.margaritov.preference.colorpicker.R$id -> net.margaritov.preference.colorpicker.h:
+    int color_picker_view -> color_picker_view
+    int hex_val -> hex_val
+    int new_color_panel -> new_color_panel
+    int old_color_panel -> old_color_panel
+    int text_hex_wrapper -> text_hex_wrapper
+net.margaritov.preference.colorpicker.R$layout -> net.margaritov.preference.colorpicker.i:
+    int dialog_color_picker -> dialog_color_picker
+net.margaritov.preference.colorpicker.R$string -> net.margaritov.preference.colorpicker.j:
+    int app_name -> app_name
+    int color1_summary -> color1_summary
+    int color1_title -> color1_title
+    int color2_summary -> color2_summary
+    int color2_title -> color2_title
+    int color3_summary -> color3_summary
+    int color3_title -> color3_title
+    int color4_summary -> color4_summary
+    int color4_title -> color4_title
+    int dialog_color_picker -> dialog_color_picker
+    int hello -> hello
+    int pref_category -> pref_category
+    int press_color_to_apply -> press_color_to_apply
