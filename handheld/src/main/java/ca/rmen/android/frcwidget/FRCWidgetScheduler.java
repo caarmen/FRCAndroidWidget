@@ -145,7 +145,14 @@ public class FRCWidgetScheduler {
     }
 
     /**
-     * We only want to be updating the widgets when the screen is on.
+     * In the mode where the time is displayed, we only want to be updating the widgets when the screen is on,
+     * because the update will occur every minute.
+     * TODO: this screen broadcast receiver will stop being triggered when the OS decides to kill
+     * our app process to free memory. We need to find a solution (if possible) for when the user
+     * has chosen to display the decimal clock.  In that case, we want to update the widget every
+     * minute when the screen is on, and do nothing when the screen is off.  However, if we want to
+     * "behave", if the user hasn't added any widget at all, we don't want to be doing anything
+     * at all during screen on/off events: so we shouldn't add a receiver for these events in the manifest.
      */
     private class ScreenBroadcastReceiver extends BroadcastReceiver {
 
@@ -154,7 +161,10 @@ public class FRCWidgetScheduler {
             Log.v(TAG, "onReceive: intent = " + intent);
 
             if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
-                cancel();
+                int frequency = FRCPreferences.getInstance(context).getUpdateFrequency();
+                if (frequency < FRCPreferences.FREQUENCY_DAYS) {
+                    cancel();
+                }
             } else if (Intent.ACTION_SCREEN_ON.equals(intent.getAction())) {
                 schedule();
             }
