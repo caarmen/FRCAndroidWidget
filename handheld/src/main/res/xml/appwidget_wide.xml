@@ -17,10 +17,12 @@
 
 -->
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:configure="ca.rmen.android.frcwidget.prefs.FRCPreferenceActivity"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:configure="ca.rmen.android.frccommon.prefs.FRCPreferenceActivity"
     android:initialLayout="@layout/appwidget_wide_initial"
     android:minHeight="40dp"
     android:minWidth="110dp"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="3600000"
-    android:widgetCategory="home_screen|keyguard" />
+    android:widgetCategory="home_screen|keyguard"
+    tools:ignore="UnusedAttribute" />

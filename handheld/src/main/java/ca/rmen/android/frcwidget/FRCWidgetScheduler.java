@@ -56,6 +56,7 @@ public class FRCWidgetScheduler {
         updateWidgetPendingIntent = PendingIntent.getBroadcast(context, 0, updateWidgetIntent, 0);
         IntentFilter filterOn = new IntentFilter(Intent.ACTION_SCREEN_ON);
         IntentFilter filterOff = new IntentFilter(Intent.ACTION_SCREEN_OFF);
+        ScreenBroadcastReceiver screenBroadcastReceiver = new ScreenBroadcastReceiver();
         context.getApplicationContext().registerReceiver(screenBroadcastReceiver, filterOn);
         context.getApplicationContext().registerReceiver(screenBroadcastReceiver, filterOff);
     }
@@ -108,7 +109,7 @@ public class FRCWidgetScheduler {
     /**
      * We only want to be updating the widgets when the screen is on.
      */
-    private final BroadcastReceiver screenBroadcastReceiver = new BroadcastReceiver() {
+    private class ScreenBroadcastReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -120,6 +121,6 @@ public class FRCWidgetScheduler {
                 schedule();
             }
         }
-    };
+    }
 
 }

@@ -46,7 +46,7 @@ public class FRCPreferences {
 
     private final SharedPreferences sharedPrefs;
 
-    public static enum DetailedView {
+    public enum DetailedView {
         NONE, TIME, DAY_OF_YEAR
     }
 

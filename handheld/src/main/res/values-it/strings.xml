@@ -61,4 +61,7 @@ Sono passati %8$d giorni dall\'inizio della Repubblica</string>
     <string name="title_no_widgets">Non hai widgets!</string>
     <string name="message_no_widgets">Devi prima aggiungere un widget sulla schermata home.</string>
     <string name="message_save">Premi indietro per salvare le tue impostazioni.</string>
+
+    <string name="dialog_color_picker">Scegliere un colore</string>
+    <string name="press_color_to_apply">Premere sul colore per applicare</string>
 </resources>

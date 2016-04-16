@@ -22,7 +22,11 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.ColorRes;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import ca.rmen.android.frccommon.prefs.FRCPreferences;
 import ca.rmen.android.frenchcalendar.R;
@@ -72,6 +76,6 @@ public class FRCDateUtils {
         }
         String colorResIdStr = "month_" + date.month;
         int colorResId = context.getResources().getIdentifier(colorResIdStr, "color", R.class.getPackage().getName());
-        return context.getResources().getColor(colorResId);
+        return ContextCompat.getColor(context, colorResId);
     }
 }

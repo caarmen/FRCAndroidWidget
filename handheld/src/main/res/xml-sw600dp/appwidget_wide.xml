@@ -18,6 +18,7 @@
 
 -->
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:configure="ca.rmen.android.frccommon.prefs.FRCPreferenceActivity"
     android:initialLayout="@layout/appwidget_wide_initial"
     android:minHeight="110dp"
@@ -25,4 +26,5 @@
     android:minResizeWidth="110dp"
     android:minWidth="180dp"
     android:resizeMode="horizontal|vertical"
-    android:updatePeriodMillis="3600000" />
+    android:updatePeriodMillis="3600000"
+    tools:ignore="UnusedAttribute" />

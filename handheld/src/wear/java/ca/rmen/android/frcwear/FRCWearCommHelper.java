@@ -22,6 +22,7 @@ package ca.rmen.android.frcwear;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -70,7 +71,7 @@ public class FRCWearCommHelper {
             }
         }).addOnConnectionFailedListener(new GoogleApiClient.OnConnectionFailedListener() {
             @Override
-            public void onConnectionFailed(ConnectionResult result) {
+            public void onConnectionFailed(@NonNull ConnectionResult result) {
                 Log.w(TAG, "onConnectionFailed result=" + result);
                 // TODO handle failures
             }
@@ -92,14 +93,13 @@ public class FRCWearCommHelper {
     /**
      * This must not be called from the UI thread.
      */
-    public void updateToday(String date, String dayOfYear, int month, int color) {
+    public void updateToday(String date, String dayOfYear, int color) {
         Log.d(TAG, "updateToday date=" + date + " dayOfYear=" + dayOfYear);
         PutDataMapRequest putDataMapRequest = PutDataMapRequest.create(WearCommConstants.PATH_TODAY);
 
         DataMap dataMap = putDataMapRequest.getDataMap();
         dataMap.putString(WearCommConstants.EXTRA_DATE, date);
         dataMap.putString(WearCommConstants.EXTRA_DAY_OF_YEAR, dayOfYear);
-        dataMap.putInt(WearCommConstants.EXTRA_MONTH, month);
         dataMap.putInt(WearCommConstants.EXTRA_COLOR, color);
 
         PutDataRequest request = putDataMapRequest.asPutDataRequest();

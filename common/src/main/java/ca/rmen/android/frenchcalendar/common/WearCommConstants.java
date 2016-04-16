@@ -31,16 +31,10 @@ public class WearCommConstants {
      */
     public static final String EXTRA_DATE = "EXTRA_DATE";
 
-
     /**
      * Name of this day in the year ({@code String}).
      */
     public static final String EXTRA_DAY_OF_YEAR = "EXTRA_DAY_OF_YEAR";
-
-    /**
-     * Month in the year, from 1 to 11 ({@code int}).
-     */
-    public static final String EXTRA_MONTH = "EXTRA_MONTH";
 
     /**
      * The color of the widget or wear notification ({@code int}).

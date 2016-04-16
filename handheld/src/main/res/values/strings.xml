@@ -63,4 +63,7 @@ It has been %8$d days since the start of the Republic.</string>
     <string name="message_no_widgets">You must first add a widget to the home screen.</string>
     <string name="message_save">Press back to save your settings.</string>
 
+    <string name="dialog_color_picker">Choose a color</string>
+    <string name="press_color_to_apply">Tap on the color to apply</string>
+
 </resources>

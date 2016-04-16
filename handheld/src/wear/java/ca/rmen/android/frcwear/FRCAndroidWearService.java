@@ -92,8 +92,7 @@ public class FRCAndroidWearService extends IntentService {
         FrenchRevolutionaryCalendarDate frenchDate = FRCDateUtils.getToday(context);
         String date = frenchDate.getWeekdayName() + " " + frenchDate.dayOfMonth + " " + frenchDate.getMonthName() + " " + frenchDate.year;
         String dayOfYear = frenchDate.getDayOfYear();
-        int month = frenchDate.month;
         int color = FRCDateUtils.getColor(context, frenchDate);
-        wearCommHelper.updateToday(date, dayOfYear, month, color);
+        wearCommHelper.updateToday(date, dayOfYear, color);
     }
 }

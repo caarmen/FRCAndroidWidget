@@ -48,7 +48,6 @@ public class NotificationService extends WearableListenerService {
 
     private String mDate;
     private String mDayOfYear;
-    private int mMonth;
     private int mColor;
 
     public NotificationService() {}
@@ -78,7 +77,6 @@ public class NotificationService extends WearableListenerService {
             DataMap dataMap = dataMapItem.getDataMap();
             mDate = dataMap.getString(WearCommConstants.EXTRA_DATE);
             mDayOfYear = dataMap.getString(WearCommConstants.EXTRA_DAY_OF_YEAR);
-            mMonth = dataMap.getInt(WearCommConstants.EXTRA_MONTH);
             mColor = dataMap.getInt(WearCommConstants.EXTRA_COLOR);
             showNotification();
         }
@@ -112,7 +110,7 @@ public class NotificationService extends WearableListenerService {
         mainNotifBuilder.setContentText(spannableText);
 
         // Low priority (let's face it)
-        mainNotifBuilder.setPriority(0);
+        mainNotifBuilder.setPriority(Notification.PRIORITY_MIN);
 
         // Wear specifics
         Notification.WearableExtender wearableExtender = new Notification.WearableExtender();
@@ -121,13 +119,11 @@ public class NotificationService extends WearableListenerService {
         wearableExtender.setBackground(createBitmapForMonth(mColor));
 
         Notification.Builder wearableNotifBuilder = wearableExtender.extend(mainNotifBuilder);
-        Notification res = wearableNotifBuilder.build();
-        return res;
+        return wearableNotifBuilder.build();
     }
 
-    public Bitmap createBitmapForMonth(int color) {
+    private Bitmap createBitmapForMonth(int color) {
         int[] colors = {color};
-        Bitmap bitmap = Bitmap.createBitmap(colors, 1, 1, Bitmap.Config.ARGB_8888);
-        return bitmap;
+        return Bitmap.createBitmap(colors, 1, 1, Bitmap.Config.ARGB_8888);
     }
 }

@@ -102,7 +102,7 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
     protected void onStart() {
         super.onStart();
         Log.v(TAG, "onStart");
-        //noinspection deprecation
+        //noinspection deprecation,ConstantConditions
         boolean canUseWear = !BuildConfig.FOSS && Integer.valueOf(Build.VERSION.SDK) >= Build.VERSION_CODES.JELLY_BEAN_MR2;
 
         // We have to load the preferences in onStart instead of on onCreate, in
