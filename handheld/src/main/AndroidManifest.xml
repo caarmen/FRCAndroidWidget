@@ -23,7 +23,11 @@
     android:installLocation="internalOnly"
     tools:ignore="MissingVersion,UnusedAttribute">
 
-    <uses-sdk tools:overrideLibrary="com.google.android.gms, android.support.v4, net.margaritov.preference.colorpicker" />
+    <uses-sdk tools:overrideLibrary="com.google.android.gms,
+    com.google.android.gms.base,
+    com.google.android.gms.wearable,
+    android.support.v4,
+    net.margaritov.preference.colorpicker" />
 
     <supports-screens
         android:largeScreens="true"

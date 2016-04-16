@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.1"
+    compileSdkVersion 23
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
         applicationId "ca.rmen.android.frenchcalendar"
         minSdkVersion 3
-        targetSdkVersion 21
+        targetSdkVersion 23
         versionCode 181
         versionName "1.8.1"
         buildConfigField 'String', 'GIT_SHA1', '"' + gitSha1() + '"'
@@ -64,40 +64,10 @@ dependencies {
 
     // Package the wear apk inside this one (only for the 'wear' flavor)
     if(rootProject.findProject("wearable") != null) {
-        wearCompile 'com.google.android.gms:play-services:6.1.71'
+        wearCompile 'com.google.android.gms:play-services-wearable:8.4.0'
         wearWearApp project(':wearable')
     }
+    compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.android.support:support-annotations:23.3.0'
 }
 
-task deploy(dependsOn: assembleRelease) << {
-    description 'Build a release apk, copy the result to the deploy and \'etc\' folders, then increment the build number.'
-
-    def projectFlavorNames = project.("android").productFlavors.collect { it.name };
-    for (flavorName in projectFlavorNames) {
-
-        // Copy the apk to the 'etc' folder
-        new File('../etc/apk').mkdirs()
-        copy {
-            from buildDir.getPath() + "/outputs/apk/${project.name}-${flavorName}-release.apk"
-            into '../etc/apk'
-            rename "${project.name}-${flavorName}-release.apk", "${globalProjectName}-${flavorName}-${android.defaultConfig.versionCode}-signed.apk"
-        }
-
-        // Copy the apk to the deploy folder
-        if(project.hasProperty("deployFolder")) {
-            copy {
-                from buildDir.getPath() + "/outputs/apk/${project.name}-${flavorName}-release.apk"
-                into project.deployFolder
-                rename "${project.name}-${flavorName}-release.apk", "${globalProjectName}-${flavorName}-${android.defaultConfig.versionCode}-signed.apk"
-            }
-        }
-
-        // Copy the proguard mapping to the 'etc' folder
-        new File('../etc/proguard').mkdirs()
-        copy {
-            from buildDir.getPath() + "/outputs/mapping/${flavorName}/release/mapping.txt"
-            into '../etc/proguard'
-            rename 'mapping.txt', "mapping-${flavorName}-${android.defaultConfig.versionCode}.txt"
-        }
-    }
-}
