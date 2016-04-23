@@ -23,10 +23,12 @@
     <string-array name="setting_method_labels">
         <item>Equinox</item>
         <item>Romme</item>
+        <item>von Mädler</item>
     </string-array>
     <string-array name="setting_method_values" translatable="false">
         <item>0</item>
         <item>1</item>
+        <item>2</item>
     </string-array>
     <string-array name="setting_detailed_view_labels">
         <item>None</item>
