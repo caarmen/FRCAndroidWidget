@@ -74,6 +74,7 @@ public abstract class FRCAppWidgetProvider extends AppWidgetProvider {
             else
                 updateAll(context, appWidgetManager, appWidgetIds);
         }
+        FRCWidgetScheduler.getInstance(context).scheduleTomorrow();
         super.onReceive(context, intent);
     }
 
