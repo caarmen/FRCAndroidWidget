@@ -22,10 +22,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
-import android.support.annotation.ColorRes;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import ca.rmen.android.frccommon.prefs.FRCPreferences;
