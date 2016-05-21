@@ -25,7 +25,9 @@
 
     <uses-sdk tools:overrideLibrary="com.google.android.gms,
     com.google.android.gms.base,
+    com.google.android.gms.tasks,
     com.google.android.gms.wearable,
+    com.google.firebase,
     android.support.v4,
     net.margaritov.preference.colorpicker" />
 
