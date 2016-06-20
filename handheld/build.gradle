@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 24
+    buildToolsVersion "24"
 
     defaultConfig {
         applicationId "ca.rmen.android.frenchcalendar"
         minSdkVersion 3
-        targetSdkVersion 23
-        versionCode 191
-        versionName "1.9.1"
+        targetSdkVersion 24
+        versionCode 192
+        versionName "1.9.2"
         buildConfigField 'String', 'GIT_SHA1', '"' + gitSha1() + '"'
         buildConfigField 'String', 'BUILD_DATE', '"' + buildDate() + '"'
         // For now we enable strict mode for all the configs
@@ -64,10 +64,10 @@ dependencies {
 
     // Package the wear apk inside this one (only for the 'wear' flavor)
     if(rootProject.findProject("wearable") != null) {
-        wearCompile 'com.google.android.gms:play-services-wearable:9.0.0'
+        wearCompile 'com.google.android.gms:play-services-wearable:9.0.2'
         wearWearApp project(':wearable')
     }
-    compile 'com.android.support:support-v4:23.4.0'
-    compile 'com.android.support:support-annotations:23.4.0'
+    compile 'com.android.support:support-v4:24.0.0'
+    compile 'com.android.support:support-annotations:24.0.0'
 }
 
