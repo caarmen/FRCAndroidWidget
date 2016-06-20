@@ -113,10 +113,10 @@ public class FRCWidgetScheduler {
      * at least it will trigger when the device wakes up later, which is good enough for us.
      */
     public void scheduleTomorrow() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        //noinspection deprecation
+        if (Integer.valueOf(Build.VERSION.SDK) >= Build.VERSION_CODES.KITKAT) {
             long nextAlarmTime = getTimeTomorrowMidnightMillis();
-            AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            mgr.setExact(AlarmManager.RTC, nextAlarmTime, updateWidgetTomorrowPendingIntent);
+            FRCSchedulerApi19.scheduleExact(context, nextAlarmTime, updateWidgetTomorrowPendingIntent);
         }
     }
 

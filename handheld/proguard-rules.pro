@@ -23,7 +23,8 @@
     public static *** v(...);
 }
 
--optimizations !code/allocation/variable
+-optimizations !method/inlining/short,!method/inlining/unique,!method/inlining/tailrecursion,!code/allocation/variable
 
 -keepattributes SourceFile,LineNumberTable
+-dontobfuscate
 

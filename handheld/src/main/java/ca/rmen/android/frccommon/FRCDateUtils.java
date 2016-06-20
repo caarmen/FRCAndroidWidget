@@ -23,6 +23,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import ca.rmen.android.frccommon.prefs.FRCPreferences;
@@ -73,6 +74,12 @@ public class FRCDateUtils {
         }
         String colorResIdStr = "month_" + date.month;
         int colorResId = context.getResources().getIdentifier(colorResIdStr, "color", R.class.getPackage().getName());
-        return ContextCompat.getColor(context, colorResId);
+        //noinspection deprecation
+        if (Integer.valueOf(Build.VERSION.SDK) >= Build.VERSION_CODES.M) {
+            return ContextCompat.getColor(context, colorResId);
+        } else {
+            //noinspection deprecation
+            return context.getResources().getColor(colorResId);
+        }
     }
 }
