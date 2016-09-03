@@ -9,3 +9,6 @@ local.properties
 .project
 .DS_Store
 *.iml
+etc/*.apk
+etc/release-*
+gradle.properties

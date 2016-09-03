@@ -75,7 +75,7 @@ public class FRCDateUtils {
         String colorResIdStr = "month_" + date.month;
         int colorResId = context.getResources().getIdentifier(colorResIdStr, "color", R.class.getPackage().getName());
         //noinspection deprecation
-        if (Integer.valueOf(Build.VERSION.SDK) >= Build.VERSION_CODES.M) {
+        if (Integer.valueOf(Build.VERSION.SDK) >= Build.VERSION_CODES.GINGERBREAD) {
             return ContextCompat.getColor(context, colorResId);
         } else {
             //noinspection deprecation

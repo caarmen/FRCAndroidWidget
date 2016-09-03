@@ -29,6 +29,11 @@
     com.google.android.gms.wearable,
     com.google.firebase,
     android.support.v4,
+    android.support.compat,
+    android.support.coreui,
+    android.support.coreutils,
+    android.support.fragment,
+    android.support.mediacompat,
     net.margaritov.preference.colorpicker" />
 
     <supports-screens
