@@ -33,7 +33,7 @@
     <string name="translation_italian">* Alfonso Fusco, pour ses contributions à la traduction italienne</string>
     <string name="github">Projet sur GitHub:</string>
     <string name="widget_settings">Configuration du calendrier</string>
-    <string name="setting_method">Methode de calcul</string>
+    <string name="setting_method">Méthode de calcul</string>
     <string name="setting_method_summary">Comment le premier jour de l\'année est déterminé: %s</string>
     <string name="setting_detailed_view">Vue détaillée</string>
     <string name="setting_detailed_view_summary">%s</string>
