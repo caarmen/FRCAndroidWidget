@@ -21,7 +21,7 @@
     android:title="@string/widget_settings">
 
     <ListPreference
-        android:defaultValue="0"
+        android:defaultValue="1"
         android:dialogTitle="@string/setting_method"
         android:entries="@array/setting_method_labels"
         android:entryValues="@array/setting_method_values"

@@ -13,8 +13,8 @@ android {
         applicationId "ca.rmen.android.frenchcalendar"
         minSdkVersion 20
         targetSdkVersion 24
-        versionCode 194
-        versionName "1.9.4"
+        versionCode 195
+        versionName "1.9.5"
 
         // For now we enable strict mode for all the configs
         buildConfigField 'boolean', 'STRICT_MODE', 'true'

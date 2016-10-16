@@ -21,8 +21,9 @@
 <resources>
 
     <string-array name="setting_method_labels">
-        <item>Equinozio</item>
         <item>Romme</item>
+        <item>Equinozio</item>
+        <item>von Mädler</item>
     </string-array>
     <string-array name="setting_detailed_view_labels">
         <item>Nessuno</item>
