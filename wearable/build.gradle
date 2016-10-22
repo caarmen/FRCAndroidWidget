@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -12,9 +12,9 @@ android {
     defaultConfig {
         applicationId "ca.rmen.android.frenchcalendar"
         minSdkVersion 20
-        targetSdkVersion 24
-        versionCode 196
-        versionName "1.9.6"
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
 
         // For now we enable strict mode for all the configs
         buildConfigField 'boolean', 'STRICT_MODE', 'true'
