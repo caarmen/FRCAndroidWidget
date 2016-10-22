@@ -18,6 +18,7 @@
 
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -29,11 +30,13 @@
     android:paddingBottom="@dimen/wide_bottom_margin"
     android:paddingRight="@dimen/wide_left_right_margin"
     android:paddingLeft="@dimen/wide_left_right_margin"
+    tools:layout_width="250dp"
     >
 
     <TextView
         android:id="@+id/text_weekday"
-        android:layout_width="fill_parent"
+        tools:text="Tridi"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
@@ -41,7 +44,7 @@
         android:textSize="@dimen/wide_weekday_textsize" />
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
@@ -51,6 +54,7 @@
             android:id="@+id/text_dayofmonth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            tools:text="3"
             android:paddingRight="@dimen/wide_right_margin"
             android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/wide_month_textsize" />
@@ -58,6 +62,7 @@
         <TextView
             android:id="@+id/text_month"
             android:layout_width="wrap_content"
+            tools:text="Sanculotides"
             android:layout_height="wrap_content"
             android:paddingRight="@dimen/wide_right_margin"
             android:textColor="@color/primaryTextColor"
@@ -67,6 +72,7 @@
             android:id="@+id/text_year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            tools:text="225"
             android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/wide_month_textsize" />
     </LinearLayout>

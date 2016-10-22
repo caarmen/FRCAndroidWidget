@@ -18,18 +18,21 @@
 
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootView"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_width="250dp"
     android:clickable="true"
     android:gravity="center"
     android:orientation="vertical"
     android:paddingBottom="@dimen/narrow_top_bottom_margin"
-    android:paddingTop="@dimen/narrow_top_bottom_margin" >
+    android:paddingTop="@dimen/narrow_top_bottom_margin">
 
     <TextView
         android:id="@+id/text_weekday"
-        android:layout_width="fill_parent"
+        tools:text="Tridi"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
@@ -37,7 +40,7 @@
         android:textSize="@dimen/narrow_weekday_textsize" />
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
@@ -45,6 +48,7 @@
 
         <TextView
             android:id="@+id/text_dayofmonth"
+            tools:text="3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingRight="@dimen/narrow_right_margin"
@@ -53,6 +57,7 @@
 
         <TextView
             android:id="@+id/text_month"
+            tools:text="Sanculotides"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/primaryTextColor"
@@ -61,7 +66,8 @@
 
     <TextView
         android:id="@+id/text_year"
-        android:layout_width="fill_parent"
+        tools:text="225"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
