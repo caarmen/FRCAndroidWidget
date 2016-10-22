@@ -17,6 +17,7 @@
 
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="widget_settings"
     android:title="@string/widget_settings">
 
@@ -54,6 +55,12 @@
         android:dependency="setting_custom_color_enabled"
         android:key="setting_custom_color"
         android:title="@string/setting_custom_color" />
+
+    <com.vanniktech.vntfontlistpreference.VNTFontListPreference
+        android:defaultValue="@string/default_font"
+        android:key="setting_custom_font"
+        android:title="@string/setting_custom_font"
+        app:vnt_fontDirectory="@string/fonts_folder" />
 
     <CheckBoxPreference
         android:defaultValue="false"

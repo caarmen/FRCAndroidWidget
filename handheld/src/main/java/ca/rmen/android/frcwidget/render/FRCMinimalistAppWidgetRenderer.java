@@ -84,6 +84,7 @@ class FRCMinimalistAppWidgetRenderer implements FRCAppWidgetRenderer {
         setTextColors(context, tvTime, frenchDate);
 
         FRCRender.scaleViews(view, scaleFactor);
+        Font.applyFont(context, view);
 
         // Render the views to a bitmap and return a RemoteViews containing this image.
         int width = (int) (scaleFactor * defaultWidgetWidth);

@@ -19,10 +19,16 @@
 package ca.rmen.android.frcwidget.render;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import java.util.Locale;
+
+import ca.rmen.android.frenchcalendar.R;
 
 /**
  * Allows us to use a custom font on TextViews in the app.
@@ -31,14 +37,23 @@ import android.widget.TextView;
  */
 public class Font {
 
-    private static Typeface sTypeface;
+    private static final String PREF_SETTING_CUSTOM_FONT = "setting_custom_font";
 
     /**
-     * Lazy initialize the font.
+     * Load the font specified in the preferences.
      */
     private static Typeface getTypeface(Context context) {
-        if (sTypeface == null) sTypeface = Typeface.createFromAsset(context.getAssets(), "Gabrielle.ttf");
-        return sTypeface;
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String defaultFontName = String.format(
+                Locale.US, "%s/%s",
+                context.getString(R.string.fonts_folder),
+                context.getString(R.string.default_font));
+        String fontName = sharedPreferences.getString(PREF_SETTING_CUSTOM_FONT, defaultFontName);
+        try {
+            return Typeface.createFromAsset(context.getAssets(), fontName);
+        } catch (Exception e) {
+            return Typeface.DEFAULT;
+        }
     }
 
     /**

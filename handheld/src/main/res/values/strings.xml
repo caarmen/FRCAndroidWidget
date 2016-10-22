@@ -31,6 +31,8 @@
     <string name="equinox_tool">* AstroLib C++ program by Mark Huss, to determine the first day of autumn in each year: http://mhuss.com/AstroLib/</string>
     <string name="wearable">* BoD, for the wearable implementation: http://jraf.org/</string>
     <string name="translation_italian">* Alfonso Fusco, for providing Italian translations.</string>
+    <string name="lib_colorpicker_pref">* Sergey Margaritov, for his ColorPickerPreference library</string>
+    <string name="lib_font_pref">* Niklas Baudy, for his VNTFontListPreference library</string>
     <string name="github">Project on GitHub:</string>
     <string name="link_github" translatable="false">https://github.com/caarmen/FRCAndroidWidget</string>
     <string name="widget_settings">French Calendar Settings</string>
@@ -44,6 +46,7 @@
     <string name="setting_custom_color_summary_enabled">Currently using your custom color.</string>
     <string name="setting_custom_color_summary_disabled">Currently using predefined colors (color changes every month).</string>
     <string name="setting_custom_color">Custom color</string>
+    <string name="setting_custom_font">Font</string>
     <string name="setting_android_wear">Android Wear</string>
     <string name="setting_android_wear_summary">Show a notification once a day on connected Android Wear devices</string>
     <string name="chooser_title">Choose an app</string>
@@ -65,5 +68,7 @@ It has been %8$d days since the start of the Republic.</string>
 
     <string name="dialog_color_picker">Choose a color</string>
     <string name="press_color_to_apply">Tap on the color to apply</string>
+    <string name="default_font" translatable="false">Rochester-Regular.ttf</string>
+    <string name="fonts_folder" translatable="false">fonts</string>
 
 </resources>

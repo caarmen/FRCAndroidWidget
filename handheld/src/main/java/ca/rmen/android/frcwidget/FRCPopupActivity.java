@@ -133,7 +133,6 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
             Action action = getItem(position);
             textView.setText(action.title);
             textView.setCompoundDrawablesWithIntrinsicBounds(action.iconId, 0, 0, 0);
-            Font.applyFont(getContext(), textView);
             return textView;
         }
     }

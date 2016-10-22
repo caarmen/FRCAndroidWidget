@@ -22,6 +22,9 @@
     android:drawablePadding="16dp"
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:paddingLeft="6dip"
+    android:paddingLeft="6dp"
+    android:paddingStart="6dp"
+    android:paddingRight="6dp"
+    android:paddingEnd="6dp"
     android:textColor="@color/primaryTextColor"
-    android:textSize="26sp" />
+    android:textSize="14sp" />

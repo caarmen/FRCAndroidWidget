@@ -120,6 +120,26 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:paddingLeft="50dip"
+            android:paddingRight="50dip"
+            android:text="@string/lib_colorpicker_pref"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:paddingLeft="50dip"
+            android:paddingRight="50dip"
+            android:text="@string/lib_font_pref"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="30dip"
             android:paddingLeft="50dip"
             android:paddingRight="50dip"
