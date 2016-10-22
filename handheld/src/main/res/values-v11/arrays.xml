@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  French Revolutionary Calendar Android Widget
+  Copyright (C) 2016 Carmen Alvarez
+  
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 3
+  of the License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, see <http://www.gnu.org/licenses/>.
+
+-->
+
+<resources>
+
+    <string-array name="setting_method_labels">
+        <item>\n<b>Romme</b>\n<small>Like the Gregorian calendar: Leap years are years divisible by four, but not by 100 (except by 400).</small></item>
+        <item>\n<b>Equinox</b>\n<small>Leap years vary so that 1 Vendémiaire always falls on the autumn equinox.</small></item>
+        <item>\n<b>von Mädler</b>\n<small>Leap years are years divisible by four, but not by 128.</small></item>
+    </string-array>
+</resources>

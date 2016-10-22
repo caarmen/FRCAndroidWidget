@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  French Revolutionary Calendar Android Widget
+  Copyright (C) 2016 Carmen Alvarez
+  
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 3
+  of the License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, see <http://www.gnu.org/licenses/>.
+
+-->
+
+<resources>
+
+    <string-array name="setting_method_labels">
+        <item>\n<b>Romme</b>\n<small>Comme le calendrier Grégorian : les années bissextiles sont celles divisibles par quatre, mais pas par 100 (sauf par 400).</small></item>
+        <item>\n<b>Équinoxe</b>\n<small>Les années bissextiles varient afin que le 1er vendémiaire tombe toujours sur l\'équinoxe d\'automne.</small></item>
+        <item>\n<b>von Mädler</b>\n<small>Les années bissextiles sont celles divisibles par quatre mais pas par 128.</small></item>
+    </string-array>
+</resources>
