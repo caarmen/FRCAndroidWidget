@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   French Revolutionary Calendar Android Widget
-  Copyright (C) 2011 - 2014 Carmen Alvarez
+  Copyright (C) 2011 - 2016 Carmen Alvarez
   
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -18,50 +18,39 @@
 
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootView"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_width="250dp"
     android:clickable="true"
     android:gravity="center"
     android:orientation="vertical"
     android:paddingBottom="@dimen/narrow_top_bottom_margin"
-    android:paddingTop="@dimen/narrow_top_bottom_margin" >
+    android:paddingTop="@dimen/narrow_top_bottom_margin">
 
     <TextView
         android:id="@+id/text_weekday"
-        android:layout_width="fill_parent"
+        tools:text="Tridi"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
         android:textColor="@color/primaryTextColor"
         android:textSize="@dimen/narrow_weekday_textsize" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:id="@+id/text_dayofmonth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="@dimen/narrow_right_margin"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/narrow_month_textsize" />
-
-        <TextView
-            android:id="@+id/text_month"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/narrow_month_textsize" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/text_date"
+        tools:text="3 Sanculotides"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/narrow_month_textsize" />
 
     <TextView
         android:id="@+id/text_year"
-        android:layout_width="fill_parent"
+        tools:text="225"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"

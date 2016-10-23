@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   French Revolutionary Calendar Android Widget
-  Copyright (C) 2011 - 2014 Carmen Alvarez
+  Copyright (C) 2011 - 2016 Carmen Alvarez
   
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -31,6 +31,8 @@
     <string name="equinox_tool">* AstroLib C++, programme de Mark Huss, qui détermine le premier jour de l\'automne de chaque année : http://mhuss.com/AstroLib/</string>
     <string name="wearable">* BoD, pour son implémentation wearable: http://jraf.org/</string>
     <string name="translation_italian">* Alfonso Fusco, pour ses contributions à la traduction italienne</string>
+    <string name="lib_colorpicker_pref">* Sergey Margaritov, pour sa bibliothèque ColorPickerPreference</string>
+    <string name="lib_font_pref">* Niklas Baudy, pour sa bibliothèque VNTFontListPreference</string>
     <string name="github">Projet sur GitHub:</string>
     <string name="widget_settings">Configuration du calendrier</string>
     <string name="setting_method">Méthode de calcul</string>
@@ -43,6 +45,7 @@
     <string name="setting_custom_color_summary_enabled">Votre couleur personalisée est utilisée.</string>
     <string name="setting_custom_color_summary_disabled">Couleurs prédéfinies utilisées (la couleur change chaque mois).</string>
     <string name="setting_custom_color">Couleur personalisée</string>
+    <string name="setting_custom_font">Police</string>
     <string name="setting_android_wear">Android Wear</string>
     <string name="setting_android_wear_summary">Affiche une notification une fois par jour sur les objets Android Wear connectés</string>
     <string name="chooser_title">Séléctionner une appli</string>

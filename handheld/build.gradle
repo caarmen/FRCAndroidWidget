@@ -59,6 +59,7 @@ android.applicationVariants.all { variant ->
 dependencies {
     compile 'ca.rmen:lib-french-revolutionary-calendar:1.5.1'
     compile 'com.robbypond:android-ColorPickerPreference:1.11.1'
+    compile 'com.vanniktech:vntfontlistpreference:1.0.0'
 
     compile project(':common')
 

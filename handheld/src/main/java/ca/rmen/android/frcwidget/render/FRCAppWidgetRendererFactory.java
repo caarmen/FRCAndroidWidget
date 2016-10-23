@@ -1,6 +1,6 @@
 /*
  * French Revolutionary Calendar Android Widget
- * Copyright (C) 2011 - 2014 Carmen Alvarez
+ * Copyright (C) 2011 - 2016 Carmen Alvarez
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,7 +19,6 @@
 package ca.rmen.android.frcwidget.render;
 
 import ca.rmen.android.frccommon.Constants.WidgetType;
-import ca.rmen.android.frenchcalendar.R;
 
 /**
  * Provide the correct rendering parameters for the widget, depending on the type of widget (wide or narrow).
@@ -31,20 +30,9 @@ public class FRCAppWidgetRendererFactory {
 	public static FRCAppWidgetRenderer getRenderer(WidgetType widgetType) {
 		switch (widgetType) {
 		case WIDE:
-			return new FRCScrollAppWidgetRenderer(
-					new FRCScrollAppWidgetRenderParams(R.layout.appwidget_wide,
-							R.dimen.wide_widget_width,
-							R.dimen.wide_widget_height,
-							R.dimen.wide_widget_text_width,
-							R.drawable.hscroll_blank));
+			return new FRCWideScrollAppWidgetRenderer();
 		case NARROW:
-			return new FRCScrollAppWidgetRenderer(
-					new FRCScrollAppWidgetRenderParams(
-							R.layout.appwidget_narrow,
-							R.dimen.narrow_widget_width,
-							R.dimen.narrow_widget_height,
-							R.dimen.narrow_widget_text_width,
-							R.drawable.vscroll_blank));
+			return new FRCNarrowScrollAppWidgetRenderer();
 		case MINIMALIST:
 		default:
 			return new FRCMinimalistAppWidgetRenderer();

@@ -34,7 +34,8 @@
     android.support.coreutils,
     android.support.fragment,
     android.support.mediacompat,
-    net.margaritov.preference.colorpicker" />
+    net.margaritov.preference.colorpicker,
+    com.vanniktech.vntfontlistpreference"/>
 
     <supports-screens
         android:largeScreens="true"
@@ -49,7 +50,6 @@
         android:label="@string/app_name">
 
         <activity android:name="ca.rmen.android.frccommon.prefs.FRCPreferenceActivity"
-            android:noHistory="true"
             tools:ignore="ExportedPreferenceActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />

@@ -1,6 +1,6 @@
 /*
  * French Revolutionary Calendar Android Widget
- * Copyright (C) 2011 - 2014 Carmen Alvarez
+ * Copyright (C) 2011 - 2016 Carmen Alvarez
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,6 @@ import ca.rmen.android.frccommon.Constants;
 import ca.rmen.android.frccommon.FRCDateUtils;
 import ca.rmen.android.frccommon.prefs.FRCPreferenceActivity;
 import ca.rmen.android.frccommon.prefs.FRCPreferences;
-import ca.rmen.android.frcwidget.render.Font;
 import ca.rmen.android.frenchcalendar.R;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
@@ -133,7 +132,6 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
             Action action = getItem(position);
             textView.setText(action.title);
             textView.setCompoundDrawablesWithIntrinsicBounds(action.iconId, 0, 0, 0);
-            Font.applyFont(getContext(), textView);
             return textView;
         }
     }

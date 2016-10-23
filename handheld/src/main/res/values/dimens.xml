@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   French Revolutionary Calendar Android Widget
-  Copyright (C) 2011 - 2014 Carmen Alvarez
+  Copyright (C) 2011 - 2016 Carmen Alvarez
   
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@
     <dimen name="wide_right_margin">8dp</dimen>
 
     <dimen name="narrow_widget_width">80dp</dimen>
-    <dimen name="narrow_widget_text_width">55dp</dimen>
+    <dimen name="narrow_widget_text_width">78dp</dimen>
     <dimen name="narrow_widget_height">100dp</dimen>
     <dimen name="narrow_weekday_textsize">20sp</dimen>
     <dimen name="narrow_month_textsize">17sp</dimen>
