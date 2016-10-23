@@ -31,14 +31,14 @@ public class FRCAppWidgetRendererFactory {
 	public static FRCAppWidgetRenderer getRenderer(WidgetType widgetType) {
 		switch (widgetType) {
 		case WIDE:
-			return new FRCScrollAppWidgetRenderer(
+			return new FRCWideScrollAppWidgetRenderer(
 					new FRCScrollAppWidgetRenderParams(R.layout.appwidget_wide,
 							R.dimen.wide_widget_width,
 							R.dimen.wide_widget_height,
 							R.dimen.wide_widget_text_width,
 							R.drawable.hscroll_blank));
 		case NARROW:
-			return new FRCScrollAppWidgetRenderer(
+			return new FRCNarrowScrollAppWidgetRenderer(
 					new FRCScrollAppWidgetRenderParams(
 							R.layout.appwidget_narrow,
 							R.dimen.narrow_widget_width,

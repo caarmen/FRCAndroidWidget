@@ -26,19 +26,14 @@ import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
-import java.util.Locale;
 
 import ca.rmen.android.frccommon.Constants;
 import ca.rmen.android.frccommon.FRCDateUtils;
-import ca.rmen.android.frccommon.prefs.FRCPreferences;
-import ca.rmen.android.frccommon.prefs.FRCPreferences.DetailedView;
 import ca.rmen.android.frenchcalendar.R;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
 /**
  * Responsible for drawing the minimalist widget.
- * TODO try to share as much as logic as possible between the scroll widgets and the minimalist widgets.
- *
  * @author calvarez
  */
 class FRCMinimalistAppWidgetRenderer implements FRCAppWidgetRenderer {
@@ -54,47 +49,20 @@ class FRCMinimalistAppWidgetRenderer implements FRCAppWidgetRenderer {
         String date = " " + frenchDate.dayOfMonth + " " + frenchDate.getMonthName() + " " + frenchDate.year + " ";
         TextView tvWeekday = (TextView) view.findViewById(R.id.text_weekday);
         TextView tvDate = (TextView) view.findViewById(R.id.text_date);
+        TextView tvTime = (TextView) view.findViewById(R.id.text_time);
         tvWeekday.setText(" " + frenchDate.getWeekdayName() + " ");
         tvDate.setText(date);
-
-        // Set the text fields for the time.
-        final String timestamp;
-        DetailedView detailedView = FRCPreferences.getInstance(context).getDetailedView();
-
-        TextView tvTime = (TextView) view.findViewById(R.id.text_time);
-        if (detailedView == DetailedView.NONE) {
-            tvTime.setVisibility(View.GONE);
-        } else {
-            tvTime.setVisibility(View.VISIBLE);
-            if (detailedView == DetailedView.TIME)
-                timestamp = String.format(Locale.US, "%d:%02d", frenchDate.hour, frenchDate.minute);
-            else
-                timestamp = " " + frenchDate.getDayOfYear() + " ";
-            tvTime.setText(timestamp);
-        }
-
-        // Scale the views.
-        float defaultWidgetWidth = context.getResources().getDimension(R.dimen.minimalist_widget_width);
-        float defaultWidgetHeight = context.getResources().getDimension(R.dimen.minimalist_widget_height);
-        float scaleFactor = FRCRender.getScaleFactor(context, appWidgetManager, appWidgetId, defaultWidgetWidth, defaultWidgetHeight);
-        Log.v(TAG, "render: scaleFactor=" + scaleFactor);
+        FRCRender.setDetailedViewText(context, tvTime, frenchDate);
 
         setTextColors(context, tvWeekday, frenchDate);
         setTextColors(context, tvDate, frenchDate);
         setTextColors(context, tvTime, frenchDate);
 
-        FRCRender.scaleViews(view, scaleFactor);
+        FRCRender.scaleWidget(context, view, appWidgetManager, appWidgetId,
+                R.dimen.minimalist_widget_width, R.dimen.minimalist_widget_height, R.dimen.minimalist_widget_width);
         Font.applyFont(context, view);
 
-        // Render the views to a bitmap and return a RemoteViews containing this image.
-        int width = (int) (scaleFactor * defaultWidgetWidth);
-        int height = (int) (scaleFactor * defaultWidgetHeight);
-
-        // In some months and languages, the date field text may be too long to fit.
-        FRCRender.shrinkText(tvDate, width);
-
-        Log.v(TAG, "Creating widget of size " + width + "x" + height);
-        return FRCRender.createRemoteViews(context, view, width, height);
+        return FRCRender.createRemoteViews(context, view, appWidgetManager, appWidgetId, R.dimen.minimalist_widget_width, R.dimen.minimalist_widget_height);
     }
 
     /**

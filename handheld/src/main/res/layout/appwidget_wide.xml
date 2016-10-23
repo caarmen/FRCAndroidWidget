@@ -43,42 +43,17 @@
         android:textColor="@color/primaryTextColor"
         android:textSize="@dimen/wide_weekday_textsize" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:id="@+id/text_dayofmonth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="3"
-            android:paddingRight="@dimen/wide_right_margin"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/wide_month_textsize" />
-
-        <TextView
-            android:id="@+id/text_month"
-            android:layout_width="wrap_content"
-            tools:text="Sanculotides"
-            android:layout_height="wrap_content"
-            android:paddingRight="@dimen/wide_right_margin"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/wide_month_textsize" />
-
-        <TextView
-            android:id="@+id/text_year"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="225"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/wide_month_textsize" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/text_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="3 Sanculotides 225"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/wide_month_textsize" />
 
     <TextView
         android:id="@+id/text_time"
+        tools:text="Pomme"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
