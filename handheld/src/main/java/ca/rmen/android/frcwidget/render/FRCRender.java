@@ -22,7 +22,6 @@ import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -82,14 +81,10 @@ class FRCRender {
                       AppWidgetManager appWidgetManager,
                       int appWidgetId,
                       @DimenRes int defaultWidthResId,
-                      @DimenRes int defaultHeightResId,
-                      @DimenRes int defaultTextWidthResId) {
+                      @DimenRes int defaultHeightResId) {
 
         float scaleFactor = getScaleFactor(context, appWidgetManager, appWidgetId, defaultWidthResId, defaultHeightResId);
         scaleViews(view, scaleFactor);
-        // Just in case the line with the month name is too long for the widget, we'll squeeze it so it fits.
-        int textViewableWidth = (int) (scaleFactor * context.getResources().getDimensionPixelSize(defaultTextWidthResId));
-        shrinkTextViews(view, textViewableWidth);
     }
 
     /**
@@ -129,37 +124,6 @@ class FRCRender {
                 scaleViews(v, scaleFactor);
             }
         }
-    }
-
-    private static void shrinkTextViews(View parent, float maxWidth) {
-        // Scale the text size
-        if (parent instanceof TextView) {
-            shrinkText((TextView) parent, maxWidth);
-        }
-        // Scale all child views
-        else if (parent instanceof ViewGroup) {
-            final ViewGroup parentGroup = (ViewGroup) parent;
-            final int childCount = parentGroup.getChildCount();
-            for (int i = 0; i < childCount; i++) {
-                final View v = parentGroup.getChildAt(i);
-                shrinkTextViews(v, maxWidth);
-            }
-        }
-    }
-
-    /**
-     * If the given TextView's text is too long for the given max width, set the text size on the
-     * TextView to a smaller value so it will fit the width.
-     */
-    private static void shrinkText(TextView textView, float maxWidth) {
-        Paint paint = new Paint();
-        float originalTextSize = textView.getTextSize();
-        paint.setTextSize(originalTextSize);
-        float actualWidth = paint.measureText(textView.getText().toString());
-        if (actualWidth < maxWidth) return;
-        float shrunkenTextSize = (maxWidth / actualWidth) * originalTextSize;
-        Log.v(TAG, "Shrunk text size for '" + textView.getText() + "' from " + originalTextSize + "px to " + shrunkenTextSize + "px");
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, shrunkenTextSize);
     }
 
     /**

@@ -39,7 +39,6 @@ import ca.rmen.android.frccommon.Constants;
 import ca.rmen.android.frccommon.FRCDateUtils;
 import ca.rmen.android.frccommon.prefs.FRCPreferenceActivity;
 import ca.rmen.android.frccommon.prefs.FRCPreferences;
-import ca.rmen.android.frcwidget.render.Font;
 import ca.rmen.android.frenchcalendar.R;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 

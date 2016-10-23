@@ -58,8 +58,10 @@ class FRCMinimalistAppWidgetRenderer implements FRCAppWidgetRenderer {
         setTextColors(context, tvDate, frenchDate);
         setTextColors(context, tvTime, frenchDate);
 
+        TextViewSizing.fitTextViewsHorizontally(view, R.dimen.minimalist_widget_width);
+
         FRCRender.scaleWidget(context, view, appWidgetManager, appWidgetId,
-                R.dimen.minimalist_widget_width, R.dimen.minimalist_widget_height, R.dimen.minimalist_widget_width);
+                R.dimen.minimalist_widget_width, R.dimen.minimalist_widget_height);
         Font.applyFont(context, view);
 
         return FRCRender.createRemoteViews(context, view, appWidgetManager, appWidgetId, R.dimen.minimalist_widget_width, R.dimen.minimalist_widget_height);

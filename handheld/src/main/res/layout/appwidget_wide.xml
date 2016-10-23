@@ -30,15 +30,16 @@
     android:paddingBottom="@dimen/wide_bottom_margin"
     android:paddingRight="@dimen/wide_left_right_margin"
     android:paddingLeft="@dimen/wide_left_right_margin"
+    tools:background="@drawable/hscroll"
     tools:layout_width="250dp"
+    tools:layout_height="140dp"
     >
 
     <TextView
         android:id="@+id/text_weekday"
-        tools:text="Tridi"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        tools:text="Quintidi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="@color/primaryTextColor"
         android:textSize="@dimen/wide_weekday_textsize" />
@@ -47,17 +48,17 @@
         android:id="@+id/text_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="3 Sanculotides 225"
+        tools:singleLine="true"
+        tools:text="5 Sanculotides 225"
         android:textColor="@color/primaryTextColor"
         android:textSize="@dimen/wide_month_textsize" />
 
     <TextView
         android:id="@+id/text_time"
-        tools:text="Pomme"
+        tools:text="Récompenses"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:textColor="@color/primaryTextColor"
         android:textSize="@dimen/wide_time_textsize" />
 

@@ -21,7 +21,6 @@ package ca.rmen.android.frcwidget.render;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.TextView;
@@ -37,10 +36,8 @@ import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
  */
 class FRCNarrowScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
     private static final String TAG = Constants.TAG + FRCNarrowScrollAppWidgetRenderer.class.getSimpleName();
-    private final FRCScrollAppWidgetRenderParams mParams;
 
-    FRCNarrowScrollAppWidgetRenderer(FRCScrollAppWidgetRenderParams params) {
-    	mParams = params;
+    FRCNarrowScrollAppWidgetRenderer() {
     }
 
     public RemoteViews render(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
@@ -49,24 +46,32 @@ class FRCNarrowScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
         FrenchRevolutionaryCalendarDate frenchDate = FRCDateUtils.getToday(context);
 
         // Create a view with the right scroll image as the background.
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(mParams.layoutResourceId, null, false);
-        FRCRender.setBackgroundImage(context, view, mParams.scrollResourceId, frenchDate);
+        View view = View.inflate(context, R.layout.appwidget_narrow, null);
+        FRCRender.setBackgroundImage(context, view, R.drawable.vscroll_blank, frenchDate);
 
         // Set all the text fields for the date.
         // Add a space before and after the text: this font sometimes cuts off the last letter.
         String date = " " + frenchDate.dayOfMonth + " " + frenchDate.getMonthName() + " ";
-        ((TextView) view.findViewById(R.id.text_year)).setText(" " + frenchDate.year + " ");
-        ((TextView) view.findViewById(R.id.text_weekday)).setText(frenchDate.getWeekdayName());
-        ((TextView) view.findViewById(R.id.text_date)).setText(date);
-        TextView timeView = (TextView) view.findViewById(R.id.text_time);
-        FRCRender.setDetailedViewText(context, timeView, frenchDate);
-        
-        FRCRender.scaleWidget(context, view, appWidgetManager, appWidgetId,
-                mParams.widthResourceId, mParams.heightResourceId, mParams.textViewableWidthResourceId);
-        Font.applyFont(context, view);
+        TextView tvYear = (TextView) view.findViewById(R.id.text_year);
+        TextView tvDate = (TextView) view.findViewById(R.id.text_date);
+        TextView tvWeekday = (TextView) view.findViewById(R.id.text_weekday);
+        TextView tvDetail = (TextView) view.findViewById(R.id.text_time);
+        tvYear.setText(" " + frenchDate.year + " ");
+        tvWeekday.setText(frenchDate.getWeekdayName());
+        tvDate.setText(date);
+        FRCRender.setDetailedViewText(context, tvDetail, frenchDate);
 
-        return FRCRender.createRemoteViews(context, view, appWidgetManager, appWidgetId, mParams.widthResourceId, mParams.heightResourceId);
+        Font.applyFont(context, view);
+        TextViewSizing.fitTextViewsHorizontally(view, R.dimen.narrow_widget_text_width);
+        TextViewSizing.fitTextViewsVertically(context,
+                R.dimen.narrow_widget_height,
+                R.dimen.narrow_top_bottom_margin,
+                R.dimen.narrow_top_bottom_margin,
+                tvYear, tvWeekday, tvDate, tvDetail);
+        FRCRender.scaleWidget(context, view, appWidgetManager, appWidgetId,
+                R.dimen.narrow_widget_width, R.dimen.narrow_widget_height);
+
+        return FRCRender.createRemoteViews(context, view, appWidgetManager, appWidgetId, R.dimen.narrow_widget_width, R.dimen.narrow_widget_height);
     }
 
 
