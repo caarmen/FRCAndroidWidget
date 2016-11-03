@@ -36,6 +36,7 @@ import android.widget.TextView;
 import java.util.Locale;
 
 import ca.rmen.android.frccommon.Constants;
+import ca.rmen.android.frccommon.FRCConverterActivity;
 import ca.rmen.android.frccommon.FRCDateUtils;
 import ca.rmen.android.frccommon.prefs.FRCPreferenceActivity;
 import ca.rmen.android.frccommon.prefs.FRCPreferences;
@@ -54,7 +55,8 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
 
     private static final int ACTION_SHARE = 1;
     private static final int ACTION_SETTINGS = 2;
-    private static final int ACTION_SEARCH = 3;
+    private static final int ACTION_CONVERTER = 3;
+    private static final int ACTION_SEARCH = 4;
 
     private FrenchRevolutionaryCalendarDate mFrenchDate;
 
@@ -68,6 +70,7 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
         mFrenchDate = (FrenchRevolutionaryCalendarDate) getIntent().getSerializableExtra(EXTRA_DATE);
         adapter.add(new Action(this, ACTION_SHARE, R.drawable.ic_action_share, R.string.popup_action_share));
         adapter.add(new Action(this, ACTION_SETTINGS, R.drawable.ic_action_settings, R.string.popup_action_settings));
+        adapter.add(new Action(this, ACTION_CONVERTER, R.drawable.ic_action_converter, R.string.popup_action_converter));
         adapter.add(new Action(this, ACTION_SEARCH, R.drawable.ic_action_search, R.string.popup_action_search, mFrenchDate.getDayOfYear()));
 
         // Build the alert dialog.
@@ -164,6 +167,11 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
                     Intent settingsIntent = new Intent(getApplication(), FRCPreferenceActivity.class);
                     startActivity(settingsIntent);
                     Log.v(TAG, "started settings activity");
+                    break;
+                case ACTION_CONVERTER:
+                    Intent converterIntent = new Intent(getApplication(), FRCConverterActivity.class);
+                    startActivity(converterIntent);
+                    Log.v(TAG, "started converter activity");
                     break;
                 case ACTION_SEARCH:
                     Intent searchIntent = new Intent(Intent.ACTION_WEB_SEARCH);

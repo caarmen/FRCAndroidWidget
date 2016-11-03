@@ -21,8 +21,8 @@
 <resources>
 
     <string-array name="setting_method_labels">
-        <item>\n<b>Romme</b>\n<small>Come il calendario gregoriano, gli anni bisestili sono gli anni divisibili per 4 ma non per 100 (salvo per 400).</small></item>
-        <item>\n<b>Equinozio</b>\n<small>Gli anni bisestili variano affinché il primo vendemmiaio cade sempre all\'equinozio d\'autunno.</small></item>
-        <item>\n<b>von Mädler</b>\n<small>Gli anni bisestili sono gli anni divisibili per 4 ma non per 128.</small></item>
+        <item>@string/romme_description</item>
+        <item>@string/equinox_description</item>
+        <item>@string/von_madler_description</item>
     </string-array>
 </resources>

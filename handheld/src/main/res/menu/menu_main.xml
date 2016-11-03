@@ -2,27 +2,26 @@
 <!--
   French Revolutionary Calendar Android Widget
   Copyright (C) 2016 Carmen Alvarez
-  
+
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
   as published by the Free Software Foundation; either version 3
   of the License, or (at your option) any later version.
-  
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-  
+
   You should have received a copy of the GNU General Public License
   along with this program; if not, see <http://www.gnu.org/licenses/>.
 
 -->
-
-<resources>
-
-    <string-array name="setting_method_labels">
-        <item>@string/romme_description</item>
-        <item>@string/equinox_description</item>
-        <item>@string/von_madler_description</item>
-    </string-array>
-</resources>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/action_settings"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/menu_settings"
+        tools:ignore="UnusedAttribute" />
+</menu>

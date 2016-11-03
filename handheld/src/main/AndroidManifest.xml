@@ -56,17 +56,20 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="ca.rmen.android.frccommon.FRCConverterActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity-alias
             android:name="ca.rmen.android.frcwidget.prefs.FRCPreferenceActivity"
             android:targetActivity="ca.rmen.android.frccommon.prefs.FRCPreferenceActivity"
             android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
 

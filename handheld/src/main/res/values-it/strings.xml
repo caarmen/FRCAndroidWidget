@@ -35,6 +35,9 @@ Italian translations provided by Alfonso Fusco
     <string name="lib_font_pref">* Niklas Baudy, per la sua libreria VNTFontListPreference</string>
     <string name="github">Progetto su GitHub:</string>
     <string name="widget_settings">Impostazioni del Calendario Rivoluzionario</string>
+    <string name="menu_settings">Impostazioni</string>
+    <string name="setting_category_widget">Widget</string>
+    <string name="setting_category_other">Altri</string>
     <string name="setting_method">Metodo di calcolo</string>
     <string name="setting_method_summary">Come è calcolato il primo giorno di ogni anno: %s</string>
     <string name="setting_detailed_view">Vista dettagliata</string>
@@ -52,6 +55,7 @@ Italian translations provided by Alfonso Fusco
     <string name="popup_action_share">Condividi</string>
     <string name="popup_action_search">Cercare \'%s\'</string>
     <string name="popup_action_settings">Impostazioni</string>
+    <string name="popup_action_converter">Convertitore</string>
     <string name="share_subject">%1$s, %2$d %3$s %4$d</string>
 <string name="share_body">Oggi è %1$s, %2$d %3$s %4$d.
 \n\n\
@@ -67,4 +71,13 @@ Sono passati %8$d giorni dall\'inizio della Repubblica</string>
 
     <string name="dialog_color_picker">Scegliere un colore</string>
     <string name="press_color_to_apply">Premere sul colore per applicare</string>
+
+    <string name="help">Aiuto</string>
+    <string name="romme_description">\n<b>Romme</b>\n<small>Come il calendario gregoriano, gli anni bisestili sono gli anni divisibili per 4 ma non per 100 (salvo per 400).</small></string>
+    <string name="equinox_description">\n<b>Equinozio</b>\n<small>Gli anni bisestili variano affinché il primo vendemmiaio cade sempre all\'equinozio d\'autunno.</small></string>
+    <string name="von_madler_description">\n<b>von Mädler</b>\n<small>Gli anni bisestili sono gli anni divisibili per 4 ma non per 128.</small></string>
+    <string name="date_format">%1$s, %2$d %3$s %4$d:\n(%5$s: %6$s)</string>
+    <string name="method_romme">Romme:\u00a0</string>
+    <string name="method_equinox">Equinozio:\u00a0</string>
+    <string name="method_von_madler">von Mädler:\u00a0</string>
 </resources>

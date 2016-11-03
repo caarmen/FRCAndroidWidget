@@ -28,13 +28,16 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
+import ca.rmen.android.frccommon.ActivityApi11;
 import ca.rmen.android.frccommon.Constants;
 import ca.rmen.android.frcwear.FRCWearPreferenceListener;
 import ca.rmen.android.frcwidget.FRCAppWidgetManager;
@@ -75,6 +78,9 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
     protected void onCreate(Bundle icicle) {
         Log.v(TAG, "onCreate: bundle = " + icicle);
         super.onCreate(icicle);
+        if (Integer.valueOf(Build.VERSION.SDK) >= Build.VERSION_CODES.HONEYCOMB) {
+            ActivityApi11.setDisplayHomeAsUpEnabled(this);
+        }
         /*
          * From the documentation: https://developer.android.com/guide/topics/appwidgets/index.html
          * The App Widget host calls the configuration Activity and the configuration
@@ -130,11 +136,14 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
             updatePreferenceSummary(FRCPreferences.PREF_CUSTOM_COLOR_ENABLED, 0);
 
             // Don't show Android Wear stuff for old devices that don't support it
-            if (!canUseWear)
+            if (!canUseWear) {
                 //noinspection deprecation
-                getPreferenceScreen().removePreference(findPreference(FRCPreferences.PREF_ANDROID_WEAR));
-            else
+                PreferenceCategory category = (PreferenceCategory) getPreferenceScreen().findPreference(FRCPreferences.PREF_CATEGORY_OTHER);
+                Preference wearPreference = category.findPreference(FRCPreferences.PREF_ANDROID_WEAR);
+                category.removePreference(wearPreference);
+            } else {
                 mWearPreferenceListener = new FRCWearPreferenceListener(getApplicationContext());
+            }
 
             //noinspection deprecation
             ColorPickerPreference pref = (ColorPickerPreference) getPreferenceScreen().findPreference(FRCPreferences.PREF_CUSTOM_COLOR);
@@ -162,6 +171,14 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
     protected void onDestroy() {
         Log.v(TAG, "onDestroy");
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void updatePreferenceSummary(String key, int summaryResId) {
