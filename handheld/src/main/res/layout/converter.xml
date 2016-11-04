@@ -48,6 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/method_romme"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -55,12 +56,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
+                android:textSize="14sp"
                 tools:text="Primidi 1 brumaire 222: (Pomme)" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/method_equinox"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -68,18 +71,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
+                android:textSize="14sp"
                 tools:text="Primidi 1 brumaire 222: (Pomme)" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/method_von_madler"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/frcDateVonMadler"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="14sp"
                 tools:text="Primidi 1 brumaire 222: (Pomme)" />
         </LinearLayout>
 

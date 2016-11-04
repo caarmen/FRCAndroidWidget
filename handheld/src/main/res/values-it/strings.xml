@@ -76,8 +76,8 @@ Sono passati %8$d giorni dall\'inizio della Repubblica</string>
     <string name="romme_description">\n<b>Romme</b>\n<small>Come il calendario gregoriano, gli anni bisestili sono gli anni divisibili per 4 ma non per 100 (salvo per 400).</small></string>
     <string name="equinox_description">\n<b>Equinozio</b>\n<small>Gli anni bisestili variano affinché il primo vendemmiaio cade sempre all\'equinozio d\'autunno.</small></string>
     <string name="von_madler_description">\n<b>von Mädler</b>\n<small>Gli anni bisestili sono gli anni divisibili per 4 ma non per 128.</small></string>
-    <string name="date_format">%1$s, %2$d %3$s %4$d: (%5$s: %6$s)</string>
-    <string name="method_romme">Romme:\u00a0</string>
-    <string name="method_equinox">Equinozio:\u00a0</string>
-    <string name="method_von_madler">von Mädler:\u00a0</string>
+    <string name="date_format">%1$s, %2$d %3$s %4$d\n%5$s: %6$s</string>
+    <string name="method_romme">Romme</string>
+    <string name="method_equinox">Equinozio</string>
+    <string name="method_von_madler">von Mädler</string>
 </resources>

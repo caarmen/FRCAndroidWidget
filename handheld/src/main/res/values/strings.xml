@@ -79,9 +79,9 @@ It has been %8$d days since the start of the Republic.</string>
     <string name="romme_description">\n<b>Romme</b>\n<small>Like the Gregorian calendar: Leap years are years divisible by four, but not by 100 (except by 400).</small></string>
     <string name="equinox_description">\n<b>Equinox</b>\n<small>Leap years vary so that 1 Vendémiaire always falls on the autumn equinox.</small></string>
     <string name="von_madler_description">\n<b>von Mädler</b>\n<small>Leap years are years divisible by four, but not by 128.</small></string>
-    <string name="date_format">%1$s, %2$d %3$s %4$d: (%5$s: %6$s)</string>
-    <string name="method_romme">Romme:\u00a0</string>
-    <string name="method_equinox">Equinox:\u00a0</string>
-    <string name="method_von_madler">von Mädler:\u00a0</string>
+    <string name="date_format">%1$s, %2$d %3$s %4$d\n%5$s: %6$s</string>
+    <string name="method_romme">Romme</string>
+    <string name="method_equinox">Equinox</string>
+    <string name="method_von_madler">von Mädler</string>
 
 </resources>
