@@ -21,7 +21,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/activity_margin">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,59 +38,50 @@
             android:datePickerMode="spinner"
             tools:ignore="UnusedAttribute" />
 
-        <TableLayout
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            android:shrinkColumns="1">
+            android:orientation="vertical">
 
-            <TableRow android:layout_marginBottom="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/method_romme"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/method_romme" />
+            <TextView
+                android:id="@+id/frcDateRomme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                tools:text="Primidi 1 brumaire 222\n(Pomme)" />
 
-                <TextView
-                    android:id="@+id/frcDateRomme"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Primidi 1 brumaire 222\n(Pomme)" />
-            </TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/method_equinox"
+                android:textStyle="bold" />
 
-            <TableRow android:layout_marginBottom="16dp">
+            <TextView
+                android:id="@+id/frcDateEquinox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                tools:text="Primidi 1 brumaire 222\n(Pomme)" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/method_von_madler"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/method_equinox" />
-
-                <TextView
-                    android:id="@+id/frcDateEquinox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Primidi 1 brumaire 222\n(Pomme)" />
-            </TableRow>
-
-
-            <TableRow android:layout_marginBottom="16dp">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/method_von_madler" />
-
-                <TextView
-                    android:id="@+id/frcDateVonMadler"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Primidi 1 brumaire 222\n(Pomme)" />
-            </TableRow>
-        </TableLayout>
+            <TextView
+                android:id="@+id/frcDateVonMadler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Primidi 1 brumaire 222\n(Pomme)" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/btn_help"
