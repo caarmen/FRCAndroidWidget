@@ -27,6 +27,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -130,11 +131,13 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
             TextView textView = (TextView) super.getView(position, convertView, parent);
             Action action = getItem(position);
-            textView.setText(action.title);
-            textView.setCompoundDrawablesWithIntrinsicBounds(action.iconId, 0, 0, 0);
+            if (action != null) {
+                textView.setText(action.title);
+                textView.setCompoundDrawablesWithIntrinsicBounds(action.iconId, 0, 0, 0);
+            }
             return textView;
         }
     }
