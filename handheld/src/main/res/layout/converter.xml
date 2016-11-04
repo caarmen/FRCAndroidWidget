@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                tools:text="Primidi 1 brumaire 222\n(Pomme)" />
+                tools:text="Primidi 1 brumaire 222: (Pomme)" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                tools:text="Primidi 1 brumaire 222\n(Pomme)" />
+                tools:text="Primidi 1 brumaire 222: (Pomme)" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -80,7 +80,7 @@
                 android:id="@+id/frcDateVonMadler"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Primidi 1 brumaire 222\n(Pomme)" />
+                tools:text="Primidi 1 brumaire 222: (Pomme)" />
         </LinearLayout>
 
         <ImageView

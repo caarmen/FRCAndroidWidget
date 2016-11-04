@@ -21,7 +21,9 @@ package ca.rmen.android.frccommon;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -64,6 +66,13 @@ public class FRCConverterActivity extends Activity {
         datePicker.init(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH), mOnDateChangedListener);
         update(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
         findViewById(R.id.btn_help).setOnClickListener(mOnHelpClickedListener);
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(mPrefsListener);
+    }
+
+    @Override
+    protected void onDestroy() {
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(mPrefsListener);
+        super.onDestroy();
     }
 
     @Override
@@ -124,6 +133,18 @@ public class FRCConverterActivity extends Activity {
                     .setMessage(message)
                     .setPositiveButton(android.R.string.ok, null)
                     .show();
+        }
+    };
+
+    private final SharedPreferences.OnSharedPreferenceChangeListener mPrefsListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            if (FRCPreferences.PREF_LANGUAGE.equals(key)) {
+                Locale locale = FRCPreferences.getInstance(getApplicationContext()).getLocale();
+                mFrcRomme = new FrenchRevolutionaryCalendar(locale, FrenchRevolutionaryCalendar.CalculationMethod.ROMME);
+                mFrcEquinox = new FrenchRevolutionaryCalendar(locale, FrenchRevolutionaryCalendar.CalculationMethod.EQUINOX);
+                mFrcVonMadler = new FrenchRevolutionaryCalendar(locale, FrenchRevolutionaryCalendar.CalculationMethod.VON_MADLER);
+            }
         }
     };
 
