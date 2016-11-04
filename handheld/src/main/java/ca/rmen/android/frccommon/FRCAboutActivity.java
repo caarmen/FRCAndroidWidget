@@ -21,8 +21,10 @@ package ca.rmen.android.frccommon;
 import android.app.Activity;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import ca.rmen.android.frcwidget.render.Font;
@@ -35,6 +37,9 @@ public class FRCAboutActivity extends Activity { // NO_UCD (use default)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about);
+        if (Integer.parseInt(Build.VERSION.SDK) >= Build.VERSION_CODES.HONEYCOMB) {
+            ActivityApi11.setDisplayHomeAsUpEnabled(this);
+        }
         View view = findViewById(R.id.aboutview);
         Font.applyFont(this, view);
         TextView tvAppVersion = (TextView) view.findViewById(R.id.tv_app_version);
@@ -45,6 +50,13 @@ public class FRCAboutActivity extends Activity { // NO_UCD (use default)
         } catch (NameNotFoundException e) {
             Log.e(TAG, e.getMessage(), e);
         }
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

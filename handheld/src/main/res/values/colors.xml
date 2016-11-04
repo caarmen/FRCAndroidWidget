@@ -21,6 +21,7 @@
 <resources>
 
     <color name="primaryTextColor">#381f0a</color>
+    <color name="textColorLink">#886644</color>
     <color name="item_pressed">#e8cfba</color>
     <color name="item_normal">#ffe8d3</color>
     <color name="month_1">#fff0a199</color>
