@@ -65,7 +65,7 @@ dependencies {
 
     // Package the wear apk inside this one (only for the 'wear' flavor)
     if(rootProject.findProject("wearable") != null) {
-        wearCompile ('com.google.android.gms:play-services-wearable:9.6.1') {
+        wearCompile ('com.google.android.gms:play-services-wearable:9.8.0') {
             exclude group: 'com.google.firebase', module: 'firebase-common'
         }
         wearWearApp project(':wearable')
