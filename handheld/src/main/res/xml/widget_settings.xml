@@ -21,56 +21,64 @@
     android:key="widget_settings"
     android:title="@string/widget_settings">
 
-    <ListPreference
-        android:defaultValue="1"
-        android:dialogTitle="@string/setting_method"
-        android:entries="@array/setting_method_labels"
-        android:entryValues="@array/setting_method_values"
-        android:key="setting_method"
-        android:summary="@string/setting_method_summary"
-        android:title="@string/setting_method" />
-    <ListPreference
-        android:defaultValue="day_of_year"
-        android:dialogTitle="@string/setting_detailed_view"
-        android:entries="@array/setting_detailed_view_labels"
-        android:entryValues="@array/setting_detailed_view_values"
-        android:key="setting_detailed_view"
-        android:title="@string/setting_detailed_view" />
+    <PreferenceCategory
+        android:title="@string/setting_category_widget">
 
-    <ListPreference
-        android:defaultValue="fr"
-        android:dialogTitle="@string/setting_language"
-        android:entries="@array/setting_language_labels"
-        android:entryValues="@array/setting_language_values"
-        android:key="setting_language"
-        android:title="@string/setting_language" />
+        <ListPreference
+            android:defaultValue="1"
+            android:dialogTitle="@string/setting_method"
+            android:entries="@array/setting_method_labels"
+            android:entryValues="@array/setting_method_values"
+            android:key="setting_method"
+            android:summary="@string/setting_method_summary"
+            android:title="@string/setting_method" />
+        <ListPreference
+            android:defaultValue="day_of_year"
+            android:dialogTitle="@string/setting_detailed_view"
+            android:entries="@array/setting_detailed_view_labels"
+            android:entryValues="@array/setting_detailed_view_values"
+            android:key="setting_detailed_view"
+            android:title="@string/setting_detailed_view" />
 
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="setting_custom_color_enabled"
-        android:title="@string/setting_custom_color_enabled" />
+        <ListPreference
+            android:defaultValue="fr"
+            android:dialogTitle="@string/setting_language"
+            android:entries="@array/setting_language_labels"
+            android:entryValues="@array/setting_language_values"
+            android:key="setting_language"
+            android:title="@string/setting_language" />
 
-    <net.margaritov.preference.colorpicker.ColorPickerPreference
-        android:defaultValue="@android:color/white"
-        android:dependency="setting_custom_color_enabled"
-        android:key="setting_custom_color"
-        android:title="@string/setting_custom_color" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="setting_custom_color_enabled"
+            android:title="@string/setting_custom_color_enabled" />
 
-    <com.vanniktech.vntfontlistpreference.VNTFontListPreference
-        android:defaultValue="@string/default_font"
-        android:key="setting_custom_font"
-        android:title="@string/setting_custom_font"
-        app:vnt_fontDirectory="@string/fonts_folder" />
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:defaultValue="@android:color/white"
+            android:dependency="setting_custom_color_enabled"
+            android:key="setting_custom_color"
+            android:title="@string/setting_custom_color" />
 
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="setting_android_wear"
-        android:summary="@string/setting_android_wear_summary"
-        android:title="@string/setting_android_wear" />
+        <com.vanniktech.vntfontlistpreference.VNTFontListPreference
+            android:defaultValue="@string/default_font"
+            android:key="setting_custom_font"
+            android:title="@string/setting_custom_font"
+            app:vnt_fontDirectory="@string/fonts_folder" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="setting_category_other"
+        android:title="@string/setting_category_other">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="setting_android_wear"
+            android:summary="@string/setting_android_wear_summary"
+            android:title="@string/setting_android_wear" />
 
 
-    <Preference android:title="@string/about">
-        <intent android:action="ca.rmen.android.frcwidget.FRCAboutActivity" />
-    </Preference>
+        <Preference android:title="@string/about">
+            <intent android:action="ca.rmen.android.frcwidget.FRCAboutActivity" />
+        </Preference>
+    </PreferenceCategory>
 
 </PreferenceScreen>

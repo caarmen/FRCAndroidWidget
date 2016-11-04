@@ -35,6 +35,9 @@
     <string name="lib_font_pref">* Niklas Baudy, pour sa bibliothèque VNTFontListPreference</string>
     <string name="github">Projet sur GitHub:</string>
     <string name="widget_settings">Configuration du calendrier</string>
+    <string name="menu_settings">Paramètres</string>
+    <string name="setting_category_widget">Widget</string>
+    <string name="setting_category_other">Autre</string>
     <string name="setting_method">Méthode de calcul</string>
     <string name="setting_method_summary">Comment le premier jour de l\'année est déterminé: %s</string>
     <string name="setting_detailed_view">Vue détaillée</string>
@@ -51,6 +54,7 @@
     <string name="chooser_title">Séléctionner une appli</string>
     <string name="popup_action_share">Partager</string>
     <string name="popup_action_settings">Préférences</string>
+    <string name="popup_action_converter">Convertisseur</string>
     <string name="popup_action_search">Rechercher \'%s\'</string>
     <string name="share_subject">%1$s, %2$d %3$s %4$d</string>
     <string name="share_body">Aujourd\'hui nous sommes %1$s, le %2$d %3$s %4$d.
@@ -68,5 +72,14 @@ L\'heure actuelle est %5$s.
 
     <string name="dialog_color_picker">Choisir une couleur</string>
     <string name="press_color_to_apply">Taper sur la couleur pour l\'appliquer</string>
+
+    <string name="help">Aide</string>
+    <string name="romme_description">\n<b>Romme</b>\n<small>Comme le calendrier Grégorian : les années bissextiles sont celles divisibles par quatre, mais pas par 100 (sauf par 400).</small></string>
+    <string name="equinox_description">\n<b>Équinoxe</b>\n<small>Les années bissextiles varient afin que le 1er vendémiaire tombe toujours sur l\'équinoxe d\'automne.</small></string>
+    <string name="von_madler_description">\n<b>von Mädler</b>\n<small>Les années bissextiles sont celles divisibles par quatre mais pas par 128.</small></string>
+    <string name="date_format">%1$s, %2$d %3$s %4$d\n%5$s : %6$s</string>
+    <string name="method_romme">Romme</string>
+    <string name="method_equinox">Équinoxe</string>
+    <string name="method_von_madler">von Mädler</string>
 
 </resources>

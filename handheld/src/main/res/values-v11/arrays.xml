@@ -21,8 +21,8 @@
 <resources>
 
     <string-array name="setting_method_labels">
-        <item>\n<b>Romme</b>\n<small>Like the Gregorian calendar: Leap years are years divisible by four, but not by 100 (except by 400).</small></item>
-        <item>\n<b>Equinox</b>\n<small>Leap years vary so that 1 Vendémiaire always falls on the autumn equinox.</small></item>
-        <item>\n<b>von Mädler</b>\n<small>Leap years are years divisible by four, but not by 128.</small></item>
+        <item>@string/romme_description</item>
+        <item>@string/equinox_description</item>
+        <item>@string/von_madler_description</item>
     </string-array>
 </resources>

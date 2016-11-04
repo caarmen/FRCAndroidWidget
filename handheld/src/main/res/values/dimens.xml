@@ -45,4 +45,6 @@
     <dimen name="minimalist_weekday_textsize">31sp</dimen>
     <dimen name="minimalist_month_textsize">28sp</dimen>
 
+    <dimen name="activity_margin">8dp</dimen>
+
 </resources>

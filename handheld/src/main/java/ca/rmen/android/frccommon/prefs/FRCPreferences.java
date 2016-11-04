@@ -38,6 +38,7 @@ public class FRCPreferences {
     public static final String PREF_LANGUAGE = "setting_language";
     public static final String PREF_CUSTOM_COLOR = "setting_custom_color";
     public static final String PREF_CUSTOM_COLOR_ENABLED = "setting_custom_color_enabled";
+    public static final String PREF_CATEGORY_OTHER = "setting_category_other";
     public static final String PREF_ANDROID_WEAR = "setting_android_wear";
     private static final int FREQUENCY_MINUTES = 86400;
     public static final int FREQUENCY_DAYS = 86400000;
