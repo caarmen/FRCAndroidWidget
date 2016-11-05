@@ -91,6 +91,6 @@ ext.buildToolsVersion = "25"
 ext.compileSdkVersion = 25
 ext.targetSdkVersion = 25
 ext.supportLibVersion = "25.0.0"
-ext.versionCode = 1110
-ext.versionName = "1.11.0"
+ext.versionCode = 1111
+ext.versionName = "1.11.1"
 

@@ -29,6 +29,8 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
+    <style name="AppTheme" parent="android:Theme"/>
+
     <style name="AboutEntryTextView">
         <item name="android:autoLink">all</item>
         <item name="android:paddingLeft">52dp</item>
