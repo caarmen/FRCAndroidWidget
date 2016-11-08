@@ -52,6 +52,18 @@
         tools:ignore="UnusedAttribute" />
 
     <TextView
+        android:id="@+id/text_day_of_year"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:shadowColor="@android:color/black"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/minimalist_weekday_textsize"
+        tools:ignore="UnusedAttribute" />
+
+    <TextView
         android:id="@+id/text_time"
         android:layout_width="wrap_content"
         android:layout_height="0dp"

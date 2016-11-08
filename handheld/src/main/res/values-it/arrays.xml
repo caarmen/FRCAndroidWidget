@@ -25,11 +25,6 @@
         <item>Equinozio</item>
         <item>von Mädler</item>
     </string-array>
-    <string-array name="setting_detailed_view_labels">
-        <item>Nessuno</item>
-        <item>Ora (formato decimale)</item>
-        <item>Nome del giorno dell\'anno</item>
-    </string-array>
     <string-array name="daily_object_types">
         <item>La pianta</item>
         <item>L\'animale</item>

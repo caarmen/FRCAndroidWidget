@@ -49,13 +49,15 @@ class FRCMinimalistAppWidgetRenderer implements FRCAppWidgetRenderer {
         String date = " " + frenchDate.dayOfMonth + " " + frenchDate.getMonthName() + " " + frenchDate.year + " ";
         TextView tvWeekday = (TextView) view.findViewById(R.id.text_weekday);
         TextView tvDate = (TextView) view.findViewById(R.id.text_date);
+        TextView tvDayOfYear = (TextView) view.findViewById(R.id.text_day_of_year);
         TextView tvTime = (TextView) view.findViewById(R.id.text_time);
         tvWeekday.setText(" " + frenchDate.getWeekdayName() + " ");
         tvDate.setText(date);
-        FRCRender.setDetailedViewText(context, tvTime, frenchDate);
+        FRCRender.setDetailedViewText(context, tvDayOfYear, tvTime, frenchDate);
 
         setTextColors(context, tvWeekday, frenchDate);
         setTextColors(context, tvDate, frenchDate);
+        setTextColors(context, tvDayOfYear, frenchDate);
         setTextColors(context, tvTime, frenchDate);
 
         TextViewSizing.fitTextViewsHorizontally(view, R.dimen.minimalist_widget_width);

@@ -40,8 +40,8 @@ Italian translations provided by Alfonso Fusco
     <string name="setting_category_other">Altri</string>
     <string name="setting_method">Metodo di calcolo</string>
     <string name="setting_method_summary">Come è calcolato il primo giorno di ogni anno: %s</string>
-    <string name="setting_detailed_view">Vista dettagliata</string>
-    <string name="setting_detailed_view_summary">%s</string>
+    <string name="setting_show_time">Mostrare l\'ora (formato decimale)</string>
+    <string name="setting_show_day_of_year">Mostrare il nome del giorno dell\'anno</string>
     <string name="setting_language">Lingua</string>
     <string name="setting_language_summary">%s</string>
     <string name="setting_custom_color_enabled">Utilizza un colore personalizzato</string>

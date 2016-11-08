@@ -34,11 +34,13 @@ import ca.rmen.lfrc.FrenchRevolutionaryCalendar.CalculationMethod;
 public class FRCPreferences {
 
     public static final String PREF_METHOD = "setting_method";
-    static final String PREF_DETAILED_VIEW = "setting_detailed_view";
+    private static final String PREF_DEPRECATED_DETAILED_VIEW = "setting_detailed_view";
+    private static final String PREF_SHOW_TIME = "setting_show_time";
+    private static final String PREF_SHOW_DAY_OF_YEAR = "setting_show_day_of_year";
     public static final String PREF_LANGUAGE = "setting_language";
     public static final String PREF_CUSTOM_COLOR = "setting_custom_color";
     public static final String PREF_CUSTOM_COLOR_ENABLED = "setting_custom_color_enabled";
-    public static final String PREF_CATEGORY_OTHER = "setting_category_other";
+    static final String PREF_CATEGORY_OTHER = "setting_category_other";
     public static final String PREF_ANDROID_WEAR = "setting_android_wear";
     private static final int FREQUENCY_MINUTES = 86400;
     public static final int FREQUENCY_DAYS = 86400000;
@@ -47,10 +49,6 @@ public class FRCPreferences {
 
     private final SharedPreferences sharedPrefs;
 
-    public enum DetailedView {
-        NONE, TIME, DAY_OF_YEAR
-    }
-
     public synchronized static FRCPreferences getInstance(Context context) {
         if (me == null) me = new FRCPreferences(context);
         return me;
@@ -58,6 +56,25 @@ public class FRCPreferences {
 
     private FRCPreferences(Context context) {
         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        migrateDetailedViewSetting();
+    }
+
+    private void migrateDetailedViewSetting() {
+        if (sharedPrefs.contains(PREF_DEPRECATED_DETAILED_VIEW)) {
+            String detailedViewValue = sharedPrefs.getString(PREF_DEPRECATED_DETAILED_VIEW, "day_of_year");
+            SharedPreferences.Editor editor = sharedPrefs.edit();
+            if ("time".equals(detailedViewValue)) {
+                editor.putBoolean(PREF_SHOW_TIME, true);
+                editor.putBoolean(PREF_SHOW_DAY_OF_YEAR, false);
+            } else if ("day_of_year".equals(detailedViewValue)) {
+                editor.putBoolean(PREF_SHOW_TIME, false);
+                editor.putBoolean(PREF_SHOW_DAY_OF_YEAR, true);
+            } else if ("none".equals(detailedViewValue)) {
+                editor.putBoolean(PREF_SHOW_TIME, false);
+                editor.putBoolean(PREF_SHOW_DAY_OF_YEAR, false);
+            }
+            editor.remove(PREF_DEPRECATED_DETAILED_VIEW).commit();
+        }
     }
 
     public Locale getLocale() {
@@ -79,17 +96,16 @@ public class FRCPreferences {
         return CalculationMethod.values()[calculationMethodInt];
     }
 
-    public int getUpdateFrequency() {
-        DetailedView detailedView = getDetailedView();
-        final int frequency;
-        if (detailedView == DetailedView.TIME) frequency = FREQUENCY_MINUTES;
-        else frequency = FREQUENCY_DAYS;
-        return frequency;
+    public boolean isTimeEnabled() {
+        return sharedPrefs.getBoolean(PREF_SHOW_TIME, false);
     }
 
-    public DetailedView getDetailedView() {
-        String detailedViewValue = sharedPrefs.getString(PREF_DETAILED_VIEW, DetailedView.DAY_OF_YEAR.name().toLowerCase(Locale.US));
-        return DetailedView.valueOf(detailedViewValue.toUpperCase(Locale.US));
+    public boolean isDayOfYearEnabled() {
+        return sharedPrefs.getBoolean(PREF_SHOW_DAY_OF_YEAR, true);
+    }
+
+    public int getUpdateFrequency() {
+        return isTimeEnabled() ? FREQUENCY_MINUTES : FREQUENCY_DAYS;
     }
 
     public boolean getAndroidWearEnabled() {

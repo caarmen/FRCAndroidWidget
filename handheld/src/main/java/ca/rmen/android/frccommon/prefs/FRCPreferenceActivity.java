@@ -60,9 +60,6 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
                 case FRCPreferences.PREF_METHOD:
                     updatePreferenceSummary(key, R.string.setting_method_summary);
                     break;
-                case FRCPreferences.PREF_DETAILED_VIEW:
-                    updatePreferenceSummary(key, R.string.setting_detailed_view_summary);
-                    break;
                 case FRCPreferences.PREF_LANGUAGE:
                     updatePreferenceSummary(key, R.string.setting_language_summary);
                     break;
@@ -131,7 +128,6 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
             addPreferencesFromResource(R.xml.widget_settings);
 
             updatePreferenceSummary(FRCPreferences.PREF_METHOD, R.string.setting_method_summary);
-            updatePreferenceSummary(FRCPreferences.PREF_DETAILED_VIEW, R.string.setting_detailed_view_summary);
             updatePreferenceSummary(FRCPreferences.PREF_LANGUAGE, R.string.setting_language_summary);
             updatePreferenceSummary(FRCPreferences.PREF_CUSTOM_COLOR_ENABLED, 0);
 

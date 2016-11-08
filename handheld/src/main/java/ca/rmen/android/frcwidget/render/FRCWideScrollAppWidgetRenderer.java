@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
+
 import ca.rmen.android.frccommon.Constants;
 import ca.rmen.android.frccommon.FRCDateUtils;
 import ca.rmen.android.frenchcalendar.R;
@@ -54,18 +55,19 @@ class FRCWideScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
         String date = " " + frenchDate.dayOfMonth + " " + frenchDate.getMonthName() + " " + frenchDate.year + " ";
         TextView tvDate = (TextView) view.findViewById(R.id.text_date);
         TextView tvWeekday = (TextView) view.findViewById(R.id.text_weekday);
-        TextView tvDetail = (TextView) view.findViewById(R.id.text_time);
+        TextView tvDayOfYear = (TextView) view.findViewById(R.id.text_day_of_year);
+        TextView tvTime = (TextView) view.findViewById(R.id.text_time);
         tvDate.setText(date);
         tvWeekday.setText(frenchDate.getWeekdayName());
-        FRCRender.setDetailedViewText(context, tvDetail, frenchDate);
 
+        FRCRender.setDetailedViewText(context, tvDayOfYear, tvTime, frenchDate);
         Font.applyFont(context, view);
         TextViewSizing.fitTextViewsHorizontally(view, R.dimen.wide_widget_text_width);
         TextViewSizing.fitTextViewsVertically(context,
                 R.dimen.wide_widget_height,
                 R.dimen.wide_top_margin,
                 R.dimen.wide_bottom_margin,
-                tvWeekday, tvDate, tvDetail);
+                tvWeekday, tvDate, tvDayOfYear, tvTime);
 
         FRCRender.scaleWidget(context, view, appWidgetManager, appWidgetId,
                 R.dimen.wide_widget_width, R.dimen.wide_widget_height);
