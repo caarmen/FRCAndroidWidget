@@ -171,20 +171,24 @@ class FRCRender {
     }
 
     static void setDetailedViewText(Context context,
-                                    TextView detailedViewTextView,
+                                    TextView dayOfYearTextView,
+                                    TextView timeTextView,
                                     FrenchRevolutionaryCalendarDate frenchDate) {
 
-        FRCPreferences.DetailedView detailedView = FRCPreferences.getInstance(context).getDetailedView();
-        if (detailedView == FRCPreferences.DetailedView.NONE) {
-            detailedViewTextView.setVisibility(View.GONE);
+        FRCPreferences prefs = FRCPreferences.getInstance(context);
+        if (prefs.isDayOfYearEnabled()) {
+            dayOfYearTextView.setVisibility(View.VISIBLE);
+            dayOfYearTextView.setText(" " + frenchDate.getDayOfYear() + " ");
         } else {
-            final String detailedViewText;
-            detailedViewTextView.setVisibility(View.VISIBLE);
-            if (detailedView == FRCPreferences.DetailedView.TIME)
-                detailedViewText = String.format(Locale.US, "%d:%02d", frenchDate.hour, frenchDate.minute);
-            else
-                detailedViewText = " " + frenchDate.getDayOfYear() + " ";
-            detailedViewTextView.setText(detailedViewText);
+            dayOfYearTextView.setVisibility(View.GONE);
         }
+
+        if (prefs.isTimeEnabled()) {
+            timeTextView.setVisibility(View.VISIBLE);
+            timeTextView.setText(String.format(Locale.US, "%d:%02d", frenchDate.hour, frenchDate.minute));
+        } else {
+            timeTextView.setVisibility(View.GONE);
+        }
+
     }
 }

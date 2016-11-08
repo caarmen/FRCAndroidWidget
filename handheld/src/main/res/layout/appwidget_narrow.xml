@@ -58,6 +58,15 @@
         android:textSize="@dimen/narrow_year_textsize" />
 
     <TextView
+        android:id="@+id/text_day_of_year"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/narrow_time_textsize" />
+
+    <TextView
         android:id="@+id/text_time"
         android:layout_width="wrap_content"
         android:layout_height="0dp"

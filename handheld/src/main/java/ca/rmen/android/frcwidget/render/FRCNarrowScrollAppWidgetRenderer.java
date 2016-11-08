@@ -55,11 +55,12 @@ class FRCNarrowScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
         TextView tvYear = (TextView) view.findViewById(R.id.text_year);
         TextView tvDate = (TextView) view.findViewById(R.id.text_date);
         TextView tvWeekday = (TextView) view.findViewById(R.id.text_weekday);
-        TextView tvDetail = (TextView) view.findViewById(R.id.text_time);
+        TextView tvDayOfYear = (TextView) view.findViewById(R.id.text_day_of_year);
+        TextView tvTime = (TextView) view.findViewById(R.id.text_time);
         tvYear.setText(" " + frenchDate.year + " ");
         tvWeekday.setText(frenchDate.getWeekdayName());
         tvDate.setText(date);
-        FRCRender.setDetailedViewText(context, tvDetail, frenchDate);
+        FRCRender.setDetailedViewText(context, tvDayOfYear, tvTime, frenchDate);
 
         Font.applyFont(context, view);
         TextViewSizing.fitTextViewsHorizontally(view, R.dimen.narrow_widget_text_width);
@@ -67,7 +68,7 @@ class FRCNarrowScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
                 R.dimen.narrow_widget_height,
                 R.dimen.narrow_top_bottom_margin,
                 R.dimen.narrow_top_bottom_margin,
-                tvYear, tvWeekday, tvDate, tvDetail);
+                tvYear, tvWeekday, tvDate, tvDayOfYear, tvTime);
         FRCRender.scaleWidget(context, view, appWidgetManager, appWidgetId,
                 R.dimen.narrow_widget_width, R.dimen.narrow_widget_height);
 

@@ -32,13 +32,16 @@
             android:key="setting_method"
             android:summary="@string/setting_method_summary"
             android:title="@string/setting_method" />
-        <ListPreference
-            android:defaultValue="day_of_year"
-            android:dialogTitle="@string/setting_detailed_view"
-            android:entries="@array/setting_detailed_view_labels"
-            android:entryValues="@array/setting_detailed_view_values"
-            android:key="setting_detailed_view"
-            android:title="@string/setting_detailed_view" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:title="@string/setting_show_day_of_year"
+            android:key="setting_show_day_of_year"/>
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:title="@string/setting_show_time"
+            android:key="setting_show_time"/>
 
         <ListPreference
             android:defaultValue="fr"

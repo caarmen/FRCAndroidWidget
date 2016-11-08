@@ -54,8 +54,17 @@
         android:textSize="@dimen/wide_month_textsize" />
 
     <TextView
-        android:id="@+id/text_time"
+        android:id="@+id/text_day_of_year"
         tools:text="Récompenses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/wide_day_of_year_textsize" />
+
+    <TextView
+        android:id="@+id/text_time"
+        tools:text="8:56"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"

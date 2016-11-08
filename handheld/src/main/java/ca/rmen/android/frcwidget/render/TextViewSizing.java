@@ -73,7 +73,9 @@ class TextViewSizing {
 
         int totalTextViewsHeight = 0;
         for (TextView textView : textViews) {
-            totalTextViewsHeight += getTextHeight(textView);
+            if (textView.getVisibility() == View.VISIBLE) {
+                totalTextViewsHeight += getTextHeight(textView);
+            }
         }
 
         Log.v(TAG, String.format(Locale.US, "fitTextViewsVertically: totalTextViewsHeight %s", totalTextViewsHeight));
@@ -94,30 +96,32 @@ class TextViewSizing {
             float scaleFactor = totalHeight / totalTextViewsHeight;
             Log.v(TAG, "fitTextViewsVertically: pass 1, scale factor = " + scaleFactor);
             for (TextView textView : textViews) {
-                int textViewHeight = getTextHeight(textView);
-                float newTextViewHeight = scaleFactor * textViewHeight;
-                float newTextSize = scaleFactor * textView.getTextSize();
-                Log.v(TAG, String.format(Locale.US, "fitTextViewsVertically: suggested new height %s: '%s'",
-                        newTextViewHeight,
-                        textView.getText()));
-                // This text view is already smaller than the min height, leave it alone
-                // and don't include it in pass 2.
-                if (textViewHeight < minTextViewHeight) {
-                    totalHeightPass2 -= textViewHeight;
-                    newTextSize = textView.getTextSize();
+                if (textView.getVisibility() == View.VISIBLE) {
+                    int textViewHeight = getTextHeight(textView);
+                    float newTextViewHeight = scaleFactor * textViewHeight;
+                    float newTextSize = scaleFactor * textView.getTextSize();
+                    Log.v(TAG, String.format(Locale.US, "fitTextViewsVertically: suggested new height %s: '%s'",
+                            newTextViewHeight,
+                            textView.getText()));
+                    // This text view is already smaller than the min height, leave it alone
+                    // and don't include it in pass 2.
+                    if (textViewHeight < minTextViewHeight) {
+                        totalHeightPass2 -= textViewHeight;
+                        newTextSize = textView.getTextSize();
+                    }
+                    // The scale factor would make this text view smaller than the min height.
+                    // Only scale it down to the min height, and don't include it in pass 2.
+                    else if (newTextViewHeight < minTextViewHeight) {
+                        totalHeightPass2 -= minTextViewHeight;
+                        newTextSize = (minTextViewHeight / textViewHeight) * textView.getTextSize();
+                    }
+                    // This text view needs to be scaled down and needs to go on to pass 2.
+                    else {
+                        totalTextViewHeightPass2 += newTextViewHeight;
+                        textViewsPass2.add(textView);
+                    }
+                    textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, newTextSize);
                 }
-                // The scale factor would make this text view smaller than the min height.
-                // Only scale it down to the min height, and don't include it in pass 2.
-                else if (newTextViewHeight < minTextViewHeight) {
-                    totalHeightPass2 -= minTextViewHeight;
-                    newTextSize = (minTextViewHeight / textViewHeight) * textView.getTextSize();
-                }
-                // This text view needs to be scaled down and needs to go on to pass 2.
-                else {
-                    totalTextViewHeightPass2 += newTextViewHeight;
-                    textViewsPass2.add(textView);
-                }
-                textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, newTextSize);
             }
 
             // Pass 2: These are text views which had to be scaled down already, and may need

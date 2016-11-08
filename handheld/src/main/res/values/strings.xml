@@ -41,8 +41,8 @@
     <string name="setting_category_other">Other</string>
     <string name="setting_method">Calculation method</string>
     <string name="setting_method_summary">How the first day of each year is determined: %s</string>
-    <string name="setting_detailed_view">Detailed view</string>
-    <string name="setting_detailed_view_summary">%s</string>
+    <string name="setting_show_time">Display time (decimal clock)</string>
+    <string name="setting_show_day_of_year">Show day of the year</string>
     <string name="setting_language">Language</string>
     <string name="setting_language_summary">%s</string>
     <string name="setting_custom_color_enabled">Use a custom color</string>
