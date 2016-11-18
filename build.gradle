@@ -39,7 +39,7 @@ allprojects {
     }
     configurations.all {
         resolutionStrategy {
-            force 'com.android.support:support-v4:24.2.0'
+            force "com.android.support:support-v4:${supportLibVersion}"
         }
     }
 }
@@ -90,7 +90,8 @@ def filterResources(project, buildVariant) {
 ext.buildToolsVersion = "25"
 ext.compileSdkVersion = 25
 ext.targetSdkVersion = 25
-ext.supportLibVersion = "25.0.0"
-ext.versionCode = 1112
-ext.versionName = "1.11.2"
+ext.supportLibVersion = "25.0.1"
+ext.playServicesVersion = "9.8.0"
+ext.versionCode = 1113
+ext.versionName = "1.11.3"
 
