@@ -1,7 +1,7 @@
 /*
  * French Revolutionary Calendar Android Widget
  * Copyright (C) 2014 Benoit 'BoD' Lubek (BoD@JRAF.org)
- * Copyright (C) 2011 - 2014 Carmen Alvarez
+ * Copyright (C) 2011 - 2016 Carmen Alvarez
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@ package ca.rmen.android.frcwear;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import ca.rmen.android.frccommon.FRCNotificationScheduler;
 import ca.rmen.android.frccommon.prefs.FRCPreferences;
 
 public class FRCWearPreferenceListener implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -33,35 +34,30 @@ public class FRCWearPreferenceListener implements SharedPreferences.OnSharedPref
     }
 
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (FRCPreferences.PREF_METHOD.equals(key)
+        FRCPreferences prefs = FRCPreferences.getInstance(mContext);
+        if (prefs.getAndroidWearEnabled() &&
+                (FRCPreferences.PREF_METHOD.equals(key)
                 || FRCPreferences.PREF_LANGUAGE.equals(key)
                 || FRCPreferences.PREF_CUSTOM_COLOR_ENABLED.equals(key)
-                || FRCPreferences.PREF_CUSTOM_COLOR.equals(key)) {
+                || FRCPreferences.PREF_CUSTOM_COLOR.equals(key))) {
             // Update the Android Wear notification (if enabled)
-            updateWearNotificationIfEnabled(sharedPreferences);
-        } else if (FRCPreferences.PREF_ANDROID_WEAR.equals(key)) {
-            boolean androidWearEnabled = sharedPreferences.getBoolean(FRCPreferences.PREF_ANDROID_WEAR, false);
-            if (androidWearEnabled) {
+            FRCAndroidWearService.backgroundUpdateToday(mContext);
+        }
+        if (FRCPreferences.PREF_ANDROID_WEAR.equals(key)) {
+            if (prefs.getAndroidWearEnabled()) {
                 // Schedule an alarm
-                FRCWearScheduler.scheduleRepeatingAlarm(mContext);
+                FRCNotificationScheduler.scheduleRepeatingAlarm(mContext);
 
                 // Also send the value now
-                FRCAndroidWearService.backgroundRemoveAndUpdateDays(mContext);
+                FRCAndroidWearService.backgroundUpdateToday(mContext);
 
                 // Also send the value in a minute (this allows the Wearable app to finish installing)
-                FRCWearScheduler.scheduleOnceAlarm(mContext);
+                FRCNotificationScheduler.scheduleOneShotWearableAlarm(mContext);
             } else {
                 // Unschedule the alarm
-                FRCWearScheduler.unscheduleRepeatingAlarm(mContext);
+                FRCNotificationScheduler.unscheduleRepeatingAlarm(mContext);
             }
         }
     }
 
-    private void updateWearNotificationIfEnabled(SharedPreferences sharedPreferences) {
-        boolean androidWearEnabled = sharedPreferences.getBoolean(FRCPreferences.PREF_ANDROID_WEAR, false);
-        if (androidWearEnabled) {
-            // Update the value now
-            FRCAndroidWearService.backgroundRemoveAndUpdateDays(mContext);
-        }
-    }
 }

@@ -50,6 +50,8 @@
     <string name="setting_custom_color_summary_disabled">Currently using predefined colors (color changes every month).</string>
     <string name="setting_custom_color">Custom color</string>
     <string name="setting_custom_font">Font</string>
+    <string name="setting_system_notification">System notification</string>
+    <string name="setting_system_notification_summary">Show a system notification once a day</string>
     <string name="setting_android_wear">Android Wear</string>
     <string name="setting_android_wear_summary">Show a notification once a day on connected Android Wear devices</string>
     <string name="chooser_title">Choose an app</string>
@@ -65,9 +67,11 @@ The current time is %5$s.
 %6$s of today is the %7$s.
 \n\n\
 It has been %8$d days since the start of the Republic.</string>
+    <string name="notification_text">%1$s, %2$d %3$s %4$d</string>
+    <string name="notification_long_text">Today is %1$s, %2$d %3$s %4$d.
+\n\
+%5$s of today is the %6$s.</string>
     <string name="about">About</string>
-    <string name="title_no_widgets">You have no widgets!</string>
-    <string name="message_no_widgets">You must first add a widget to the home screen.</string>
     <string name="message_save">Press back to save your settings.</string>
 
     <string name="dialog_color_picker">Choose a color</string>

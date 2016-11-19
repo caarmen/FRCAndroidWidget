@@ -1,7 +1,7 @@
 /*
  * French Revolutionary Calendar Android Widget
- * Copyright (C) 2014 Benoit 'BoD' Lubek (BoD@JRAF.org)
- * Copyright (C) 2011 - 2014 Carmen Alvarez
+ * Copyright (C) 2014 - 2016 Benoit 'BoD' Lubek (BoD@JRAF.org)
+ * Copyright (C) 2011 - 2016 Carmen Alvarez
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,6 @@
 package ca.rmen.android.frcwear;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -52,7 +51,7 @@ public class FRCWearCommHelper {
         return INSTANCE;
     }
 
-    public void connect(Context context) {
+    void connect(Context context) {
         Log.d(TAG, "connect");
         if (mGoogleApiClient != null) {
             Log.d(TAG, "connect Already connected");
@@ -79,7 +78,7 @@ public class FRCWearCommHelper {
         mGoogleApiClient.connect();
     }
 
-    public void disconnect() {
+    void disconnect() {
         Log.d(TAG, "disconnect");
         if (mGoogleApiClient != null) mGoogleApiClient.disconnect();
         mGoogleApiClient = null;
@@ -93,7 +92,7 @@ public class FRCWearCommHelper {
     /**
      * This must not be called from the UI thread.
      */
-    public void updateToday(String date, String dayOfYear, int color) {
+    void updateToday(String date, String dayOfYear, int color) {
         Log.d(TAG, "updateToday date=" + date + " dayOfYear=" + dayOfYear);
         PutDataMapRequest putDataMapRequest = PutDataMapRequest.create(WearCommConstants.PATH_TODAY);
 
@@ -101,25 +100,11 @@ public class FRCWearCommHelper {
         dataMap.putString(WearCommConstants.EXTRA_DATE, date);
         dataMap.putString(WearCommConstants.EXTRA_DAY_OF_YEAR, dayOfYear);
         dataMap.putInt(WearCommConstants.EXTRA_COLOR, color);
+        // This ensures the data is different every time, which forces the Wear system to actually send it.
+        // If the data is not different, it is not sent to the watch (as an optimization).
+        dataMap.putLong(WearCommConstants.EXTRA_UPDATE_TIMESTAMP, System.currentTimeMillis());
 
         PutDataRequest request = putDataMapRequest.asPutDataRequest();
         Wearable.DataApi.putDataItem(mGoogleApiClient, request).await();
-    }
-
-    /**
-     * This must not be called from the UI thread.
-     */
-    public void removeToday() {
-        Log.d(TAG, "removeToday");
-        Wearable.DataApi.deleteDataItems(mGoogleApiClient, createUri(WearCommConstants.PATH_TODAY)).await();
-    }
-
-
-    /*
-     * Misc.
-     */
-
-    private static Uri createUri(String path) {
-        return new Uri.Builder().scheme("wear").path(path).build();
     }
 }

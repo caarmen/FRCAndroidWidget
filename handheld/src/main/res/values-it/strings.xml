@@ -49,6 +49,8 @@ Italian translations provided by Alfonso Fusco
     <string name="setting_custom_color_summary_disabled">Utilizza il colore predefinito (il colore cambia ogni mese).</string>
     <string name="setting_custom_color">Colore personalizzato</string>
     <string name="setting_custom_font">Font</string>
+    <string name="setting_system_notification">Notifica</string>
+    <string name="setting_system_notification_summary">Mostrare una notifica nella barra di stato una volta al giorno</string>
     <string name="setting_android_wear">Android Wear</string>
     <string name="setting_android_wear_summary">Mostra una notifica una volta al giorno sui dispositivi Android Wear collegati</string>
     <string name="chooser_title">Scegli un\'applicazione</string>
@@ -64,9 +66,11 @@ Sono le ore %5$s.
 %6$s del giorno:  %7$s.
 \n\n\
 Sono passati %8$d giorni dall\'inizio della Repubblica</string>
+    <string name="notification_text">%1$s, %2$d %3$s %4$d</string>
+    <string name="notification_long_text">Oggi è %1$s, %2$d %3$s %4$d.
+\n\
+%5$s del giorno: %6$s.</string>
     <string name="about">Informazioni</string>
-    <string name="title_no_widgets">Non hai widgets!</string>
-    <string name="message_no_widgets">Devi prima aggiungere un widget sulla schermata home.</string>
     <string name="message_save">Premi indietro per salvare le tue impostazioni.</string>
 
     <string name="dialog_color_picker">Scegliere un colore</string>

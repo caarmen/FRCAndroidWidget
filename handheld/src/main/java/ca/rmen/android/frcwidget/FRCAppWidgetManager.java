@@ -1,6 +1,6 @@
 /*
  * French Revolutionary Calendar Android Widget
- * Copyright (C) 2011 - 2014 Carmen Alvarez
+ * Copyright (C) 2011 - 2016 Carmen Alvarez
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,14 +28,8 @@ import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetMinimalist;
 import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetNarrow;
 import ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetWide;
 
-public class FRCAppWidgetManager {
+class FRCAppWidgetManager {
 
-    /**
-     * @return true if at least one widget has been added to the home screen.
-     */
-    public static boolean hasWidgets(Context context) {
-        return !getAllAppWidgetIds(context).isEmpty();
-    }
     /**
      * @return all the widget ids for both narrow and wide widgets.
      */

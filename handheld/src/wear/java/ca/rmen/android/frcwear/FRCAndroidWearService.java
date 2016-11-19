@@ -1,7 +1,7 @@
 /*
  * French Revolutionary Calendar Android Widget
  * Copyright (C) 2014 Benoit 'BoD' Lubek (BoD@JRAF.org)
- * Copyright (C) 2011 - 2014 Carmen Alvarez
+ * Copyright (C) 2011 - 2016 Carmen Alvarez
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,6 @@
 package ca.rmen.android.frcwear;
 
 import android.app.IntentService;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -49,9 +48,6 @@ public class FRCAndroidWearService extends IntentService {
         }
 
         FRCWearCommHelper wearCommHelper = FRCWearCommHelper.get();
-        if (FRCWearScheduler.ACTION_WEAR_REMOVE_AND_UPDATE.equals(intent.getAction())) {
-            wearCommHelper.removeToday();
-        }
         updateToday(this, wearCommHelper);
     }
 
@@ -61,21 +57,13 @@ public class FRCAndroidWearService extends IntentService {
         super.onDestroy();
     }
 
-    public static PendingIntent getPendingIntent(Context context, String action) {
-        Intent intent = new Intent(context, FRCAndroidWearService.class);
-        intent.setAction(action);
-        return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-    }
-
-    public static void backgroundRemoveAndUpdateDays(final Context context) {
+    public static void backgroundUpdateToday(final Context context) {
         final FRCWearCommHelper wearCommHelper = FRCWearCommHelper.get();
         wearCommHelper.connect(context);
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
                 synchronized (wearCommHelper) {
-                    wearCommHelper.removeToday();
-
                     updateToday(context, wearCommHelper);
                     return null;
                 }

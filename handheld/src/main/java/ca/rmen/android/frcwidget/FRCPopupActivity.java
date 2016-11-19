@@ -38,7 +38,7 @@ import java.util.Locale;
 
 import ca.rmen.android.frccommon.Constants;
 import ca.rmen.android.frccommon.FRCConverterActivity;
-import ca.rmen.android.frccommon.FRCDateUtils;
+import ca.rmen.android.frccommon.Share;
 import ca.rmen.android.frccommon.prefs.FRCPreferenceActivity;
 import ca.rmen.android.frccommon.prefs.FRCPreferences;
 import ca.rmen.android.frenchcalendar.R;
@@ -117,7 +117,7 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
         final int iconId;
         final String title;
 
-        public Action(Context context, int id, int iconId, int titleId, Object ... titleParams) {
+        Action(Context context, int id, int iconId, int titleId, Object... titleParams) {
             this.id = id;
             this.iconId = iconId;
             this.title = context.getString(titleId, titleParams);
@@ -126,10 +126,11 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
 
     private static class ActionsAdapter extends ArrayAdapter<Action> {
 
-        public ActionsAdapter(Context context) {
+        ActionsAdapter(Context context) {
             super(context, R.layout.popup_item);
         }
 
+        @NonNull
         @Override
         public View getView(int position, View convertView, @NonNull ViewGroup parent) {
             TextView textView = (TextView) super.getView(position, convertView, parent);
@@ -148,48 +149,38 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
         public void onClick(DialogInterface dialog, int which) {
             ActionsAdapter adapter = (ActionsAdapter) ((AlertDialog) dialog).getListView().getAdapter();
             Action action = adapter.getItem(which);
-            switch (action.id) {
-                case ACTION_SHARE:
-                    // Prepare the text to share, based on the current date.
-                    String subject = getString(R.string.share_subject, mFrenchDate.getWeekdayName(), mFrenchDate.dayOfMonth, mFrenchDate.getMonthName(),
-                            mFrenchDate.year);
-                    String time = String.format(Locale.US, "%d:%02d:%02d", mFrenchDate.hour, mFrenchDate.minute, mFrenchDate.second);
-                    String objectType = getResources().getStringArray(R.array.daily_object_types)[mFrenchDate.getObjectType().ordinal()];
-                    String body = getString(R.string.share_body, mFrenchDate.getWeekdayName(), mFrenchDate.dayOfMonth, mFrenchDate.getMonthName(),
-                            mFrenchDate.year, time, objectType, mFrenchDate.getDayOfYear(), FRCDateUtils.getDaysSinceDay1());
-
-                    // Open an intent chooser to share our text.
-                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                    shareIntent.setType("text/plain");
-                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-                    shareIntent.putExtra(Intent.EXTRA_TEXT, body);
-                    startActivity(Intent.createChooser(shareIntent, getString(R.string.chooser_title)));
-                    Log.v(TAG, "started share chooser");
-                    break;
-                case ACTION_SETTINGS:
-                    Intent settingsIntent = new Intent(getApplication(), FRCPreferenceActivity.class);
-                    startActivity(settingsIntent);
-                    Log.v(TAG, "started settings activity");
-                    break;
-                case ACTION_CONVERTER:
-                    Intent converterIntent = new Intent(getApplication(), FRCConverterActivity.class);
-                    startActivity(converterIntent);
-                    Log.v(TAG, "started converter activity");
-                    break;
-                case ACTION_SEARCH:
-                    Intent searchIntent = new Intent(Intent.ACTION_WEB_SEARCH);
-                    searchIntent.putExtra(SearchManager.QUERY, mFrenchDate.getDayOfYear());
-                    // No apps can handle ACTION_WEB_SEARCH.  We'll try a more generic intent instead
-                    if(getPackageManager().queryIntentActivities(searchIntent, 0).isEmpty()) {
-                        searchIntent = new Intent(Intent.ACTION_SEND);
-                        searchIntent.setType("text/plain");
-                        Locale locale = FRCPreferences.getInstance(getApplicationContext()).getLocale();
-                        searchIntent.putExtra(Intent.EXTRA_TEXT, mFrenchDate.getDayOfYear().toLowerCase(locale));
-                    }
-                    startActivity(Intent.createChooser(searchIntent, getString(R.string.chooser_title)));
-                    break;
-                default:
-                    break;
+            if (action != null) {
+                switch (action.id) {
+                    case ACTION_SHARE:
+                        Intent shareIntent = Share.getShareIntent(getApplicationContext(), mFrenchDate);
+                        startActivity(shareIntent);
+                        Log.v(TAG, "started share chooser");
+                        break;
+                    case ACTION_SETTINGS:
+                        Intent settingsIntent = new Intent(getApplication(), FRCPreferenceActivity.class);
+                        startActivity(settingsIntent);
+                        Log.v(TAG, "started settings activity");
+                        break;
+                    case ACTION_CONVERTER:
+                        Intent converterIntent = new Intent(getApplication(), FRCConverterActivity.class);
+                        startActivity(converterIntent);
+                        Log.v(TAG, "started converter activity");
+                        break;
+                    case ACTION_SEARCH:
+                        Intent searchIntent = new Intent(Intent.ACTION_WEB_SEARCH);
+                        searchIntent.putExtra(SearchManager.QUERY, mFrenchDate.getDayOfYear());
+                        // No apps can handle ACTION_WEB_SEARCH.  We'll try a more generic intent instead
+                        if (getPackageManager().queryIntentActivities(searchIntent, 0).isEmpty()) {
+                            searchIntent = new Intent(Intent.ACTION_SEND);
+                            searchIntent.setType("text/plain");
+                            Locale locale = FRCPreferences.getInstance(getApplicationContext()).getLocale();
+                            searchIntent.putExtra(Intent.EXTRA_TEXT, mFrenchDate.getDayOfYear().toLowerCase(locale));
+                        }
+                        startActivity(Intent.createChooser(searchIntent, getString(R.string.chooser_title)));
+                        break;
+                    default:
+                        break;
+                }
             }
             finish();
 
