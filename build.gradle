@@ -87,7 +87,7 @@ def filterResources(project, buildVariant) {
     }
 }
 
-ext.buildToolsVersion = "25"
+ext.buildToolsVersion = "25.0.1"
 ext.compileSdkVersion = 25
 ext.targetSdkVersion = 25
 ext.supportLibVersion = "25.0.1"
