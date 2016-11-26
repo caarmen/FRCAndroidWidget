@@ -14,15 +14,21 @@ android {
         buildConfigField 'String', 'BUILD_DATE', '"' + buildDate() + '"'
         // For now we enable strict mode for all the configs
         buildConfigField 'boolean', 'STRICT_MODE', 'true'
+        return this;
+    }
 
+    lintOptions {
+        lintConfig file("lint.xml")
     }
 
     productFlavors {
         foss {
             buildConfigField 'boolean', 'FOSS', 'true'
+            return this;
         }
         wear {
             buildConfigField 'boolean', 'FOSS', 'false'
+            return this;
         }
     }
 
@@ -46,7 +52,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    return this;
 }
 
 android.applicationVariants.all { variant ->

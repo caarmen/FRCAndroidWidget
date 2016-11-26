@@ -1,7 +1,7 @@
 /*
  * French Revolutionary Calendar Android Widget
- * Copyright (C) 2014 Benoit 'BoD' Lubek (BoD@JRAF.org)
- * Copyright (C) 2011 - 2014 Carmen Alvarez
+ * Copyright (C) 2014 - 2016 Benoit 'BoD' Lubek (BoD@JRAF.org)
+ * Copyright (C) 2011 - 2016 Carmen Alvarez
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,4 +41,8 @@ public class WearCommConstants {
      */
     public static final String EXTRA_COLOR = "EXTRA_COLOR";
 
+    /**
+     * When the update was made ({@code long}).
+     */
+    public static final String EXTRA_UPDATE_TIMESTAMP = "EXTRA_UPDATE_TIMESTAMP";
 }

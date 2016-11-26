@@ -1,6 +1,6 @@
 /*
  * French Revolutionary Calendar Android Widget
- * Copyright (C) 2011 - 2014 Carmen Alvarez
+ * Copyright (C) 2011 - 2016 Carmen Alvarez
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,7 @@
  */
 package ca.rmen.android.frccommon.prefs;
 
+import android.annotation.SuppressLint;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -37,10 +38,10 @@ import android.widget.Toast;
 
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
-import ca.rmen.android.frccommon.ActivityApi11;
 import ca.rmen.android.frccommon.Constants;
+import ca.rmen.android.frccommon.compat.Api11Helper;
+import ca.rmen.android.frccommon.compat.ApiHelper;
 import ca.rmen.android.frcwear.FRCWearPreferenceListener;
-import ca.rmen.android.frcwidget.FRCAppWidgetManager;
 import ca.rmen.android.frcwidget.FRCWidgetScheduler;
 import ca.rmen.android.frenchcalendar.BuildConfig;
 import ca.rmen.android.frenchcalendar.R;
@@ -50,6 +51,7 @@ import ca.rmen.android.frenchcalendar.R;
  *
  * @author calvarez
  */
+@SuppressLint("ExportedPreferenceActivity")
 public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use default)
 
     private static final String TAG = Constants.TAG + FRCPreferenceActivity.class.getSimpleName();
@@ -70,13 +72,14 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         }
     };
     private FRCWearPreferenceListener mWearPreferenceListener;
+    private FRCSystemNotificationPreferenceListener mSystemNotificationPreferenceListener;
 
     @Override
     protected void onCreate(Bundle icicle) {
         Log.v(TAG, "onCreate: bundle = " + icicle);
         super.onCreate(icicle);
-        if (Integer.valueOf(Build.VERSION.SDK) >= Build.VERSION_CODES.HONEYCOMB) {
-            ActivityApi11.setDisplayHomeAsUpEnabled(this);
+        if (ApiHelper.getAPILevel() >= Build.VERSION_CODES.HONEYCOMB) {
+            Api11Helper.setDisplayHomeAsUpEnabled(this);
         }
         /*
          * From the documentation: https://developer.android.com/guide/topics/appwidgets/index.html
@@ -116,39 +119,32 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         if (preferencesScreen != null)
             preferencesScreen.removeAll();
 
-        // If we have no widgets, and we can't use wear, then warn the user that they should add
-        // a widget.
-        if (!FRCAppWidgetManager.hasWidgets(this) && !canUseWear) {
+        //noinspection deprecation
+        addPreferencesFromResource(R.xml.widget_settings);
+
+        updatePreferenceSummary(FRCPreferences.PREF_METHOD, R.string.setting_method_summary);
+        updatePreferenceSummary(FRCPreferences.PREF_LANGUAGE, R.string.setting_language_summary);
+        updatePreferenceSummary(FRCPreferences.PREF_CUSTOM_COLOR_ENABLED, 0);
+
+        // Don't show Android Wear stuff for old devices that don't support it
+        if (!canUseWear) {
             //noinspection deprecation
-            addPreferencesFromResource(R.xml.no_widget_settings);
+            PreferenceCategory category = (PreferenceCategory) getPreferenceScreen().findPreference(FRCPreferences.PREF_CATEGORY_OTHER);
+            Preference wearPreference = category.findPreference(FRCPreferences.PREF_ANDROID_WEAR);
+            category.removePreference(wearPreference);
+        } else {
+            mWearPreferenceListener = new FRCWearPreferenceListener(getApplicationContext());
         }
-        // Otherwise we either have some widgets, or we can use wear.  Show all our settings.
-        else {
-            //noinspection deprecation
-            addPreferencesFromResource(R.xml.widget_settings);
 
-            updatePreferenceSummary(FRCPreferences.PREF_METHOD, R.string.setting_method_summary);
-            updatePreferenceSummary(FRCPreferences.PREF_LANGUAGE, R.string.setting_language_summary);
-            updatePreferenceSummary(FRCPreferences.PREF_CUSTOM_COLOR_ENABLED, 0);
-
-            // Don't show Android Wear stuff for old devices that don't support it
-            if (!canUseWear) {
-                //noinspection deprecation
-                PreferenceCategory category = (PreferenceCategory) getPreferenceScreen().findPreference(FRCPreferences.PREF_CATEGORY_OTHER);
-                Preference wearPreference = category.findPreference(FRCPreferences.PREF_ANDROID_WEAR);
-                category.removePreference(wearPreference);
-            } else {
-                mWearPreferenceListener = new FRCWearPreferenceListener(getApplicationContext());
-            }
-
-            //noinspection deprecation
-            ColorPickerPreference pref = (ColorPickerPreference) getPreferenceScreen().findPreference(FRCPreferences.PREF_CUSTOM_COLOR);
-            pref.setAlphaSliderEnabled(true);
-        }
+        //noinspection deprecation
+        ColorPickerPreference pref = (ColorPickerPreference) getPreferenceScreen().findPreference(FRCPreferences.PREF_CUSTOM_COLOR);
+        pref.setAlphaSliderEnabled(true);
 
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
         if (mWearPreferenceListener != null)
             PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(mWearPreferenceListener);
+        mSystemNotificationPreferenceListener = new FRCSystemNotificationPreferenceListener(this);
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(mSystemNotificationPreferenceListener);
     }
 
     @Override
@@ -158,6 +154,7 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         if (mWearPreferenceListener != null)
             PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(mWearPreferenceListener);
 
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(mSystemNotificationPreferenceListener);
         // When we leave the preference screen, reupdate all our widgets
         FRCWidgetScheduler.getInstance(this).schedule();
         super.onStop();

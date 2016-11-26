@@ -18,24 +18,24 @@
 
 -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <color name="primaryTextColor">#381f0a</color>
     <color name="textColorLink">#886644</color>
     <color name="item_pressed">#e8cfba</color>
     <color name="item_normal">#ffe8d3</color>
-    <color name="month_1">#fff0a199</color>
-    <color name="month_2">#ffbfe4a9</color>
-    <color name="month_3">#ff9fbce6</color>
-    <color name="month_4">#fffcfcfc</color>
-    <color name="month_5">#ffae9ce8</color>
-    <color name="month_6">#ff98e2e1</color>
-    <color name="month_7">#ff95c3dd</color>
-    <color name="month_8">#ffdb97e7</color>
-    <color name="month_9">#ff97e59f</color>
-    <color name="month_10">#ffd8db91</color>
-    <color name="month_11">#ffdabe93</color>
-    <color name="month_12">#ffeb9cbf</color>
-    <color name="month_13">#fff1a1ad</color>
+    <color name="month_1" tools:ignore="UnusedResources">#fff0a199</color>
+    <color name="month_2" tools:ignore="UnusedResources">#ffbfe4a9</color>
+    <color name="month_3" tools:ignore="UnusedResources">#ff9fbce6</color>
+    <color name="month_4" tools:ignore="UnusedResources">#fffcfcfc</color>
+    <color name="month_5" tools:ignore="UnusedResources">#ffae9ce8</color>
+    <color name="month_6" tools:ignore="UnusedResources">#ff98e2e1</color>
+    <color name="month_7" tools:ignore="UnusedResources">#ff95c3dd</color>
+    <color name="month_8" tools:ignore="UnusedResources">#ffdb97e7</color>
+    <color name="month_9" tools:ignore="UnusedResources">#ff97e59f</color>
+    <color name="month_10" tools:ignore="UnusedResources">#ffd8db91</color>
+    <color name="month_11" tools:ignore="UnusedResources">#ffdabe93</color>
+    <color name="month_12" tools:ignore="UnusedResources">#ffeb9cbf</color>
+    <color name="month_13" tools:ignore="UnusedResources">#fff1a1ad</color>
 
 </resources>

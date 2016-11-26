@@ -1,6 +1,6 @@
 /*
  * French Revolutionary Calendar Android Widget
- * Copyright (C) 2011 - 2014 Carmen Alvarez
+ * Copyright (C) 2011 - 2016 Carmen Alvarez
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,6 +31,7 @@ import android.os.Build;
 import android.util.Log;
 
 import ca.rmen.android.frccommon.Constants;
+import ca.rmen.android.frccommon.compat.Api19Helper;
 import ca.rmen.android.frccommon.prefs.FRCPreferences;
 
 /**
@@ -116,7 +117,7 @@ public class FRCWidgetScheduler {
         //noinspection deprecation
         if (Integer.valueOf(Build.VERSION.SDK) >= Build.VERSION_CODES.KITKAT) {
             long nextAlarmTime = getTimeTomorrowMidnightMillis();
-            FRCSchedulerApi19.scheduleExact(context, nextAlarmTime, updateWidgetTomorrowPendingIntent);
+            Api19Helper.scheduleExact(context, nextAlarmTime, updateWidgetTomorrowPendingIntent);
         }
     }
 

@@ -74,6 +74,11 @@
         android:title="@string/setting_category_other">
         <CheckBoxPreference
             android:defaultValue="false"
+            android:key="setting_system_notification"
+            android:summary="@string/setting_system_notification_summary"
+            android:title="@string/setting_system_notification" />
+        <CheckBoxPreference
+            android:defaultValue="false"
             android:key="setting_android_wear"
             android:summary="@string/setting_android_wear_summary"
             android:title="@string/setting_android_wear" />

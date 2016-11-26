@@ -1,33 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   French Revolutionary Calendar Android Widget
-  Copyright (C) 2011 - 2014 Carmen Alvarez
-  
+  Copyright (C) 2016 Carmen Alvarez
+
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
   as published by the Free Software Foundation; either version 3
   of the License, or (at your option) any later version.
-  
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-  
+
   You should have received a copy of the GNU General Public License
   along with this program; if not, see <http://www.gnu.org/licenses/>.
 
 -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:key="widget_settings"
-    android:title="@string/widget_settings">
-
-    <Preference
-        android:key="setting_no_widgets"
-        android:title="@string/title_no_widgets"
-        android:summary="@string/message_no_widgets"/>
-
-
-    <Preference android:title="@string/about">
-        <intent android:action="ca.rmen.android.frcwidget.FRCAboutActivity" />
-    </Preference>
-
-</PreferenceScreen>
+<lint>
+    <issue id="IconDuplicatesConfig">
+        <ignore regexp="src/main/res/drawable/.*.png"/>
+        <ignore regexp="src/main/res/drawable-mdpi/.*.png"/>
+    </issue>
+</lint>

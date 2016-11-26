@@ -49,6 +49,8 @@
     <string name="setting_custom_color_summary_disabled">Couleurs prédéfinies utilisées (la couleur change chaque mois).</string>
     <string name="setting_custom_color">Couleur personalisée</string>
     <string name="setting_custom_font">Police</string>
+    <string name="setting_system_notification">Notification système</string>
+    <string name="setting_system_notification_summary">Affiche une notification système une fois par jour</string>
     <string name="setting_android_wear">Android Wear</string>
     <string name="setting_android_wear_summary">Affiche une notification une fois par jour sur les objets Android Wear connectés</string>
     <string name="chooser_title">Séléctionner une appli</string>
@@ -64,9 +66,11 @@ L\'heure actuelle est %5$s.
 %6$s du jour : %7$s.
 \n\n\
 %8$d jours se sont écoulés depuis la formation de la République.</string>
+    <string name="notification_text">%1$s, %2$d %3$s %4$d</string>
+    <string name="notification_long_text">Aujourd\'hui nous sommes %1$s, le %2$d %3$s %4$d.
+\n\
+%5$s du jour : %6$s.</string>
     <string name="about">À propos</string>
-    <string name="title_no_widgets">Vous n\'avez pas de widget !</string>
-    <string name="message_no_widgets">Vous devez avant tout ajouter une widget sur votre écran d\'accueil.</string>
 
     <string name="message_save">Appuyez sur retour pour sauvegarder vos préférences.</string>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   French Revolutionary Calendar Android Widget
-  Copyright (C) 2011 - 2014 Carmen Alvarez
+  Copyright (C) 2011 - 2016 Carmen Alvarez
   
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -25,13 +25,11 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <receiver android:name="ca.rmen.android.frcwear.FRCBootCompletedBroadcastReceiver">
+        <service android:exported="false" android:name="ca.rmen.android.frcwear.FRCAndroidWearService">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="ACTION_WEAR_UPDATE" />
             </intent-filter>
-        </receiver>
-
-        <service android:name="ca.rmen.android.frcwear.FRCAndroidWearService" />
+        </service>
     </application>
 
 </manifest>
