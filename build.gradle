@@ -91,7 +91,7 @@ ext.buildToolsVersion = "25.0.1"
 ext.compileSdkVersion = 25
 ext.targetSdkVersion = 25
 ext.supportLibVersion = "25.0.1"
-ext.playServicesVersion = "9.8.0"
+ext.playServicesVersion = "10.0.1"
 ext.versionCode = 1121
 ext.versionName = "1.12.1"
 
