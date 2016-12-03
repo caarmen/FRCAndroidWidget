@@ -25,6 +25,7 @@ import android.util.Log;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import ca.rmen.android.frccommon.Action;
 import ca.rmen.android.frccommon.Constants;
 
 
@@ -43,9 +44,7 @@ public final class NotificationCompat {
             String contentText,
             String bigText,
             PendingIntent defaultIntent,
-            int actionIconId,
-            String actionText,
-            PendingIntent actionIntent) {
+            Action... actions) {
         if (ApiHelper.getAPILevel() < 11) {
             Notification notification = new Notification();
             notification.tickerText = tickerText;
@@ -70,11 +69,11 @@ public final class NotificationCompat {
         } else if (ApiHelper.getAPILevel() < 16) {
             return Api11Helper.createNotification(context, iconId, tickerText, contentText, defaultIntent);
         } else if (ApiHelper.getAPILevel() < 20) {
-            return Api16Helper.createNotification(context, iconId, tickerText, contentText, bigText, defaultIntent, actionIconId, actionText, actionIntent);
+            return Api16Helper.createNotification(context, iconId, tickerText, contentText, bigText, defaultIntent, actions);
         } else if (ApiHelper.getAPILevel() < 23) {
-            return Api20Helper.createNotification(context, iconId, tickerText, contentText, bigText, defaultIntent, actionIconId, actionText, actionIntent);
+            return Api20Helper.createNotification(context, iconId, tickerText, contentText, bigText, defaultIntent, actions);
         } else {
-            return Api23Helper.createNotification(context, iconId, tickerText, contentText, bigText, defaultIntent, actionIconId, actionText, actionIntent);
+            return Api23Helper.createNotification(context, iconId, tickerText, contentText, bigText, defaultIntent, actions);
         }
     }
 

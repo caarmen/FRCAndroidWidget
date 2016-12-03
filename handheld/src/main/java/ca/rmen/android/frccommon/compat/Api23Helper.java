@@ -24,6 +24,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.graphics.drawable.Icon;
 
+import ca.rmen.android.frccommon.Action;
+
 @TargetApi(23)
 class Api23Helper {
     private Api23Helper() {
@@ -37,9 +39,7 @@ class Api23Helper {
             String contentText,
             String bigText,
             PendingIntent defaultIntent,
-            int actionIconId,
-            CharSequence actionText,
-            PendingIntent actionIntent) {
+            Action... actions) {
         Notification.Builder builder = new Notification.Builder(context)
                 .setAutoCancel(true)
                 .setLocalOnly(true)
@@ -49,10 +49,9 @@ class Api23Helper {
                 .setSmallIcon(iconId)
                 .setContentIntent(defaultIntent);
 
-        if (actionIconId > 0) {
-            Icon icon = Icon.createWithResource(context, actionIconId);
-            Notification.Action action = new Notification.Action.Builder(icon, actionText, actionIntent).build();
-            builder.addAction(action);
+        for (Action action : actions) {
+            Icon icon = Icon.createWithResource(context, action.iconId);
+            builder.addAction(new Notification.Action.Builder(icon, action.title, action.pendingIntent).build());
         }
         return builder.build();
     }

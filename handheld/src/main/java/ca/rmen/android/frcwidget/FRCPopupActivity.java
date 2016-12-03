@@ -20,12 +20,10 @@ package ca.rmen.android.frcwidget;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnDismissListener;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -34,13 +32,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.Locale;
-
+import ca.rmen.android.frccommon.Action;
 import ca.rmen.android.frccommon.Constants;
-import ca.rmen.android.frccommon.FRCConverterActivity;
-import ca.rmen.android.frccommon.Share;
-import ca.rmen.android.frccommon.prefs.FRCPreferenceActivity;
-import ca.rmen.android.frccommon.prefs.FRCPreferences;
 import ca.rmen.android.frenchcalendar.R;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
@@ -54,13 +47,6 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
 
     public static final String EXTRA_DATE = "extra_date";
 
-    private static final int ACTION_SHARE = 1;
-    private static final int ACTION_SETTINGS = 2;
-    private static final int ACTION_CONVERTER = 3;
-    private static final int ACTION_SEARCH = 4;
-
-    private FrenchRevolutionaryCalendarDate mFrenchDate;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.v(TAG, "onCreate");
@@ -68,11 +54,11 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
 
         // Build our adapter with the list of actions
         ActionsAdapter adapter = new ActionsAdapter(this);
-        mFrenchDate = (FrenchRevolutionaryCalendarDate) getIntent().getSerializableExtra(EXTRA_DATE);
-        adapter.add(new Action(this, ACTION_SHARE, R.drawable.ic_action_share, R.string.popup_action_share));
-        adapter.add(new Action(this, ACTION_SETTINGS, R.drawable.ic_action_settings, R.string.popup_action_settings));
-        adapter.add(new Action(this, ACTION_CONVERTER, R.drawable.ic_action_converter, R.string.popup_action_converter));
-        adapter.add(new Action(this, ACTION_SEARCH, R.drawable.ic_action_search, R.string.popup_action_search, mFrenchDate.getDayOfYear()));
+        FrenchRevolutionaryCalendarDate frenchDate = (FrenchRevolutionaryCalendarDate) getIntent().getSerializableExtra(EXTRA_DATE);
+        adapter.add(Action.getShareAction(this, frenchDate));
+        adapter.add(Action.getSettingsAction(this));
+        adapter.add(Action.getConverterAction(this));
+        adapter.add(Action.getSearchAction(this, frenchDate));
 
         // Build the alert dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -112,18 +98,6 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
         Log.v(TAG, "onDestroy");
     }
 
-    private static class Action {
-        final int id;
-        final int iconId;
-        final String title;
-
-        Action(Context context, int id, int iconId, int titleId, Object... titleParams) {
-            this.id = id;
-            this.iconId = iconId;
-            this.title = context.getString(titleId, titleParams);
-        }
-    }
-
     private static class ActionsAdapter extends ArrayAdapter<Action> {
 
         ActionsAdapter(Context context) {
@@ -150,37 +124,8 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
             ActionsAdapter adapter = (ActionsAdapter) ((AlertDialog) dialog).getListView().getAdapter();
             Action action = adapter.getItem(which);
             if (action != null) {
-                switch (action.id) {
-                    case ACTION_SHARE:
-                        Intent shareIntent = Share.getShareIntent(getApplicationContext(), mFrenchDate);
-                        startActivity(shareIntent);
-                        Log.v(TAG, "started share chooser");
-                        break;
-                    case ACTION_SETTINGS:
-                        Intent settingsIntent = new Intent(getApplication(), FRCPreferenceActivity.class);
-                        startActivity(settingsIntent);
-                        Log.v(TAG, "started settings activity");
-                        break;
-                    case ACTION_CONVERTER:
-                        Intent converterIntent = new Intent(getApplication(), FRCConverterActivity.class);
-                        startActivity(converterIntent);
-                        Log.v(TAG, "started converter activity");
-                        break;
-                    case ACTION_SEARCH:
-                        Intent searchIntent = new Intent(Intent.ACTION_WEB_SEARCH);
-                        searchIntent.putExtra(SearchManager.QUERY, mFrenchDate.getDayOfYear());
-                        // No apps can handle ACTION_WEB_SEARCH.  We'll try a more generic intent instead
-                        if (getPackageManager().queryIntentActivities(searchIntent, 0).isEmpty()) {
-                            searchIntent = new Intent(Intent.ACTION_SEND);
-                            searchIntent.setType("text/plain");
-                            Locale locale = FRCPreferences.getInstance(getApplicationContext()).getLocale();
-                            searchIntent.putExtra(Intent.EXTRA_TEXT, mFrenchDate.getDayOfYear().toLowerCase(locale));
-                        }
-                        startActivity(Intent.createChooser(searchIntent, getString(R.string.chooser_title)));
-                        break;
-                    default:
-                        break;
-                }
+                Log.v(TAG, "clicked on action " + action.title);
+                startActivity(action.intent);
             }
             finish();
 

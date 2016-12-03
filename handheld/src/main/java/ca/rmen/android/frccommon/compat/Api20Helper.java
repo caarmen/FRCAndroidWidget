@@ -23,6 +23,8 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 
+import ca.rmen.android.frccommon.Action;
+
 @TargetApi(20)
 class Api20Helper {
     private Api20Helper() {
@@ -36,9 +38,7 @@ class Api20Helper {
             String contentText,
             String bigText,
             PendingIntent defaultIntent,
-            int actionIconId,
-            CharSequence actionText,
-            PendingIntent actionIntent) {
+            Action... actions) {
         Notification.Builder builder = new Notification.Builder(context)
                 .setAutoCancel(true)
                 .setLocalOnly(true)
@@ -48,9 +48,9 @@ class Api20Helper {
                 .setSmallIcon(iconId)
                 .setContentIntent(defaultIntent);
 
-        if (actionIconId > 0) {
+        for (Action action : actions) {
             //noinspection deprecation
-            builder.addAction(actionIconId, actionText, actionIntent);
+            builder.addAction(action.iconId, action.title, action.pendingIntent);
         }
         return builder.build();
     }

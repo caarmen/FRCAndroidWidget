@@ -20,9 +20,7 @@ package ca.rmen.android.frccommon;
 
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 
 import ca.rmen.android.frccommon.compat.NotificationCompat;
@@ -63,14 +61,16 @@ public class FRCSystemNotification {
                     date.getMonthName(),
                     date.year,
                     objectType, date.getDayOfYear());
-            PendingIntent defaultIntent = PendingIntent.getActivity(mContext, 1, new Intent(mContext, FRCConverterActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
-            PendingIntent shareIntent = PendingIntent.getActivity(mContext, 2, Share.getShareIntent(mContext, date), PendingIntent.FLAG_UPDATE_CURRENT);
+            Action converterAction = Action.getConverterAction(mContext);
+            Action shareAction = Action.getShareAction(mContext, date);
+            Action searchAction = Action.getSearchAction(mContext, date);
             Notification notification = NotificationCompat.createNotification(
                     mContext,
                     R.drawable.ic_notif,
                     mContext.getString(R.string.app_full_name),
-                    notificationText, notificationLongText, defaultIntent,
-                    R.drawable.ic_action_share, mContext.getString(R.string.popup_action_share), shareIntent);
+                    notificationText, notificationLongText,
+                    converterAction.pendingIntent,
+                    shareAction, searchAction);
             NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify(NOTIFICATION_ID, notification);
         }
