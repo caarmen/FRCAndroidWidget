@@ -12,7 +12,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath 'com.android.tools.build:gradle:2.2.3'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
     }
 }
@@ -90,8 +90,8 @@ def filterResources(project, buildVariant) {
 ext.buildToolsVersion = "25.0.1"
 ext.compileSdkVersion = 25
 ext.targetSdkVersion = 25
-ext.supportLibVersion = "25.0.1"
+ext.supportLibVersion = "25.1.0"
 ext.playServicesVersion = "10.0.1"
-ext.versionCode = 1121
-ext.versionName = "1.12.1"
+ext.versionCode = 1122
+ext.versionName = "1.12.2"
 
