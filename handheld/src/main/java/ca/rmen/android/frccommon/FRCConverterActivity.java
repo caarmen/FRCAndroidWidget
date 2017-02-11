@@ -1,6 +1,6 @@
 /*
  * French Revolutionary Calendar Android Widget
- * Copyright (C) 2016 Carmen Alvarez
+ * Copyright (C) 2017 Carmen Alvarez
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,6 +46,7 @@ public class FRCConverterActivity extends Activity {
     private TextView mTextViewRomme;
     private TextView mTextViewEquinox;
     private TextView mTextViewVonMadler;
+    private DatePicker mDatePicker;
     private FrenchRevolutionaryCalendar mFrcRomme;
     private FrenchRevolutionaryCalendar mFrcEquinox;
     private FrenchRevolutionaryCalendar mFrcVonMadler;
@@ -61,9 +62,9 @@ public class FRCConverterActivity extends Activity {
         mFrcRomme = new FrenchRevolutionaryCalendar(locale, FrenchRevolutionaryCalendar.CalculationMethod.ROMME);
         mFrcEquinox = new FrenchRevolutionaryCalendar(locale, FrenchRevolutionaryCalendar.CalculationMethod.EQUINOX);
         mFrcVonMadler = new FrenchRevolutionaryCalendar(locale, FrenchRevolutionaryCalendar.CalculationMethod.VON_MADLER);
-        DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
+        mDatePicker = (DatePicker) findViewById(R.id.datePicker);
         Calendar now = Calendar.getInstance();
-        datePicker.init(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH), mOnDateChangedListener);
+        mDatePicker.init(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH), mOnDateChangedListener);
         update(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
         findViewById(R.id.btn_help).setOnClickListener(mOnHelpClickedListener);
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(mPrefsListener);
@@ -109,7 +110,7 @@ public class FRCConverterActivity extends Activity {
                 date.getWeekdayName(),
                 date.dayOfMonth,
                 date.getMonthName(),
-                date.year,
+                FRCDateUtils.formatNumber(this, date.year),
                 date.getObjectTypeName(),
                 date.getDayOfYear());
     }
@@ -145,6 +146,7 @@ public class FRCConverterActivity extends Activity {
                 mFrcEquinox = new FrenchRevolutionaryCalendar(locale, FrenchRevolutionaryCalendar.CalculationMethod.EQUINOX);
                 mFrcVonMadler = new FrenchRevolutionaryCalendar(locale, FrenchRevolutionaryCalendar.CalculationMethod.VON_MADLER);
             }
+            update(mDatePicker.getYear(), mDatePicker.getMonth(), mDatePicker.getDayOfMonth());
         }
     };
 

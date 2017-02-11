@@ -78,5 +78,6 @@ dependencies {
     }
     compile "com.android.support:support-compat:${rootProject.supportLibVersion}"
     compile "com.android.support:support-annotations:${rootProject.supportLibVersion}"
+    testCompile 'junit:junit:4.12'
 }
 

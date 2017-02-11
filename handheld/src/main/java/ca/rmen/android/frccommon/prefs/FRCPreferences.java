@@ -1,6 +1,6 @@
 /*
  * French Revolutionary Calendar Android Widget
- * Copyright (C) 2011 - 2016 Carmen Alvarez
+ * Copyright (C) 2011 - 2017 Carmen Alvarez
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,6 +36,7 @@ public class FRCPreferences {
     public static final String PREF_METHOD = "setting_method";
     private static final String PREF_DEPRECATED_DETAILED_VIEW = "setting_detailed_view";
     private static final String PREF_SHOW_TIME = "setting_show_time";
+    private static final String PREF_ROMAN_NUMERAL = "setting_roman_numeral";
     private static final String PREF_SHOW_DAY_OF_YEAR = "setting_show_day_of_year";
     public static final String PREF_LANGUAGE = "setting_language";
     public static final String PREF_CUSTOM_COLOR = "setting_custom_color";
@@ -99,6 +100,10 @@ public class FRCPreferences {
 
     public boolean isTimeEnabled() {
         return sharedPrefs.getBoolean(PREF_SHOW_TIME, false);
+    }
+
+    public boolean isRomanNumeralEnabled(){
+        return sharedPrefs.getBoolean(PREF_ROMAN_NUMERAL, false);
     }
 
     public boolean isDayOfYearEnabled() {
