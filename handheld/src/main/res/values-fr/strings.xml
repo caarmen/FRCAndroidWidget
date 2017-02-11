@@ -41,7 +41,7 @@
     <string name="setting_category_other">Autre</string>
     <string name="setting_method">Méthode de calcul</string>
     <string name="setting_method_summary">Comment le premier jour de l\'année est déterminé: %s</string>
-    <string name="setting_roman_numeral">Année en chiffre romain</string>
+    <string name="setting_roman_numeral">Année en chiffres romains</string>
     <string name="setting_show_time">Montrer l\'heure (temps décimal)</string>
     <string name="setting_show_day_of_year">Montrer le nom du jour de l\'année</string>
     <string name="setting_language">Langue</string>
