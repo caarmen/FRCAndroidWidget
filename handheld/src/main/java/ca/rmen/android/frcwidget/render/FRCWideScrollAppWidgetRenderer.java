@@ -1,6 +1,6 @@
 /*
  * French Revolutionary Calendar Android Widget
- * Copyright (C) 2011 - 2016 Carmen Alvarez
+ * Copyright (C) 2011 - 2017 Carmen Alvarez
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,7 +52,7 @@ class FRCWideScrollAppWidgetRenderer implements FRCAppWidgetRenderer {
 
         // Set all the text fields for the date.
         // Add a space before and after the text: this font sometimes cuts off the last letter.
-        String date = " " + frenchDate.dayOfMonth + " " + frenchDate.getMonthName() + " " + frenchDate.year + " ";
+        String date = " " + frenchDate.dayOfMonth + " " + frenchDate.getMonthName() + " " + FRCDateUtils.formatNumber(context, frenchDate.year) + " ";
         TextView tvDate = (TextView) view.findViewById(R.id.text_date);
         TextView tvWeekday = (TextView) view.findViewById(R.id.text_weekday);
         TextView tvDayOfYear = (TextView) view.findViewById(R.id.text_day_of_year);

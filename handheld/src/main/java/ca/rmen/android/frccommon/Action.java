@@ -1,6 +1,6 @@
 /*
  * French Revolutionary Calendar Android Widget
- * Copyright (C) 2016 Carmen Alvarez
+ * Copyright (C) 2017 Carmen Alvarez
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,11 +64,11 @@ public class Action {
     public static Action getShareAction(Context context, FrenchRevolutionaryCalendarDate date) {
         // Prepare the text to share, based on the current date.
         String subject = context.getString(R.string.share_subject, date.getWeekdayName(), date.dayOfMonth, date.getMonthName(),
-                date.year);
+                FRCDateUtils.formatNumber(context, date.year));
         String time = String.format(Locale.US, "%d:%02d:%02d", date.hour, date.minute, date.second);
         String objectType = context.getResources().getStringArray(R.array.daily_object_types)[date.getObjectType().ordinal()];
         String body = context.getString(R.string.share_body, date.getWeekdayName(), date.dayOfMonth, date.getMonthName(),
-                date.year, time, objectType, date.getDayOfYear(), FRCDateUtils.getDaysSinceDay1());
+                FRCDateUtils.formatNumber(context, date.year), time, objectType, date.getDayOfYear(), FRCDateUtils.getDaysSinceDay1());
 
         // Open an intent chooser to share our text.
         Intent shareIntent = new Intent(Intent.ACTION_SEND);

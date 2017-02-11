@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 French Revolutionary Calendar Android Widget
-Copyright (C) 2011 - 2016 Carmen Alvarez
+Copyright (C) 2011 - 2017 Carmen Alvarez
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -29,6 +29,7 @@ Italian translations provided by Alfonso Fusco
     <string name="credits">Ringraziamenti:</string>
     <string name="wikipedia">* Articolo su Wikipedia: http://it.wikipedia.org/wiki/Calendario_rivoluzionario_francese</string>
     <string name="equinox_tool">* AstroLib C++ programma di Mark Huss, per determinare il primo giorno di autunno in ogni anno: http://mhuss.com/AstroLib/</string>
+    <string name="roman_numeral_algorithm">* Fraser Chapman per l\'algoritmo per il calcolo dei numeri romani: https://goo.gl/xw65ng</string>
     <string name="wearable">* BoD, per la funzione wearable: http://jraf.org/</string>
     <string name="translation_italian">* Alfonso Fusco, per il suo contributo alla traduzione italiana.</string>
     <string name="lib_colorpicker_pref">* Sergey Margaritov, per la sua libreria ColorPickerPreference</string>
@@ -40,6 +41,7 @@ Italian translations provided by Alfonso Fusco
     <string name="setting_category_other">Altri</string>
     <string name="setting_method">Metodo di calcolo</string>
     <string name="setting_method_summary">Come è calcolato il primo giorno di ogni anno: %s</string>
+    <string name="setting_roman_numeral">Anno in numeri romani</string>
     <string name="setting_show_time">Mostrare l\'ora (formato decimale)</string>
     <string name="setting_show_day_of_year">Mostrare il nome del giorno dell\'anno</string>
     <string name="setting_language">Lingua</string>
@@ -58,16 +60,16 @@ Italian translations provided by Alfonso Fusco
     <string name="popup_action_search">Cercare \'%s\'</string>
     <string name="popup_action_settings">Impostazioni</string>
     <string name="popup_action_converter">Convertitore</string>
-    <string name="share_subject">%1$s, %2$d %3$s %4$d</string>
-<string name="share_body">Oggi è %1$s, %2$d %3$s %4$d.
+    <string name="share_subject">%1$s, %2$d %3$s %4$s</string>
+<string name="share_body">Oggi è %1$s, %2$d %3$s %4$s.
 \n\n\
 Sono le ore %5$s.
 \n\n\
 %6$s del giorno:  %7$s.
 \n\n\
 Sono passati %8$d giorni dall\'inizio della Repubblica</string>
-    <string name="notification_text">%1$s, %2$d %3$s %4$d</string>
-    <string name="notification_long_text">Oggi è %1$s, %2$d %3$s %4$d.
+    <string name="notification_text">%1$s, %2$d %3$s %4$s</string>
+    <string name="notification_long_text">Oggi è %1$s, %2$d %3$s %4$s.
 \n\
 %5$s del giorno: %6$s.</string>
     <string name="about">Informazioni</string>
@@ -80,7 +82,7 @@ Sono passati %8$d giorni dall\'inizio della Repubblica</string>
     <string name="romme_description">\n<b>Romme</b>\n<small>Come il calendario gregoriano, gli anni bisestili sono gli anni divisibili per 4 ma non per 100 (salvo per 400).</small></string>
     <string name="equinox_description">\n<b>Equinozio</b>\n<small>Gli anni bisestili variano affinché il primo vendemmiaio cade sempre all\'equinozio d\'autunno.</small></string>
     <string name="von_madler_description">\n<b>von Mädler</b>\n<small>Gli anni bisestili sono gli anni divisibili per 4 ma non per 128.</small></string>
-    <string name="date_format">%1$s, %2$d %3$s %4$d\n%5$s: %6$s</string>
+    <string name="date_format">%1$s, %2$d %3$s %4$s\n%5$s: %6$s</string>
     <string name="method_romme">Romme</string>
     <string name="method_equinox">Equinozio</string>
     <string name="method_von_madler">von Mädler</string>

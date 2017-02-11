@@ -1,6 +1,6 @@
 /*
  * French Revolutionary Calendar Android Widget
- * Copyright (C) 2011 - 2014 Carmen Alvarez
+ * Copyright (C) 2011 - 2017 Carmen Alvarez
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,14 +18,16 @@
  */
 package ca.rmen.android.frccommon;
 
+import android.content.Context;
+import android.os.Build;
+import android.support.annotation.VisibleForTesting;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-import android.content.Context;
-import android.os.Build;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import ca.rmen.android.frccommon.prefs.FRCPreferences;
 import ca.rmen.android.frenchcalendar.R;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendar;
@@ -81,5 +83,40 @@ public class FRCDateUtils {
             //noinspection deprecation
             return context.getResources().getColor(colorResId);
         }
+    }
+
+    /**
+     * @return the number as a Roman numeral if the roman numeral setting is true and the given number is between 1 and 4999 inclusive, an Arabic number representation otherwise.
+     */
+    public static String formatNumber(Context context, int number) {
+        if (FRCPreferences.getInstance(context).isRomanNumeralEnabled()) {
+            return getRomanNumeral(number);
+        } else {
+            return String.valueOf(number);
+        }
+    }
+
+    // http://stackoverflow.com/questions/12967896/converting-integers-to-roman-numerals-java
+    private static final int ROMAN_NUMERAL_MIN_VALUE = 1;
+    private static final int ROMAN_NUMERAL_MAX_VALUE = 4999;
+    private static final String[] RN_1000 = {"", "M", "MM", "MMM", "MMMM"};
+    private static final String[] RN_100 = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
+    private static final String[] RN_10 = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+    private static final String[] RN_1 = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+
+    /**
+     * @param number must be between 1 and 4999 inclusive, to return a roman numeral.
+     * @return the roman numeral for the given number, if it is within the bounds.  Otherwise the arabic numeral is returned.
+     */
+    @VisibleForTesting
+    static String getRomanNumeral(int number) {
+        if (number < ROMAN_NUMERAL_MIN_VALUE || number > ROMAN_NUMERAL_MAX_VALUE) {
+            return String.valueOf(number);
+        }
+
+        return RN_1000[number / 1000] +
+                RN_100[number % 1000 / 100] +
+                RN_10[number % 100 / 10] +
+                RN_1[number % 10];
     }
 }

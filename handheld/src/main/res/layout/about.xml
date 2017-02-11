@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   French Revolutionary Calendar Android Widget
-  Copyright (C) 2011 - 2016 Carmen Alvarez
+  Copyright (C) 2011 - 2017 Carmen Alvarez
   
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -83,6 +83,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/equinox_tool"/>
+
+        <TextView
+            style="@style/AboutEntryTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/roman_numeral_algorithm"/>
 
         <TextView
             style="@style/AboutEntryTextView"

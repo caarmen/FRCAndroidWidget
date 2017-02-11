@@ -1,7 +1,7 @@
 /*
  * French Revolutionary Calendar Android Widget
  * Copyright (C) 2014 Benoit 'BoD' Lubek (BoD@JRAF.org)
- * Copyright (C) 2011 - 2016 Carmen Alvarez
+ * Copyright (C) 2011 - 2017 Carmen Alvarez
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,7 +78,7 @@ public class FRCAndroidWearService extends IntentService {
 
     private static void updateToday(Context context, FRCWearCommHelper wearCommHelper) {
         FrenchRevolutionaryCalendarDate frenchDate = FRCDateUtils.getToday(context);
-        String date = frenchDate.getWeekdayName() + " " + frenchDate.dayOfMonth + " " + frenchDate.getMonthName() + " " + frenchDate.year;
+        String date = frenchDate.getWeekdayName() + " " + frenchDate.dayOfMonth + " " + frenchDate.getMonthName() + " " + FRCDateUtils.formatNumber(context, frenchDate.year);
         String dayOfYear = frenchDate.getDayOfYear();
         int color = FRCDateUtils.getColor(context, frenchDate);
         wearCommHelper.updateToday(date, dayOfYear, color);
