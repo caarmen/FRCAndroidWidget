@@ -42,7 +42,6 @@ public class Api11Helper {
         //noinspection deprecation
         return new Notification.Builder(context)
                 .setAutoCancel(true)
-                .setLocalOnly(true)
                 .setContentTitle(tickerText)
                 .setContentText(contentText)
                 .setSmallIcon(iconId)
