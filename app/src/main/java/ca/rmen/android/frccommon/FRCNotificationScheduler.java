@@ -25,18 +25,18 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.text.format.DateUtils;
 
 import ca.rmen.android.frccommon.prefs.FRCPreferences;
 
 public class FRCNotificationScheduler {
-    private static final long ONE_DAY = 24 * 60 * 60 * 1000;
 
     public static void scheduleRepeatingAlarm(Context context) {
         FRCPreferences prefs = FRCPreferences.getInstance(context);
         if (prefs.getSystemNotificationEnabled()) {
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             PendingIntent pendingIntent = getPendingIntent(context);
-            alarmManager.setInexactRepeating(AlarmManager.RTC, getTomorrowAtEight(), ONE_DAY, pendingIntent);
+            alarmManager.setInexactRepeating(AlarmManager.RTC, getTomorrowAtEight(), DateUtils.DAY_IN_MILLIS, pendingIntent);
         }
     }
 

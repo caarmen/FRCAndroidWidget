@@ -45,24 +45,24 @@ public class FRCPreferences {
     private static final int FREQUENCY_MINUTES = 86400;
     public static final int FREQUENCY_DAYS = 86400000;
 
-    private static FRCPreferences me = null;
+    private static FRCPreferences sInstance = null;
 
-    private final SharedPreferences sharedPrefs;
+    private final SharedPreferences mSharedPrefs;
 
     public synchronized static FRCPreferences getInstance(Context context) {
-        if (me == null) me = new FRCPreferences(context);
-        return me;
+        if (sInstance == null) sInstance = new FRCPreferences(context);
+        return sInstance;
     }
 
     private FRCPreferences(Context context) {
-        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         migrateDetailedViewSetting();
     }
 
     private void migrateDetailedViewSetting() {
-        if (sharedPrefs.contains(PREF_DEPRECATED_DETAILED_VIEW)) {
-            String detailedViewValue = sharedPrefs.getString(PREF_DEPRECATED_DETAILED_VIEW, "day_of_year");
-            SharedPreferences.Editor editor = sharedPrefs.edit();
+        if (mSharedPrefs.contains(PREF_DEPRECATED_DETAILED_VIEW)) {
+            String detailedViewValue = mSharedPrefs.getString(PREF_DEPRECATED_DETAILED_VIEW, "day_of_year");
+            SharedPreferences.Editor editor = mSharedPrefs.edit();
             if ("time".equals(detailedViewValue)) {
                 editor.putBoolean(PREF_SHOW_TIME, true);
                 editor.putBoolean(PREF_SHOW_DAY_OF_YEAR, false);
@@ -78,34 +78,34 @@ public class FRCPreferences {
     }
 
     public Locale getLocale() {
-        String language = sharedPrefs.getString(PREF_LANGUAGE, "fr");
+        String language = mSharedPrefs.getString(PREF_LANGUAGE, "fr");
         return new Locale(language);
     }
 
     public boolean isCustomColorEnabled() {
-        return sharedPrefs.getBoolean(PREF_CUSTOM_COLOR_ENABLED, false);
+        return mSharedPrefs.getBoolean(PREF_CUSTOM_COLOR_ENABLED, false);
     }
     
     public int getColor() {
-        return sharedPrefs.getInt(PREF_CUSTOM_COLOR, -1);
+        return mSharedPrefs.getInt(PREF_CUSTOM_COLOR, -1);
     }
 
     public CalculationMethod getCalculationMethod() {
-        String methodPrefStr = sharedPrefs.getString(PREF_METHOD, "0");
+        String methodPrefStr = mSharedPrefs.getString(PREF_METHOD, "0");
         int calculationMethodInt = Integer.parseInt(methodPrefStr);
         return CalculationMethod.values()[calculationMethodInt];
     }
 
     public boolean isTimeEnabled() {
-        return sharedPrefs.getBoolean(PREF_SHOW_TIME, false);
+        return mSharedPrefs.getBoolean(PREF_SHOW_TIME, false);
     }
 
     public boolean isRomanNumeralEnabled(){
-        return sharedPrefs.getBoolean(PREF_ROMAN_NUMERAL, false);
+        return mSharedPrefs.getBoolean(PREF_ROMAN_NUMERAL, false);
     }
 
     public boolean isDayOfYearEnabled() {
-        return sharedPrefs.getBoolean(PREF_SHOW_DAY_OF_YEAR, true);
+        return mSharedPrefs.getBoolean(PREF_SHOW_DAY_OF_YEAR, true);
     }
 
     public int getUpdateFrequency() {
@@ -113,7 +113,7 @@ public class FRCPreferences {
     }
 
     public boolean getSystemNotificationEnabled() {
-        return sharedPrefs.getBoolean(PREF_SYSTEM_NOTIFICATION, false);
+        return mSharedPrefs.getBoolean(PREF_SYSTEM_NOTIFICATION, false);
     }
 
 }

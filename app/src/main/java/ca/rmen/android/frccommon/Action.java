@@ -34,9 +34,8 @@ import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
 public class Action {
     public final String title;
-    public final
     @DrawableRes
-    int iconId;
+    public final int iconId;
     public final Intent intent;
     public final PendingIntent pendingIntent;
 

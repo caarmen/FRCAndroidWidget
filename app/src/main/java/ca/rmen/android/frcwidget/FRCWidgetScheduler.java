@@ -48,14 +48,14 @@ public class FRCWidgetScheduler {
     private static final String TAG = Constants.TAG + FRCWidgetScheduler.class.getSimpleName();
     static final String ACTION_WIDGET_UPDATE = "ca.rmen.android.frcwidget.UPDATE_WIDGET";
 
-    private static FRCWidgetScheduler INSTANCE;
-    private final PendingIntent updateWidgetPendingIntent;
-    private final PendingIntent updateWidgetTomorrowPendingIntent;
+    private static FRCWidgetScheduler sInstance;
+    private final PendingIntent mUpdateWidgetPendingIntent;
+    private final PendingIntent mUpdateWidgetTomorrowPendingIntent;
 
     private FRCWidgetScheduler(Context context) {
         Intent updateWidgetIntent = new Intent(ACTION_WIDGET_UPDATE);
-        updateWidgetPendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, updateWidgetIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        updateWidgetTomorrowPendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 1, updateWidgetIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        mUpdateWidgetPendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, updateWidgetIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        mUpdateWidgetTomorrowPendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 1, updateWidgetIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         IntentFilter filterOn = new IntentFilter(Intent.ACTION_SCREEN_ON);
         IntentFilter filterOff = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         ScreenBroadcastReceiver screenBroadcastReceiver = new ScreenBroadcastReceiver();
@@ -64,8 +64,8 @@ public class FRCWidgetScheduler {
     }
 
     public synchronized static FRCWidgetScheduler getInstance(Context context) {
-        if (INSTANCE == null) INSTANCE = new FRCWidgetScheduler(context);
-        return INSTANCE;
+        if (sInstance == null) sInstance = new FRCWidgetScheduler(context);
+        return sInstance;
     }
 
     /**
@@ -86,7 +86,7 @@ public class FRCWidgetScheduler {
         }
 
         // Schedule the periodic updates.
-        mgr.setRepeating(AlarmManager.RTC, nextAlarmTime, frequency, updateWidgetPendingIntent);
+        mgr.setRepeating(AlarmManager.RTC, nextAlarmTime, frequency, mUpdateWidgetPendingIntent);
         scheduleTomorrow(context);
 
         // Also send a broadcast to force an update now.
@@ -115,7 +115,7 @@ public class FRCWidgetScheduler {
         //noinspection deprecation
         if (Integer.valueOf(Build.VERSION.SDK) >= Build.VERSION_CODES.KITKAT) {
             long nextAlarmTime = getTimeTomorrowMidnightMillis();
-            Api19Helper.scheduleExact(context, nextAlarmTime, updateWidgetTomorrowPendingIntent);
+            Api19Helper.scheduleExact(context, nextAlarmTime, mUpdateWidgetTomorrowPendingIntent);
         }
     }
 
@@ -140,7 +140,7 @@ public class FRCWidgetScheduler {
     void cancel(Context context) {
         Log.v(TAG, "cancel");
         AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        mgr.cancel(updateWidgetPendingIntent);
+        mgr.cancel(mUpdateWidgetPendingIntent);
     }
 
     /**
