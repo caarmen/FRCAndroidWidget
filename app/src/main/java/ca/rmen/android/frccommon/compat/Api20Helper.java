@@ -41,7 +41,6 @@ class Api20Helper {
             Action... actions) {
         Notification.Builder builder = new Notification.Builder(context)
                 .setAutoCancel(true)
-                .setLocalOnly(true)
                 .setContentTitle(tickerText)
                 .setContentText(contentText)
                 .setStyle(new Notification.BigTextStyle().bigText(bigText))
