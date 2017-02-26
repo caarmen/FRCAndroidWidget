@@ -22,6 +22,8 @@ import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.annotation.ColorInt;
 
 import ca.rmen.android.frccommon.Action;
 
@@ -34,6 +36,7 @@ class Api20Helper {
     static Notification createNotification(
             Context context,
             int iconId,
+            @ColorInt int color,
             String tickerText,
             String contentText,
             String bigText,
@@ -51,6 +54,9 @@ class Api20Helper {
             //noinspection deprecation
             builder.addAction(action.iconId, action.title, action.pendingIntent);
         }
+        Notification.WearableExtender extender = new Notification.WearableExtender()
+                .setBackground(Bitmap.createBitmap(new int[]{color}, 1, 1, Bitmap.Config.ARGB_8888));
+        builder.extend(extender);
         return builder.build();
     }
 

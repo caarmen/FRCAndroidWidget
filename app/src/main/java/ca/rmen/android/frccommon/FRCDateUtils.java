@@ -19,6 +19,7 @@
 package ca.rmen.android.frccommon;
 
 import android.content.Context;
+import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
@@ -69,6 +70,7 @@ public class FRCDateUtils {
      * @return the color to display for the widget/notification for the given date (for now it's just based on the month)
      * TODO this might not be a "date utility" method, but I can't find a better place to put it.
      */
+    @ColorInt
     public static int getColor(Context context, FrenchRevolutionaryCalendarDate date) {
         FRCPreferences prefs = FRCPreferences.getInstance(context);
         if(prefs.isCustomColorEnabled()) {

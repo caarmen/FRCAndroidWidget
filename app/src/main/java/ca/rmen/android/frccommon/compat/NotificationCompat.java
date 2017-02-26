@@ -20,6 +20,8 @@ package ca.rmen.android.frccommon.compat;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
 import android.util.Log;
 
 import java.lang.reflect.InvocationTargetException;
@@ -27,6 +29,7 @@ import java.lang.reflect.Method;
 
 import ca.rmen.android.frccommon.Action;
 import ca.rmen.android.frccommon.Constants;
+import ca.rmen.android.frenchcalendar.R;
 
 
 public final class NotificationCompat {
@@ -39,12 +42,13 @@ public final class NotificationCompat {
 
     public static Notification createNotification(
             Context context,
-            int iconId,
+            @ColorInt int color,
             String tickerText,
             String contentText,
             String bigText,
             PendingIntent defaultIntent,
             Action... actions) {
+        @DrawableRes int iconId = R.drawable.ic_notif;
         if (ApiHelper.getAPILevel() < 11) {
             Notification notification = new Notification();
             notification.tickerText = tickerText;
@@ -71,9 +75,9 @@ public final class NotificationCompat {
         } else if (ApiHelper.getAPILevel() < 20) {
             return Api16Helper.createNotification(context, iconId, tickerText, contentText, bigText, defaultIntent, actions);
         } else if (ApiHelper.getAPILevel() < 23) {
-            return Api20Helper.createNotification(context, iconId, tickerText, contentText, bigText, defaultIntent, actions);
+            return Api20Helper.createNotification(context, iconId, color, tickerText, contentText, bigText, defaultIntent, actions);
         } else {
-            return Api23Helper.createNotification(context, iconId, tickerText, contentText, bigText, defaultIntent, actions);
+            return Api23Helper.createNotification(context, iconId, color, tickerText, contentText, bigText, defaultIntent, actions);
         }
     }
 

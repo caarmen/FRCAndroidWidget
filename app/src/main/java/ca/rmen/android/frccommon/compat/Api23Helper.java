@@ -22,6 +22,7 @@ import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
@@ -37,6 +38,7 @@ class Api23Helper {
     static Notification createNotification(
             Context context,
             int iconId,
+            @ColorInt int color,
             String tickerText,
             String contentText,
             String bigText,
@@ -44,6 +46,7 @@ class Api23Helper {
             Action... actions) {
         Notification.Builder builder = new Notification.Builder(context)
                 .setAutoCancel(true)
+                .setColor(color)
                 .setContentTitle(tickerText)
                 .setContentText(contentText)
                 .setStyle(new Notification.BigTextStyle().bigText(bigText))
@@ -54,6 +57,9 @@ class Api23Helper {
             Icon icon = Icon.createWithResource(context, action.iconId);
             builder.addAction(new Notification.Action.Builder(icon, action.title, action.pendingIntent).build());
         }
+        Notification.WearableExtender extender = new Notification.WearableExtender()
+                .setBackground(Bitmap.createBitmap(new int[]{color}, 1, 1, Bitmap.Config.ARGB_8888));
+        builder.extend(extender);
         return builder.build();
     }
 

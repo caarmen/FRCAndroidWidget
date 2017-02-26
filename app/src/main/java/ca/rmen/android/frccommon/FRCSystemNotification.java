@@ -66,7 +66,7 @@ public class FRCSystemNotification {
             Action searchAction = Action.getSearchAction(mContext, date);
             Notification notification = NotificationCompat.createNotification(
                     mContext,
-                    R.drawable.ic_notif,
+                    FRCDateUtils.getColor(mContext, date),
                     mContext.getString(R.string.app_full_name),
                     notificationText, notificationLongText,
                     converterAction.pendingIntent,
