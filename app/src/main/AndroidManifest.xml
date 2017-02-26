@@ -23,13 +23,7 @@
     android:installLocation="internalOnly"
     tools:ignore="MissingVersion,UnusedAttribute">
 
-    <uses-sdk tools:overrideLibrary="android.support.v4,
-    android.support.compat,
-    android.support.coreui,
-    android.support.coreutils,
-    android.support.fragment,
-    android.support.mediacompat,
-    net.margaritov.preference.colorpicker,
+    <uses-sdk tools:overrideLibrary="net.margaritov.preference.colorpicker,
     com.vanniktech.vntfontlistpreference"/>
 
     <supports-screens
