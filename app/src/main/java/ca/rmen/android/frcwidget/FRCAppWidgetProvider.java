@@ -70,11 +70,11 @@ public abstract class FRCAppWidgetProvider extends AppWidgetProvider {
         final int[] appWidgetIds = appWidgetManager.getAppWidgetIds(provider);
         if (FRCWidgetScheduler.ACTION_WIDGET_UPDATE.equals(intent.getAction())) {
             Set<Integer> allAppWidgetIds = FRCAppWidgetManager.getAllAppWidgetIds(context);
-            if (allAppWidgetIds.size() == 0) FRCWidgetScheduler.getInstance(context).cancel();
+            if (allAppWidgetIds.size() == 0) FRCWidgetScheduler.getInstance(context).cancel(context);
             else
                 updateAll(context, appWidgetManager, appWidgetIds);
         }
-        FRCWidgetScheduler.getInstance(context).scheduleTomorrow();
+        FRCWidgetScheduler.getInstance(context).scheduleTomorrow(context);
         super.onReceive(context, intent);
     }
 
@@ -93,7 +93,7 @@ public abstract class FRCAppWidgetProvider extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         Log.v(TAG, "onUpdate: appWidgetIds = " + Arrays.toString(appWidgetIds));
         super.onUpdate(context, appWidgetManager, appWidgetIds);
-        FRCWidgetScheduler.getInstance(context).schedule();
+        FRCWidgetScheduler.getInstance(context).schedule(context);
     }
 
     /**

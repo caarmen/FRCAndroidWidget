@@ -135,7 +135,7 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
         PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(mSystemNotificationPreferenceListener);
         // When we leave the preference screen, reupdate all our widgets
-        FRCWidgetScheduler.getInstance(this).schedule();
+        FRCWidgetScheduler.getInstance(this).schedule(this);
         super.onStop();
     }
 

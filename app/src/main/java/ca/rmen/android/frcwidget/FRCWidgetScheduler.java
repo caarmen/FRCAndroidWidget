@@ -49,15 +49,13 @@ public class FRCWidgetScheduler {
     static final String ACTION_WIDGET_UPDATE = "ca.rmen.android.frcwidget.UPDATE_WIDGET";
 
     private static FRCWidgetScheduler INSTANCE;
-    private final Context context;
     private final PendingIntent updateWidgetPendingIntent;
     private final PendingIntent updateWidgetTomorrowPendingIntent;
 
     private FRCWidgetScheduler(Context context) {
-        this.context = context.getApplicationContext();
         Intent updateWidgetIntent = new Intent(ACTION_WIDGET_UPDATE);
-        updateWidgetPendingIntent = PendingIntent.getBroadcast(context, 0, updateWidgetIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        updateWidgetTomorrowPendingIntent = PendingIntent.getBroadcast(context, 1, updateWidgetIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        updateWidgetPendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, updateWidgetIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        updateWidgetTomorrowPendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 1, updateWidgetIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         IntentFilter filterOn = new IntentFilter(Intent.ACTION_SCREEN_ON);
         IntentFilter filterOff = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         ScreenBroadcastReceiver screenBroadcastReceiver = new ScreenBroadcastReceiver();
@@ -73,7 +71,7 @@ public class FRCWidgetScheduler {
     /**
      * Cancel any scheduled update alarms, reschedule an update alarm, and force an update now.
      */
-    public void schedule() {
+    public void schedule(Context context) {
         Log.v(TAG, "schedule");
 
         int frequency = FRCPreferences.getInstance(context).getUpdateFrequency();
@@ -89,7 +87,7 @@ public class FRCWidgetScheduler {
 
         // Schedule the periodic updates.
         mgr.setRepeating(AlarmManager.RTC, nextAlarmTime, frequency, updateWidgetPendingIntent);
-        scheduleTomorrow();
+        scheduleTomorrow(context);
 
         // Also send a broadcast to force an update now.
         Intent updateIntent = new Intent(ACTION_WIDGET_UPDATE);
@@ -113,7 +111,7 @@ public class FRCWidgetScheduler {
      * setExact api, if the device is idle at midnight, the alarm may not trigger at midnight, but
      * at least it will trigger when the device wakes up later, which is good enough for us.
      */
-    public void scheduleTomorrow() {
+    void scheduleTomorrow(Context context) {
         //noinspection deprecation
         if (Integer.valueOf(Build.VERSION.SDK) >= Build.VERSION_CODES.KITKAT) {
             long nextAlarmTime = getTimeTomorrowMidnightMillis();
@@ -139,7 +137,7 @@ public class FRCWidgetScheduler {
     /**
      * Cancel any scheduled update alarms.
      */
-    void cancel() {
+    void cancel(Context context) {
         Log.v(TAG, "cancel");
         AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         mgr.cancel(updateWidgetPendingIntent);
@@ -164,10 +162,10 @@ public class FRCWidgetScheduler {
             if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
                 int frequency = FRCPreferences.getInstance(context).getUpdateFrequency();
                 if (frequency < FRCPreferences.FREQUENCY_DAYS) {
-                    cancel();
+                    cancel(context);
                 }
             } else if (Intent.ACTION_SCREEN_ON.equals(intent.getAction())) {
-                schedule();
+                schedule(context);
             }
         }
     }
