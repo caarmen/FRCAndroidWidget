@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  French Revolutionary Calendar Android Widget
+  Copyright (C) 2011 - 2017 Carmen Alvarez
+  
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 3
+  of the License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, see <http://www.gnu.org/licenses/>.
+
+-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:key="widget_settings"
+    android:title="@string/widget_settings">
+
+    <PreferenceCategory
+        android:title="@string/setting_category_widget">
+
+        <ListPreference
+            android:defaultValue="1"
+            android:dialogTitle="@string/setting_method"
+            android:entries="@array/setting_method_labels"
+            android:entryValues="@array/setting_method_values"
+            android:key="setting_method"
+            android:summary="@string/setting_method_summary"
+            android:title="@string/setting_method" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:title="@string/setting_roman_numeral"
+            android:key="setting_roman_numeral"/>
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:title="@string/setting_show_day_of_year"
+            android:key="setting_show_day_of_year"/>
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:title="@string/setting_show_time"
+            android:key="setting_show_time"/>
+
+        <ListPreference
+            android:defaultValue="fr"
+            android:dialogTitle="@string/setting_language"
+            android:entries="@array/setting_language_labels"
+            android:entryValues="@array/setting_language_values"
+            android:key="setting_language"
+            android:title="@string/setting_language" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="setting_custom_color_enabled"
+            android:title="@string/setting_custom_color_enabled" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:defaultValue="@android:color/white"
+            android:dependency="setting_custom_color_enabled"
+            android:key="setting_custom_color"
+            android:title="@string/setting_custom_color" />
+
+        <com.vanniktech.vntfontlistpreference.VNTFontListPreference
+            android:defaultValue="@string/default_font"
+            android:key="setting_custom_font"
+            android:title="@string/setting_custom_font"
+            app:vnt_fontDirectory="@string/fonts_folder" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="setting_category_other"
+        android:title="@string/setting_category_other">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="setting_system_notification"
+            android:summary="@string/setting_system_notification_summary"
+            android:title="@string/setting_system_notification" />
+
+        <Preference android:title="@string/about">
+            <intent android:action="ca.rmen.android.frcwidget.FRCAboutActivity" />
+        </Preference>
+    </PreferenceCategory>
+
+</PreferenceScreen>

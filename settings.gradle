@@ -1,9 +1,1 @@
-boolean includeWear=true;
-// If we are building with a "foss" task, don't include the wearable module.
-for(String taskName : startParameter.taskNames) {
-    if(taskName.contains("Foss"))
-        includeWear=false;
-}
-include ':handheld', ':common'
-if(includeWear)
-  include ':wearable'
+include ':app'
