@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import ca.rmen.android.frccommon.compat.NotificationCompat;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendar.CalculationMethod;
 
 /**
@@ -39,9 +40,12 @@ public class FRCPreferences {
     private static final String PREF_ROMAN_NUMERAL = "setting_roman_numeral";
     private static final String PREF_SHOW_DAY_OF_YEAR = "setting_show_day_of_year";
     public static final String PREF_LANGUAGE = "setting_language";
+    static final String PREF_SYSTEM_NOTIFICATION_PRIORITY = "setting_system_notification_priority";
+    private static final String PREF_SYSTEM_NOTIFICATION_PRIORITY_DEFAULT = "default";
     static final String PREF_CUSTOM_COLOR = "setting_custom_color";
     static final String PREF_CUSTOM_COLOR_ENABLED = "setting_custom_color_enabled";
     static final String PREF_SYSTEM_NOTIFICATION = "setting_system_notification";
+    static final String PREF_CATEGORY_NOTIFICATION = "setting_category_notification";
     private static final int FREQUENCY_MINUTES = 86400;
     public static final int FREQUENCY_DAYS = 86400000;
 
@@ -114,6 +118,11 @@ public class FRCPreferences {
 
     public boolean getSystemNotificationEnabled() {
         return mSharedPrefs.getBoolean(PREF_SYSTEM_NOTIFICATION, false);
+    }
+
+    public int getSystemNotificationPriority() {
+        String priorityPref = mSharedPrefs.getString(PREF_SYSTEM_NOTIFICATION_PRIORITY, PREF_SYSTEM_NOTIFICATION_PRIORITY_DEFAULT);
+        return NotificationCompat.getNotificationPriority(priorityPref);
     }
 
 }

@@ -41,6 +41,9 @@ class FRCSystemNotificationPreferenceListener implements SharedPreferences.OnSha
             } else {
                 FRCNotificationScheduler.unscheduleRepeatingAlarm(mContext);
             }
+        } else if (FRCPreferences.PREF_SYSTEM_NOTIFICATION_PRIORITY.equals(key)) {
+            FRCSystemNotification.hideNotification(mContext);
+            FRCSystemNotification.showNotification(mContext);
         }
     }
 }

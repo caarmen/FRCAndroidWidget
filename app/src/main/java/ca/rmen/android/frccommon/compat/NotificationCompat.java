@@ -40,8 +40,18 @@ public final class NotificationCompat {
         // prevent instantiation
     }
 
+    public static int getNotificationPriority(String priority) {
+        if (ApiHelper.getAPILevel() < 16) {
+            return 0;
+        } else {
+            return Api16Helper.getNotificationPriority(priority);
+        }
+    }
+
+
     public static Notification createNotification(
             Context context,
+            int priority,
             @ColorInt int color,
             String tickerText,
             String contentText,
@@ -73,11 +83,11 @@ public final class NotificationCompat {
         } else if (ApiHelper.getAPILevel() < 16) {
             return Api11Helper.createNotification(context, iconId, tickerText, contentText, defaultIntent);
         } else if (ApiHelper.getAPILevel() < 20) {
-            return Api16Helper.createNotification(context, iconId, tickerText, contentText, bigText, defaultIntent, actions);
+            return Api16Helper.createNotification(context, priority, iconId, tickerText, contentText, bigText, defaultIntent, actions);
         } else if (ApiHelper.getAPILevel() < 23) {
-            return Api20Helper.createNotification(context, iconId, color, tickerText, contentText, bigText, defaultIntent, actions);
+            return Api20Helper.createNotification(context, priority, iconId, color, tickerText, contentText, bigText, defaultIntent, actions);
         } else {
-            return Api23Helper.createNotification(context, iconId, color, tickerText, contentText, bigText, defaultIntent, actions);
+            return Api23Helper.createNotification(context, priority, iconId, color, tickerText, contentText, bigText, defaultIntent, actions);
         }
     }
 
