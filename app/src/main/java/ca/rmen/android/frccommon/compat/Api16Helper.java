@@ -27,12 +27,26 @@ import ca.rmen.android.frccommon.Action;
 
 @TargetApi(16)
 class Api16Helper {
+    private static final String PREF_SETTING_SYSTEM_NOTIFICATION_PRIORITY_MAX = "max";
+    private static final String PREF_SETTING_SYSTEM_NOTIFICATION_PRIORITY_HIGH = "high";
+    private static final String PREF_SETTING_SYSTEM_NOTIFICATION_PRIORITY_LOW = "low";
+    private static final String PREF_SETTING_SYSTEM_NOTIFICATION_PRIORITY_MIN = "min";
+
     private Api16Helper() {
         // prevent instantiation
     }
 
+    static int getNotificationPriority(String priorityPref) {
+        if (priorityPref.equals(PREF_SETTING_SYSTEM_NOTIFICATION_PRIORITY_MAX)) return Notification.PRIORITY_MAX;
+        if (priorityPref.equals(PREF_SETTING_SYSTEM_NOTIFICATION_PRIORITY_HIGH)) return Notification.PRIORITY_HIGH;
+        if (priorityPref.equals(PREF_SETTING_SYSTEM_NOTIFICATION_PRIORITY_LOW)) return Notification.PRIORITY_LOW;
+        if (priorityPref.equals(PREF_SETTING_SYSTEM_NOTIFICATION_PRIORITY_MIN)) return Notification.PRIORITY_MIN;
+        return Notification.PRIORITY_DEFAULT;
+    }
+
     static Notification createNotification(
             Context context,
+            int priority,
             int iconId,
             String tickerText,
             String contentText,
@@ -40,6 +54,7 @@ class Api16Helper {
             PendingIntent defaultIntent,
             Action... actions) {
         Notification.Builder builder = new Notification.Builder(context)
+                .setPriority(priority)
                 .setAutoCancel(true)
                 .setContentTitle(tickerText)
                 .setContentText(contentText)

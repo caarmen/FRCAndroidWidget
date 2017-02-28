@@ -24,6 +24,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import ca.rmen.android.frccommon.compat.NotificationCompat;
+import ca.rmen.android.frccommon.prefs.FRCPreferences;
 import ca.rmen.android.frenchcalendar.R;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
@@ -32,6 +33,11 @@ public class FRCSystemNotification {
 
     public static void showNotification(Context context) {
         new ShowNotificationTask(context).execute();
+    }
+
+    public static void hideNotification(Context context) {
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(NOTIFICATION_ID);
     }
 
     private static final class ShowNotificationTask extends AsyncTask<Void, Void, FrenchRevolutionaryCalendarDate> {
@@ -50,6 +56,7 @@ public class FRCSystemNotification {
         @Override
         protected void onPostExecute(FrenchRevolutionaryCalendarDate date) {
             String objectType = mContext.getResources().getStringArray(R.array.daily_object_types)[date.getObjectType().ordinal()];
+            int priority = FRCPreferences.getInstance(mContext).getSystemNotificationPriority();
             String notificationText = mContext.getString(R.string.notification_text,
                     date.getWeekdayName(),
                     date.dayOfMonth,
@@ -66,6 +73,7 @@ public class FRCSystemNotification {
             Action searchAction = Action.getSearchAction(mContext, date);
             Notification notification = NotificationCompat.createNotification(
                     mContext,
+                    priority,
                     FRCDateUtils.getColor(mContext, date),
                     mContext.getString(R.string.app_full_name),
                     notificationText, notificationLongText,

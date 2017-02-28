@@ -75,14 +75,27 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="setting_category_other"
-        android:title="@string/setting_category_other">
+        android:key="setting_category_notification"
+        android:title="@string/setting_category_notification">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="setting_system_notification"
             android:summary="@string/setting_system_notification_summary"
             android:title="@string/setting_system_notification" />
 
+        <ListPreference
+            android:defaultValue="default"
+            android:dependency="setting_system_notification"
+            android:dialogTitle="@string/setting_system_notification_priority"
+            android:entries="@array/setting_system_notification_priority_labels"
+            android:entryValues="@array/setting_system_notification_priority_values"
+            android:key="setting_system_notification_priority"
+            android:title="@string/setting_system_notification_priority" />
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="setting_category_other"
+        android:title="@string/setting_category_other">
         <Preference android:title="@string/about">
             <intent android:action="ca.rmen.android.frcwidget.FRCAboutActivity" />
         </Preference>

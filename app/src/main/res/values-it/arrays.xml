@@ -25,6 +25,13 @@
         <item>Equinozio</item>
         <item>von Mädler</item>
     </string-array>
+    <string-array name="setting_system_notification_priority_labels">
+        <item>Massima</item>
+        <item>Alta</item>
+        <item>Normale</item>
+        <item>Bassa</item>
+        <item>Minima</item>
+    </string-array>
     <string-array name="daily_object_types">
         <item>La pianta</item>
         <item>L\'animale</item>

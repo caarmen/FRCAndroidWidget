@@ -37,6 +37,7 @@
     <string name="widget_settings">Configuration du calendrier</string>
     <string name="menu_settings">Paramètres</string>
     <string name="setting_category_widget">Widget</string>
+    <string name="setting_category_notification">Notification</string>
     <string name="setting_category_other">Autre</string>
     <string name="setting_method">Méthode de calcul</string>
     <string name="setting_method_summary">Comment le premier jour de l\'année est déterminé: %s</string>
@@ -50,8 +51,9 @@
     <string name="setting_custom_color_summary_disabled">Couleurs prédéfinies utilisées (la couleur change chaque mois).</string>
     <string name="setting_custom_color">Couleur personalisée</string>
     <string name="setting_custom_font">Police</string>
-    <string name="setting_system_notification">Notification système</string>
-    <string name="setting_system_notification_summary">Affiche une notification système une fois par jour</string>
+    <string name="setting_system_notification">Notification</string>
+    <string name="setting_system_notification_summary">Affiche une notification une fois par jour</string>
+    <string name="setting_system_notification_priority">Priorité</string>
     <string name="chooser_title">Séléctionner une appli</string>
     <string name="popup_action_share">Partager</string>
     <string name="popup_action_settings">Préférences</string>

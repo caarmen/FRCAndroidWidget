@@ -37,6 +37,7 @@ Italian translations provided by Alfonso Fusco
     <string name="widget_settings">Impostazioni del Calendario Rivoluzionario</string>
     <string name="menu_settings">Impostazioni</string>
     <string name="setting_category_widget">Widget</string>
+    <string name="setting_category_notification">Notifica</string>
     <string name="setting_category_other">Altri</string>
     <string name="setting_method">Metodo di calcolo</string>
     <string name="setting_method_summary">Come è calcolato il primo giorno di ogni anno: %s</string>
@@ -51,7 +52,8 @@ Italian translations provided by Alfonso Fusco
     <string name="setting_custom_color">Colore personalizzato</string>
     <string name="setting_custom_font">Font</string>
     <string name="setting_system_notification">Notifica</string>
-    <string name="setting_system_notification_summary">Mostrare una notifica nella barra di stato una volta al giorno</string>
+    <string name="setting_system_notification_summary">Mostrare una notifica una volta al giorno</string>
+    <string name="setting_system_notification_priority">Priorità</string>
     <string name="chooser_title">Scegli un\'applicazione</string>
     <string name="popup_action_share">Condividi</string>
     <string name="popup_action_search">Cercare \'%s\'</string>

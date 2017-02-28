@@ -29,6 +29,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.util.Log;
@@ -64,6 +65,9 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
                     break;
                 case FRCPreferences.PREF_CUSTOM_COLOR_ENABLED:
                     updatePreferenceSummary(key, 0);
+                    break;
+                case FRCPreferences.PREF_SYSTEM_NOTIFICATION_PRIORITY:
+                    updatePreferenceSummary(key, R.string.setting_system_notification_priority_summary);
                     break;
             }
         }
@@ -119,6 +123,13 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         updatePreferenceSummary(FRCPreferences.PREF_METHOD, R.string.setting_method_summary);
         updatePreferenceSummary(FRCPreferences.PREF_LANGUAGE, R.string.setting_language_summary);
         updatePreferenceSummary(FRCPreferences.PREF_CUSTOM_COLOR_ENABLED, 0);
+        updatePreferenceSummary(FRCPreferences.PREF_SYSTEM_NOTIFICATION_PRIORITY, R.string.setting_system_notification_priority_summary);
+
+        if (ApiHelper.getAPILevel() < 16) {
+            @SuppressWarnings("deprecation") PreferenceCategory category = (PreferenceCategory) getPreferenceScreen().findPreference(FRCPreferences.PREF_CATEGORY_NOTIFICATION);
+            Preference notificationPriorityPreference = category.findPreference(FRCPreferences.PREF_SYSTEM_NOTIFICATION_PRIORITY);
+            category.removePreference(notificationPriorityPreference);
+        }
 
         //noinspection deprecation
         ColorPickerPreference pref = (ColorPickerPreference) getPreferenceScreen().findPreference(FRCPreferences.PREF_CUSTOM_COLOR);

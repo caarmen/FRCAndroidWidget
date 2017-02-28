@@ -25,6 +25,13 @@
         <item>Équinoxe</item>
         <item>von Mädler</item>
     </string-array>
+    <string-array name="setting_system_notification_priority_labels">
+        <item>Maximum</item>
+        <item>Haute</item>
+        <item>Normale</item>
+        <item>Basse</item>
+        <item>Minimum</item>
+    </string-array>
     <string-array name="daily_object_types">
         <item>La plante</item>
         <item>L\'animal</item>

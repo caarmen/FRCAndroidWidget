@@ -37,6 +37,7 @@ class Api23Helper {
 
     static Notification createNotification(
             Context context,
+            int priority,
             int iconId,
             @ColorInt int color,
             String tickerText,
@@ -45,6 +46,7 @@ class Api23Helper {
             PendingIntent defaultIntent,
             Action... actions) {
         Notification.Builder builder = new Notification.Builder(context)
+                .setPriority(priority)
                 .setAutoCancel(true)
                 .setColor(color)
                 .setContentTitle(tickerText)
