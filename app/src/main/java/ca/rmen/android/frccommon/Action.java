@@ -46,7 +46,15 @@ public class Action {
         this.pendingIntent = pendingIntent;
     }
 
-    public static Action getSearchAction(Context context, FrenchRevolutionaryCalendarDate date) {
+    public static Action getLightSearchAction(Context context, FrenchRevolutionaryCalendarDate date) {
+        return getSearchAction(context, date, R.drawable.ic_action_search);
+    }
+
+    public static Action getDarkSearchAction(Context context, FrenchRevolutionaryCalendarDate date) {
+        return getSearchAction(context, date, R.drawable.ic_action_search_dark);
+    }
+
+    private static Action getSearchAction(Context context, FrenchRevolutionaryCalendarDate date, @DrawableRes int iconId) {
         Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
         intent.putExtra(SearchManager.QUERY, date.getDayOfYear());
         // No apps can handle ACTION_WEB_SEARCH.  We'll try a more generic intent instead
@@ -57,10 +65,18 @@ public class Action {
             intent.putExtra(Intent.EXTRA_TEXT, date.getDayOfYear().toLowerCase(locale));
         }
         PendingIntent pendingIntent = PendingIntent.getActivity(context, R.id.action_search, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        return new Action(R.drawable.ic_action_search, context.getString(R.string.popup_action_search, date.getDayOfYear()), intent, pendingIntent);
+        return new Action(iconId, context.getString(R.string.popup_action_search, date.getDayOfYear()), intent, pendingIntent);
     }
 
-    public static Action getShareAction(Context context, FrenchRevolutionaryCalendarDate date) {
+    public static Action getLightShareAction(Context context, FrenchRevolutionaryCalendarDate date) {
+        return getShareAction(context, date, R.drawable.ic_action_share);
+    }
+
+    public static Action getDarkShareAction(Context context, FrenchRevolutionaryCalendarDate date) {
+        return getShareAction(context, date, R.drawable.ic_action_share_dark);
+    }
+
+    public static Action getShareAction(Context context, FrenchRevolutionaryCalendarDate date, @DrawableRes int iconId) {
         // Prepare the text to share, based on the current date.
         String subject = context.getString(R.string.share_subject, date.getWeekdayName(), date.dayOfMonth, date.getMonthName(),
                 FRCDateUtils.formatNumber(context, date.year));
@@ -76,7 +92,7 @@ public class Action {
         shareIntent.putExtra(Intent.EXTRA_TEXT, body);
         Intent intent = Intent.createChooser(shareIntent, context.getString(R.string.chooser_title));
         PendingIntent pendingIntent = PendingIntent.getActivity(context, R.id.action_share, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        return new Action(R.drawable.ic_action_share, context.getString(R.string.popup_action_share), intent, pendingIntent);
+        return new Action(iconId, context.getString(R.string.popup_action_share), intent, pendingIntent);
     }
 
     public static Action getConverterAction(Context context) {

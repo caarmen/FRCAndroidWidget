@@ -55,10 +55,10 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
         // Build our adapter with the list of actions
         ActionsAdapter adapter = new ActionsAdapter(this);
         FrenchRevolutionaryCalendarDate frenchDate = (FrenchRevolutionaryCalendarDate) getIntent().getSerializableExtra(EXTRA_DATE);
-        adapter.add(Action.getShareAction(this, frenchDate));
+        adapter.add(Action.getDarkShareAction(this, frenchDate));
         adapter.add(Action.getSettingsAction(this));
         adapter.add(Action.getConverterAction(this));
-        adapter.add(Action.getSearchAction(this, frenchDate));
+        adapter.add(Action.getDarkSearchAction(this, frenchDate));
 
         // Build the alert dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
