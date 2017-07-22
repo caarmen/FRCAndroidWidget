@@ -178,7 +178,7 @@ class FRCRender {
         FRCPreferences prefs = FRCPreferences.getInstance(context);
         if (prefs.isDayOfYearEnabled()) {
             dayOfYearTextView.setVisibility(View.VISIBLE);
-            dayOfYearTextView.setText(" " + frenchDate.getDayOfYear() + " ");
+            dayOfYearTextView.setText(" " + frenchDate.getObjectOfTheDay() + " ");
         } else {
             dayOfYearTextView.setVisibility(View.GONE);
         }

@@ -67,7 +67,7 @@ public class FRCSystemNotification {
                     date.dayOfMonth,
                     date.getMonthName(),
                     FRCDateUtils.formatNumber(mContext, date.year),
-                    objectType, date.getDayOfYear());
+                    objectType, date.getObjectOfTheDay());
             Action converterAction = Action.getConverterAction(mContext);
             Action shareAction = Action.getLightShareAction(mContext, date);
             Action searchAction = Action.getLightSearchAction(mContext, date);

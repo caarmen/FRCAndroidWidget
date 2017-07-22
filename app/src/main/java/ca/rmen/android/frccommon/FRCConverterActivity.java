@@ -112,7 +112,7 @@ public class FRCConverterActivity extends Activity {
                 date.getMonthName(),
                 FRCDateUtils.formatNumber(this, date.year),
                 date.getObjectTypeName(),
-                date.getDayOfYear());
+                date.getObjectOfTheDay());
     }
 
     private final DatePicker.OnDateChangedListener mOnDateChangedListener = new DatePicker.OnDateChangedListener() {
