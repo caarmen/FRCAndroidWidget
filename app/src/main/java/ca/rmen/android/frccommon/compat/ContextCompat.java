@@ -18,9 +18,11 @@
 package ca.rmen.android.frccommon.compat;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 
 public final class ContextCompat {
 
@@ -35,5 +37,14 @@ public final class ContextCompat {
         }
         //noinspection deprecation
         return context.getResources().getColor(colorRes);
+    }
+
+    public static Drawable getDrawable(Context context, @DrawableRes int drawableRes) {
+        if (ApiHelper.getAPILevel() >= Build.VERSION_CODES.LOLLIPOP) {
+            return Api21Helper.getDrawable(context, drawableRes);
+        }
+        //noinspection deprecation
+        return context.getResources().getDrawable(drawableRes);
+
     }
 }

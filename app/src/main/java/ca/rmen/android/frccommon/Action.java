@@ -1,6 +1,6 @@
 /*
  * French Revolutionary Calendar Android Widget
- * Copyright (C) 2016-2017 Carmen Alvarez
+ * Copyright (C) 2016 - 2017 Carmen Alvarez
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@ import android.support.annotation.DrawableRes;
 
 import java.util.Locale;
 
+import ca.rmen.android.frccommon.converter.FRCConverterActivity;
 import ca.rmen.android.frccommon.prefs.FRCPreferenceActivity;
 import ca.rmen.android.frccommon.prefs.FRCPreferences;
 import ca.rmen.android.frenchcalendar.R;
