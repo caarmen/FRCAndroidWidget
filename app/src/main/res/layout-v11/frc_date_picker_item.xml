@@ -19,10 +19,6 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/text1"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/date_picker_item_height"
     android:gravity="center"
-    android:paddingEnd="4dp"
-    android:paddingLeft="4dp"
-    android:paddingRight="4dp"
-    android:paddingStart="4dp"
     android:textAppearance="@style/DatePickerItem" />
