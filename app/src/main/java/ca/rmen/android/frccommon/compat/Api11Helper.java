@@ -24,9 +24,6 @@ import android.app.Activity;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.widget.DatePicker;
-
-import java.util.Calendar;
 
 @TargetApi(11)
 public class Api11Helper {
@@ -52,9 +49,4 @@ public class Api11Helper {
                 .getNotification();
     }
 
-    static void setMinDate(DatePicker datePicker, int year, int month, int day) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month - 1, day);
-        datePicker.setMinDate(calendar.getTimeInMillis());
-    }
 }
