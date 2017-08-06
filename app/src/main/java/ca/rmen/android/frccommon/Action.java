@@ -1,6 +1,6 @@
 /*
  * French Revolutionary Calendar Android Widget
- * Copyright (C) 2016-2017 Carmen Alvarez
+ * Copyright (C) 2016 - 2017 Carmen Alvarez
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@ import android.support.annotation.DrawableRes;
 
 import java.util.Locale;
 
+import ca.rmen.android.frccommon.converter.FRCConverterActivity;
 import ca.rmen.android.frccommon.prefs.FRCPreferenceActivity;
 import ca.rmen.android.frccommon.prefs.FRCPreferences;
 import ca.rmen.android.frenchcalendar.R;
@@ -56,16 +57,16 @@ public class Action {
 
     private static Action getSearchAction(Context context, FrenchRevolutionaryCalendarDate date, @DrawableRes int iconId) {
         Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-        intent.putExtra(SearchManager.QUERY, date.getDayOfYear());
+        intent.putExtra(SearchManager.QUERY, date.getObjectOfTheDay());
         // No apps can handle ACTION_WEB_SEARCH.  We'll try a more generic intent instead
         if (context.getPackageManager().queryIntentActivities(intent, 0).isEmpty()) {
             intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
             Locale locale = FRCPreferences.getInstance(context.getApplicationContext()).getLocale();
-            intent.putExtra(Intent.EXTRA_TEXT, date.getDayOfYear().toLowerCase(locale));
+            intent.putExtra(Intent.EXTRA_TEXT, date.getObjectOfTheDay().toLowerCase(locale));
         }
         PendingIntent pendingIntent = PendingIntent.getActivity(context, R.id.action_search, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        return new Action(iconId, context.getString(R.string.popup_action_search, date.getDayOfYear()), intent, pendingIntent);
+        return new Action(iconId, context.getString(R.string.popup_action_search, date.getObjectOfTheDay()), intent, pendingIntent);
     }
 
     public static Action getLightShareAction(Context context, FrenchRevolutionaryCalendarDate date) {
@@ -83,7 +84,7 @@ public class Action {
         String time = String.format(Locale.US, "%d:%02d:%02d", date.hour, date.minute, date.second);
         String objectType = context.getResources().getStringArray(R.array.daily_object_types)[date.getObjectType().ordinal()];
         String body = context.getString(R.string.share_body, date.getWeekdayName(), date.dayOfMonth, date.getMonthName(),
-                FRCDateUtils.formatNumber(context, date.year), time, objectType, date.getDayOfYear(), FRCDateUtils.getDaysSinceDay1());
+                FRCDateUtils.formatNumber(context, date.year), time, objectType, date.getObjectOfTheDay(), FRCDateUtils.getDaysSinceDay1());
 
         // Open an intent chooser to share our text.
         Intent shareIntent = new Intent(Intent.ACTION_SEND);

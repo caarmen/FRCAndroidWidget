@@ -1,6 +1,6 @@
 /*
  * French Revolutionary Calendar Android Widget
- * Copyright (C) 2016-2017 Carmen Alvarez
+ * Copyright (C) 2016 - 2017 Carmen Alvarez
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,7 +67,7 @@ public class FRCSystemNotification {
                     date.dayOfMonth,
                     date.getMonthName(),
                     FRCDateUtils.formatNumber(mContext, date.year),
-                    objectType, date.getDayOfYear());
+                    objectType, date.getObjectOfTheDay());
             Action converterAction = Action.getConverterAction(mContext);
             Action shareAction = Action.getLightShareAction(mContext, date);
             Action searchAction = Action.getLightSearchAction(mContext, date);

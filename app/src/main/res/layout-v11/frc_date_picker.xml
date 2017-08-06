@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   French Revolutionary Calendar Android Widget
-  Copyright (C) 2016 - 2017 Carmen Alvarez
+  Copyright (C) 2017 Carmen Alvarez
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -18,24 +18,31 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/activity_margin">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/btn_help"
+    <NumberPicker
+        android:id="@+id/spinnerDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|end"
-        android:contentDescription="@string/help"
-        android:src="@drawable/ic_action_help"
-        tools:ignore="UnusedAttribute" />
+        android:descendantFocusability="blocksDescendants" />
 
-    <ca.rmen.android.frccommon.converter.G2fConverterView
-        android:id="@+id/converter_g2f"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center" />
+    <NumberPicker
+        android:id="@+id/spinnerMonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:descendantFocusability="blocksDescendants" />
+
+    <NumberPicker
+        android:id="@+id/spinnerYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

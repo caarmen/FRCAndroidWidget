@@ -21,7 +21,6 @@ package ca.rmen.android.frccommon;
 import android.content.Context;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
-import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
 import java.util.Calendar;
@@ -104,8 +103,7 @@ public class FRCDateUtils {
      * @param number must be between 1 and 4999 inclusive, to return a roman numeral.
      * @return the roman numeral for the given number, if it is within the bounds.  Otherwise the arabic numeral is returned.
      */
-    @VisibleForTesting
-    static String getRomanNumeral(int number) {
+    public static String getRomanNumeral(int number) {
         if (number < ROMAN_NUMERAL_MIN_VALUE || number > ROMAN_NUMERAL_MAX_VALUE) {
             return String.valueOf(number);
         }

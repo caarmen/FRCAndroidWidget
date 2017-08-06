@@ -37,7 +37,7 @@ public class FRCPreferences {
     static final String PREF_METHOD = "setting_method";
     private static final String PREF_DEPRECATED_DETAILED_VIEW = "setting_detailed_view";
     private static final String PREF_SHOW_TIME = "setting_show_time";
-    private static final String PREF_ROMAN_NUMERAL = "setting_roman_numeral";
+    public static final String PREF_ROMAN_NUMERAL = "setting_roman_numeral";
     private static final String PREF_SHOW_DAY_OF_YEAR = "setting_show_day_of_year";
     public static final String PREF_LANGUAGE = "setting_language";
     static final String PREF_SYSTEM_NOTIFICATION_PRIORITY = "setting_system_notification_priority";

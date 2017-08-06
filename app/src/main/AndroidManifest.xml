@@ -47,7 +47,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="ca.rmen.android.frccommon.FRCConverterActivity">
+        <activity android:name="ca.rmen.android.frccommon.converter.FRCConverterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
