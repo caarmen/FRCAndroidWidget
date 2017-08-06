@@ -90,5 +90,7 @@ It has been %8$d days since the start of the Republic.</string>
     <string name="method_equinox">Equinox</string>
     <string name="method_von_madler">von Mädler</string>
     <string name="object_of_the_day_format" translatable="false">%1$s: %2$s</string>
+    <string name="reset_frc_date_picker">Reset the French calendar</string>
+    <string name="reset_gregorian_date_picker">Reset the Gregorian calendar</string>
 
 </resources>

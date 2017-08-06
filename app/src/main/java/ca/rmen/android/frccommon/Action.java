@@ -28,6 +28,7 @@ import android.support.annotation.DrawableRes;
 import java.util.Locale;
 
 import ca.rmen.android.frccommon.converter.FRCConverterActivity;
+import ca.rmen.android.frccommon.converter.FRCLegacyConverterActivity;
 import ca.rmen.android.frccommon.prefs.FRCPreferenceActivity;
 import ca.rmen.android.frccommon.prefs.FRCPreferences;
 import ca.rmen.android.frenchcalendar.R;
@@ -98,6 +99,12 @@ public class Action {
 
     public static Action getConverterAction(Context context) {
         Intent intent = new Intent(context.getApplicationContext(), FRCConverterActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, R.id.action_converter, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        return new Action(R.drawable.ic_action_converter, context.getString(R.string.popup_action_converter), intent, pendingIntent);
+    }
+
+    public static Action getLegacyConverterAction(Context context) {
+        Intent intent = new Intent(context.getApplicationContext(), FRCLegacyConverterActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, R.id.action_converter, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         return new Action(R.drawable.ic_action_converter, context.getString(R.string.popup_action_converter), intent, pendingIntent);
     }

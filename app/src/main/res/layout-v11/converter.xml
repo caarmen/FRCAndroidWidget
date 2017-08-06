@@ -21,64 +21,95 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:padding="@dimen/activity_margin">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
         android:padding="@dimen/activity_margin">
 
-        <TabHost
-            android:id="@android:id/tabhost"
+        <RelativeLayout
+            android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+            <ImageView
+                android:id="@+id/btn_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:contentDescription="@string/help"
+                android:src="@drawable/ic_action_help"
+                tools:ignore="UnusedAttribute" />
 
-                <TabWidget
-                    android:id="@android:id/tabs"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <FrameLayout
-                    android:id="@android:id/tabcontent"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-
-                    <ca.rmen.android.frccommon.converter.G2fConverterView
-                        android:id="@+id/converter_g2f"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:visibility="gone" />
-
-                    <ca.rmen.android.frccommon.converter.F2gConverterView
-                        android:id="@+id/converter_f2g"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:visibility="gone"
-                        tools:ignore="InconsistentLayout" />
-                </FrameLayout>
-            </LinearLayout>
-        </TabHost>
+            <Spinner
+                android:id="@+id/spinner_method"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
 
 
-        <ImageView
-            android:id="@+id/btn_help"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:contentDescription="@string/help"
-            android:src="@drawable/ic_action_help"
-            tools:ignore="UnusedAttribute" />
+            android:gravity="center"
+            android:orientation="horizontal">
 
-    </RelativeLayout>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:contentDescription="@string/reset_frc_date_picker"
+                android:onClick="resetFrcDatePicker"
+                android:src="@drawable/ic_action_reset" />
+
+            <ca.rmen.android.frccommon.converter.FRCDatePicker
+                android:id="@+id/frc_date_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="InconsistentLayout" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/object_of_the_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="Plant of the day: Apple" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:contentDescription="@string/reset_gregorian_date_picker"
+                android:onClick="resetGregorianDatePicker"
+                android:src="@drawable/ic_action_reset" />
+
+            <DatePicker
+                android:id="@+id/gregorian_date_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                android:startYear="1792"
+                tools:ignore="UnusedAttribute" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 </ScrollView>

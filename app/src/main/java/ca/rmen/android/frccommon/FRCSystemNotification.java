@@ -23,6 +23,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import ca.rmen.android.frccommon.compat.ApiHelper;
 import ca.rmen.android.frccommon.compat.NotificationCompat;
 import ca.rmen.android.frccommon.prefs.FRCPreferences;
 import ca.rmen.android.frenchcalendar.R;
@@ -68,7 +69,8 @@ public class FRCSystemNotification {
                     date.getMonthName(),
                     FRCDateUtils.formatNumber(mContext, date.year),
                     objectType, date.getObjectOfTheDay());
-            Action converterAction = Action.getConverterAction(mContext);
+            Action converterAction = ApiHelper.getAPILevel() >= Constants.MIN_API_LEVEL_TWO_WAY_CONVERTER?
+                    Action.getConverterAction(mContext) : Action.getLegacyConverterAction(mContext);
             Action shareAction = Action.getLightShareAction(mContext, date);
             Action searchAction = Action.getLightSearchAction(mContext, date);
             Notification notification = NotificationCompat.createNotification(

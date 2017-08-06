@@ -34,6 +34,7 @@ import android.widget.TextView;
 
 import ca.rmen.android.frccommon.Action;
 import ca.rmen.android.frccommon.Constants;
+import ca.rmen.android.frccommon.compat.ApiHelper;
 import ca.rmen.android.frenchcalendar.R;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
@@ -57,7 +58,11 @@ public class FRCPopupActivity extends Activity { // NO_UCD (use default)
         FrenchRevolutionaryCalendarDate frenchDate = (FrenchRevolutionaryCalendarDate) getIntent().getSerializableExtra(EXTRA_DATE);
         adapter.add(Action.getDarkShareAction(this, frenchDate));
         adapter.add(Action.getSettingsAction(this));
-        adapter.add(Action.getConverterAction(this));
+        if (ApiHelper.getAPILevel() >= Constants.MIN_API_LEVEL_TWO_WAY_CONVERTER) {
+            adapter.add(Action.getConverterAction(this));
+        } else {
+            adapter.add(Action.getLegacyConverterAction(this));
+        }
         adapter.add(Action.getDarkSearchAction(this, frenchDate));
 
         // Build the alert dialog.
