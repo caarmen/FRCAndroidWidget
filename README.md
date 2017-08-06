@@ -17,3 +17,4 @@ Widget which displays the current date and time in the French Revolutionary cale
 This app uses the following libraries:
 * French Revolutionary Calendar Library: https://github.com/caarmen/lib-french-revolutionary-calendar
 * android-ColorPickerPreference: https://github.com/attenzione/android-ColorPickerPreference
+* VNTFontListPreference: https://github.com/vanniktech/VNTFontListPreference
