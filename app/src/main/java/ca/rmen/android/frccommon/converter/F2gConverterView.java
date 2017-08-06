@@ -87,14 +87,11 @@ public class F2gConverterView extends LinearLayout {
 
     public void setLocale(Locale locale) {
         mFRCDatePicker.setLocale(locale);
+        notifyChange(mFRCDatePicker.getDate());
     }
 
     public void setUseRomanNumerals(boolean useRomanNumerals) {
         mFRCDatePicker.setUseRomanNumerals(useRomanNumerals);
-    }
-
-    public void setFrcDate(FrenchRevolutionaryCalendarDate date) {
-        mFRCDatePicker.setDate(date);
     }
 
     public void setMethod(FrenchRevolutionaryCalendar.CalculationMethod method) {

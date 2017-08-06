@@ -34,7 +34,7 @@
     <ca.rmen.android.frccommon.converter.FRCDatePicker
         android:id="@+id/frcDatePicker"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/date_picker_height" />
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="wrap_content"

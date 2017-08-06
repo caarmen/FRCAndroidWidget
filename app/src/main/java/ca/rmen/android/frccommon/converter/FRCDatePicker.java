@@ -19,19 +19,15 @@ package ca.rmen.android.frccommon.converter;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.support.annotation.NonNull;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.widget.NumberPicker;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import ca.rmen.android.frccommon.Constants;
@@ -43,10 +39,14 @@ import ca.rmen.lfrc.i18n.FrenchRevolutionaryCalendarLabels;
 @TargetApi(Constants.MIN_API_LEVEL_F2G_CONVERTER)
 public class FRCDatePicker extends LinearLayout {
 
+    private static final String EXTRA_YEAR = "year";
+    private static final String EXTRA_MONTH = "month";
+    private static final String EXTRA_DAY = "day";
+    private static final String EXTRA_SUPER_STATE = "super_state";
     private Locale mLocale;
-    private ListView mListViewDay;
-    private ListView mListViewMonth;
-    private ListView mListViewYear;
+    private NumberPicker mDayPicker;
+    private NumberPicker mMonthPicker;
+    private NumberPicker mYearPicker;
     private OnDateSelectedListener mListener;
 
     interface OnDateSelectedListener {
@@ -66,42 +66,34 @@ public class FRCDatePicker extends LinearLayout {
     private void initView(Context context) {
         View view = View.inflate(context, R.layout.frc_date_picker, null);
         addView(view);
-        mListViewDay = findViewById(R.id.spinnerDay);
-        mListViewMonth = findViewById(R.id.spinnerMonth);
-        mListViewYear = findViewById(R.id.spinnerYear);
-        setListeners(mListViewDay);
-        setListeners(mListViewMonth);
-        setListeners(mListViewYear);
+        mDayPicker = findViewById(R.id.spinnerDay);
+        mMonthPicker = findViewById(R.id.spinnerMonth);
+        mYearPicker = findViewById(R.id.spinnerYear);
+        initNumberPicker(mDayPicker, 30);
+        initNumberPicker(mMonthPicker, 13);
+        initNumberPicker(mYearPicker, 300);
         setLocale(Locale.getDefault());
     }
 
     @Override
-    protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
-        super.onVisibilityChanged(changedView, visibility);
-        if (visibility == View.VISIBLE) {
-            post(new Runnable() {
-                @Override
-                public void run() {
-                    recenterListView(mListViewDay);
-                    recenterListView(mListViewMonth);
-                    recenterListView(mListViewYear);
-                }
-            });
-        }
+    protected void onRestoreInstanceState(Parcelable state) {
+        Bundle bundle = (Bundle) state;
+        Parcelable superState = (Parcelable) bundle.get(EXTRA_SUPER_STATE);
+        super.onRestoreInstanceState(superState);
+        mYearPicker.setValue(bundle.getInt(EXTRA_YEAR));
+        mMonthPicker.setValue(bundle.getInt(EXTRA_MONTH));
+        mDayPicker.setValue(bundle.getInt(EXTRA_DAY));
     }
 
-    private void recenterListView(ListView listView) {
-        int position = listView.getCheckedItemPosition();
-        int itemHeight = getResources().getDimensionPixelSize(R.dimen.date_picker_item_height);
-        listView.setSelectionFromTop(position, itemHeight);
-    }
-
-    private void smoothScrollToPosition(ListView listView, int position) {
-        int itemHeight = getResources().getDimensionPixelSize(R.dimen.date_picker_item_height);
-        if (position < listView.getFirstVisiblePosition() || position > listView.getLastVisiblePosition()) {
-            mIsScrolling = true;
-        }
-        listView.smoothScrollToPositionFromTop(position, itemHeight);
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+        Bundle result = new Bundle(4);
+        result.putParcelable(EXTRA_SUPER_STATE, superState);
+        result.putInt(EXTRA_YEAR, mYearPicker.getValue());
+        result.putInt(EXTRA_MONTH, mMonthPicker.getValue());
+        result.putInt(EXTRA_DAY, mDayPicker.getValue());
+        return result;
     }
 
     public void setOnDateSelectedListener(OnDateSelectedListener listener) {
@@ -110,158 +102,75 @@ public class FRCDatePicker extends LinearLayout {
 
     public void setLocale(Locale locale) {
         mLocale = locale;
-        int position = mListViewDay.getCheckedItemPosition();
-        mListViewDay.setAdapter(new ArrayAdapter<>(getContext(), R.layout.frc_date_picker_item, getDayNames(locale)));
-        if (position >= 0) selectListViewItem(mListViewDay, position);
+        setDisplayedValues(mDayPicker, getDayNames(locale));
+        setDisplayedValues(mMonthPicker, getMonthNames(locale));
+    }
 
-        position = mListViewMonth.getCheckedItemPosition();
-        mListViewMonth.setAdapter(new ArrayAdapter<>(getContext(), R.layout.frc_date_picker_item, getMonthNames(locale)));
-        if (position >= 0) selectListViewItem(mListViewMonth, position);
+
+    private void setDisplayedValues(NumberPicker numberPicker, String[] values) {
+        numberPicker.setDisplayedValues(values);
+        // Workaround to force a new layout to resize the number picker to fit the new labels.
+        // Calling invalidate(), postInvalidate() and requestLayout() didn't work.
+        numberPicker.setVisibility(View.GONE);
+        numberPicker.setVisibility(View.VISIBLE);
     }
 
     public void setUseRomanNumerals(boolean useRomanNumerals) {
-        int position = mListViewYear.getCheckedItemPosition();
-        mListViewYear.setAdapter(new ArrayAdapter<>(getContext(), R.layout.frc_date_picker_item, getYears(useRomanNumerals)));
-        if (position >= 0) selectListViewItem(mListViewYear, position);
-    }
-
-    public void setDate(@NonNull FrenchRevolutionaryCalendarDate date) {
-        mListViewDay.setItemChecked(date.dayOfMonth, true);
-        mListViewMonth.setItemChecked(date.month, true);
-        mListViewYear.setItemChecked(date.year, true);
+        setDisplayedValues(mYearPicker, useRomanNumerals ? getRomanNumeralYears() : null);
     }
 
     @Nullable
     public FrenchRevolutionaryCalendarDate getDate() {
-        if (!isDateValid()) return null;
+        if (mDayPicker.getValue() > 6 && mMonthPicker.getValue() == 13) {
+            return null;
+        }
         return new FrenchRevolutionaryCalendarDate(mLocale,
-                mListViewYear.getCheckedItemPosition(),
-                mListViewMonth.getCheckedItemPosition(),
-                mListViewDay.getCheckedItemPosition(),
+                mYearPicker.getValue(),
+                mMonthPicker.getValue(),
+                mDayPicker.getValue(),
                 0, 0, 0);
     }
 
-    private static List<String> getDayNames(Locale locale) {
+    private static String[] getDayNames(Locale locale) {
         FrenchRevolutionaryCalendarLabels cal = FrenchRevolutionaryCalendarLabels.getInstance(locale);
-        List<String> result = new ArrayList<>();
-        result.add("");
+        String[] result = new String[30];
         for (int i = 1; i <= 30; i++) {
             int dayIndex = i % 10 == 0 ? 10 : i % 10;
-            result.add(i + " " + cal.getWeekdayName(dayIndex));
+            result[i - 1] = (i + " " + cal.getWeekdayName(dayIndex));
         }
-        result.add("");
         return result;
     }
 
-    private static List<String> getMonthNames(Locale locale) {
+    private static String[] getMonthNames(Locale locale) {
         FrenchRevolutionaryCalendarLabels cal = FrenchRevolutionaryCalendarLabels.getInstance(locale);
-        List<String> result = new ArrayList<>();
-        result.add("");
+        String[] result = new String[13];
         for (int i = 1; i <= 13; i++) {
-            result.add(cal.getMonthName(i));
+            result[i - 1] = cal.getMonthName(i);
         }
-        result.add("");
         return result;
     }
 
-    private static List<String> getYears(boolean useRomanNumerals) {
-        List<String> result = new ArrayList<>();
-        result.add("");
+    private static String[] getRomanNumeralYears() {
+        String[] result = new String[300];
         for (int i = 1; i <= 300; i++) {
-            if (useRomanNumerals) {
-                result.add(FRCDateUtils.getRomanNumeral(i));
-            } else {
-                result.add(String.valueOf(i));
-            }
+            result[i - 1] = FRCDateUtils.getRomanNumeral(i);
         }
-        result.add("");
         return result;
     }
 
-    private boolean isDateValid() {
-        int day = mListViewDay.getCheckedItemPosition();
-        int month = mListViewMonth.getCheckedItemPosition();
-        int year = mListViewYear.getCheckedItemPosition();
-        return (day >= 1 && day <= 30 && month >= 1 && month <= 13 && year >= 1)
-                && (month < 13 || day <= 6);
-    }
-
-    private void selectValidDate() {
-        int day = mListViewDay.getCheckedItemPosition();
-        int month = mListViewMonth.getCheckedItemPosition();
-        int year = mListViewYear.getCheckedItemPosition();
-        if (day < 1) selectListViewItem(mListViewDay, 1);
-        else if (day > 6 && month >= 13) selectListViewItem(mListViewDay, 6);
-        else if (day > 30) selectListViewItem(mListViewDay, 30);
-
-        if (month < 1) selectListViewItem(mListViewMonth, 1);
-        else if (month > 13) selectListViewItem(mListViewMonth, 13);
-
-        if (year <= 1) selectListViewItem(mListViewYear, 1);
-    }
-
-    private void selectListViewItem(ListView listView, int position) {
-        listView.setItemChecked(position, true);
-        smoothScrollToPosition(listView, position);
-        notifyDateSelected();
-    }
-
-    private void notifyDateSelected() {
-        if (mListener != null) mListener.onFrenchDateSelected(getDate());
-    }
-
-    private void setListeners(ListView listView) {
-        listView.setOnItemClickListener(mListViewItemClickListener);
-        listView.setOnScrollListener(mListViewScrollListener);
-        listView.setOnTouchListener(mIgnoreParentTouchListener);
-    }
-
-    private final ListView.OnItemClickListener mListViewItemClickListener = new ListView.OnItemClickListener() {
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            if (isDateValid()) {
-                smoothScrollToPosition((ListView) parent, position);
-                notifyDateSelected();
-            } else {
-                selectValidDate();
-            }
+    private void initNumberPicker(NumberPicker numberPicker, int maxValue) {
+        if (numberPicker.getValue() == 0) {
+            numberPicker.setMinValue(1);
+            numberPicker.setMaxValue(maxValue);
         }
-    };
+        numberPicker.setOnValueChangedListener(mValueChangedListener);
+        numberPicker.setOnTouchListener(mIgnoreParentTouchListener);
+    }
 
-    private boolean mIsScrolling;
-    private final AbsListView.OnScrollListener mListViewScrollListener = new AbsListView.OnScrollListener() {
-
+    private final NumberPicker.OnValueChangeListener mValueChangedListener = new NumberPicker.OnValueChangeListener() {
         @Override
-        public void onScrollStateChanged(final AbsListView view, int scrollState) {
-            if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
-                if (mIsScrolling) {
-                    mIsScrolling = false;
-                    return;
-                }
-                // Initially: the new position will be the average of the first and last positions
-                int newCheckedItemPosition = (view.getFirstVisiblePosition() + view.getLastVisiblePosition()) / 2;
-
-                // If the first visible item is scrolled up so much that it's mostly hiding, ignore it
-                // and increment the new position (to a larger value, lower in the list)
-                View firstCell = view.getChildAt(0);
-                int firstCellTop = firstCell.getTop();
-                if (firstCellTop < -firstCell.getHeight() / 2) {
-                    newCheckedItemPosition++;
-                }
-                // Make sure we're not out of bounds
-                if (newCheckedItemPosition >= view.getAdapter().getCount()) {
-                    newCheckedItemPosition = view.getAdapter().getCount() - 1;
-                }
-                view.setItemChecked(newCheckedItemPosition, true);
-                smoothScrollToPosition((ListView) view, newCheckedItemPosition);
-                if (isDateValid()) notifyDateSelected();
-                else selectValidDate();
-            }
-        }
-
-        @Override
-        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
+            if (mListener != null) mListener.onFrenchDateSelected(getDate());
         }
     };
 

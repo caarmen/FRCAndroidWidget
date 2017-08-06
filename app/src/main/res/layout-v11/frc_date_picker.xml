@@ -17,126 +17,32 @@
 
 -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:baselineAligned="false"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:orientation="horizontal">
 
-    <ListView
+    <NumberPicker
         android:id="@+id/spinnerDay"
-        android:layout_width="96dp"
-        android:layout_height="@dimen/date_picker_height"
-        android:choiceMode="singleChoice"
-        android:divider="@null"
-        android:fadingEdgeLength="48dp"
-        android:requiresFadingEdge="vertical"
-        android:scrollbars="none"
-        tools:targetApi="ice_cream_sandwich" />
-
-    <ImageView
-        android:id="@+id/divider_day1"
         android:layout_width="wrap_content"
-        android:layout_height="2dp"
-        android:layout_alignEnd="@id/spinnerDay"
-        android:layout_alignLeft="@id/spinnerDay"
-        android:layout_alignRight="@id/spinnerDay"
-        android:layout_alignStart="@id/spinnerDay"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginTop="@dimen/date_picker_item_height"
-        android:src="@color/frc_date_picker_normal" />
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="2dp"
-        android:layout_alignBottom="@id/spinnerDay"
-        android:layout_alignEnd="@id/divider_day1"
-        android:layout_alignLeft="@id/divider_day1"
-        android:layout_alignRight="@id/divider_day1"
-        android:layout_alignStart="@id/divider_day1"
-        android:layout_marginBottom="@dimen/date_picker_item_height"
-        android:src="@color/frc_date_picker_normal" />
-
-    <ListView
+    <NumberPicker
         android:id="@+id/spinnerMonth"
-        android:layout_width="128dp"
-        android:layout_height="@dimen/date_picker_height"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_toEndOf="@id/spinnerDay"
-        android:layout_toRightOf="@id/spinnerDay"
-        android:choiceMode="singleChoice"
-        android:divider="@null"
-        android:fadingEdgeLength="48dp"
-        android:requiresFadingEdge="vertical"
-        android:scrollbars="none"
-        tools:targetApi="ice_cream_sandwich" />
-
-    <ImageView
-        android:id="@+id/divider_month1"
         android:layout_width="wrap_content"
-        android:layout_height="2dp"
-        android:layout_alignEnd="@id/spinnerMonth"
-        android:layout_alignLeft="@id/spinnerMonth"
-        android:layout_alignRight="@id/spinnerMonth"
-        android:layout_alignStart="@id/spinnerMonth"
-        android:layout_marginEnd="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="@dimen/date_picker_item_height"
-        android:src="@color/frc_date_picker_normal" />
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:descendantFocusability="blocksDescendants" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="2dp"
-        android:layout_alignBottom="@id/spinnerMonth"
-        android:layout_alignEnd="@id/divider_month1"
-        android:layout_alignLeft="@id/divider_month1"
-        android:layout_alignRight="@id/divider_month1"
-        android:layout_alignStart="@id/divider_month1"
-        android:layout_marginBottom="@dimen/date_picker_item_height"
-        android:src="@color/frc_date_picker_normal" />
-
-    <ListView
+    <NumberPicker
         android:id="@+id/spinnerYear"
-        android:layout_width="52dp"
-        android:layout_height="@dimen/date_picker_height"
-        android:layout_toEndOf="@id/spinnerMonth"
-        android:layout_toRightOf="@id/spinnerMonth"
-        android:choiceMode="singleChoice"
-        android:divider="@null"
-        android:fadingEdgeLength="48dp"
-        android:requiresFadingEdge="vertical"
-        android:scrollbars="none"
-        tools:targetApi="ice_cream_sandwich" />
-
-    <ImageView
-        android:id="@+id/divider_year1"
         android:layout_width="wrap_content"
-        android:layout_height="2dp"
-        android:layout_alignEnd="@id/spinnerYear"
-        android:layout_alignLeft="@id/spinnerYear"
-        android:layout_alignRight="@id/spinnerYear"
-        android:layout_alignStart="@id/spinnerYear"
-        android:layout_alignTop="@id/spinnerYear"
-        android:layout_marginLeft="4dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="@dimen/date_picker_item_height"
-        android:src="@color/frc_date_picker_normal" />
+        android:layout_height="wrap_content" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="2dp"
-        android:layout_alignBottom="@id/spinnerYear"
-        android:layout_alignLeft="@id/divider_year1"
-        android:layout_alignStart="@id/divider_year1"
-        android:layout_alignRight="@id/divider_year1"
-        android:layout_alignEnd="@id/divider_year1"
-        android:layout_marginBottom="@dimen/date_picker_item_height"
-        android:src="@color/frc_date_picker_normal" />
-</RelativeLayout>
+</LinearLayout>

@@ -17,17 +17,18 @@
 
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="horizontal">
+    android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/datePickerContainer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingEnd="8dp"
         android:paddingLeft="8dp"
@@ -42,14 +43,19 @@
         <ca.rmen.android.frccommon.converter.FRCDatePicker
             android:id="@+id/frcDatePicker"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/date_picker_height" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:layout_toRightOf="@id/datePickerContainer"
+        android:layout_toEndOf="@id/datePickerContainer"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:orientation="vertical"
         android:paddingEnd="8dp"
         android:paddingLeft="8dp"
@@ -73,4 +79,4 @@
             android:textSize="14sp"
             tools:text="Pomme" />
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

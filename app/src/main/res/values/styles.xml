@@ -40,9 +40,4 @@
         <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="DatePickerItem" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/frc_date_picker_item_color</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">16sp</item>
-    </style>
 </resources>

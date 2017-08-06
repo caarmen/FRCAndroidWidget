@@ -55,8 +55,6 @@ class F2gConverterModel {
         mView.setMethod(method);
         mView.setUseRomanNumerals(FRCPreferences.getInstance(context).isRomanNumeralEnabled());
 
-        mView.setFrcDate(new FrenchRevolutionaryCalendarDate(locale, 2, 3, 4, 0, 0, 0));
-
         PreferenceManager.getDefaultSharedPreferences(context).registerOnSharedPreferenceChangeListener(mPrefsListener);
     }
 
