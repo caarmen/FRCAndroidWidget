@@ -24,8 +24,8 @@
     <color name="textColorLink">#886644</color>
     <color name="item_pressed">#e8cfba</color>
     <color name="item_normal">#ffe8d3</color>
-    <color name="frc_date_picker_normal">#888</color>
-    <color name="frc_date_picker_highlight">#fff</color>
+    <color name="spinner_drop_down_text_color_normal">#888</color>
+    <color name="spinner_drop_down_text_color_activated">#fff</color>
     <color name="month_1" tools:ignore="UnusedResources">#fff0a199</color>
     <color name="month_2" tools:ignore="UnusedResources">#ffbfe4a9</color>
     <color name="month_3" tools:ignore="UnusedResources">#ff9fbce6</color>

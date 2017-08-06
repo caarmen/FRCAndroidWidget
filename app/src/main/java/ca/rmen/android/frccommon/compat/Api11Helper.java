@@ -1,6 +1,6 @@
 /*
  * French Revolutionary Calendar Android Widget
- * Copyright (C) 2016-2017 Carmen Alvarez
+ * Copyright (C) 2016 - 2017 Carmen Alvarez
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,9 @@ import android.app.Activity;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.widget.DatePicker;
+
+import java.util.Calendar;
 
 @TargetApi(11)
 public class Api11Helper {
@@ -49,4 +52,9 @@ public class Api11Helper {
                 .getNotification();
     }
 
+    static void setMinDate(DatePicker datePicker, int year, int month, int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month - 1, day);
+        datePicker.setMinDate(calendar.getTimeInMillis());
+    }
 }

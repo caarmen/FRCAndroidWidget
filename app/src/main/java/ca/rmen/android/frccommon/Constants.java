@@ -28,6 +28,6 @@ public class Constants {
         NARROW, WIDE, MINIMALIST
     }
 
-    public static final int MIN_API_LEVEL_F2G_CONVERTER = Build.VERSION_CODES.HONEYCOMB;
+    public static final int MIN_API_LEVEL_TWO_WAY_CONVERTER = Build.VERSION_CODES.HONEYCOMB;
 
 }

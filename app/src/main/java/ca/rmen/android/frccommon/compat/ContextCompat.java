@@ -23,6 +23,7 @@ import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.widget.DatePicker;
 
 public final class ContextCompat {
 
@@ -46,5 +47,11 @@ public final class ContextCompat {
         //noinspection deprecation
         return context.getResources().getDrawable(drawableRes);
 
+    }
+
+    public static void setMinDate(DatePicker datePicker, int year, int month, int day) {
+        if (ApiHelper.getAPILevel() >= Build.VERSION_CODES.HONEYCOMB) {
+            Api11Helper.setMinDate(datePicker, year, month, day);
+        }
     }
 }

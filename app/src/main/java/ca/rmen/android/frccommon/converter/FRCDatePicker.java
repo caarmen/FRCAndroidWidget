@@ -36,7 +36,7 @@ import ca.rmen.android.frenchcalendar.R;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 import ca.rmen.lfrc.i18n.FrenchRevolutionaryCalendarLabels;
 
-@TargetApi(Constants.MIN_API_LEVEL_F2G_CONVERTER)
+@TargetApi(Constants.MIN_API_LEVEL_TWO_WAY_CONVERTER)
 public class FRCDatePicker extends LinearLayout {
 
     private static final String EXTRA_YEAR = "year";
@@ -73,6 +73,12 @@ public class FRCDatePicker extends LinearLayout {
         initNumberPicker(mMonthPicker, 13);
         initNumberPicker(mYearPicker, 300);
         setLocale(Locale.getDefault());
+    }
+
+    void setDate(FrenchRevolutionaryCalendarDate frcDate) {
+        mYearPicker.setValue(frcDate.year);
+        mMonthPicker.setValue(frcDate.month);
+        mDayPicker.setValue(frcDate.dayOfMonth);
     }
 
     @Override
@@ -170,7 +176,13 @@ public class FRCDatePicker extends LinearLayout {
     private final NumberPicker.OnValueChangeListener mValueChangedListener = new NumberPicker.OnValueChangeListener() {
         @Override
         public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
-            if (mListener != null) mListener.onFrenchDateSelected(getDate());
+            if (mMonthPicker.getValue() == 13 && mDayPicker.getMaxValue() == 30)  {
+                mDayPicker.setMaxValue(6);
+            } else if (mMonthPicker.getValue() < 13 && mDayPicker.getMaxValue() == 6){
+                mDayPicker.setMaxValue(30);
+            } else if (mListener != null) {
+                mListener.onFrenchDateSelected(getDate());
+            }
         }
     };
 

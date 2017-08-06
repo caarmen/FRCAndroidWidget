@@ -86,5 +86,7 @@ L\'heure actuelle est %5$s.
     <string name="method_romme">Romme</string>
     <string name="method_equinox">Équinoxe</string>
     <string name="method_von_madler">von Mädler</string>
+    <string name="reset_frc_date_picker">Réinitialiser le calendrier français</string>
+    <string name="reset_gregorian_date_picker">Réinitialiser le calendrier grégorien</string>
 
 </resources>

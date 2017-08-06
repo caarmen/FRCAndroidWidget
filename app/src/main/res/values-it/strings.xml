@@ -85,4 +85,6 @@ Sono passati %8$d giorni dall\'inizio della Repubblica</string>
     <string name="method_romme">Romme</string>
     <string name="method_equinox">Equinozio</string>
     <string name="method_von_madler">von Mädler</string>
+    <string name="reset_frc_date_picker">Resettare il calendario francese</string>
+    <string name="reset_gregorian_date_picker">Resettare il calendario gregoriano</string>
 </resources>
