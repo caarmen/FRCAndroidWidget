@@ -23,6 +23,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import ca.rmen.android.frccommon.compat.ApiHelper;
 import ca.rmen.android.frccommon.compat.NotificationCompat;
 import ca.rmen.android.frccommon.prefs.FRCPreferences;
 import ca.rmen.android.frenchcalendar.R;

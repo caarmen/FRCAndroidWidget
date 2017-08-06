@@ -47,7 +47,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="ca.rmen.android.frccommon.converter.FRCConverterActivity">
+        <activity android:name="ca.rmen.android.frccommon.converter.FRCConverterActivity"
+            android:enabled="@bool/converter_enabled">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="ca.rmen.android.frccommon.converter.FRCLegacyConverterActivity"
+            android:enabled="@bool/legacy_converter_enabled">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

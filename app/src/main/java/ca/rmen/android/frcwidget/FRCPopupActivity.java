@@ -34,6 +34,7 @@ import android.widget.TextView;
 
 import ca.rmen.android.frccommon.Action;
 import ca.rmen.android.frccommon.Constants;
+import ca.rmen.android.frccommon.compat.ApiHelper;
 import ca.rmen.android.frenchcalendar.R;
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate;
 
