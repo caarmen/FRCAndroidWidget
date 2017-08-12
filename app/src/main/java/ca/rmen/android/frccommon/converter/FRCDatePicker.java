@@ -78,6 +78,7 @@ public class FRCDatePicker extends LinearLayout {
     void setDate(FrenchRevolutionaryCalendarDate frcDate) {
         mYearPicker.setValue(frcDate.year);
         mMonthPicker.setValue(frcDate.month);
+        setValidRanges();
         mDayPicker.setValue(frcDate.dayOfMonth);
     }
 
@@ -173,14 +174,20 @@ public class FRCDatePicker extends LinearLayout {
         numberPicker.setOnTouchListener(mIgnoreParentTouchListener);
     }
 
+    private void setValidRanges() {
+        if (mMonthPicker.getValue() == 13 && mDayPicker.getMaxValue() == 30)  {
+            if (mDayPicker.getValue() > 6) mDayPicker.setValue(5);
+            mDayPicker.setMaxValue(6);
+        } else if (mMonthPicker.getValue() < 13 && mDayPicker.getMaxValue() == 6){
+            mDayPicker.setMaxValue(30);
+        }
+    }
+
     private final NumberPicker.OnValueChangeListener mValueChangedListener = new NumberPicker.OnValueChangeListener() {
         @Override
         public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
-            if (mMonthPicker.getValue() == 13 && mDayPicker.getMaxValue() == 30)  {
-                mDayPicker.setMaxValue(6);
-            } else if (mMonthPicker.getValue() < 13 && mDayPicker.getMaxValue() == 6){
-                mDayPicker.setMaxValue(30);
-            } else if (mListener != null) {
+            setValidRanges();
+            if (mListener != null) {
                 mListener.onFrenchDateSelected(getDate());
             }
         }
