@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  French Revolutionary Calendar Android Widget
+  Copyright (C) 2011 - 2017 Carmen Alvarez
+  
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 3
+  of the License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, see <http://www.gnu.org/licenses/>.
+
+-->
+<resources>
+
+    <string name="app_name">Egutegi frantsesa</string>
+    <string name="app_name_wide">Egutegi frantsesa (horizontala)</string>
+    <string name="app_name_narrow">Egutegi frantsesa (bertikala)</string>
+    <string name="app_name_minimalist">Egutegi frantsesa (minimalista)</string>
+    <string name="app_full_name">Egutegi frantsesa</string>
+    <string name="description">Uneko data eta ordua Egutegi errepublikar frantsesean erakusten duen widgeta.</string>
+    <string name="credits">Kredituak:</string>
+    <string name="wikipedia">* Wikipediako artikulua: http://eu.wikipedia.org/wiki/Egutegi_errepublikanoa</string>
+    <string name="equinox_tool">* AstroLib C++ programa, Mark Hussek egina, urte bakoitzeko abuztuko lehen eguna zehazteko: http://mhuss.com/AstroLib/</string>
+    <string name="roman_numeral_algorithm">* Fraser Chapman, Erromatar zenbakizko algoritmoagatik: https://goo.gl/xw65ng</string>
+    <string name="translation_italian">* Alfonso Fusco, italiar itzulpena emateagatik.</string>
+    <string name="lib_colorpicker_pref">* Sergey Margaritov, bere ColorPickerPreference liburutegiagatik</string>
+    <string name="lib_font_pref">* Niklas Baudy, bere VNTFontListPreference liburutegiagatik</string>
+    <string name="github">Proiektua GitHuben:</string>
+    <string name="widget_settings">Egutegi frantsesaren ezarpenak</string>
+    <string name="menu_settings">Ezarpenak</string>
+    <string name="setting_category_widget">Widgeta</string>
+    <string name="setting_category_notification">Jakinarazpena</string>
+    <string name="setting_category_other">Besteak</string>
+    <string name="setting_method">Kalkulatze metodoa</string>
+    <string name="setting_method_summary">Nola zehazten da urte bakoitzaren lehen eguna: %s</string>
+    <string name="setting_roman_numeral">Erromatar zenbakizko urtea</string>
+    <string name="setting_show_time">Ordua erakutsi (erloju hamartarra)</string>
+    <string name="setting_show_day_of_year">Urteko eguna erakutsi</string>
+    <string name="setting_language">Hizkuntza</string>
+    <string name="setting_language_summary">%s</string>
+    <string name="setting_custom_color_enabled">Kolore pertsonalizatua erabili</string>
+    <string name="setting_custom_color_summary_enabled">Orain zure kolore pertsonalizatua erabiltzen da.</string>
+    <string name="setting_custom_color_summary_disabled">Orain aurrez zehaztutako koloreak erabiltzen dira (kolorea hilero aldatzen da).</string>
+    <string name="setting_custom_color">Kolore pertsonalizatua</string>
+    <string name="setting_custom_font">Letra mota</string>
+    <string name="setting_system_notification">Jakinarazpena</string>
+    <string name="setting_system_notification_summary">Jakinarazpen bat erakutsi egunean behin</string>
+    <string name="setting_system_notification_priority">Lehentasuna</string>
+    <string name="chooser_title">Aplikazioa bat hautatu</string>
+    <string name="popup_action_share">Partekatu</string>
+    <string name="popup_action_settings">Ezarpenak</string>
+    <string name="popup_action_converter">Bihurtzailea</string>
+    <string name="popup_action_search">Bilatu \'%s\'</string>
+    <string name="share_subject">%1$s, %2$d %3$s %4$s</string>
+    <string name="share_body">Gaur %1$s, %2$d %3$s %4$s da.
+\n\n\
+Uneko ordua %5$s da.
+\n\n\
+%6$s gaur %7$s da.
+\n\n\
+%8$d egun pasatu dira Errepublikaren hasieratik.</string>
+    <string name="notification_text">%1$s, %2$d %3$s %4$s</string>
+    <string name="notification_long_text">Gaur %1$s, %2$d %3$s %4$s da.
+\n\
+%5$s gaur %6$s da.</string>
+    <string name="about">Honi buruz</string>
+    <string name="message_save">Sakatu atzera zure ezarpenak gordetzeko.</string>
+
+    <string name="dialog_color_picker">Kolore bat hautatu</string>
+    <string name="press_color_to_apply">Ukitu kolorean erabiltzeko</string>
+
+    <string name="help">Laguntza</string>
+    <string name="romme_description">\n<b>Romme</b>\n<small>Egutegi gregorianoa bezala: Bisurteak lauaz zatigarriak, baina ez 100az zatigarriak diren urteak dira (400 izan ezik).</small></string>
+    <string name="equinox_description">\n<b>Ekinokzioa</b>\n<small>Bisurteak aldatzen dira Vendémiaireko 1a beti udazkenaren ekinokzioan izateko.</small></string>
+    <string name="von_madler_description">\n<b>von Mädler</b>\n<small>Bisurteak lauaz zatigarriak, baina ez 128az zatigarriak diren urteak dira.</small></string>
+    <string name="date_format">%1$s, %2$d %3$s %4$s\n%5$s: %6$s</string>
+    <string name="method_romme">Romme</string>
+    <string name="method_equinox">Ekinokzioa</string>
+    <string name="method_von_madler">von Mädler</string>
+    <string name="reset_frc_date_picker">Egutegi frantsesa berrezarri</string>
+    <string name="reset_gregorian_date_picker">Egutegi gregorianoa berrezarri</string>
+
+</resources>
