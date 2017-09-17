@@ -96,6 +96,21 @@ public abstract class FRCAppWidgetProvider extends AppWidgetProvider {
         FRCWidgetScheduler.getInstance(context).schedule(context);
     }
 
+    public static void updateAll(Context context) {
+        updateAll(context, WidgetType.NARROW, FrenchCalendarAppWidgetNarrow.class);
+        updateAll(context, WidgetType.WIDE, FrenchCalendarAppWidgetWide.class);
+        updateAll(context, WidgetType.MINIMALIST, FrenchCalendarAppWidgetMinimalist.class);
+    }
+
+    private static void updateAll(Context context, WidgetType widgetType, Class<? extends AppWidgetProvider> providerClass) {
+        AppWidgetManager appWidgetManager = (AppWidgetManager) context.getSystemService(Context.APPWIDGET_SERVICE);
+        ComponentName provider = new ComponentName(context, providerClass);
+        int[] ids = appWidgetManager.getAppWidgetIds(provider);
+        for (int id : ids) {
+            update(context, appWidgetManager, id, widgetType);
+        }
+    }
+
     /**
      * Rerender all the widgets (for this {@link AppWidgetProvider}).
      */
@@ -110,9 +125,12 @@ public abstract class FRCAppWidgetProvider extends AppWidgetProvider {
      */
     private void update(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         Log.v(TAG, "update: appWidgetId = " + appWidgetId);
-        FRCAppWidgetRenderer renderer = FRCAppWidgetRendererFactory.getRenderer(getWidgetType());
-        RemoteViews views = renderer.render(context, appWidgetManager, appWidgetId);
+        update(context, appWidgetManager, appWidgetId, getWidgetType());
+    }
 
+    private static void update(Context context, AppWidgetManager appWidgetManager, int appWidgetId, WidgetType widgetType) {
+        FRCAppWidgetRenderer renderer = FRCAppWidgetRendererFactory.getRenderer(widgetType);
+        RemoteViews views = renderer.render(context, appWidgetManager, appWidgetId);
         FrenchRevolutionaryCalendarDate date = FRCDateUtils.getToday(context.getApplicationContext());
         Intent intent = new Intent(context, FRCPopupActivity.class);
         intent.putExtra(FRCPopupActivity.EXTRA_DATE, date);

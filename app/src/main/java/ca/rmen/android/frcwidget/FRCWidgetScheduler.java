@@ -90,6 +90,7 @@ public class FRCWidgetScheduler {
         scheduleTomorrow(context);
 
         // Also send a broadcast to force an update now.
+        FRCAppWidgetProvider.updateAll(context);
         Intent updateIntent = new Intent(ACTION_WIDGET_UPDATE);
         context.sendBroadcast(updateIntent);
 
