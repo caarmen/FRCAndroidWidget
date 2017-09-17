@@ -1,6 +1,6 @@
 /*
  * French Revolutionary Calendar Android Widget
- * Copyright (C) 2011 - 2016 Carmen Alvarez
+ * Copyright (C) 2011 - 2017 Carmen Alvarez
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,6 +32,7 @@ import android.util.Log;
 
 import ca.rmen.android.frccommon.Constants;
 import ca.rmen.android.frccommon.compat.Api19Helper;
+import ca.rmen.android.frccommon.compat.IntentCompat;
 import ca.rmen.android.frccommon.prefs.FRCPreferences;
 
 /**
@@ -54,6 +55,7 @@ public class FRCWidgetScheduler {
 
     private FRCWidgetScheduler(Context context) {
         Intent updateWidgetIntent = new Intent(ACTION_WIDGET_UPDATE);
+        IntentCompat.setPackage(updateWidgetIntent, context.getPackageName());
         mUpdateWidgetPendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, updateWidgetIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         mUpdateWidgetTomorrowPendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 1, updateWidgetIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         IntentFilter filterOn = new IntentFilter(Intent.ACTION_SCREEN_ON);
@@ -90,8 +92,8 @@ public class FRCWidgetScheduler {
         scheduleTomorrow(context);
 
         // Also send a broadcast to force an update now.
-        FRCAppWidgetProvider.updateAll(context);
         Intent updateIntent = new Intent(ACTION_WIDGET_UPDATE);
+        IntentCompat.setPackage(updateIntent, context.getPackageName());
         context.sendBroadcast(updateIntent);
 
         Log.v(TAG, "Started updater");
