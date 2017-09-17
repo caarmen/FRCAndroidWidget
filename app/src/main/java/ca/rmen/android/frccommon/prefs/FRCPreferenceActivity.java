@@ -125,7 +125,7 @@ public class FRCPreferenceActivity extends PreferenceActivity { // NO_UCD (use d
         updatePreferenceSummary(FRCPreferences.PREF_CUSTOM_COLOR_ENABLED, 0);
         updatePreferenceSummary(FRCPreferences.PREF_SYSTEM_NOTIFICATION_PRIORITY, R.string.setting_system_notification_priority_summary);
 
-        if (ApiHelper.getAPILevel() < 16) {
+        if (ApiHelper.getAPILevel() < 16 || ApiHelper.getAPILevel() >= 26) {
             @SuppressWarnings("deprecation") PreferenceCategory category = (PreferenceCategory) getPreferenceScreen().findPreference(FRCPreferences.PREF_CATEGORY_NOTIFICATION);
             Preference notificationPriorityPreference = category.findPreference(FRCPreferences.PREF_SYSTEM_NOTIFICATION_PRIORITY);
             category.removePreference(notificationPriorityPreference);

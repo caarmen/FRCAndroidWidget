@@ -86,8 +86,10 @@ public final class NotificationCompat {
             return Api16Helper.createNotification(context, priority, iconId, tickerText, contentText, bigText, defaultIntent, actions);
         } else if (ApiHelper.getAPILevel() < 23) {
             return Api20Helper.createNotification(context, priority, iconId, color, tickerText, contentText, bigText, defaultIntent, actions);
-        } else {
+        } else if (ApiHelper.getAPILevel() < 26) {
             return Api23Helper.createNotification(context, priority, iconId, color, tickerText, contentText, bigText, defaultIntent, actions);
+        } else {
+            return Api26Helper.createNotification(context, iconId, color, tickerText, contentText, bigText, defaultIntent, actions);
         }
     }
 
