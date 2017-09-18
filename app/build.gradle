@@ -8,8 +8,8 @@ android {
         applicationId "ca.rmen.android.frenchcalendar"
         minSdkVersion 3
         targetSdkVersion 26
-        versionCode 1173
-        versionName "1.17.3"
+        versionCode 1174
+        versionName "1.17.4"
         buildConfigField 'String', 'GIT_SHA1', '"' + gitSha1() + '"'
         buildConfigField 'String', 'BUILD_DATE', '"' + buildDate() + '"'
         // For now we enable strict mode for all the configs
@@ -52,7 +52,7 @@ android.applicationVariants.all { variant ->
 }
 
 dependencies {
-    compile 'ca.rmen:lib-french-revolutionary-calendar:1.7.0'
+    compile 'ca.rmen:lib-french-revolutionary-calendar:1.7.1'
     compile 'com.robbypond:android-ColorPickerPreference:1.11.1'
     compile 'com.vanniktech:vntfontlistpreference:1.0.0'
 
