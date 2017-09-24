@@ -31,6 +31,7 @@ Italian translations provided by Alfonso Fusco
     <string name="equinox_tool">* AstroLib C++ programma di Mark Huss, per determinare il primo giorno di autunno in ogni anno: http://mhuss.com/AstroLib/</string>
     <string name="roman_numeral_algorithm">* Fraser Chapman per l\'algoritmo per il calcolo dei numeri romani: https://goo.gl/xw65ng</string>
     <string name="translation_italian">* Alfonso Fusco, per il suo contributo alla traduzione italiana.</string>
+    <string name="translation_basque">* Aitor Beriain, per il suo contributo alla traduzione in basco.</string>
     <string name="lib_colorpicker_pref">* Sergey Margaritov, per la sua libreria ColorPickerPreference</string>
     <string name="lib_font_pref">* Niklas Baudy, per la sua libreria VNTFontListPreference</string>
     <string name="github">Progetto su GitHub:</string>
