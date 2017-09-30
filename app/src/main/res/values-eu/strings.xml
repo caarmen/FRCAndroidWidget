@@ -27,10 +27,10 @@
     <string name="description">Uneko data eta ordua Egutegi errepublikar frantsesean erakusten duen widgeta.</string>
     <string name="credits">Kredituak:</string>
     <string name="wikipedia">* Wikipediako artikulua: http://eu.wikipedia.org/wiki/Egutegi_errepublikanoa</string>
-    <string name="equinox_tool">* AstroLib C++ programa, Mark Hussek egina, urte bakoitzeko abuztuko lehen eguna zehazteko: http://mhuss.com/AstroLib/</string>
+    <string name="equinox_tool">* AstroLib C++ programa, Mark Hussek egina, urte bakoitzeko udazkeneko lehen eguna zehazteko: http://mhuss.com/AstroLib/</string>
     <string name="roman_numeral_algorithm">* Fraser Chapman, Erromatar zenbakizko algoritmoagatik: https://goo.gl/xw65ng</string>
     <string name="translation_italian">* Alfonso Fusco, italiar itzulpena emateagatik.</string>
-    <string name="translation_basque">* Aitor Beriain, for providing Basque translations.</string>
+    <string name="translation_basque">* Aitor Beriain, euskarazko itzulpenengatik.</string>
     <string name="lib_colorpicker_pref">* Sergey Margaritov, bere ColorPickerPreference liburutegiagatik</string>
     <string name="lib_font_pref">* Niklas Baudy, bere VNTFontListPreference liburutegiagatik</string>
     <string name="github">Proiektua GitHuben:</string>
