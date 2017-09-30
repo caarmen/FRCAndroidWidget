@@ -44,10 +44,7 @@ public class Font {
      */
     private static Typeface getTypeface(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        String defaultFontName = String.format(
-                Locale.US, "%s/%s",
-                context.getString(R.string.fonts_folder),
-                context.getString(R.string.default_font));
+        String defaultFontName = context.getString(R.string.default_font);
         String fontName = sharedPreferences.getString(PREF_SETTING_CUSTOM_FONT, defaultFontName);
         try {
             return Typeface.createFromAsset(context.getAssets(), fontName);

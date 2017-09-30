@@ -79,7 +79,7 @@ It has been %8$d days since the start of the Republic.</string>
 
     <string name="dialog_color_picker">Choose a color</string>
     <string name="press_color_to_apply">Tap on the color to apply</string>
-    <string name="default_font" translatable="false">Rochester-Regular.ttf</string>
+    <string name="default_font" translatable="false">fonts/Rochester-Regular.ttf</string>
     <string name="fonts_folder" translatable="false">fonts</string>
 
     <string name="help">Help</string>
