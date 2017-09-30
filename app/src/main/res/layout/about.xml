@@ -100,6 +100,12 @@
             style="@style/AboutEntryTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/translation_basque"/>
+
+        <TextView
+            style="@style/AboutEntryTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/lib_colorpicker_pref"/>
 
         <TextView

@@ -31,6 +31,7 @@
     <string name="equinox_tool">* AstroLib C++, programme de Mark Huss, qui détermine le premier jour de l\'automne de chaque année : http://mhuss.com/AstroLib/</string>
     <string name="roman_numeral_algorithm">* Fraser Chapman pour l\'algorithme de calcul des chiffres romains: https://goo.gl/xw65ng</string>
     <string name="translation_italian">* Alfonso Fusco, pour ses contributions à la traduction italienne</string>
+    <string name="translation_basque">* Aitor Beriain, pour ses contributions à la traduction basque</string>
     <string name="lib_colorpicker_pref">* Sergey Margaritov, pour sa bibliothèque ColorPickerPreference</string>
     <string name="lib_font_pref">* Niklas Baudy, pour sa bibliothèque VNTFontListPreference</string>
     <string name="github">Projet sur GitHub:</string>
