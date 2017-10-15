@@ -1,15 +1,17 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
         applicationId "ca.rmen.android.frenchcalendar"
         minSdkVersion 3
         targetSdkVersion 26
-        versionCode 1180
-        versionName "1.18.0"
+        versionCode 1181
+        versionName "1.18.1"
         buildConfigField 'String', 'GIT_SHA1', '"' + gitSha1() + '"'
         buildConfigField 'String', 'BUILD_DATE', '"' + buildDate() + '"'
         // For now we enable strict mode for all the configs
@@ -41,6 +43,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+    }
     return this;
 }
 
@@ -57,6 +63,7 @@ dependencies {
     compile 'com.vanniktech:vntfontlistpreference:1.0.0'
 
     compile "com.android.support:support-annotations:${rootProject.supportLibVersion}"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     testCompile 'junit:junit:4.12'
 }
 
