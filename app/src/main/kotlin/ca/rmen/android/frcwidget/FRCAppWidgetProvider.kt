@@ -18,11 +18,13 @@
 
 package ca.rmen.android.frcwidget
 
+import android.annotation.TargetApi
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import ca.rmen.android.frccommon.Constants
 import ca.rmen.android.frccommon.FRCDateUtils
@@ -62,6 +64,13 @@ abstract class FRCAppWidgetProvider : AppWidgetProvider() {
         }
         FRCWidgetScheduler.getInstance(context).scheduleTomorrow(context)
         super.onReceive(context, intent)
+    }
+
+    @TargetApi(16)
+    override fun onAppWidgetOptionsChanged(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int, newOptions: Bundle) {
+        newOptions.isEmpty
+        Log.v(tag, "onAppWidgetOptionsChanged: appWidgetId  $appWidgetId, newOptions = $newOptions")
+        update(context, appWidgetManager, appWidgetId)
     }
 
     /**
