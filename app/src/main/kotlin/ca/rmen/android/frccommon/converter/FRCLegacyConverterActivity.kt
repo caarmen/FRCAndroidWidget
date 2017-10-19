@@ -99,13 +99,13 @@ class FRCLegacyConverterActivity : Activity() {
     }
 
     private fun format(date: FrenchRevolutionaryCalendarDate): String =
-        getString(R.string.date_format,
-                date.weekdayName,
-                date.dayOfMonth,
-                date.monthName,
-                FRCDateUtils.formatNumber(this, date.year),
-                date.objectTypeName,
-                date.objectOfTheDay)
+            getString(R.string.date_format,
+                    date.weekdayName,
+                    date.dayOfMonth,
+                    date.monthName,
+                    FRCDateUtils.formatNumber(this, date.year),
+                    date.objectTypeName,
+                    date.objectOfTheDay)
 
     private val mOnDateChangedListener = DatePicker.OnDateChangedListener { _, year, monthOfYear, dayOfMonth ->
         update(year, monthOfYear, dayOfMonth)

@@ -27,5 +27,6 @@ object ApiHelper {
      * "code maturity".
      */
     @Suppress("DEPRECATION")
-    val apiLevel: Int get() = Integer.parseInt(Build.VERSION.SDK)
+    val apiLevel: Int
+        get() = Integer.parseInt(Build.VERSION.SDK)
 }

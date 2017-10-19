@@ -31,7 +31,7 @@ import ca.rmen.android.frenchcalendar.R
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate
 import java.util.Locale
 
-data class Action (@DrawableRes val iconId: Int, val title: String, val intent: Intent, @JvmField val pendingIntent: PendingIntent) {
+data class Action(@DrawableRes val iconId: Int, val title: String, val intent: Intent, @JvmField val pendingIntent: PendingIntent) {
     companion object {
         fun getLightSearchAction(context: Context, date: FrenchRevolutionaryCalendarDate): Action = getSearchAction(context, date, R.drawable.ic_action_search)
         fun getDarkSearchAction(context: Context, date: FrenchRevolutionaryCalendarDate): Action = getSearchAction(context, date, R.drawable.ic_action_search_dark)

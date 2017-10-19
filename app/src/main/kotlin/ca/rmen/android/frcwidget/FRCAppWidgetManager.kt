@@ -30,7 +30,7 @@ object FRCAppWidgetManager {
     /**
      * @return all the widget ids for both narrow and wide widgets.
      */
-    fun getAllAppWidgetIds(context : Context) : Set<Int> {
+    fun getAllAppWidgetIds(context: Context): Set<Int> {
         val result = HashSet<Int>()
         result.addAll(getAppWidgetIds(context, FrenchCalendarAppWidgetNarrow::class.java))
         result.addAll(getAppWidgetIds(context, FrenchCalendarAppWidgetWide::class.java))
@@ -41,7 +41,7 @@ object FRCAppWidgetManager {
     /**
      * @return the widget ids for the given widget class (wide or narrow)
      */
-    private fun getAppWidgetIds(context : Context, appWidgetClass : Class<out FRCAppWidgetProvider>) : Set<Int> {
+    private fun getAppWidgetIds(context: Context, appWidgetClass: Class<out FRCAppWidgetProvider>): Set<Int> {
         val appWidgetManager = AppWidgetManager.getInstance(context)
         val provider = ComponentName(context, appWidgetClass)
         val result = HashSet<Int>()

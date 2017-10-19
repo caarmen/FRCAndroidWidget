@@ -146,10 +146,10 @@ object FRCRender {
         return views
     }
 
-    fun setBackgroundImage(context : Context,
-                           view : View,
-                           @DrawableRes backgroundDrawable : Int,
-                           frenchDate : FrenchRevolutionaryCalendarDate) {
+    fun setBackgroundImage(context: Context,
+                           view: View,
+                           @DrawableRes backgroundDrawable: Int,
+                           frenchDate: FrenchRevolutionaryCalendarDate) {
         val color = FRCDateUtils.getColor(context, frenchDate)
         view.setBackgroundResource(backgroundDrawable)
         val background = view.background
@@ -158,10 +158,10 @@ object FRCRender {
         view.setBackgroundDrawable(background)
     }
 
-    fun setDetailedViewText(context : Context,
-                            dayOfYearTextView : TextView,
-                            timeTextView : TextView,
-                            frenchDate : FrenchRevolutionaryCalendarDate) {
+    fun setDetailedViewText(context: Context,
+                            dayOfYearTextView: TextView,
+                            timeTextView: TextView,
+                            frenchDate: FrenchRevolutionaryCalendarDate) {
         val prefs = FRCPreferences.getInstance(context)
         if (prefs.isDayOfYearEnabled) {
             dayOfYearTextView.visibility = View.VISIBLE

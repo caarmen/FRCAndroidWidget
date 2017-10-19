@@ -51,7 +51,7 @@ class FRCWideScrollAppWidgetRenderer : FRCAppWidgetRenderer {
         val date = " " + frenchDate.dayOfMonth + " " + frenchDate.monthName + " " + FRCDateUtils.formatNumber(context, frenchDate.year) + " "
         val tvDate = view.findViewById<TextView>(R.id.text_date)
         val tvWeekday = view.findViewById<TextView>(R.id.text_weekday)
-        val tvDayOfYear= view.findViewById<TextView>(R.id.text_day_of_year)
+        val tvDayOfYear = view.findViewById<TextView>(R.id.text_day_of_year)
         val tvTime = view.findViewById<TextView>(R.id.text_time)
         tvDate.text = date
         tvWeekday.text = frenchDate.weekdayName

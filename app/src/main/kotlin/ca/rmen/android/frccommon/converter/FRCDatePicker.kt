@@ -42,6 +42,7 @@ class FRCDatePicker : LinearLayout {
         private const val EXTRA_DAY = "day"
         private const val EXTRA_SUPER_STATE = "super_state"
     }
+
     private lateinit var mLocale: Locale
     private lateinit var mDayPicker: NumberPicker
     private lateinit var mMonthPicker: NumberPicker
@@ -110,7 +111,7 @@ class FRCDatePicker : LinearLayout {
     }
 
     fun setUseRomanNumerals(useRomanNumerals: Boolean) =
-        setDisplayedValues(mYearPicker, if (useRomanNumerals) getRomanNumeralYears() else null)
+            setDisplayedValues(mYearPicker, if (useRomanNumerals) getRomanNumeralYears() else null)
 
     var date
         get(): FrenchRevolutionaryCalendarDate? =
@@ -120,7 +121,7 @@ class FRCDatePicker : LinearLayout {
                     mMonthPicker.value,
                     mDayPicker.value,
                     0, 0, 0)
-        set(frcDate)  {
+        set(frcDate) {
             if (frcDate != null) {
                 mYearPicker.value = frcDate.year
                 mMonthPicker.value = frcDate.month
@@ -145,9 +146,9 @@ class FRCDatePicker : LinearLayout {
     }
 
     private fun getRomanNumeralYears(): Array<String> =
-        Array(300) { i ->
-            FRCDateUtils.getRomanNumeral(i + 1)
-        }
+            Array(300) { i ->
+                FRCDateUtils.getRomanNumeral(i + 1)
+            }
 
     private fun initNumberPicker(numberPicker: NumberPicker, maxValue: Int) {
         if (numberPicker.value == 0) {

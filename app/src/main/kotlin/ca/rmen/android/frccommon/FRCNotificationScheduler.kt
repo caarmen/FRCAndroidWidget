@@ -28,7 +28,7 @@ import ca.rmen.android.frccommon.prefs.FRCPreferences
 import java.util.Calendar
 
 object FRCNotificationScheduler {
-    fun scheduleRepeatingAlarm(context : Context) {
+    fun scheduleRepeatingAlarm(context: Context) {
         val prefs = FRCPreferences.getInstance(context)
         if (prefs.systemNotificationEnabled) {
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -37,7 +37,7 @@ object FRCNotificationScheduler {
         }
     }
 
-    fun unscheduleRepeatingAlarm(context : Context) {
+    fun unscheduleRepeatingAlarm(context: Context) {
         val prefs = FRCPreferences.getInstance(context)
         if (!prefs.systemNotificationEnabled) {
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -46,7 +46,7 @@ object FRCNotificationScheduler {
         }
     }
 
-    private fun getTomorrowAtEight() : Long {
+    private fun getTomorrowAtEight(): Long {
         val calendar = Calendar.getInstance()
         // At eight
         stripTime(calendar)
@@ -56,14 +56,14 @@ object FRCNotificationScheduler {
         return calendar.time.time
     }
 
-    private fun stripTime(cal : Calendar) {
+    private fun stripTime(cal: Calendar) {
         cal[Calendar.HOUR_OF_DAY] = 0
         cal[Calendar.MINUTE] = 0
         cal[Calendar.SECOND] = 0
         cal[Calendar.MILLISECOND] = 0
     }
 
-    private fun getPendingIntent(context : Context) : PendingIntent {
+    private fun getPendingIntent(context: Context): PendingIntent {
         val intent = Intent(FRCNotificationReceiver.ACTION)
         return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
     }

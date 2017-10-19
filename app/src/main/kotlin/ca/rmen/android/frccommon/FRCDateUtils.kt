@@ -46,20 +46,21 @@ object FRCDateUtils {
     /**
      * @return the number of days since the first day of the French Republican Calendar (September 22, 1792.
      */
-    val daysSinceDay1 : Long get() {
-        Log.v(TAG, "getDaysSinceDay1")
-        val now = Calendar.getInstance()
-        val day1 = Calendar.getInstance()
-        day1[Calendar.DAY_OF_MONTH] = 22
-        day1[Calendar.MONTH] = Calendar.SEPTEMBER
-        day1[Calendar.YEAR] = 1792
-        day1[Calendar.HOUR_OF_DAY] = now[Calendar.HOUR_OF_DAY]
-        day1[Calendar.MINUTE] = now[Calendar.MINUTE]
-        day1[Calendar.SECOND] = now[Calendar.SECOND]
-        day1[Calendar.MILLISECOND] = now[Calendar.MILLISECOND]
-        val elapsedMilliseconds = now.timeInMillis - day1.timeInMillis
-        return elapsedMilliseconds / (1000 * 60 * 60 * 24)
-    }
+    val daysSinceDay1: Long
+        get() {
+            Log.v(TAG, "getDaysSinceDay1")
+            val now = Calendar.getInstance()
+            val day1 = Calendar.getInstance()
+            day1[Calendar.DAY_OF_MONTH] = 22
+            day1[Calendar.MONTH] = Calendar.SEPTEMBER
+            day1[Calendar.YEAR] = 1792
+            day1[Calendar.HOUR_OF_DAY] = now[Calendar.HOUR_OF_DAY]
+            day1[Calendar.MINUTE] = now[Calendar.MINUTE]
+            day1[Calendar.SECOND] = now[Calendar.SECOND]
+            day1[Calendar.MILLISECOND] = now[Calendar.MILLISECOND]
+            val elapsedMilliseconds = now.timeInMillis - day1.timeInMillis
+            return elapsedMilliseconds / (1000 * 60 * 60 * 24)
+        }
 
     /**
      * @return the color to display for the widget/notification for the given date (for now it's just based on the month)
@@ -81,11 +82,11 @@ object FRCDateUtils {
      * @return the number as a Roman numeral if the roman numeral setting is true and the given number is between 1 and 4999 inclusive, an Arabic number representation otherwise.
      */
     fun formatNumber(context: Context, number: Int): String =
-        if (FRCPreferences.getInstance(context).isRomanNumeralEnabled) {
-            getRomanNumeral(number)
-        } else {
-            number.toString()
-        }
+            if (FRCPreferences.getInstance(context).isRomanNumeralEnabled) {
+                getRomanNumeral(number)
+            } else {
+                number.toString()
+            }
 
     // http://stackoverflow.com/questions/12967896/converting-integers-to-roman-numerals-java
     private const val ROMAN_NUMERAL_MIN_VALUE = 1
@@ -99,14 +100,13 @@ object FRCDateUtils {
      * @param number must be between 1 and 4999 inclusive, to return a roman numeral.
      * @return the roman numeral for the given number, if it is within the bounds.  Otherwise the arabic numeral is returned.
      */
-    fun getRomanNumeral(number: Int): String {
-        return if (number < ROMAN_NUMERAL_MIN_VALUE || number > ROMAN_NUMERAL_MAX_VALUE) {
-            number.toString()
-        } else {
-            RN_1000[number / 1000] +
-                    RN_100[number % 1000 / 100] +
-                    RN_10[number % 100 / 10] +
-                    RN_1[number % 10]
-        }
-    }
+    fun getRomanNumeral(number: Int): String =
+            if (number < ROMAN_NUMERAL_MIN_VALUE || number > ROMAN_NUMERAL_MAX_VALUE) {
+                number.toString()
+            } else {
+                RN_1000[number / 1000] +
+                        RN_100[number % 1000 / 100] +
+                        RN_10[number % 100 / 10] +
+                        RN_1[number % 10]
+            }
 }

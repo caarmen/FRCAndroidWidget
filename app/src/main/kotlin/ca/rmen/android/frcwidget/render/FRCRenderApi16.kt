@@ -38,7 +38,7 @@ object FRCRenderApi16 {
      * should be multiplied by this scale factor when rendering the widget.
      */
     @TargetApi(16)
-    fun getScaleFactor(context : Context, appWidgetManager: AppWidgetManager, appWidgetId: Int, defaultWidgetWidth : Float, defaultWidgetHeight : Float) : Float {
+    fun getScaleFactor(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int, defaultWidgetWidth: Float, defaultWidgetHeight: Float): Float {
         Log.v(TAG, "getScaleFactor for widget " + appWidgetId)
         val widgetOptions = appWidgetManager.getAppWidgetOptions(appWidgetId)
         val keys = widgetOptions.keySet()
@@ -56,9 +56,9 @@ object FRCRenderApi16 {
     }
 
     @TargetApi(16)
-    fun scaleShadow(textView : TextView, scaleFactor : Float) =
-        textView.setShadowLayer(textView.shadowRadius * scaleFactor,
-                textView.shadowDx * scaleFactor,
-                textView.shadowDy * scaleFactor,
-                textView.shadowColor)
+    fun scaleShadow(textView: TextView, scaleFactor: Float) =
+            textView.setShadowLayer(textView.shadowRadius * scaleFactor,
+                    textView.shadowDx * scaleFactor,
+                    textView.shadowDy * scaleFactor,
+                    textView.shadowColor)
 }
