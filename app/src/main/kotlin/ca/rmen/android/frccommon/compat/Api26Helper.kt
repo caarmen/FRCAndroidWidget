@@ -30,7 +30,7 @@ import ca.rmen.android.frccommon.Action
 import ca.rmen.android.frenchcalendar.R
 
 object Api26Helper {
-    private val NOTIFICATION_CHANNEL_ID = "FRC_NOTIFICATION_CHANNEL"
+    private const val NOTIFICATION_CHANNEL_ID = "FRC_NOTIFICATION_CHANNEL"
 
     fun createNotification(context: Context,
                            iconId: Int,
@@ -41,8 +41,8 @@ object Api26Helper {
                            defaultIntent: PendingIntent,
                            actions: Array<Action>): Notification {
         val notificationChannel = NotificationChannel(NOTIFICATION_CHANNEL_ID, context.getString(R.string.app_name), NotificationManager.IMPORTANCE_DEFAULT)
-        val notificaitonManager = context.getSystemService(NotificationManager::class.java)
-        notificaitonManager.createNotificationChannel(notificationChannel)
+        val notificationManager = context.getSystemService(NotificationManager::class.java)
+        notificationManager.createNotificationChannel(notificationChannel)
         val builder = Notification.Builder(context, notificationChannel.id)
                 .setAutoCancel(true)
                 .setColor(color)

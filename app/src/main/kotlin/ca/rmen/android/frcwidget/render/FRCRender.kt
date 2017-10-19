@@ -38,6 +38,7 @@ import ca.rmen.android.frccommon.compat.ApiHelper
 import ca.rmen.android.frccommon.prefs.FRCPreferences
 import ca.rmen.android.frenchcalendar.R
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate
+import java.util.Locale
 
 /**
  * Provides methods used to render widgets.
@@ -63,9 +64,9 @@ object FRCRender {
         val defaultWidgetWidth = context.resources.getDimension(defaultWidthResId)
         val defaultWidgetHeight = context.resources.getDimension(defaultHeightResId)
         var scaleFactor = 1.0f
-        if (ApiHelper.getAPILevel() >= 16) {
+        if (ApiHelper.apiLevel >= 16) {
             scaleFactor = FRCRenderApi16.getScaleFactor(context, appWidgetManager, appWidgetId, defaultWidgetWidth, defaultWidgetHeight)
-        } else if (ApiHelper.getAPILevel() >= 13) {
+        } else if (ApiHelper.apiLevel >= 13) {
             scaleFactor = FRCRenderApi13.getMaxScaleFactor(context, defaultWidgetWidth, defaultWidgetHeight)
         }
         return scaleFactor
@@ -92,7 +93,7 @@ object FRCRender {
         // Scale the margins, if any
         val layoutParams = parent.layoutParams as LinearLayout.LayoutParams?
         if (layoutParams != null) {
-            layoutParams.leftMargin = (layoutParams.leftMargin * scaleFactor).toInt()
+            layoutParams.leftMargin *= (layoutParams.leftMargin * scaleFactor).toInt()
             layoutParams.rightMargin = (layoutParams.rightMargin * scaleFactor).toInt()
             layoutParams.bottomMargin = (layoutParams.bottomMargin * scaleFactor).toInt()
             layoutParams.topMargin = (layoutParams.topMargin * scaleFactor).toInt()
@@ -101,7 +102,7 @@ object FRCRender {
         // Scale the text size
         if (parent is TextView) {
             parent.setTextSize(TypedValue.COMPLEX_UNIT_PX, parent.textSize * scaleFactor)
-            if (ApiHelper.getAPILevel() >= 16) {
+            if (ApiHelper.apiLevel >= 16) {
                 FRCRenderApi16.scaleShadow(parent, scaleFactor)
             }
         }
@@ -171,14 +172,9 @@ object FRCRender {
 
         if (prefs.isTimeEnabled) {
             timeTextView.visibility = View.VISIBLE
-            timeTextView.text = formatTime(frenchDate.hour, frenchDate.minute)
+            timeTextView.text = java.lang.String.format(Locale.US, "%d:%02d", frenchDate.hour, frenchDate.minute)
         } else {
             timeTextView.visibility = View.GONE
         }
-    }
-
-    private fun formatTime(hour : Int, minute: Int) : String {
-        if (minute < 10) return hour.toString() + ":0" + minute
-        return hour.toString() + ":" + minute
     }
 }

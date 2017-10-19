@@ -46,7 +46,7 @@ object FRCAppWidgetManager {
         val provider = ComponentName(context, appWidgetClass)
         val result = HashSet<Int>()
         val appWidgetIds = appWidgetManager.getAppWidgetIds(provider)
-        appWidgetIds?.forEach { appWidgetId -> result.add(appWidgetId) }
+        appWidgetIds?.forEach { result.add(it) }
         return result
     }
 }

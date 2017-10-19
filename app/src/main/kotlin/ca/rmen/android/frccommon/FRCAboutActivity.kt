@@ -39,7 +39,7 @@ class FRCAboutActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.about)
-        if (ApiHelper.getAPILevel() >= Build.VERSION_CODES.HONEYCOMB) {
+        if (ApiHelper.apiLevel >= Build.VERSION_CODES.HONEYCOMB) {
             Api11Helper.setDisplayHomeAsUpEnabled(this)
         }
         val view = findViewById<View>(R.id.aboutview)

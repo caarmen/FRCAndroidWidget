@@ -31,7 +31,7 @@ import ca.rmen.android.frenchcalendar.R
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate
 import java.util.Locale
 
-data class Action private constructor(@DrawableRes val iconId: Int, val title: String, val intent: Intent, @JvmField val pendingIntent: PendingIntent) {
+data class Action (@DrawableRes val iconId: Int, val title: String, val intent: Intent, @JvmField val pendingIntent: PendingIntent) {
     companion object {
         fun getLightSearchAction(context: Context, date: FrenchRevolutionaryCalendarDate): Action = getSearchAction(context, date, R.drawable.ic_action_search)
         fun getDarkSearchAction(context: Context, date: FrenchRevolutionaryCalendarDate): Action = getSearchAction(context, date, R.drawable.ic_action_search_dark)
@@ -45,7 +45,7 @@ data class Action private constructor(@DrawableRes val iconId: Int, val title: S
             if (context.packageManager.queryIntentActivities(intent, 0).isEmpty()) {
                 intent = Intent(Intent.ACTION_SEND)
                 intent.type = "text/plain"
-                val locale = FRCPreferences.getInstance(context).locale
+                val locale = FRCPreferences.getInstance(context.applicationContext).locale
                 intent.putExtra(Intent.EXTRA_TEXT, date.objectOfTheDay.toLowerCase(locale))
             }
             val pendingIntent = PendingIntent.getActivity(context, R.id.action_search, intent, PendingIntent.FLAG_UPDATE_CURRENT)
@@ -59,7 +59,7 @@ data class Action private constructor(@DrawableRes val iconId: Int, val title: S
             val time = java.lang.String.format(Locale.US, "%d:%02d:%02d", date.hour, date.minute, date.second)
             val objectType = context.resources.getStringArray(R.array.daily_object_types)[date.objectType.ordinal]
             val body = context.getString(R.string.share_body, date.weekdayName, date.dayOfMonth, date.monthName,
-                    FRCDateUtils.formatNumber(context, date.year), time, objectType, date.objectOfTheDay, FRCDateUtils.getDaysSinceDay1())
+                    FRCDateUtils.formatNumber(context, date.year), time, objectType, date.objectOfTheDay, FRCDateUtils.daysSinceDay1)
 
             // Open an intent chooser to share our text.
             val shareIntent = Intent(Intent.ACTION_SEND)

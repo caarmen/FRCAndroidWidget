@@ -46,7 +46,7 @@ object FRCDateUtils {
     /**
      * @return the number of days since the first day of the French Republican Calendar (September 22, 1792.
      */
-    fun getDaysSinceDay1(): Long {
+    val daysSinceDay1 : Long get() {
         Log.v(TAG, "getDaysSinceDay1")
         val now = Calendar.getInstance()
         val day1 = Calendar.getInstance()
@@ -80,17 +80,16 @@ object FRCDateUtils {
     /**
      * @return the number as a Roman numeral if the roman numeral setting is true and the given number is between 1 and 4999 inclusive, an Arabic number representation otherwise.
      */
-    fun formatNumber(context: Context, number: Int): String {
-        return if (FRCPreferences.getInstance(context).isRomanNumeralEnabled) {
+    fun formatNumber(context: Context, number: Int): String =
+        if (FRCPreferences.getInstance(context).isRomanNumeralEnabled) {
             getRomanNumeral(number)
         } else {
             number.toString()
         }
-    }
 
     // http://stackoverflow.com/questions/12967896/converting-integers-to-roman-numerals-java
-    private val ROMAN_NUMERAL_MIN_VALUE = 1
-    private val ROMAN_NUMERAL_MAX_VALUE = 4999
+    private const val ROMAN_NUMERAL_MIN_VALUE = 1
+    private const val ROMAN_NUMERAL_MAX_VALUE = 4999
     private val RN_1000 = arrayOf("", "M", "MM", "MMM", "MMMM")
     private val RN_100 = arrayOf("", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM")
     private val RN_10 = arrayOf("", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC")
@@ -101,14 +100,13 @@ object FRCDateUtils {
      * @return the roman numeral for the given number, if it is within the bounds.  Otherwise the arabic numeral is returned.
      */
     fun getRomanNumeral(number: Int): String {
-        if (number < ROMAN_NUMERAL_MIN_VALUE || number > ROMAN_NUMERAL_MAX_VALUE) {
-            return number.toString()
+        return if (number < ROMAN_NUMERAL_MIN_VALUE || number > ROMAN_NUMERAL_MAX_VALUE) {
+            number.toString()
+        } else {
+            RN_1000[number / 1000] +
+                    RN_100[number % 1000 / 100] +
+                    RN_10[number % 100 / 10] +
+                    RN_1[number % 10]
         }
-        return RN_1000[number / 1000] +
-                RN_100[number % 1000 / 100] +
-                RN_10[number % 100 / 10] +
-                RN_1[number % 10];
     }
-
-
 }

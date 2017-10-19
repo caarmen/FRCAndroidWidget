@@ -37,10 +37,10 @@ import java.util.Locale
 @TargetApi(Constants.MIN_API_LEVEL_TWO_WAY_CONVERTER)
 class FRCDatePicker : LinearLayout {
     companion object {
-        private val EXTRA_YEAR = "year"
-        private val EXTRA_MONTH = "month"
-        private val EXTRA_DAY = "day"
-        private val EXTRA_SUPER_STATE = "super_state"
+        private const val EXTRA_YEAR = "year"
+        private const val EXTRA_MONTH = "month"
+        private const val EXTRA_DAY = "day"
+        private const val EXTRA_SUPER_STATE = "super_state"
     }
     private lateinit var mLocale: Locale
     private lateinit var mDayPicker: NumberPicker
@@ -70,13 +70,6 @@ class FRCDatePicker : LinearLayout {
         initNumberPicker(mMonthPicker, 13)
         initNumberPicker(mYearPicker, 300)
         setLocale(Locale.getDefault())
-    }
-
-    fun setDate(frcDate: FrenchRevolutionaryCalendarDate) {
-        mYearPicker.value = frcDate.year
-        mMonthPicker.value = frcDate.month
-        setValidRanges()
-        mDayPicker.value = frcDate.dayOfMonth
     }
 
     override fun onRestoreInstanceState(state: Parcelable) {
@@ -116,18 +109,25 @@ class FRCDatePicker : LinearLayout {
         numberPicker.visibility = View.VISIBLE
     }
 
-    fun setUseRomanNumerals(useRomanNumerals: Boolean) {
+    fun setUseRomanNumerals(useRomanNumerals: Boolean) =
         setDisplayedValues(mYearPicker, if (useRomanNumerals) getRomanNumeralYears() else null)
-    }
 
-    fun getDate(): FrenchRevolutionaryCalendarDate? {
-        if (mDayPicker.value > 6 && mMonthPicker.value == 13) return null
-        return FrenchRevolutionaryCalendarDate(mLocale,
-                mYearPicker.value,
-                mMonthPicker.value,
-                mDayPicker.value,
-                0, 0, 0)
-    }
+    var date
+        get(): FrenchRevolutionaryCalendarDate? =
+            if (mDayPicker.value > 6 && mMonthPicker.value == 13) null
+            else FrenchRevolutionaryCalendarDate(mLocale,
+                    mYearPicker.value,
+                    mMonthPicker.value,
+                    mDayPicker.value,
+                    0, 0, 0)
+        set(frcDate)  {
+            if (frcDate != null) {
+                mYearPicker.value = frcDate.year
+                mMonthPicker.value = frcDate.month
+                setValidRanges()
+                mDayPicker.value = frcDate.dayOfMonth
+            }
+        }
 
     private fun getDayNames(locale: Locale): Array<String> {
         val cal = FrenchRevolutionaryCalendarLabels.getInstance(locale)
@@ -144,11 +144,10 @@ class FRCDatePicker : LinearLayout {
         }
     }
 
-    private fun getRomanNumeralYears(): Array<String> {
-        return Array(300) { i ->
+    private fun getRomanNumeralYears(): Array<String> =
+        Array(300) { i ->
             FRCDateUtils.getRomanNumeral(i + 1)
         }
-    }
 
     private fun initNumberPicker(numberPicker: NumberPicker, maxValue: Int) {
         if (numberPicker.value == 0) {
@@ -170,7 +169,7 @@ class FRCDatePicker : LinearLayout {
 
     private val mValueChangedListener = NumberPicker.OnValueChangeListener { _, _, _ ->
         setValidRanges()
-        mListener?.onFrenchDateSelected(getDate())
+        mListener?.onFrenchDateSelected(date)
     }
 
     // Setting on Touch Listener for handling the touch inside ScrollView

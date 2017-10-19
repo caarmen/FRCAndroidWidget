@@ -32,13 +32,12 @@ import java.lang.reflect.InvocationTargetException
 object NotificationCompat {
     private val TAG = Constants.TAG + NotificationCompat::class.java.simpleName
 
-    fun getNotificationPriority(priority: String): Int {
-        return if (ApiHelper.getAPILevel() < 16) {
+    fun getNotificationPriority(priority: String): Int =
+        if (ApiHelper.apiLevel < 16) {
             0
         } else {
             Api16Helper.getNotificationPriority(priority)
         }
-    }
 
     fun createNotification(context: Context,
                            priority: Int,
@@ -50,7 +49,7 @@ object NotificationCompat {
                            vararg actions: Action): Notification {
         @DrawableRes val iconId: Int = R.drawable.ic_notif
         when {
-            ApiHelper.getAPILevel() < 11 -> {
+            ApiHelper.apiLevel < 11 -> {
                 val notification = Notification()
                 notification.tickerText = tickerText
                 notification.`when` = System.currentTimeMillis()
@@ -71,12 +70,12 @@ object NotificationCompat {
                 }
                 return notification
             }
-            ApiHelper.getAPILevel() < 16 -> return Api11Helper.createNotification(context, iconId, tickerText, contentText, defaultIntent)
+            ApiHelper.apiLevel < 16 -> return Api11Helper.createNotification(context, iconId, tickerText, contentText, defaultIntent)
             // convoluted way to pass actions. We have to convert from vararg to array, because the spread operator (*) crashes on cupcake.
             // Arrays.copyOf() is used by the spread operator, and this doesn't exist on cupcake.
-            ApiHelper.getAPILevel() < 20 -> return Api16Helper.createNotification(context, priority, iconId, tickerText, contentText, bigText, defaultIntent, Array(actions.size){actions[it]})
-            ApiHelper.getAPILevel() < 23 -> return Api20Helper.createNotification(context, priority, iconId, color, tickerText, contentText, bigText, defaultIntent, Array(actions.size){actions[it]})
-            ApiHelper.getAPILevel() < 26 -> return Api23Helper.createNotification(context, priority, iconId, color, tickerText, contentText, bigText, defaultIntent, Array(actions.size){actions[it]})
+            ApiHelper.apiLevel < 20 -> return Api16Helper.createNotification(context, priority, iconId, tickerText, contentText, bigText, defaultIntent, Array(actions.size){actions[it]})
+            ApiHelper.apiLevel < 23 -> return Api20Helper.createNotification(context, priority, iconId, color, tickerText, contentText, bigText, defaultIntent, Array(actions.size){actions[it]})
+            ApiHelper.apiLevel < 26 -> return Api23Helper.createNotification(context, priority, iconId, color, tickerText, contentText, bigText, defaultIntent, Array(actions.size){actions[it]})
             else -> return Api26Helper.createNotification(context, iconId, color, tickerText, contentText, bigText, defaultIntent, Array(actions.size){actions[it]})
         }
     }

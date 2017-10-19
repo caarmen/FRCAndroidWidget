@@ -35,26 +35,26 @@ import java.util.Arrays
  *
  * At any given point, there will be at most three instances of this class:
  * <ul>
- * <li> one {@link FrenchCalendarAppWidgetWide} which will manage all of the wide widgets, and </li>
- * <li> one {@link FrenchCalendarAppWidgetNarrow} which will manage all of the narrow widgets.</li>
- * <li> one {@link FrenchCalendarAppWidgetMinimalist} which will manage all of the minimalist widgets.</li>
+ * <li> one [ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetWide] which will manage all of the wide widgets, and </li>
+ * <li> one [ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetNarrow] which will manage all of the narrow widgets.</li>
+ * <li> one [ca.rmen.android.frenchcalendar.FrenchCalendarAppWidgetMinimalist] which will manage all of the minimalist widgets.</li>
  * </ul>
  * These receivers are notified by the system when a widget of the given type is added or deleted,
  * or when widgets of the given type should be updated.
  *
- * These receivers are also notified by the alarm set up by {@link FRCWidgetScheduler}, which will
+ * These receivers are also notified by the alarm set up by [FRCWidgetScheduler], which will
  * go off either once a minute, or once a day, depending on the preferences.
  */
 abstract class FRCAppWidgetProvider : AppWidgetProvider() {
-    private val _TAG = Constants.TAG + this::class.java.simpleName
 
+    private val tag get()  :String = Constants.TAG + javaClass.simpleName
     override fun onReceive(context: Context, intent: Intent) {
-        Log.v(_TAG, "onReceive: action = " + intent.action + ": component = " + intent.component?.className)
+        Log.v(tag, "onReceive: action = " + intent.action + ": component = " + intent.component?.className)
         val appWidgetManager = AppWidgetManager.getInstance(context)
         val appWidgetIds = appWidgetManager.getAppWidgetIds(intent.component)
         if (FRCWidgetScheduler.ACTION_WIDGET_UPDATE == intent.action) {
             val allAppWidgetIds = FRCAppWidgetManager.getAllAppWidgetIds(context)
-            if (allAppWidgetIds.size == 0) {
+            if (allAppWidgetIds.isEmpty()) {
                 FRCWidgetScheduler.getInstance(context).cancel(context)
             } else {
                 updateAll(context, appWidgetManager, appWidgetIds)
@@ -68,16 +68,16 @@ abstract class FRCAppWidgetProvider : AppWidgetProvider() {
      * This is called by the parent class when the system broadcasts "android.appwidget.action.APPWIDGET_UPDATE".
      */
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-        Log.v(_TAG, "onUpdate: appWidgetIds = " + Arrays.toString(appWidgetIds))
+        Log.v(tag, "onUpdate: appWidgetIds = " + Arrays.toString(appWidgetIds))
         super.onUpdate(context, appWidgetManager, appWidgetIds)
         FRCWidgetScheduler.getInstance(context).schedule(context)
     }
 
     /**
-     * Rerender all the widgets (for this {@link AppWidgetProvider}).
+     * Rerender all the widgets (for this [AppWidgetProvider]).
      */
     private fun updateAll(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-        Log.v(_TAG, "updateAll: appWidgetIds = " + Arrays.toString(appWidgetIds))
+        Log.v(tag, "updateAll: appWidgetIds = " + Arrays.toString(appWidgetIds))
         appWidgetIds.forEach { appWidgetId -> update(context, appWidgetManager, appWidgetId) }
     }
 
@@ -85,7 +85,7 @@ abstract class FRCAppWidgetProvider : AppWidgetProvider() {
      * Rerender a single widget.
      */
     private fun update(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
-        Log.v(_TAG, "update: appWidgetId = $appWidgetId")
+        Log.v(tag, "update: appWidgetId = $appWidgetId")
         val renderer = FRCAppWidgetRendererFactory.getRenderer(getWidgetType())
         val views = renderer.render(context, appWidgetManager, appWidgetId)
 

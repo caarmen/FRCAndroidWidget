@@ -28,7 +28,7 @@ import ca.rmen.android.frenchcalendar.R
 import ca.rmen.lfrc.FrenchRevolutionaryCalendarDate
 
 object FRCSystemNotification {
-    private val NOTIFICATION_ID = R.drawable.ic_notif
+    private const val NOTIFICATION_ID = R.drawable.ic_notif
 
     fun showNotification(context: Context) {
         ShowNotificationTask(context).execute()
@@ -58,7 +58,7 @@ object FRCSystemNotification {
                     date.monthName,
                     FRCDateUtils.formatNumber(mContext, date.year),
                     objectType, date.objectOfTheDay)
-            val converterAction = if (ApiHelper.getAPILevel() >= Constants.MIN_API_LEVEL_TWO_WAY_CONVERTER)
+            val converterAction = if (ApiHelper.apiLevel >= Constants.MIN_API_LEVEL_TWO_WAY_CONVERTER)
                 Action.getConverterAction(mContext) else Action.getLegacyConverterAction(mContext)
             val shareAction = Action.getLightShareAction(mContext, date)
             val searchAction = Action.getLightSearchAction(mContext, date)

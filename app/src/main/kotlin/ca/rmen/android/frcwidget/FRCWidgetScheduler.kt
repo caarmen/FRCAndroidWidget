@@ -38,7 +38,7 @@ import java.util.Calendar
  * Periodically forces an update of all the widgets, depending on if they are set
  * to be updated once a minute, or once a day.
  *
- * The update is done by sending a broadcast which will be received by the {@link AppWidgetProvider}s.
+ * The update is done by sending a broadcast which will be received by the [FRCAppWidgetProvider]s.
  *
  * @author calvarez
  *
@@ -93,9 +93,9 @@ class FRCWidgetScheduler private constructor(context: Context) {
         scheduleTomorrow(context)
 
         // Also send a broadcast to force an update now.
-        val updateInent = Intent(ACTION_WIDGET_UPDATE)
-        IntentCompat.setPackage(updateInent, context.packageName)
-        context.sendBroadcast(updateInent)
+        val updateIntent = Intent(ACTION_WIDGET_UPDATE)
+        IntentCompat.setPackage(updateIntent, context.packageName)
+        context.sendBroadcast(updateIntent)
 
         Log.v(TAG, "Started updater")
     }
@@ -116,7 +116,7 @@ class FRCWidgetScheduler private constructor(context: Context) {
      * at least it will trigger when the device wakes up later, which is good enough for us.
      */
     fun scheduleTomorrow(context: Context) {
-        if (ApiHelper.getAPILevel() >= Build.VERSION_CODES.KITKAT) {
+        if (ApiHelper.apiLevel >= Build.VERSION_CODES.KITKAT) {
             val nextAlarmTime = getTimeTomorrowMidnightMillis()
             Api19Helper.scheduleExact(context, nextAlarmTime, mUpdateWidgetTomorrowPendingIntent)
         }

@@ -42,11 +42,11 @@ class FRCPreferences private constructor(context: Context) {
         const val PREF_SYSTEM_NOTIFICATION = "setting_system_notification"
         const val PREF_CATEGORY_NOTIFICATION = "setting_category_notification"
         const val FREQUENCY_DAYS = 86400000
-        private val PREF_DEPRECATED_DETAIL_VIEW = "settings_detailed_view"
-        private val PREF_SHOW_TIME = "setting_show_time"
-        private val PREF_SHOW_DAY_OF_YEAR = "setting_show_day_of_year"
-        private val PREF_SYSTEM_NOTIFICATION_PRIORITY_DEFAULT = "default"
-        private val FREQUENCY_MINUTES = 86400
+        private const val PREF_DEPRECATED_DETAILED_VIEW = "settings_detailed_view"
+        private const val PREF_SHOW_TIME = "setting_show_time"
+        private const val PREF_SHOW_DAY_OF_YEAR = "setting_show_day_of_year"
+        private const val PREF_SYSTEM_NOTIFICATION_PRIORITY_DEFAULT = "default"
+        private const val FREQUENCY_MINUTES = 86400
 
         private lateinit var mSharedPrefs: SharedPreferences
         @Volatile
@@ -64,8 +64,8 @@ class FRCPreferences private constructor(context: Context) {
     }
 
     private fun migrateDetailedViewSetting() {
-        if (mSharedPrefs.contains(PREF_DEPRECATED_DETAIL_VIEW)) {
-            val detailedViewValue = mSharedPrefs.getString(PREF_DEPRECATED_DETAIL_VIEW, "day_of_year")
+        if (mSharedPrefs.contains(PREF_DEPRECATED_DETAILED_VIEW)) {
+            val detailedViewValue = mSharedPrefs.getString(PREF_DEPRECATED_DETAILED_VIEW, "day_of_year")
             val editor = mSharedPrefs.edit()
             when (detailedViewValue) {
                 "time" -> {
@@ -81,7 +81,7 @@ class FRCPreferences private constructor(context: Context) {
                     editor.putBoolean(PREF_SHOW_DAY_OF_YEAR, false)
                 }
             }
-            editor.remove(PREF_DEPRECATED_DETAIL_VIEW).commit()
+            editor.remove(PREF_DEPRECATED_DETAILED_VIEW).commit()
         }
     }
 

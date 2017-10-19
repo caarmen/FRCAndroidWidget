@@ -25,10 +25,10 @@ import ca.rmen.android.frccommon.Action
 
 @TargetApi(16)
 object Api16Helper {
-    private val PREF_SETTING_SYSTEM_NOTIFICATION_PRIORITY_MAX = "max"
-    private val PREF_SETTING_SYSTEM_NOTIFICATION_PRIORITY_HIGH = "high"
-    private val PREF_SETTING_SYSTEM_NOTIFICATION_PRIORITY_LOW = "low"
-    private val PREF_SETTING_SYSTEM_NOTIFICATION_PRIORITY_MIN = "min"
+    private const val PREF_SETTING_SYSTEM_NOTIFICATION_PRIORITY_MAX = "max"
+    private const val PREF_SETTING_SYSTEM_NOTIFICATION_PRIORITY_HIGH = "high"
+    private const val PREF_SETTING_SYSTEM_NOTIFICATION_PRIORITY_LOW = "low"
+    private const val PREF_SETTING_SYSTEM_NOTIFICATION_PRIORITY_MIN = "min"
 
     @Suppress("DEPRECATION")
     fun getNotificationPriority(priorityPref: String): Int {
@@ -43,7 +43,7 @@ object Api16Helper {
                            priority: Int,
                            iconId: Int,
                            tickerText: String,
-                           contextText: String,
+                           contentText: String,
                            bigText: String,
                            defaultIntent: PendingIntent,
                            actions: Array<Action>): Notification {
@@ -52,7 +52,7 @@ object Api16Helper {
                 .setPriority(priority)
                 .setAutoCancel(true)
                 .setContentTitle(tickerText)
-                .setContentText(contextText)
+                .setContentText(contentText)
                 .setStyle(Notification.BigTextStyle().bigText(bigText))
                 .setSmallIcon(iconId)
                 .setContentIntent(defaultIntent)

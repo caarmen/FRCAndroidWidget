@@ -54,7 +54,7 @@ class FRCPopupActivity : Activity() {
         val frenchDate = intent.getSerializableExtra(EXTRA_DATE) as FrenchRevolutionaryCalendarDate
         adapter.add(Action.getDarkShareAction(this, frenchDate))
         adapter.add(Action.getSettingsAction(this))
-        if (ApiHelper.getAPILevel() >= Constants.MIN_API_LEVEL_TWO_WAY_CONVERTER) {
+        if (ApiHelper.apiLevel >= Constants.MIN_API_LEVEL_TWO_WAY_CONVERTER) {
             adapter.add(Action.getConverterAction(this))
         } else {
             adapter.add(Action.getLegacyConverterAction(this))

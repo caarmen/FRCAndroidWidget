@@ -23,7 +23,7 @@ import android.os.Build
 
 object IntentCompat {
     fun setPackage(intent: Intent, packageName: String) {
-        if (ApiHelper.getAPILevel() >= Build.VERSION_CODES.DONUT) {
+        if (ApiHelper.apiLevel >= Build.VERSION_CODES.DONUT) {
             Api4Helper.setPackage(intent, packageName)
         }
     }

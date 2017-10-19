@@ -71,7 +71,7 @@ class FRCMinimalistAppWidgetRenderer : FRCAppWidgetRenderer {
      * Set the color of the text according to the preference or the current month.
      * Set the shadow on the text.
      */
-    fun setTextColors(context: Context, textView: TextView, frenchDate: FrenchRevolutionaryCalendarDate) {
+    private fun setTextColors(context: Context, textView: TextView, frenchDate: FrenchRevolutionaryCalendarDate) {
         val color = FRCDateUtils.getColor(context, frenchDate)
         textView.setTextColor(color)
 

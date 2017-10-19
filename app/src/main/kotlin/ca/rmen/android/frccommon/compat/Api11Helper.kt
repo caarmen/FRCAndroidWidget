@@ -31,11 +31,11 @@ object Api11Helper {
         }
     }
 
-    fun createNotification(context: Context, iconId: Int, ticketText: String, contentText: String, pendingIntent: PendingIntent): Notification {
+    fun createNotification(context: Context, iconId: Int, tickerText: String, contentText: String, pendingIntent: PendingIntent): Notification {
         @Suppress("DEPRECATION")
         return Notification.Builder(context)
                 .setAutoCancel(true)
-                .setContentTitle(ticketText)
+                .setContentTitle(tickerText)
                 .setContentText(contentText)
                 .setSmallIcon(iconId)
                 .setContentIntent(pendingIntent)

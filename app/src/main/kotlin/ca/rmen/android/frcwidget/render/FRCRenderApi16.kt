@@ -56,10 +56,9 @@ object FRCRenderApi16 {
     }
 
     @TargetApi(16)
-    fun scaleShadow(textView : TextView, scaleFactor : Float) {
+    fun scaleShadow(textView : TextView, scaleFactor : Float) =
         textView.setShadowLayer(textView.shadowRadius * scaleFactor,
                 textView.shadowDx * scaleFactor,
                 textView.shadowDy * scaleFactor,
                 textView.shadowColor)
-    }
 }

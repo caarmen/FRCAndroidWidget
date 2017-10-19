@@ -134,7 +134,7 @@ class FRCConverterActivity : Activity() {
                 FRCPreferences.getInstance(this).locale,
                 1, 1, 1,
                 0, 0, 0)
-        mFrcDatePicker.setDate(frcDate)
+        mFrcDatePicker.date = frcDate
         mFrcDateSelectedListener.onFrenchDateSelected(frcDate)
     }
 
@@ -186,11 +186,10 @@ class FRCConverterActivity : Activity() {
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
             val locale = FRCPreferences.getInstance(applicationContext).locale
             mFrc = FrenchRevolutionaryCalendar(locale, getSelectedCalculationMethod())
-            mFrcDateSelectedListener.onFrenchDateSelected(mFrcDatePicker.getDate())
+            mFrcDateSelectedListener.onFrenchDateSelected(mFrcDatePicker.date)
         }
 
-        override fun onNothingSelected(parent: AdapterView<*>?) {
-        }
+        override fun onNothingSelected(parent: AdapterView<*>?) = Unit
     }
 
     private val mFrcDateSelectedListener = object : FRCDatePicker.OnDateSelectedListener {
@@ -207,7 +206,7 @@ class FRCConverterActivity : Activity() {
         val gregDate = GregorianCalendar()
         gregDate.set(year, monthOfYear, dayOfMonth)
         val frcDate = mFrc.getDate(gregDate)
-        mFrcDatePicker.setDate(frcDate)
+        mFrcDatePicker.date = frcDate
         updateObjectOfTheDayText(frcDate)
     }
 
@@ -216,7 +215,7 @@ class FRCConverterActivity : Activity() {
             val locale = FRCPreferences.getInstance(applicationContext).locale
             mFrc = FrenchRevolutionaryCalendar(locale, getSelectedCalculationMethod())
             mFrcDatePicker.setLocale(locale)
-            mFrcDateSelectedListener.onFrenchDateSelected(mFrcDatePicker.getDate())
+            mFrcDateSelectedListener.onFrenchDateSelected(mFrcDatePicker.date)
         } else if (FRCPreferences.PREF_ROMAN_NUMERAL == key) {
             mFrcDatePicker.setUseRomanNumerals(FRCPreferences.getInstance(applicationContext).isRomanNumeralEnabled)
         }

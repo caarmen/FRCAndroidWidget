@@ -32,7 +32,7 @@ import ca.rmen.android.frenchcalendar.R
  * @author calvarez
  */
 object Font {
-    private val PREF_SETTING_CUSTOM_FONT = "setting_custom_font"
+    private const val PREF_SETTING_CUSTOM_FONT = "setting_custom_font"
 
     /**
      * Load the font specified in the preferences.

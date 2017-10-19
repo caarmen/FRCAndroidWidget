@@ -61,7 +61,7 @@ class FRCPreferenceActivity : PreferenceActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (ApiHelper.getAPILevel() >= Build.VERSION_CODES.HONEYCOMB) {
+        if (ApiHelper.apiLevel >= Build.VERSION_CODES.HONEYCOMB) {
             Api11Helper.setDisplayHomeAsUpEnabled(this)
         }
         /*
@@ -101,7 +101,7 @@ class FRCPreferenceActivity : PreferenceActivity() {
         updatePreferenceSummary(FRCPreferences.PREF_CUSTOM_COLOR_ENABLED, 0)
         updatePreferenceSummary(FRCPreferences.PREF_SYSTEM_NOTIFICATION_PRIORITY, R.string.setting_system_notification_priority_summary)
 
-        if (ApiHelper.getAPILevel() < 16 || ApiHelper.getAPILevel() >= 26) {
+        if (ApiHelper.apiLevel < 16 || ApiHelper.apiLevel >= 26) {
             @Suppress("DEPRECATION")
             val category = preferenceScreen.findPreference(FRCPreferences.PREF_CATEGORY_NOTIFICATION) as PreferenceCategory
             val notificationPriorityPreference = category.findPreference(FRCPreferences.PREF_SYSTEM_NOTIFICATION_PRIORITY)

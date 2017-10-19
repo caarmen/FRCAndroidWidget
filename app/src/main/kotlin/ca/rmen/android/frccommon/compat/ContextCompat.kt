@@ -24,11 +24,11 @@ import android.support.annotation.ColorRes
 
 object ContextCompat {
     @ColorInt
-    fun getColor(context: Context, @ColorRes colorRes: Int): Int {
-        if (ApiHelper.getAPILevel() >= Build.VERSION_CODES.M) {
-            return Api23Helper.getColor(context, colorRes)
-        }
-        @Suppress("DEPRECATION")
-        return context.resources.getColor(colorRes)
-    }
+    fun getColor(context: Context, @ColorRes colorRes: Int): Int =
+            if (ApiHelper.apiLevel >= Build.VERSION_CODES.M) {
+                Api23Helper.getColor(context, colorRes)
+            } else {
+                @Suppress("DEPRECATION")
+                context.resources.getColor(colorRes)
+            }
 }
