@@ -113,20 +113,21 @@ class FRCDatePicker : LinearLayout {
     fun setUseRomanNumerals(useRomanNumerals: Boolean) =
             setDisplayedValues(mYearPicker, if (useRomanNumerals) getRomanNumeralYears() else null)
 
-    var date
-        get(): FrenchRevolutionaryCalendarDate? =
-            if (mDayPicker.value > 6 && mMonthPicker.value == 13) null
+    var date: FrenchRevolutionaryCalendarDate?
+        get() {
+            return if (mDayPicker.value > 6 && mMonthPicker.value == 13) null
             else FrenchRevolutionaryCalendarDate(mLocale,
                     mYearPicker.value,
                     mMonthPicker.value,
                     mDayPicker.value,
                     0, 0, 0)
-        set(frcDate) {
-            if (frcDate != null) {
-                mYearPicker.value = frcDate.year
-                mMonthPicker.value = frcDate.month
+        }
+        set(value) {
+            if (value != null) {
+                mYearPicker.value = value.year
+                mMonthPicker.value = value.month
                 setValidRanges()
-                mDayPicker.value = frcDate.dayOfMonth
+                mDayPicker.value = value.dayOfMonth
             }
         }
 

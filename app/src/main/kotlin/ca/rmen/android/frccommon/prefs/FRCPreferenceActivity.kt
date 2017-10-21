@@ -51,10 +51,14 @@ class FRCPreferenceActivity : PreferenceActivity() {
 
     private val mOnSharedPreferenceChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
         when (key) {
-            FRCPreferences.PREF_METHOD -> updatePreferenceSummary(key, R.string.setting_method_summary)
-            FRCPreferences.PREF_LANGUAGE -> updatePreferenceSummary(key, R.string.setting_language_summary)
-            FRCPreferences.PREF_CUSTOM_COLOR_ENABLED -> updatePreferenceSummary(key, 0)
-            FRCPreferences.PREF_SYSTEM_NOTIFICATION_PRIORITY -> updatePreferenceSummary(key, R.string.setting_system_notification_priority_summary)
+            FRCPreferences.PREF_METHOD ->
+                updatePreferenceSummary(key, R.string.setting_method_summary)
+            FRCPreferences.PREF_LANGUAGE ->
+                updatePreferenceSummary(key, R.string.setting_language_summary)
+            FRCPreferences.PREF_CUSTOM_COLOR_ENABLED ->
+                updatePreferenceSummary(key, 0)
+            FRCPreferences.PREF_SYSTEM_NOTIFICATION_PRIORITY ->
+                updatePreferenceSummary(key, R.string.setting_system_notification_priority_summary)
         }
     }
     private lateinit var mSystemNotificationPreferenceListener: FRCSystemNotificationPreferenceListener
