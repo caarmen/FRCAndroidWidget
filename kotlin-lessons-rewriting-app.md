@@ -9,7 +9,7 @@ To give an idea of the effort in rewriting an app in Kotlin: This project had 21
 I didn't really read much about Kotlin before jumping into the rewrite.
 
 ## General impressions
-* Kotlin is less verbose than Java, without losing readability. This project has about 10% fewer lines of code now. And the lines are shorter as well: No more need for `void` for example.
+* Kotlin is less verbose than Java, without losing readability. This project has about 10% fewer lines of code now. And the lines are shorter as well: No more need for `void` or semicolons for example.
 * Kotlin and Java can call each other, which makes a progressive migration possible. During the transition, there may be temporary code that will ultimately be removed once the project is completely in Kotlin. In my case, I had to temporarily add few keywords ([`INSTANCE`](https://kotlinlang.org/docs/reference/java-to-kotlin-interop.html), `CompanionObject`, and [`JvmField`](https://kotlinlang.org/docs/reference/java-to-kotlin-interop.html)).
 * The only crashes and issues requiring workarounds that I encountered were due to supporting a very old api level in my project.
 * I haven't done any benchmarking to compare the app's performance in Java vs Kotlin.
@@ -319,14 +319,14 @@ fun getApiLevel() : Int {
 Second iteration:
 ```kotlin
 @Suppress("DEPRECATION")
-fun getApiLevel() : Int = Integer.parseInt(Build.VERSION.SDK)
+fun getApiLevel() = Integer.parseInt(Build.VERSION.SDK)
 ```
 
 
 ## Properties: Nice, maybe
 
 Kotlin allows you to access getter and setter methods as if you were accessing a field directly. In my project, I found a couple of use cases for this.
-The first case was for this now famous `getApiLevel()` method. (By the say, I need this because `Build.VERSION.SDK_INT` doesn't exist in api level 3...)
+The first case was for this now famous `getApiLevel()` method. (By the way, I need this because `Build.VERSION.SDK_INT` doesn't exist in api level 3...)
 
 This is how other parts of the project were initially accessing this method:
 
@@ -341,7 +341,7 @@ The third iteration changed this function into a property:
 ```kotlin
 object ApiHelper {
     @Suppress("DEPRECATION")
-    val apiLevel: Int get() = Integer.parseInt(Build.VERSION.SDK)
+    val apiLevel get() = Integer.parseInt(Build.VERSION.SDK)
 }
 
 ...
@@ -351,8 +351,14 @@ if (ApiHelper.apiLevel >= Build.VERSION_CODES.M) {
 }
 ```
 
-This is more concise and easier to read. However, you have to keep in mind when using it, that you're not just reading a field: in this case, each time this property is read, an `Integer.parseInt()` is being executed. I guess the usage of properties should be limited to code which is not very expensive to execute, or which isn't accessed very often.
+This is more concise and easier to read. However, you have to keep in mind when using it, that you're not just reading a field: in this case, each time this property is read, an `Integer.parseInt()` is being executed. In this case, this can be remedied by using [`by lazy`](https://kotlinlang.org/docs/reference/delegated-properties.html):
 
+```kotlin
+object ApiHelper {
+    @Suppress("DEPRECATION")
+    val apiLevel by lazy {Integer.parseInt(Build.VERSION.SDK)}
+}
+```
 Another use case for properties is a custom date picker widget class: it has separate `NumberPicker` fields for day, month, and year, but has getters and setters for a `FrenchRevolutionaryCalendarDate` object which accesses the three:
 
 ```kotlin
@@ -362,17 +368,21 @@ class FRCDatePicker : LinearLayout {
     private lateinit var mMonthPicker: NumberPicker
     private lateinit var mYearPicker: NumberPicker
     ...
-    var date
-        get(): FrenchRevolutionaryCalendarDate? =
-            FrenchRevolutionaryCalendarDate(
+    var date: FrenchRevolutionaryCalendarDate?
+        get() {
+            return if (mDayPicker.value > 6 && mMonthPicker.value == 13) null
+            else FrenchRevolutionaryCalendarDate(mLocale,
                     mYearPicker.value,
                     mMonthPicker.value,
-                    mDayPicker.value)
-        set(frcDate)  {
-            if (frcDate != null) {
-                mYearPicker.value = frcDate.year
-                mMonthPicker.value = frcDate.month
-                mDayPicker.value = frcDate.dayOfMonth
+                    mDayPicker.value,
+                    0, 0, 0)
+        }
+        set(value) {
+            if (value != null) {
+                mYearPicker.value = value.year
+                mMonthPicker.value = value.month
+                setValidRanges()
+                mDayPicker.value = value.dayOfMonth
             }
         }
 ```
@@ -388,6 +398,8 @@ Write usage:
 ```kotlin
 mFrcDatePicker.date = FrenchRevolutionaryCalendarDate(1, 1, 1)
 ```
+
+In this case, each time you read the property, a new object is created, and when you set it, three objects are updated.
 
 ## Constants in companion objects: a bit annoying
 Constants, like the `TAG` constant used for logging, or `EXTRA_XYZ` constants for `Intent`s, cannot be defined directly inside the class. Instead, they must go inside a `companion object`, as follows:
@@ -500,6 +512,27 @@ when (key) {
     FRCPreferences.PREF_SYSTEM_NOTIFICATION_PRIORITY -> 
         updatePreferenceSummary(key, R.string.setting_system_notification_priority_summary)
 }
+```
+
+## Easily ignore unused parameters: Almost great.
+
+How many times have you implemented an OnClickListener and didn't need to use its view parameter?  
+
+In Kotlin, if your listener is a lambda, you can ignore the parameter [with a simple underscore](https://kotlinlang.org/docs/reference/multi-declarations.html):
+
+```kotlin
+findViewById<View>(R.id.resetFrcDatePicker).setOnClickListener { _ ->
+   ...
+        }
+```
+
+However, this doesn't apply to methods.  In this project, I defined an `android::onClick` listener in the layout xml, and the listener as a method on the Activity. In Kotlin, as in Java, I have to suppress a warning about the view parameter:
+
+```kotlin
+fun resetFrcDatePicker(@Suppress("UNUSED_PARAMETER") view: View) {
+    ...
+}
+ 
 ```
 
 ## Tips and tricks
