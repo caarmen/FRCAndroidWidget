@@ -1,11 +1,6 @@
 French Revolutionary Calendar Android Widget
 ============================================
 
-<a href="https://f-droid.org/repository/browse/?fdid=ca.rmen.android.frenchcalendar" target="_blank">
-<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="80"/></a>
-<a href="https://play.google.com/store/apps/details?id=ca.rmen.android.frenchcalendar" target="_blank">
-<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="80"/></a>
-
 Widget which displays the current date and time in the French Revolutionary calendar. The widget supports the following preferences:
 * Update frequency: every minute, or once a day.
 * Calculation method: method used to determine the first day of the year: Based on the autumn equinox, the Romme method, or the von Mädler method (128-year rule).
